@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>FindmeHelpMe</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 </head>
 <body>
@@ -13,30 +14,36 @@
 <!-- Modal -->
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
-<form id="ihbarform" method="post" action="{% url 'ihbarview_tr' %}">
-    {% csrf_token %}
-        <!-- Modal content-->
-        <div class="modal-content px-5 pt-4">
-                <h1>İhbar Yapan Kişi</h1><hr>
+        <form id="ihbarform" method="post" action="{% url 'ihbarview_tr' %}">
+            {% csrf_token %}
+            <!-- Modal content-->
+            <div class="modal-content px-5 pt-4">
+                <div style="position: absolute;right: 30px;font-size: larger;color: red;cursor: pointer"
+                     data-dismiss="modal">X
+                </div>
+                <h1>İhbar Yapan Kişi</h1>
+                <hr>
                 <div class="form-group">
-                  <label for="example1">İsim:</label>
-                  <input required name="ihbar_first_name" type="text" class="form-control" placeholder="İsim:">
+                    <label for="example1">İsim:</label>
+                    <input required name="ihbar_first_name" type="text" class="form-control" placeholder="İsim:">
                 </div>
                 <div class="form-group">
                     <label for="example2">Soyisim:</label>
                     <input required name="ihbar_last_name" type="text" class="form-control" placeholder="Soyisim:">
-                  </div>
-                  <div class="form-group">
+                </div>
+                <div class="form-group">
                     <label for="example2">Telefon Numarası:</label>
                     <input required name="phonenumber" type="tel" class="form-control" placeholder="555-432-11-00">
-                  </div>
-                  <div class="form-group">
+                </div>
+                <div class="form-group">
                     <label for="example3">E-posta:</label>
                     <input name="eposta" type="email" class="form-control" placeholder="E-posta:">
-                  </div>
-           
+                </div>
 
-                <h1>KAYIP OLAN KİŞİ</h1><hr>
+
+                <h1>KAYIP OLAN KİŞİLER</h1><hr>
+
+
                 <button type="button" id="yenikayipadd">Yeni Kayıp Kişi Ekle</button>
 
                 <input type="hidden" name="cordinate_x" id="cordinate_x"/>
@@ -50,7 +57,7 @@
              
                 </ul>
                 <div class="tab-content" id="myTabContent">
-                  <div class="tab-pane fade show active" id="kayit1" role="tabpanel" aria-labelledby="home-tab">
+                  <form class="tab-pane fade show active" id="kayit1" role="tabpanel" aria-labelledby="home-tab">
                     <div style="border-bottom: 3px solid red;">
                       <div class="form-group">
                         <label for="example4">İsim:</label>
@@ -71,13 +78,19 @@
                         </div>
                         <div><h3>Özellikler</h3></div>
                         <div class="form-check">
+
                           {% for tag in tags %}
+                         
+
+                       
                           <div>
-                          <input name="tags" class="form-check-input" type="checkbox"  value="{{tag.id}}">
-                          <label class="form-check-label" for="defaultCheck1">
-                            {{tag.tag}}
-                          </label>
-                        </div>
+                            <input name="tags"  class="form-check-input tags-class" type="checkbox"  value="{{tag.id}}">
+                            <label class="form-check-label" for="defaultCheck1">
+                              {{tag.tag}}
+                            </label>
+                          </div>
+                    
+
                           {% endfor %}
                         </div>
                         <div class="form-group">
@@ -85,11 +98,11 @@
                           <textarea  name="detail" class="form-control" id="" cols="30" rows="5"></textarea>
                         </div>
                       </div>
-                  </div>
+                    </form>
                 </div>
 
                
-                <button id="sendButtonForForm" type="submit" class="btn btn-primary mb-3">Gönder</button>
+                <button id="sendButtonForForm" type="button" class="btn btn-primary mb-3">Gönder</button>
         </div>
     </form>
     </div>
@@ -97,7 +110,21 @@
 </div>
 
 <script>
+
+
   document.addEventListener("DOMContentLoaded", function(){
+
+
+    document.getElementById('sendButtonForForm').addEventListener('click',()=>{
+      console.log(document.getElementById('myTabContent'))
+      Array.from(document.getElementById('myTabContent').querySelectorAll('form')).forEach((frm)=>{
+        let result = $("#"+frm.id).serialize()
+        console.log(result,'result')
+
+      })
+    })
+
+
   
 
 
@@ -118,15 +145,21 @@ function newKayipForm(){
                     <input  name="kayip_phone_number" type="tel" class="form-control" placeholder="555-432-11-00">
                   </div>
                   <div><h3>Özellikler</h3></div>
-                  <div class="form-check">
-                    {% for tag in tags %}
-                    <div>
-                    <input name="tags" class="form-check-input" type="checkbox" value="{{tag.id}}">
-                    <label class="form-check-label" for="defaultCheck1">
-                      {{tag.tag}}
-                    </label>
-                  </div>
-                    {% endfor %}
+                        <div class="form-check">
+
+                          {% for tag in tags %}
+                         
+
+                       
+                          <div>
+                            <input  name="tags" class="form-check-input tags-class" type="checkbox"  value="{{tag.id}}">
+                            <label class="form-check-label" for="defaultCheck1">
+                              {{tag.tag}}
+                            </label>
+                          </div>
+                    
+
+                          {% endfor %}
                   </div>
                   </div>`
     )
@@ -136,7 +169,7 @@ function newKayipForm(){
 const tabItemSingle = (counter)=>{
   return(
     `
-  <div class="tab-pane fade" id="kayit${counter}" role="tabpanel" aria-labelledby="profile-tab">${newKayipForm()}</div>`
+  <form class="tab-pane fade" id="kayit${counter}" role="tabpanel" aria-labelledby="profile-tab">${newKayipForm()}</form>`
   )
 }
 
@@ -146,7 +179,7 @@ const tabItemSingle = (counter)=>{
   const addliObject = (counter)=>{
     return(
       `<li class="nav-item">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#kayit${counter}" role="tab" aria-controls="profile"
+                    <a class="nav-link" id="record_tab${counter}" data-toggle="tab" href="#kayit${counter}" role="tab" aria-controls="profile"
                       aria-selected="false">Kayıt ${counter}</a>
                   </li>`
     )
@@ -156,25 +189,20 @@ const tabItemSingle = (counter)=>{
 
   document.getElementById('yenikayipadd').addEventListener('click',()=>{
     counter++
-      document.getElementById('myTab').innerHTML+=addliObject(counter)
-      document.getElementById('myTabContent').innerHTML+=tabItemSingle(counter)
+      $('#myTab').append(addliObject(counter))
+      $('#myTabContent').append(tabItemSingle(counter))
+      $('#record_tab'+counter).click()
   })
 
-document.getElementById('sendButtonForForm').addEventListener('click',()=>{
-  let forms = document.querySelectorAll('form')
 
-  Array.from(forms).forEach((form)=>{
-    let form_instance = $(form).serializeArray()
-    console.log(form_instance,'forminstancennn')
-  })
-})
 });
 </script>
 
 
-
 <div id="map" style="width: 100%; height: 100%"></div>
-<button type="button" id="openModal" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style=" display:none;">Fill Form</button>
+<button type="button" id="openModal" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"
+        style=" display:none;">Fill Form
+</button>
 </body>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js"></script>
@@ -183,8 +211,14 @@ document.getElementById('sendButtonForForm').addEventListener('click',()=>{
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css"/>
 <script src="{% static 'js/map.js' %}"></script>
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 
 </html>
