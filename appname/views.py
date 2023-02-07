@@ -29,7 +29,7 @@ def IhbarView(request):
                     ihbar_instance.ihbar_user = ihbarform_instance
                     ihbar_instance.kayip_user.add(kayip_form_instance)
                     ihbar_instance.save()
-                    return redirect('ihbarview_en')
+                    return redirect('ihbarview_tr')
             
 
             except IntegrityError:
