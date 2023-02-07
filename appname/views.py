@@ -11,8 +11,8 @@ def user_create(request):
             return redirect('user_list')
     else:
         form = UserForm()
-    return render(request, 'appname/user_form.html', {'form': form})
+    return render(request, 'user_form.html', {'form': form})
 
 def user_list(request):
     users = User.objects.all()
-    return render(request, 'appname/user_list.html', {'users': users})
+    return render(request, 'user_list.html', {'users': users})
