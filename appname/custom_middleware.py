@@ -32,7 +32,7 @@ class MaintenanceModeMiddleware:
  
 
             if path == "/":
-                return redirect('ihbarview_tr')
+                return redirect('kayiplarview_tr')
 
 
 

@@ -79,6 +79,12 @@ def KayipUserList(request):
     users = KayipUser.objects.order_by('-id')
     return render(request,'user_list.html',{"users":str(users.values())})
 
+def KayipUserListAR(request):
+    users = KayipUser.objects.order_by('-id')
+    return render(request,'user_list_ar.html',{"users":str(users.values())})
+
+
+
 class KayipUserListView(ListAPIView):
     queryset = KayipUser.objects.order_by('-id')
     serializer_class = KayipUserSerializer
