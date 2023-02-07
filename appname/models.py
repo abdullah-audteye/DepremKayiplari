@@ -16,13 +16,13 @@ class KayipUser(models.Model):
     cordinate_x = models.FloatField(max_length=10)
     cordinate_y = models.FloatField(max_length=10)
     address = models.TextField()
-    tags = models.ManyToManyField(Tag)
-    # detail = models.TextField()
+    tags = models.ManyToManyField(Tag,blank=True)
+    detail = models.TextField(null=True,blank=True)
+
 
 class Ihbar(models.Model):
     ihbar_user = models.ForeignKey(IhbarUser, on_delete=models.CASCADE)
     kayip_user = models.ManyToManyField(KayipUser)
-    detail = models.TextField()
 
 
 

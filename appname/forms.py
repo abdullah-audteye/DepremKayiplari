@@ -1,7 +1,18 @@
 from django import forms
-# from .models import User
+from .models import IhbarUser,KayipUser,Ihbar
 
-# class UserForm(forms.ModelForm):
-#     class Meta:
-#         # model = User
-#         fields = ['first_name', 'last_name', 'email']
+class IhbarUserForm(forms.ModelForm):
+    class Meta:
+        model = IhbarUser
+        fields = "__all__"
+
+class KayipUserForm(forms.ModelForm):
+    class Meta:
+        model = KayipUser
+        fields = "__all__"
+
+
+class IhbarForm(forms.ModelForm):
+    class Meta:
+        model = Ihbar
+        fields = "__all__"
