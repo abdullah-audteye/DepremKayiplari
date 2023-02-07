@@ -29,6 +29,16 @@ DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
 
+CSRF_TRUSTED_ORIGINS = ["https://localhost",
+                        "https://findmehelpme.com", "http://findmehelpme.com"]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://localhost:8000",
+    "http://localhost:5500",
+    "https://findmehelpme.com"
+]
+
 # Application definition
 
 INSTALLED_APPS = [
