@@ -20,5 +20,5 @@ from appname.views import IhbarView
 
 urlpatterns = [
     path("admin", admin.site.urls, name="admin_page"),
-    path('',IhbarView)
+    path('',IhbarView,name="ihbarview")
 ]
