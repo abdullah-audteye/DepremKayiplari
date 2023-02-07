@@ -15,6 +15,7 @@
     <p>{{ user.first_name }} {{ user.last_name }} ({{ user.email }})</p>
 {% endfor %}
 </body>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="https://unpkg.com/leaflet@1.1.0/dist/leaflet.js"></script>
 <script src="https://leaflet.github.io/Leaflet.markercluster/dist/leaflet.markercluster.js"></script>
@@ -25,7 +26,6 @@
 <script type="text/javascript">
 
     var addressPoints = [];
-
 
     var tiles = L.tileLayer('//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 18,

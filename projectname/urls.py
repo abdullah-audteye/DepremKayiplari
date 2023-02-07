@@ -20,7 +20,7 @@ from appname.views import IhbarView,KayipUserList,KayipUserListView,IhbarViewAR
 
 urlpatterns = [
     path("admin", admin.site.urls, name="admin_page"),
-    path('en',IhbarView,name="ihbarview_en"),
+    path('tr',IhbarView,name="ihbarview_tr"),
     path('ar',IhbarViewAR,name="ihbarview_ar"),
 
     path('kayiplar',KayipUserList,name="kayiplarview"),

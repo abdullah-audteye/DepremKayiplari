@@ -11,7 +11,7 @@ class IhbarUser(models.Model):
     ihbar_first_name = models.CharField(max_length=100)
     ihbar_last_name = models.CharField(max_length=100)
     phonenumber = models.CharField(max_length=100)
-    eposta = models.EmailField(max_length=100)
+    eposta = models.EmailField(max_length=100,null=True,blank=True)
 
 
     def __str__(self):
