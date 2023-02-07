@@ -20,7 +20,7 @@ services:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
       - ./nginx/certs/8c0f14ed4a6c9fb9.crt:/etc/nginx/ssl/live/audteye.com/fullchain.pem
       - ./nginx/certs/secret.key:/etc/nginx/ssl/live/audteye.com/privkey.pem
-      - ./static:/code/staticfiles
+      - ./staticfiles:/code/staticfiles
       - ./media:/code/media
       - ./templates:/code/templates
     depends_on:
