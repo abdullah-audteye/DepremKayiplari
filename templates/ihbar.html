@@ -13,8 +13,8 @@
     <div class="modal-dialog">
 <form method="post" action="{% url 'ihbarview' %}">
         <!-- Modal content-->
-        <div class="modal-content">
-            <form style="padding: 0 40px;">
+        <div class="modal-content px-5">
+            <form>
                 <h1>İhbar Yapan Kişi</h1><hr>
                 <div class="form-group">
                   <label for="example1">Ihbar first name:</label>
@@ -35,7 +35,7 @@
               </form>
            
 
-              <form style="padding: 0 40px;">
+              <form>
                 <h1>KAYIP FORM</h1><hr>
                 <div class="form-group">
                   <label for="example4">Kayip first name:</label>
@@ -69,14 +69,13 @@
                 <button type="submit" class="btn btn-primary">Submit</button>
               </form>
         </div>
-        <button type="submit">BUtton</button>
     </form>
     </div>
 
 </div>
 
 <div id="map" style="width: 100%; height: 100%"></div>
-<button type="button" id="openModal" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="display: none;">Fill Form</button>
+<button type="button" id="openModal" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="">Fill Form</button>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
