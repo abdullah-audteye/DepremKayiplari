@@ -108,7 +108,7 @@ document.body.appendChild(button);
 newDiv = document.createElement("div");
 
 // and give it some content
-const newContentss = document.createTextNode(lang === "ar" ? "Kayıtlara Git" : "ابحث عن مفقودين");
+const newContentss = document.createTextNode(lang === "ar" ? "ابحث عن مفقودين" : "Kayıtlara Git");
 newDiv.style.position = "absolute";
 newDiv.style.right = "36px";
 newDiv.style.top = "0px";
