@@ -3,7 +3,6 @@ from .forms import KayipUserForm,IhbarUserForm
 from .models import Ihbar,KayipUser
 from django.db import IntegrityError, transaction
 from django.core.serializers import json
-from .serializers import KayipUserSerializer
 import json
 
 
