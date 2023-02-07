@@ -30,36 +30,15 @@ var MyCustomMarker = L.Icon.extend({
 var drawPluginOptions = {
     position: 'topright',
     draw: {
-        polyline: {
-            shapeOptions: {
-                color: '#f357a1',
-                weight: 10
-            }
-        },
-        polygon: {
-            allowIntersection: false, // Restricts shapes to simple polygons
-            drawError: {
-                color: '#e1e100', // Color the shape will turn when intersects
-                message: '<strong>Polygon draw does not allow intersections!<strong> (allowIntersection: false)' // Message that will show when intersect
-            },
-            shapeOptions: {
-                color: '#bada55'
-            }
-        },
+        polyline: false,
+        polygon: false,
         circle: false, // Turns off this drawing tool
-        rectangle: {
-            shapeOptions: {
-                clickable: false
-            }
-        },
+        rectangle: false,
         marker: {
             icon: new MyCustomMarker()
         }
     },
-    edit: {
-        featureGroup: editableLayers, //REQUIRED!!
-        remove: false
-    }
+    edit: false
 };
 
 
@@ -70,6 +49,25 @@ map.addControl(drawControl);
 
 var editableLayers = new L.FeatureGroup();
 map.addLayer(editableLayers);
+document.getElementsByClassName('leaflet-draw-draw-circlemarker')[0].style.display = 'none';
+document.getElementsByClassName('leaflet-draw-draw-marker')[0].style.scale = '1.4';
+
+// create a new div element
+const newDiv = document.createElement("div");
+
+// and give it some content
+const newContent = document.createTextNode("Haritadan Konum Seçerek Kişiye Ait Bilgileri Doldurunuz");
+newDiv.style.position = "absolute";
+newDiv.style.right = "31px";
+newDiv.style.width = "328px";
+newDiv.style.backgroundColor = "rosybrown";
+
+// add the text node to the newly created div
+newDiv.appendChild(newContent);
+
+// add the newly created element and its content into the DOM
+const currentDiv = document.getElementsByClassName('leaflet-draw-draw-marker')[0];
+currentDiv.appendChild(newDiv);
 
 
 map.on('draw:created', function (e) {
