@@ -70,7 +70,7 @@ def IhbarViewAR(request):
             print(kayipuserform.errors,'kayipuserform')
 
 
-    return render(request,"ihbar_ar.html",{"kayipuserform":kayipuserform,"ihbaruserform":ihbaruserform,"tags":tags})
+    return render(request,"ihbar_arabic.html",{"kayipuserform":kayipuserform,"ihbaruserform":ihbaruserform,"tags":tags})
 
 
 

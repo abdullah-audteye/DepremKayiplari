@@ -15,47 +15,46 @@
     <div class="modal-dialog">
 <form id="ihbarform" method="post" action="{% url 'ihbarview_en' %}">
     {% csrf_token %}
-        <!-- Modal content-->
         <div class="modal-content px-5 pt-4">
-                <h1>İhbar Yapan Kişi</h1><hr>
-                <div class="form-group">
-                  <label for="example1">İsim:</label>
-                  <input name="ihbar_first_name" type="text" class="form-control" placeholder="İsim:">
+            <h1>قم بالتبليغ عن مفقودين</h1>
+            <div class="form-group">
+                  <label for="example1">>اسم المبلغ:</label>
+                  <input name="ihbar_first_name" type="text" class="form-control" >
                 </div>
                 <div class="form-group">
-                    <label for="example2">Soyisim:</label>
-                    <input name="ihbar_last_name" type="text" class="form-control" placeholder="Soyisim:">
+                    <label for="example2" style="display: flex;">كنية المبلغ</label>
+                    <input name="ihbar_last_name" type="text" class="form-control">
                   </div>
                   <div class="form-group">
-                    <label for="example2">Telefon Numarası:</label>
-                    <input name="phonenumber" type="tel" class="form-control" placeholder="555-432-11-00">
+                    <label for="example2" style="display: flex;">رقم الهاتف</label>
+                    <input name="phonenumber" type="tel" class="form-control">
                   </div>
                   <div class="form-group">
-                    <label for="example3">E-posta:</label>
-                    <input name="eposta" type="email" class="form-control" placeholder="E-posta:">
+                    <label for="example3" style="display: flex;">البريد الالكتروني</label>
+                    <input name="eposta" type="email" class="form-control" >
                   </div>
            
 
-                <h1>KAYIP OLAN KİŞİ</h1><hr>
+                  <h1 style="display: flex;">بيانات المفقود</h1>
 
                 <input type="hidden" name="cordinate_x" id="cordinate_x"/>
                 <input type="hidden" name="cordinate_y" id="cordinate_y"/>
 
                 <div class="form-group">
-                  <label for="example4">İsim:</label>
-                  <input name="kayip_first_name" type="text" class="form-control" placeholder="İsim:">
+                    <label for="example4" style="display: flex;">اسم المفقود</label>
+                    <input name="kayip_first_name" type="text" class="form-control" >
                 </div>
                 <div class="form-group">
-                    <label for="example5">Soyisim:</label>
-                    <input name="kayip_last_name" type="text" class="form-control" placeholder="Soyisim:">
+                    <label for="example5" style="display: flex;">كنية المفقود</label>
+                    <input name="kayip_last_name" type="text" class="form-control">
                   </div>
                   
                   <div class="form-group">
-                    <label for="example6">Telefon Numarası:</label>
-                    <input name="phonenumber" type="tel" class="form-control" placeholder="555-432-11-00">
+                    <label for="example6" style="display: flex;">رقم هاتف المفقود </label>
+                    <input name="phonenumber" type="tel" class="form-control" >
                   </div>
                   <div class="form-group">
-                    <label for="example7">Adres:</label>
+                    <label for="example7" style="display: flex;">عنوان المفقود</label>
                     <textarea name="address" class="form-control" id="" cols="30" rows="5"></textarea>
                   </div>
                   <div><h3>Özellikler</h3></div>
@@ -68,12 +67,12 @@
                     {% endfor %}
                   </div>
                   <div class="form-group">
-                    <label for="example8">Açıklama:</label>
+                    <label for="example8" style="display: flex;">تفاصيل اخرى:</label>
                     <textarea name="detail" class="form-control" id="" cols="30" rows="5"></textarea>
                   </div>
                
-                <button type="submit" class="btn btn-primary">Gönder</button>
-        </div>
+                  <button type="submit" class="btn btn-primary" style="display: flex;">ارسل</button>
+                </div>
     </form>
     </div>
 
