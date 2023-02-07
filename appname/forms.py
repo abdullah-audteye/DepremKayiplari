@@ -9,7 +9,7 @@ class IhbarUserForm(forms.ModelForm):
 class KayipUserForm(forms.ModelForm):
     class Meta:
         model = KayipUser
-        exclude = ["cordinate_x","cordinate_y"]
+        fields = "__all__"
 
 
 class IhbarForm(forms.ModelForm):
