@@ -3,6 +3,7 @@ backports.zoneinfo==0.2.1
 certifi==2022.12.7
 chardet==3.0.4
 Django==4.1.6
+django-geojson==4.0.0
 django-google-translate==1.1
 djangorestframework==3.14.0
 googletrans==3.0.0
