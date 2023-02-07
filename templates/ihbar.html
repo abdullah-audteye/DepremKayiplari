@@ -18,57 +18,57 @@
             <form>
                 <h1>İhbar Yapan Kişi</h1><hr>
                 <div class="form-group">
-                  <label for="example1">Ihbar first name:</label>
-                  <input type="text" class="form-control" placeholder="Ihbar first name:">
+                  <label for="example1">İsim:</label>
+                  <input name="ihbar_first_name" type="text" class="form-control" placeholder="İsim:">
                 </div>
                 <div class="form-group">
-                    <label for="example2">Ihbar last name:</label>
-                    <input type="text" class="form-control" placeholder="Ihbar last name:">
+                    <label for="example2">Soyisim:</label>
+                    <input name="ihbar_last_name" type="text" class="form-control" placeholder="Soyisim:">
                   </div>
                   <div class="form-group">
-                    <label for="example2">Phonenumber:</label>
-                    <input type="tel" class="form-control" placeholder="555-432-11-00">
+                    <label for="example2">Telefon Numarası:</label>
+                    <input name="phonenumber" type="tel" class="form-control" placeholder="555-432-11-00">
                   </div>
                   <div class="form-group">
-                    <label for="example3">Eposta:</label>
-                    <input type="email" class="form-control" placeholder="Eposta:">
+                    <label for="example3">E-posta:</label>
+                    <input name="eposta" type="email" class="form-control" placeholder="E-posta:">
                   </div>
               </form>
            
 
               <form>
-                <h1>KAYIP FORM</h1><hr>
+                <h1>KAYIP OLAN KİŞİ</h1><hr>
                 <div class="form-group">
-                  <label for="example4">Kayip first name:</label>
-                  <input type="text" class="form-control" placeholder="Kayip first name:">
+                  <label for="example4">İsim:</label>
+                  <input name="kayip_first_name" type="text" class="form-control" placeholder="İsim:">
                 </div>
                 <div class="form-group">
-                    <label for="example5">Kayip last name:</label>
-                    <input type="text" class="form-control" placeholder="Kayip last name:">
+                    <label for="example5">Soyisim:</label>
+                    <input name="kayip_last_name" type="text" class="form-control" placeholder="Soyisim:">
                   </div>
                   <div class="form-group">
-                    <label for="example6">Phonenumber:</label>
-                    <input type="tel" class="form-control" placeholder="555-432-11-00">
+                    <label for="example6">Telefon Numarası:</label>
+                    <input name="phonenumber" type="tel" class="form-control" placeholder="555-432-11-00">
                   </div>
                   <div class="form-group">
-                    <label for="example7">Address:</label>
-                    <textarea name="" class="form-control" id="" cols="30" rows="5"></textarea>
+                    <label for="example7">Adres:</label>
+                    <textarea name="address" class="form-control" id="" cols="30" rows="5"></textarea>
                   </div>
-                  <div><h3>Tags</h3></div>
+                  <div><h3>Özellikler</h3></div>
                   <div class="form-check">
                     {% for tag in tags %}
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                    <input name="tags" class="form-check-input" type="checkbox" value="" id="defaultCheck1">
                     <label class="form-check-label" for="defaultCheck1">
                       {{tag.tag}}
                     </label>
                     {% endfor %}
                   </div>
                   <div class="form-group">
-                    <label for="example8">Detail:</label>
-                    <textarea name="" class="form-control" id="" cols="30" rows="5"></textarea>
+                    <label for="example8">Açıklama:</label>
+                    <textarea name="detail" class="form-control" id="" cols="30" rows="5"></textarea>
                   </div>
                
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Gönder</button>
               </form>
         </div>
     </form>
