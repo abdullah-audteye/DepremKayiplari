@@ -23,21 +23,18 @@ class MaintenanceModeMiddleware:
             print(path,'pathhh')
             lang_check = (request.path.split('/')[1])
 
-            print(lang_check,'pathhhcchkk')
 
 
 
             if len(lang_check) == 0:
-                lang_check = "en"
+                lang_check = "tr"
 
  
 
             if path == "/":
                 return redirect('ihbarview_tr')
-                # return render(request,"404.html")
 
 
-        
 
         except Exception as err:
             print(err, 'errcheck')

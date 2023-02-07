@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import KayipUserForm,IhbarUserForm
-from .models import Ihbar,KayipUser,Tag
+from .models import Ihbar,KayipUser,Tag,TagArabic
 from django.db import IntegrityError, transaction
 from django.core.serializers import json
 from django.core.serializers import serialize
@@ -43,7 +43,7 @@ def IhbarView(request):
 
 
 def IhbarViewAR(request):
-    tags = Tag.objects.all()
+    tags = TagArabic.objects.all()
     kayipuserform = KayipUserForm()
     ihbaruserform = IhbarUserForm()
     if request.method == "POST":
