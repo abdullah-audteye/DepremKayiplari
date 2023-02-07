@@ -10,6 +10,10 @@ class IhbarUser(models.Model):
     phonenumber = models.CharField(max_length=100)
     eposta = models.EmailField(max_length=100)
 
+
+    def __str__(self):
+        return self.ihbar_first_name + " - "+self.ihbar_last_name
+
 class KayipUser(models.Model):
     kayip_first_name = models.CharField(max_length=100)
     kayip_last_name = models.CharField(max_length=100)
@@ -20,10 +24,14 @@ class KayipUser(models.Model):
     tags = models.ManyToManyField(Tag,blank=True)
     detail = models.TextField(null=True,blank=True)
 
+    def __str__(self):
+        return self.kayip_first_name + " - "+self.kayip_last_name
+
 
 class Ihbar(models.Model):
     ihbar_user = models.ForeignKey(IhbarUser, on_delete=models.CASCADE,null=True,blank=True)
     kayip_user = models.ManyToManyField(KayipUser)
+
 
 
 
