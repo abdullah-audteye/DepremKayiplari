@@ -23,72 +23,38 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css"/>
 <script src="{% static 'js/view_map.js' %}"></script>
 <script type="text/javascript">
-var map = L.map('mapid').setView([38.286, 35.681], 15);
 
-var apikey = 'f4d3e21d4fc14954a1d5930d4dde3809'
-var markers = L.markerClusterGroup({
-    spiderfyOnMaxZoom: true,
-    showCoverageOnHover: false,
-    zoomToBoundsOnClick: true
-});
-
-L.tileLayer(
-    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 18
-    }).addTo(map);
+    var addressPoints = [];
 
 
-var pUrl = "https://landsd.azure-api.net/dev/ogc/wfs/loc/geocomm?request=GetFeature&outputFormat=application/json&srsName=EPSG:4326&CQL_filter=class='SCH'&key=" + apikey;
-// Use jQuery to load date from GeoJSON file
-
-console.log("{{users}}",'usersss')
-
-$.getJSON(pUrl, function (data) {
-    var geoJsonLayer = L.geoJson(data, {
-        filter: function (feature, layer) {
-            return true;
-            return (feature.properties.type == "PRS");
-        },
-        pointToLayer: function (feature, latlng) {
-            var label = '<h4>' + feature.properties.ename + '<br>' + feature.properties.cname + '</h4>';
-            label += feature.properties.e_address + '<br>';
-            label += feature.properties.c_address + '<br>';
-
-            var pMarker = new L.Marker(latlng, {
-                title: feature.properties.cname
-            });
-            pMarker = new L.CircleMarker(latlng, {
-                title: feature.properties.cname,
-                radius: 5,
-                color: '#FFFFFF',
-                weight: 2,
-                fillOpacity: 0.5,
-                fillColor: 'green'
-            });
-            pMarker.bindPopup(label);
-            markers.addLayer(pMarker);
-            return pMarker;
-        }
+    var tiles = L.tileLayer('//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        attribution: '&copy; <a href="//openstreetmap.org/copyright">OpenStreetMap</a> contributors, Points &copy 2012 LINZ'
     });
 
-    // Add geoJsonLayer to markercluster group
-
-    markers.on('clusterclick', function (a) {
-        console.log('Cluster Clicked:' + a);
-    });
-    markers.on('click', function (a) {
-        console.log('Marker Clicked:' + a);
+    var map = L.map('mapid', {
+        center: L.latLng(38.286, 35.681),
+        zoom: 15,
+        layers: [tiles]
     });
 
-    // Add the markercluster group to the map
-    map.addLayer(markers);
-});
+    var mcg = L.markerClusterGroup({
+        chunkedLoading: true,
+        //singleMarkerMode: true,
+        spiderfyOnMaxZoom: false
+    });
 
-</script>
-<script>
-        let examplejson = "{{users|safe}}"
-    examplejson = examplejson.replace('<QuerySet ',"")
-    examplejson = examplejson.replace('>',"")
-    console.log(examplejson,'examplejson')
+    fetch('api/kayiplar')
+        .then(response => response.json())
+        .then(points => points.map((i) => {
+            var a = i;
+            var title = i.kayip_first_name + "-" + i.kayip_first_name + "-" + i.kayip_last_name;
+            var marker = L.marker(new L.LatLng(i.cordinate_x, i.cordinate_y), {title: title});
+            marker.bindPopup(title);
+            mcg.addLayer(marker);
+        }))
+
+    map.addLayer(mcg);
+
 </script>
 </html>

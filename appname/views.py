@@ -18,8 +18,8 @@ def IhbarView(request):
     if request.method == "POST":
         kayipuserform = KayipUserForm(request.POST)
         ihbaruserform = IhbarUserForm(request.POST)
-
         if(ihbaruserform.is_valid() and kayipuserform.is_valid()):
+
             try:
                 with transaction.atomic():
                     ihbarform_instance=ihbaruserform.save()

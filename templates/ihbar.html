@@ -11,11 +11,10 @@
 <!-- Modal -->
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
-<form method="post" action="{% url 'ihbarview' %}">
-    
+<form id="ihbarform" method="post" action="{% url 'ihbarview' %}">
+    {% csrf_token %}
         <!-- Modal content-->
         <div class="modal-content px-5 pt-4">
-            <form>
                 <h1>İhbar Yapan Kişi</h1><hr>
                 <div class="form-group">
                   <label for="example1">İsim:</label>
@@ -33,11 +32,13 @@
                     <label for="example3">E-posta:</label>
                     <input name="eposta" type="email" class="form-control" placeholder="E-posta:">
                   </div>
-              </form>
            
 
-              <form>
                 <h1>KAYIP OLAN KİŞİ</h1><hr>
+
+                <input type="hidden" name="cordinate_x" id="cordinate_x"/>
+                <input type="hidden" name="cordinate_y" id="cordinate_y"/>
+
                 <div class="form-group">
                   <label for="example4">İsim:</label>
                   <input name="kayip_first_name" type="text" class="form-control" placeholder="İsim:">
@@ -46,6 +47,7 @@
                     <label for="example5">Soyisim:</label>
                     <input name="kayip_last_name" type="text" class="form-control" placeholder="Soyisim:">
                   </div>
+                  
                   <div class="form-group">
                     <label for="example6">Telefon Numarası:</label>
                     <input name="phonenumber" type="tel" class="form-control" placeholder="555-432-11-00">
@@ -57,7 +59,7 @@
                   <div><h3>Özellikler</h3></div>
                   <div class="form-check">
                     {% for tag in tags %}
-                    <input name="tags" class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                    <input name="tags" class="form-check-input" type="checkbox" value="{{tag.id}}">
                     <label class="form-check-label" for="defaultCheck1">
                       {{tag.tag}}
                     </label>
@@ -69,12 +71,13 @@
                   </div>
                
                 <button type="submit" class="btn btn-primary">Gönder</button>
-              </form>
         </div>
     </form>
     </div>
 
 </div>
+
+
 
 <div id="map" style="width: 100%; height: 100%"></div>
 <button type="button" id="openModal" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style=" display:none;">Fill Form</button>

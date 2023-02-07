@@ -12,7 +12,6 @@ L.tileLayer(
 
 // add a marker in the given location
 
-
 // Initialise the FeatureGroup to store editable layers
 var editableLayers = new L.FeatureGroup();
 map.addLayer(editableLayers);
@@ -41,11 +40,9 @@ var drawPluginOptions = {
     edit: false
 };
 
-
 // Initialise the draw control and pass it the FeatureGroup of editable layers
 var drawControl = new L.Control.Draw(drawPluginOptions);
 map.addControl(drawControl);
-
 
 var editableLayers = new L.FeatureGroup();
 map.addLayer(editableLayers);
@@ -56,10 +53,10 @@ document.getElementsByClassName('leaflet-draw-draw-marker')[0].style.scale = '1.
 const newDiv = document.createElement("div");
 
 // and give it some content
-const newContent = document.createTextNode("Haritadan Konum Seçerek Kişiye Ait Bilgileri Doldurunuz");
+const newContent = document.createTextNode("Konum Seç");
 newDiv.style.position = "absolute";
 newDiv.style.right = "31px";
-newDiv.style.width = "328px";
+newDiv.style.width = "100px";
 newDiv.style.backgroundColor = "rosybrown";
 
 // add the text node to the newly created div
@@ -75,6 +72,8 @@ map.on('draw:created', function (e) {
         layer = e.layer;
 
     if (type === 'marker') {
+        document.getElementById("cordinate_x").value = e.layer._latlng.lat;
+        document.getElementById("cordinate_y").value = e.layer._latlng.lng;
         document.getElementById("openModal").click();
         // let lat = (e.layer._latlng.lat);
         // let lng = (e.layer._latlng.lng);
