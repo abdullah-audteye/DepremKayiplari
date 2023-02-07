@@ -72,6 +72,8 @@ map.on('draw:created', function (e) {
         layer = e.layer;
 
     if (type === 'marker') {
+        document.getElementById("cordinate_x").value = e.layer._latlng.lat;
+        document.getElementById("cordinate_y").value = e.layer._latlng.lng;
         document.getElementById("openModal").click();
         // let lat = (e.layer._latlng.lat);
         // let lng = (e.layer._latlng.lng);
