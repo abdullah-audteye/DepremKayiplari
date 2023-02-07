@@ -3,6 +3,10 @@ from .forms import KayipUserForm,IhbarUserForm
 from .models import Ihbar,KayipUser,Tag
 from django.db import IntegrityError, transaction
 from django.core.serializers import json
+from django.core.serializers import serialize
+from .serializers import KayipUserSerializer
+from rest_framework.generics import ListAPIView
+
 import json
 
 
@@ -40,3 +44,7 @@ def IhbarView(request):
 def KayipUserList(request):
     users = KayipUser.objects.order_by('-id')
     return render(request,'user_list.html',{"users":str(users.values())})
+
+class KayipUserListView(ListAPIView):
+    queryset = KayipUser.objects.order_by('-id')
+    serializer_class = KayipUserSerializer
