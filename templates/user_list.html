@@ -25,23 +25,15 @@
 <script src="{% static 'js/view_map.js' %}"></script>
 <script type="text/javascript">
 
+    let lang = window.location.href.split("/")[window.location.href.split("/").length - 1];
     var button = document.createElement("Button");
-    button.innerHTML = '<i class="fa fa-language" style="font-size:24px"></i>';
+    button.innerHTML = '<i class="fa fa-envelope-open" aria-hidden="true"  style="font-size: 24px"></i>';
     button.style = "top:12px;right:12px;position:absolute;z-index: 9999"
     button.onclick = function () {
-        let lang = window.location.href.split("/")[window.location.href.split("/").length - 1];
         if (lang == "ar")
-            window.location.href = "/tr"
+            window.location.href = "/ar/ihbar"
         else
-            window.location.href = "/ar"
-    };
-    document.body.appendChild(button);
-
-    button = document.createElement("Button");
-    button.innerHTML = '<i class="fa fa-envelope-open" aria-hidden="true"></i>';
-    button.style = "top:12px;right:12px;position:absolute;z-index: 9999"
-    button.onclick = function () {
-        window.location.href = "/tr"
+            window.location.href = "/tr/ihbar"
     };
     document.body.appendChild(button);
 

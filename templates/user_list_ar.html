@@ -22,6 +22,18 @@
 <script src="{% static 'js/view_map.js' %}"></script>
 <script type="text/javascript">
 
+        let lang = window.location.href.split("/")[window.location.href.split("/").length - 1];
+    var button = document.createElement("Button");
+    button.innerHTML = '<i class="fa fa-envelope-open" aria-hidden="true"  style="font-size: 24px"></i>';
+    button.style = "top:12px;right:12px;position:absolute;z-index: 9999"
+    button.onclick = function () {
+        if (lang == "ar")
+            window.location.href = "/ar/ihbar"
+        else
+            window.location.href = "/tr/ihbar"
+    };
+    document.body.appendChild(button);
+
     var addressPoints = [];
 
     var tiles = L.tileLayer('//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -66,7 +78,7 @@
 }
                 );
             mcg.addLayer(marker);
-        })) 
+        }))
     map.addLayer(mcg);
 
 </script>
