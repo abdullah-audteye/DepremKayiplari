@@ -20,3 +20,5 @@ Missing:
  - Update the status of the missing person 
  - Automatically update an excel sheet on every new change in dB
  - Add new pin show information about people who were rescued from the rubble and have no connection with their families
+ - add image/s to missing pin
+ 
