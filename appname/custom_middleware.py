@@ -33,7 +33,7 @@ class MaintenanceModeMiddleware:
  
 
             if path == "/":
-                return redirect('ihbarview_en')
+                return redirect('ihbarview_tr')
                 # return render(request,"404.html")
 
 
