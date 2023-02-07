@@ -57,7 +57,7 @@
              
                 </ul>
                 <div class="tab-content" id="myTabContent">
-                  <form class="tab-pane fade show active" id="kayit1" role="tabpanel" aria-labelledby="home-tab">
+                  <div class="tab-pane fade show active" id="kayit1" role="tabpanel" aria-labelledby="home-tab">
                     <div style="border-bottom: 3px solid red;">
                       <div class="form-group">
                         <label for="example4">İsim:</label>
@@ -78,31 +78,28 @@
                         </div>
                         <div><h3>Özellikler</h3></div>
                         <div class="form-check">
-
+<!-- 
                           {% for tag in tags %}
                          
-
-                       
                           <div>
-                            <input name="tags"  class="form-check-input tags-class" type="checkbox"  value="{{tag.id}}">
+                            <input  class="form-check-input tags-class" type="checkbox"  value="{{tag.id}}">
                             <label class="form-check-label" for="defaultCheck1">
                               {{tag.tag}}
                             </label>
                           </div>
-                    
-
-                          {% endfor %}
+                  
+                          {% endfor %} -->
                         </div>
                         <div class="form-group">
                           <label for="example8">Açıklama:</label>
                           <textarea  name="detail" class="form-control" id="" cols="30" rows="5"></textarea>
                         </div>
                       </div>
-                    </form>
+                  </div>
                 </div>
 
                
-                <button id="sendButtonForForm" type="button" class="btn btn-primary mb-3">Gönder</button>
+                <button id="sendButtonForForm" type="submit" class="btn btn-primary mb-3">Gönder</button>
         </div>
     </form>
     </div>
@@ -111,20 +108,8 @@
 
 <script>
 
-
+  
   document.addEventListener("DOMContentLoaded", function(){
-
-
-    document.getElementById('sendButtonForForm').addEventListener('click',()=>{
-      console.log(document.getElementById('myTabContent'))
-      Array.from(document.getElementById('myTabContent').querySelectorAll('form')).forEach((frm)=>{
-        let result = $("#"+frm.id).serialize()
-        console.log(result,'result')
-
-      })
-    })
-
-
   
 
 
@@ -144,23 +129,7 @@ function newKayipForm(){
                     <label for="example6">Telefon Numarası:</label>
                     <input  name="kayip_phone_number" type="tel" class="form-control" placeholder="555-432-11-00">
                   </div>
-                  <div><h3>Özellikler</h3></div>
-                        <div class="form-check">
 
-                          {% for tag in tags %}
-                         
-
-                       
-                          <div>
-                            <input  name="tags" class="form-check-input tags-class" type="checkbox"  value="{{tag.id}}">
-                            <label class="form-check-label" for="defaultCheck1">
-                              {{tag.tag}}
-                            </label>
-                          </div>
-                    
-
-                          {% endfor %}
-                  </div>
                   </div>`
     )
   }
@@ -169,7 +138,7 @@ function newKayipForm(){
 const tabItemSingle = (counter)=>{
   return(
     `
-  <form class="tab-pane fade" id="kayit${counter}" role="tabpanel" aria-labelledby="profile-tab">${newKayipForm()}</form>`
+  <div class="tab-pane fade" id="kayit${counter}" role="tabpanel" aria-labelledby="profile-tab">${newKayipForm()}</div>`
   )
 }
 

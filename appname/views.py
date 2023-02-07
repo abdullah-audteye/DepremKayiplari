@@ -26,14 +26,7 @@ def IhbarView(request):
         kayip_tags = []
         kayip_tags.append((request.POST.getlist('tags',[])))
 
-        print(request.POST,'kayipdass')
-
-
-        matched_infos =  list(itertools.zip_longest(kayip_first_name,kayip_last_name,kayip_phone_number,kayip_tags))
-
-        # matched_infos = zip(kayip_first_name,kayip_last_name,kayip_phone_number,kayip_tags)
-
-        print(matched_infos,'matchedinfos')
+        matched_infos =  list(itertools.zip_longest(kayip_first_name,kayip_last_name,kayip_phone_number))
 
         kayipuserform = KayipUserForm(request.POST)
         ihbaruserform = IhbarUserForm(request.POST)
@@ -47,8 +40,8 @@ def IhbarView(request):
                         # kayip_form_instance=kayipuserform.save()
                         saved_records = []
                         # saved_records.append(kayip_form_instance.id)
-                        for index,(first_name,last_name,phone_number,tag) in enumerate(list(matched_infos)):
-                            print(first_name,last_name,phone_number,tag,'matchkkk')
+                        for index,(first_name,last_name,phone_number) in enumerate(list(matched_infos)):
+                            print(first_name,last_name,phone_number,'matchkkk')
                        
                             kayip_user_instance = KayipUser.objects.create(
                                 kayip_first_name = first_name,
@@ -59,9 +52,9 @@ def IhbarView(request):
                                 address=address,
 
                             )
-                            if(tag):
-                                tag_arr = [int(x) for x in tag]
-                                kayip_user_instance.tags.add(*tag_arr)
+                            # if(tag):
+                            #     tag_arr = [int(x) for x in tag]
+                            #     kayip_user_instance.tags.add(*tag_arr)
                             kayip_user_instance.save()
                             saved_records.append(kayip_user_instance.id)
 
@@ -72,7 +65,7 @@ def IhbarView(request):
                         ihbar_instance.kayip_user.add(*saved_records)
 
                         ihbar_instance.save()
-                        # return redirect('ihbarview_tr')
+                        return redirect('ihbarview_tr')
                 
 
                 except Exception as err:
