@@ -71,11 +71,11 @@ var button = document.createElement("Button");
 button.innerHTML = '<i class="fa fa-language" style="font-size:24px"></i>';
 button.style = "top:63px;right:5px;position:absolute;z-index: 9999"
 button.onclick = function () {
-    let lang = window.location.href.split("/")[window.location.href.split("/").length - 1];
+    let lang = window.location.href.split("/")[window.location.href.split("/").length - 2];
     if (lang == "ar")
-        window.location.href = "/tr"
+        window.location.href = "/tr/ihbar"
     else
-        window.location.href = "/ar"
+        window.location.href = "/ar/ihbar"
 };
 document.body.appendChild(button);
 
