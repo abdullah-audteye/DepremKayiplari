@@ -66,6 +66,10 @@ newDiv.appendChild(newContent);
 const currentDiv = document.getElementsByClassName('leaflet-draw-draw-marker')[0];
 currentDiv.appendChild(newDiv);
 
+var button = document.createElement("Button");
+button.innerHTML = '<i class="fa fa-language" style="font-size:24px"></i>';
+button.style = "top:63px;right:5px;position:absolute;z-index: 9999"
+document.body.appendChild(button);
 
 map.on('draw:created', function (e) {
     var type = e.layerType,
