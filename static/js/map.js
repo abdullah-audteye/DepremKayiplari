@@ -51,9 +51,10 @@ document.getElementsByClassName('leaflet-draw-draw-marker')[0].style.scale = '1.
 
 // create a new div element
 const newDiv = document.createElement("div");
+let lang = window.location.href.split("/")[window.location.href.split("/").length - 1];
 
 // and give it some content
-const newContent = document.createTextNode("Konum Seç");
+const newContent = document.createTextNode(lang === "ar" ? "Konum Seç" : "Konum Seç");
 newDiv.style.position = "absolute";
 newDiv.style.right = "31px";
 newDiv.style.width = "100px";
@@ -69,6 +70,13 @@ currentDiv.appendChild(newDiv);
 var button = document.createElement("Button");
 button.innerHTML = '<i class="fa fa-language" style="font-size:24px"></i>';
 button.style = "top:63px;right:5px;position:absolute;z-index: 9999"
+button.onclick = function () {
+    let lang = window.location.href.split("/")[window.location.href.split("/").length - 1];
+    if (lang == "ar")
+        window.location.href = "/tr"
+    else
+        window.location.href = "/ar"
+};
 document.body.appendChild(button);
 
 map.on('draw:created', function (e) {

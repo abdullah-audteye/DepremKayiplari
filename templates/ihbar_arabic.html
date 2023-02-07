@@ -1,5 +1,5 @@
 {% load static %}
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,20 +19,20 @@
             <div class="modal-content px-5 pt-4">
                 <h1>قم بالتبليغ عن مفقودين</h1>
                 <div class="form-group">
-                    <label for="example1">>اسم المبلغ:</label>
-                    <input name="ihbar_first_name" type="text" class="form-control">
+                    <label for="example1" style="display: flex;">اسم المبلغ </label>
+                    <input name="ihbar_first_name" type="text" class="form-control" placeholder="اسم المبلغ">
                 </div>
                 <div class="form-group">
                     <label for="example2" style="display: flex;">كنية المبلغ</label>
-                    <input name="ihbar_last_name" type="text" class="form-control">
+                    <input name="ihbar_last_name" type="text" class="form-control"  placeholder="كنية المبلغ">
                 </div>
                 <div class="form-group">
                     <label for="example2" style="display: flex;">رقم الهاتف</label>
-                    <input name="phonenumber" type="tel" class="form-control">
+                    <input name="phonenumber" type="tel" class="form-control" placeholder="555-432-11-00">
                 </div>
                 <div class="form-group">
                     <label for="example3" style="display: flex;">البريد الالكتروني</label>
-                    <input name="eposta" type="email" class="form-control">
+                    <input name="eposta" type="email" class="form-control" placeholder="ali@gmail.com" dir="ltr">
                 </div>
 
 
@@ -43,22 +43,22 @@
 
                 <div class="form-group">
                     <label for="example4" style="display: flex;">اسم المفقود</label>
-                    <input name="kayip_first_name" type="text" class="form-control">
+                    <input name="kayip_first_name" type="text" class="form-control" placeholder="اسم المفقود">
                 </div>
                 <div class="form-group">
                     <label for="example5" style="display: flex;">كنية المفقود</label>
-                    <input name="kayip_last_name" type="text" class="form-control">
+                    <input name="kayip_last_name" type="text" class="form-control" placeholder="كنية المفقود">
                 </div>
 
                 <div class="form-group">
                     <label for="example6" style="display: flex;">رقم هاتف المفقود </label>
-                    <input name="phonenumber" type="tel" class="form-control">
+                    <input name="phonenumber" type="tel" class="form-control" placeholder="555-432-11-00">
                 </div>
                 <div class="form-group">
                     <label for="example7" style="display: flex;">عنوان المفقود</label>
                     <textarea name="address" class="form-control" id="" cols="30" rows="5"></textarea>
                 </div>
-                <div><h3>Özellikler</h3></div>
+                <div><h3 style="display: flex;">مواصفات الفقيد</h3></div>
                 <div class="form-check">
                     {% for tag in tags %}
                         <input name="tags" class="form-check-input" type="checkbox" value="{{ tag.id }}">
