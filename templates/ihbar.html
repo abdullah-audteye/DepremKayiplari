@@ -1,3 +1,4 @@
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,6 +15,13 @@
     <h1>KAYIP FORM</h1>
     {{kayipuserform}}
 
-    
+<h1>mapp</h1>
+<div id="map" style="width: 100%; height: 100%"></div>
+
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css"/>
+<script src="{% static 'js/map.js' %}"></script>
 </html>
