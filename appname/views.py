@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from .forms import KayipUserForm,IhbarUserForm
 from .models import Ihbar,KayipUser
 from django.db import IntegrityError, transaction
+from django.core.serializers import json
+from .serializers import KayipUserSerializer
+import json
 
 
 
@@ -36,4 +39,4 @@ def IhbarView(request):
 
 def KayipUserList(request):
     users = KayipUser.objects.order_by('-id')
-    return render(request,'user_list.html',{"users":users})
+    return render(request,'user_list.html',{"users":str(users.values())})

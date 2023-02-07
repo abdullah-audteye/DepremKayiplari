@@ -1,5 +1,6 @@
 {% load static %}
 
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -19,4 +20,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css"/>
 <script src="{% static 'js/map.js' %}"></script>
+<script>
+    let examplejson = "{{users|safe}}"
+    examplejson = examplejson.replace('<QuerySet ',"")
+    examplejson = examplejson.replace('>',"")
+    
+    console.log(examplejson,'examplejson')
+</script>
 </html>
