@@ -54,7 +54,7 @@ let newDiv = document.createElement("div");
 let lang = window.location.href.split("/")[window.location.href.split("/").length - 2];
 
 // and give it some content
-const newContent = document.createTextNode(lang === "ar" ? "Konum Seç" : "Konum Seç");
+const newContent = document.createTextNode(lang === "ar" ? "حدد موقع المفقود" : "Konum Seç");
 newDiv.style.position = "absolute";
 newDiv.style.right = "31px";
 newDiv.style.width = "100px";
@@ -72,7 +72,7 @@ var button = document.createElement("Button");
 button.innerHTML = '<i class="fa fa-language" style="font-size:24px"></i>';
 button.style = "top:63px;right:5px;position:absolute;z-index: 9999"
 button.onclick = function () {
-     if (lang == "ar")
+    if (lang == "ar")
         window.location.href = "/tr/ihbar"
     else
         window.location.href = "/ar/ihbar"
@@ -104,6 +104,20 @@ button.onclick = function () {
         window.location.href = "/tr"
 };
 document.body.appendChild(button);
+
+newDiv = document.createElement("div");
+
+// and give it some content
+const newContentss = document.createTextNode(lang === "ar" ? "Kayıtlara Git" : "ابحث عن مفقودين");
+newDiv.style.position = "absolute";
+newDiv.style.right = "36px";
+newDiv.style.top = "0px";
+newDiv.style.width = "122px";
+newDiv.style.backgroundColor = "rosybrown";
+
+// add the text node to the newly created div
+newDiv.appendChild(newContentss);
+button.appendChild(newDiv);
 
 map.on('draw:created', function (e) {
     var type = e.layerType,
