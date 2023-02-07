@@ -2,7 +2,7 @@
 
 https://findmehelpme.com/
 ```
-#Project features
+# Project features
 ```
 
  - Pin on the map to notice a missing person:
@@ -12,7 +12,7 @@ Where the relative of the missing person can put a pin on the map for the last p
 Volunteers can browse the map and search for the injured or missing in the area where they are located.
 
 ```
-#Missing:
+# Missing:
 ```
  - Enhance UI/UX
  - Allow adding multiple people in one pin (like family or roommates)
