@@ -24,6 +24,7 @@
 <script type="text/javascript">
 
     let lang = window.location.href.split("/")[window.location.href.split("/").length - 1];
+
     var button = document.createElement("Button");
     button.innerHTML = '<i class="fa fa-envelope-open" aria-hidden="true"  style="font-size: 24px"></i>';
     button.style = "top:12px;right:12px;position:absolute;z-index: 9999"
@@ -34,7 +35,7 @@
             window.location.href = "/tr/ihbar"
     };
 
-    const newDiv = document.createElement("div");
+    let newDiv = document.createElement("div");
     const newContent = document.createTextNode("İhbar Et");
     newDiv.style.position = "absolute";
     newDiv.style.right = "41px";
@@ -46,6 +47,31 @@
     newDiv.appendChild(newContent);
 
     document.body.appendChild(button);
+    button.appendChild(newDiv);
+
+    button = document.createElement("Button");
+    button.innerHTML = '<i class="fa fa-language" style="font-size:24px"></i>';
+    button.style = "top:63px;right:5px;position:absolute;z-index: 9999"
+    button.onclick = function () {
+        if (lang == "ar")
+            window.location.href = "/tr"
+        else
+            window.location.href = "/ar"
+    };
+    document.body.appendChild(button);
+
+    newDiv = document.createElement("div");
+
+    // and give it some content
+    const newContents = document.createTextNode(lang === "ar" ? "Türkçe" : "عربي");
+    newDiv.style.position = "absolute";
+    newDiv.style.right = "36px";
+    newDiv.style.top = "0px";
+    newDiv.style.width = "100px";
+    newDiv.style.backgroundColor = "rosybrown";
+
+    // add the text node to the newly created div
+    newDiv.appendChild(newContents);
     button.appendChild(newDiv);
 
     var addressPoints = [];

@@ -50,8 +50,8 @@ document.getElementsByClassName('leaflet-draw-draw-circlemarker')[0].style.displ
 document.getElementsByClassName('leaflet-draw-draw-marker')[0].style.scale = '1.4';
 
 // create a new div element
-const newDiv = document.createElement("div");
-let lang = window.location.href.split("/")[window.location.href.split("/").length - 1];
+let newDiv = document.createElement("div");
+let lang = window.location.href.split("/")[window.location.href.split("/").length - 2];
 
 // and give it some content
 const newContent = document.createTextNode(lang === "ar" ? "Konum Seç" : "Konum Seç");
@@ -67,15 +67,41 @@ newDiv.appendChild(newContent);
 const currentDiv = document.getElementsByClassName('leaflet-draw-draw-marker')[0];
 currentDiv.appendChild(newDiv);
 
+
 var button = document.createElement("Button");
 button.innerHTML = '<i class="fa fa-language" style="font-size:24px"></i>';
 button.style = "top:63px;right:5px;position:absolute;z-index: 9999"
 button.onclick = function () {
-    let lang = window.location.href.split("/")[window.location.href.split("/").length -2];
-    if (lang == "ar")
+     if (lang == "ar")
         window.location.href = "/tr/ihbar"
     else
         window.location.href = "/ar/ihbar"
+};
+document.body.appendChild(button);
+
+newDiv = document.createElement("div");
+
+// and give it some content
+const newContents = document.createTextNode(lang === "ar" ? "Türkçe" : "عربي");
+newDiv.style.position = "absolute";
+newDiv.style.right = "36px";
+newDiv.style.top = "0px";
+newDiv.style.width = "100px";
+newDiv.style.backgroundColor = "rosybrown";
+
+// add the text node to the newly created div
+newDiv.appendChild(newContents);
+button.appendChild(newDiv);
+
+button = document.createElement("Button");
+button.innerHTML = '<i class="fa fa-backward" style="font-size:24px"></i>';
+button.style = "top:100px;right:5px;position:absolute;z-index: 9999"
+button.onclick = function () {
+    let lang = window.location.href.split("/")[window.location.href.split("/").length - 2];
+    if (lang == "ar")
+        window.location.href = "/ar"
+    else
+        window.location.href = "/tr"
 };
 document.body.appendChild(button);
 
