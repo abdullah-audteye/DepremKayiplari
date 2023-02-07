@@ -35,7 +35,20 @@
         else
             window.location.href = "/tr/ihbar"
     };
+
+    const newDiv = document.createElement("div");
+    const newContent = document.createTextNode("İhbar Et");
+    newDiv.style.position = "absolute";
+    newDiv.style.right = "41px";
+    newDiv.style.width = "100px";
+    newDiv.style.top = "0";
+    newDiv.style.backgroundColor = "rosybrown";
+
+    // add the text node to the newly created div
+    newDiv.appendChild(newContent);
+
     document.body.appendChild(button);
+    button.appendChild(newDiv);
 
     var addressPoints = [];
 
