@@ -1,5 +1,6 @@
 {% load static %}
 
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -83,5 +84,11 @@ $.getJSON(pUrl, function (data) {
     map.addLayer(markers);
 });
 
+</script>
+<script>
+        let examplejson = "{{users|safe}}"
+    examplejson = examplejson.replace('<QuerySet ',"")
+    examplejson = examplejson.replace('>',"")
+    console.log(examplejson,'examplejson')
 </script>
 </html>
