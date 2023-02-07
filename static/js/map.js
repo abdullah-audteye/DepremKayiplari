@@ -11,7 +11,7 @@ L.tileLayer(
     }).addTo(map);
 
 // add a marker in the given location
-L.marker(center).addTo(map);
+
 
 // Initialise the FeatureGroup to store editable layers
 var editableLayers = new L.FeatureGroup();
@@ -77,10 +77,11 @@ map.on('draw:created', function (e) {
         layer = e.layer;
 
     if (type === 'marker') {
-        let lat = (e.layer._latlng.lat);
-        let lng = (e.layer._latlng.lng);
-        let str = '<div><button onclick="">' + lat + ' - ' + lng + '</button></div>'
-        layer.bindPopup(str);
+        document.getElementById("openModal").click();
+        // let lat = (e.layer._latlng.lat);
+        // let lng = (e.layer._latlng.lng);
+        // let str = '<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Fill Form</button>'
+        // layer.bindPopup(str);
     }
 
     editableLayers.addLayer(layer);
