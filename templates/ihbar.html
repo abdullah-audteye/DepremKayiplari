@@ -7,13 +7,18 @@
     <title>Document</title>
 </head>
 <body>
+    <form method="post" action="{% url 'ihbarview' %}">
+{% csrf_token %}
     <h1>İhbar Yapan Kişi</h1>
     {{ihbaruserform}}
-
     <br>
-
-    <h1>KAYIP FORM</h1>
     {{kayipuserform}}
+    <button type="submit">Send</button>
+
+</form>
+
+
+    
 
 <h1>mapp</h1>
 <div id="map" style="width: 100%; height: 100%"></div>
