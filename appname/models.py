@@ -27,10 +27,10 @@ class IhbarUser(models.Model):
 class KayipUser(models.Model):
     kayip_first_name = models.CharField(max_length=100)
     kayip_last_name = models.CharField(max_length=100)
-    phonenumber = models.CharField(max_length=100)
+    phonenumber = models.CharField(max_length=100,null=True,blank=True)
     cordinate_x = models.FloatField(max_length=10,blank=True,null=True)
     cordinate_y = models.FloatField(max_length=10,blank=True,null=True)
-    address = models.TextField()
+    address = models.TextField(null=True,blank=True)
     tags = models.ManyToManyField(Tag,blank=True)
     detail = models.TextField(null=True,blank=True)
     status = models.CharField(blank=True,null=True,max_length=255)
