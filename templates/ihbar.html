@@ -61,10 +61,12 @@
                   <div><h3>Özellikler</h3></div>
                   <div class="form-check">
                     {% for tag in tags %}
+                    <div>
                     <input name="tags" class="form-check-input" type="checkbox" value="{{tag.id}}">
                     <label class="form-check-label" for="defaultCheck1">
                       {{tag.tag}}
                     </label>
+                  </div>
                     {% endfor %}
                   </div>
                   <div class="form-group">
