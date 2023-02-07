@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 
-from appname.models import User
+# from appname.models import User
 from .forms import UserForm
 
 def user_create(request):
