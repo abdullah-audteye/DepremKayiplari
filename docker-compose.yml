@@ -5,14 +5,10 @@ version: '3.3'
 services:
 
   web:
-    env_file:
-      - .env
     container_name: deprem
     build: .
     volumes:
       - .:/code/deprem
-    depends_on:
-      - db
     ports:
       - "8080:8080"
 
@@ -22,8 +18,8 @@ services:
       - "443:443"
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - ./nginx/certs/8c0f14ed4a6c9fb9.crt:/etc/nginx/conf.d/certs/8c0f14ed4a6c9fb9.crt
-      - ./nginx/certs/secret.key:/etc/nginx/conf.d/certs/secret.key
+      - ./nginx/certs/8c0f14ed4a6c9fb9.crt:/etc/nginx/ssl/live/audteye.com/fullchain.pem
+      - ./nginx/certs/secret.key:/etc/nginx/ssl/live/audteye.com/privkey.pem
       - ./static:/code/staticfiles
       - ./media:/code/media
       - ./templates:/code/templates
