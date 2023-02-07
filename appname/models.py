@@ -33,6 +33,7 @@ class KayipUser(models.Model):
     address = models.TextField()
     tags = models.ManyToManyField(Tag,blank=True)
     detail = models.TextField(null=True,blank=True)
+    status = models.CharField(blank=True,null=True,max_length=255)
 
     def __str__(self):
         return self.kayip_first_name + " - "+self.kayip_last_name
