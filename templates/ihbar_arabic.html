@@ -20,15 +20,15 @@
                 <h1>قم بالتبليغ عن مفقودين</h1>
                 <div class="form-group">
                     <label for="example1">>اسم المبلغ:</label>
-                    <input name="ihbar_first_name" type="text" class="form-control">
+                    <input required name="ihbar_first_name" type="text" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="example2" style="display: flex;">كنية المبلغ</label>
-                    <input name="ihbar_last_name" type="text" class="form-control">
+                    <input required name="ihbar_last_name" type="text" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="example2" style="display: flex;">رقم الهاتف</label>
-                    <input name="phonenumber" type="tel" class="form-control">
+                    <input required name="phonenumber" type="tel" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="example3" style="display: flex;">البريد الالكتروني</label>
@@ -39,11 +39,11 @@
                 <h1 style="display: flex;">بيانات المفقود</h1>
 
                 <input type="hidden" name="cordinate_x" id="cordinate_x"/>
-                <input type="hidden" name="cordinate_y" id="cordinate_y"/>
+                <input required type="hidden" name="cordinate_y" id="cordinate_y"/>
 
                 <div class="form-group">
                     <label for="example4" style="display: flex;">اسم المفقود</label>
-                    <input name="kayip_first_name" type="text" class="form-control">
+                    <input required name="kayip_first_name" type="text" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="example5" style="display: flex;">كنية المفقود</label>
@@ -52,13 +52,13 @@
 
                 <div class="form-group">
                     <label for="example6" style="display: flex;">رقم هاتف المفقود </label>
-                    <input name="phonenumber" type="tel" class="form-control">
+                    <input required name="phonenumber" type="tel" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="example7" style="display: flex;">عنوان المفقود</label>
                     <textarea name="address" class="form-control" id="" cols="30" rows="5"></textarea>
                 </div>
-                <div><h3>Özellikler</h3></div>
+                <div><h3></h3></div>
                 <div class="form-check">
                     {% for tag in tags %}
                     <div>
