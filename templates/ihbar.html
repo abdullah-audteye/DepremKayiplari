@@ -37,11 +37,75 @@
            
 
                 <h1>KAYIP OLAN KİŞİ</h1><hr>
+                <button type="button" id="yenikayipadd">Yeni Kayıp Kişi Ekle</button>
 
                 <input type="hidden" name="cordinate_x" id="cordinate_x"/>
                 <input type="hidden" name="cordinate_y" id="cordinate_y"/>
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#kayit1" role="tab" aria-controls="home"
+                      aria-selected="true">Kayıt 1</a>
+                  </li>
+                
+             
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                  <div class="tab-pane fade show active" id="kayit1" role="tabpanel" aria-labelledby="home-tab">
+                    <div style="border-bottom: 3px solid red;">
+                      <div class="form-group">
+                        <label for="example4">İsim:</label>
+                        <input required name="kayip_first_name" type="text" class="form-control" placeholder="İsim:">
+                      </div>
+                      <div class="form-group">
+                          <label for="example5">Soyisim:</label>
+                          <input required name="kayip_last_name" type="text" class="form-control" placeholder="Soyisim:">
+                        </div>
+                        
+                        <div class="form-group">
+                          <label for="example6">Telefon Numarası:</label>
+                          <input  name="kayip_phone_number" type="tel" class="form-control" placeholder="555-432-11-00">
+                        </div>
+                        <div class="form-group">
+                          <label for="example7">Adres:</label>
+                          <textarea required name="address" class="form-control" id="" cols="30" rows="5"></textarea>
+                        </div>
+                        <div><h3>Özellikler</h3></div>
+                        <div class="form-check">
+                          {% for tag in tags %}
+                          <div>
+                          <input name="tags" class="form-check-input" type="checkbox"  value="{{tag.id}}">
+                          <label class="form-check-label" for="defaultCheck1">
+                            {{tag.tag}}
+                          </label>
+                        </div>
+                          {% endfor %}
+                        </div>
+                        <div class="form-group">
+                          <label for="example8">Açıklama:</label>
+                          <textarea  name="detail" class="form-control" id="" cols="30" rows="5"></textarea>
+                        </div>
+                      </div>
+                  </div>
+                </div>
 
-                <div class="form-group">
+               
+                <button id="sendButtonForForm" type="submit" class="btn btn-primary mb-3">Gönder</button>
+        </div>
+    </form>
+    </div>
+
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function(){
+  
+
+
+let counter = 1
+
+function newKayipForm(){
+    return(
+      `<div class="form-group">
                   <label for="example4">İsim:</label>
                   <input required name="kayip_first_name" type="text" class="form-control" placeholder="İsim:">
                 </div>
@@ -49,14 +113,9 @@
                     <label for="example5">Soyisim:</label>
                     <input required name="kayip_last_name" type="text" class="form-control" placeholder="Soyisim:">
                   </div>
-                  
                   <div class="form-group">
                     <label for="example6">Telefon Numarası:</label>
-                    <input  name="phonenumber" type="tel" class="form-control" placeholder="555-432-11-00">
-                  </div>
-                  <div class="form-group">
-                    <label for="example7">Adres:</label>
-                    <textarea required name="address" class="form-control" id="" cols="30" rows="5"></textarea>
+                    <input  name="kayip_phone_number" type="tel" class="form-control" placeholder="555-432-11-00">
                   </div>
                   <div><h3>Özellikler</h3></div>
                   <div class="form-check">
@@ -69,17 +128,48 @@
                   </div>
                     {% endfor %}
                   </div>
-                  <div class="form-group">
-                    <label for="example8">Açıklama:</label>
-                    <textarea  name="detail" class="form-control" id="" cols="30" rows="5"></textarea>
-                  </div>
-               
-                <button type="submit" class="btn btn-primary mb-3">Gönder</button>
-        </div>
-    </form>
-    </div>
+                  </div>`
+    )
+  }
 
-</div>
+
+const tabItemSingle = (counter)=>{
+  return(
+    `
+  <div class="tab-pane fade" id="kayit${counter}" role="tabpanel" aria-labelledby="profile-tab">${newKayipForm()}</div>`
+  )
+}
+
+
+
+
+  const addliObject = (counter)=>{
+    return(
+      `<li class="nav-item">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#kayit${counter}" role="tab" aria-controls="profile"
+                      aria-selected="false">Kayıt ${counter}</a>
+                  </li>`
+    )
+  }
+
+
+
+  document.getElementById('yenikayipadd').addEventListener('click',()=>{
+    counter++
+      document.getElementById('myTab').innerHTML+=addliObject(counter)
+      document.getElementById('myTabContent').innerHTML+=tabItemSingle(counter)
+  })
+
+document.getElementById('sendButtonForForm').addEventListener('click',()=>{
+  let forms = document.querySelectorAll('form')
+
+  Array.from(forms).forEach((form)=>{
+    let form_instance = $(form).serializeArray()
+    console.log(form_instance,'forminstancennn')
+  })
+})
+});
+</script>
 
 
 
