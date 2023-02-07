@@ -41,6 +41,35 @@ def IhbarView(request):
     return render(request,"ihbar.html",{"kayipuserform":kayipuserform,"ihbaruserform":ihbaruserform,"tags":tags})
 
 
+def IhbarARView(request):
+    tags = Tag.objects.all()
+    kayipuserform = KayipUserForm()
+    ihbaruserform = IhbarUserForm()
+    if request.method == "POST":
+        kayipuserform = KayipUserForm(request.POST)
+        ihbaruserform = IhbarUserForm(request.POST)
+
+        if(ihbaruserform.is_valid() and kayipuserform.is_valid()):
+            try:
+                with transaction.atomic():
+                    ihbarform_instance=ihbaruserform.save()
+                    kayip_form_instance=kayipuserform.save()
+                    ihbar_instance = Ihbar.objects.create()
+                    ihbar_instance.ihbar_user = ihbarform_instance
+                    ihbar_instance.kayip_user.add(kayip_form_instance)
+                    ihbar_instance.save()
+                    return redirect('ihbarviewAR')
+            
+
+            except IntegrityError:
+                raise IntegrityError('Check the values that you sent !')
+        else:
+            print(ihbaruserform.errors,'ihbarformerros')
+            print(kayipuserform.errors,'kayipuserform')
+
+
+    return render(request,"ihbar-ar.html",{"kayipuserform":kayipuserform,"ihbaruserform":ihbaruserform,"tags":tags})
+
 def KayipUserList(request):
     users = KayipUser.objects.order_by('-id')
     return render(request,'user_list.html',{"users":str(users.values())})
