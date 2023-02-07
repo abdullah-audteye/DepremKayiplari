@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.urls import include, path
 from django.contrib import admin
-from appname.views import IhbarView
+from appname.views import IhbarView,KayipUserList
 
 
 urlpatterns = [
     path("admin", admin.site.urls, name="admin_page"),
-    path('',IhbarView,name="ihbarview")
+    path('',IhbarView,name="ihbarview"),
+    path('kayiplar',KayipUserList,name="kayiplarview")
 ]

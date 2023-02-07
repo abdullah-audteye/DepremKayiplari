@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import KayipUserForm,IhbarUserForm
-from .models import Ihbar
+from .models import Ihbar,KayipUser
 from django.db import IntegrityError, transaction
 
 
@@ -34,3 +34,6 @@ def IhbarView(request):
     return render(request,"ihbar.html",{"kayipuserform":kayipuserform,"ihbaruserform":ihbaruserform})
 
 
+def KayipUserList(request):
+    users = KayipUser.objects.order_by('-id')
+    return render(request,'user_list.html',{"users":users})
