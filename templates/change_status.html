@@ -1,0 +1,37 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    {% for user in ihbar.kayip_user.all %}
+
+            <div>
+                <form style="display: flex;">
+                <div>{{user.kayip_first_name}} - {{user.kayip_last_name}}</div>
+                <select>
+
+                {% for status in kayip_status %}
+
+                <option>{{status.name}}</option>
+
+                {% endfor %}
+            </select>
+        </form>
+
+        <button>Send</button>
+
+            </div>
+
+    {% endfor %}
+
+
+
+
+</body>
+
+</html>

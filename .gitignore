@@ -1,8 +1,10 @@
 venv
 env
+data
 __pycache__
 */__pycache__
 db.sqlite3
+.db.sqlite3
 .vscode
 .idea
 env
@@ -12,3 +14,4 @@ __pycache__
 __pycache__
 *.pyc
 /staticfiles/*
+docker-compose.yml

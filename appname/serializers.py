@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from .models import KayipUser,Ihbar,IhbarUser
+from .models import KayipUser,Ihbar,IhbarUser,KayipStatus
 class KayipUserSerializer(ModelSerializer):
 
     # def to_representation(self, instance):
@@ -36,3 +36,7 @@ class IhbarSerializer(ModelSerializer):
         model = Ihbar
         fields = "__all__"
 
+class KayipStatusSerializer(ModelSerializer):
+    class Meta:
+        model = KayipStatus
+        fields = "__all__"
