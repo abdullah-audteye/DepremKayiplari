@@ -1,3 +1,5 @@
+
+
 version: '3.3'
 
 services:
@@ -12,14 +14,13 @@ services:
     ports:
       - "5454:5432"
     volumes:
-      - /tempo/data/deprem1:/var/lib/postgresql/data:rw
+      - /data/deprem1:/var/lib/postgresql/data:rw
 
   web:
-    build: .
-    image: deprem_web
     env_file:
-      - .env
+        - .env
     container_name: deprem
+    build: .
     volumes:
       - .:/code/deprem
     depends_on:
