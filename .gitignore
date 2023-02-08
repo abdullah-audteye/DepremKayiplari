@@ -13,3 +13,4 @@ __pycache__
 __pycache__
 *.pyc
 /staticfiles/*
+docker-compose.yml
