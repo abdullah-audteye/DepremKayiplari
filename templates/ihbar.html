@@ -303,6 +303,18 @@
                     <label for="example3">E-posta:</label>
                     <input name="eposta" type="email" class="form-control" placeholder="E-posta:">
                 </div>
+                <select name="country" class="form-group">
+                  {% for country in countries %}
+                       
+                       <option value="{{country.id}}">
+                         <label class="form-check-label" for="defaultCheck1">
+                           {{country.name}}
+                         </label>
+                        </option>
+               
+                       {% endfor %}
+                  
+                      </select>
 
 
                 <h1>KAYIP OLAN KİŞİLER</h1>
@@ -477,13 +489,25 @@
                     <label for="example5">Soyisim:</label>
                     <input required name="kayip_last_name" type="text" class="form-control" placeholder="Soyisim:">
                   </div>
+                  <select name="kayip_status" class="form-group" style="width:100%">
+                  {% for status in kayip_status %}
+                       
+                       <option value="{{status.id}}">
+                         <label class="form-check-label" for="defaultCheck1">
+                           {{status.name}}
+                         </label>
+                        </option>
+               
+                       {% endfor %}
+                  
+                      </select>
 
                   ${counter == 1 ?
                     `<div class="form-group">
                           <label for="example7">Adres:</label>
                           <textarea required name="address" class="form-control" id="" cols="30" rows="5"></textarea>
                         </div>`
-                    : `</span>`
+                    : `<div></div>`
                 }
                         <div><h3>Özellikler</h3></div>
                   {% for tag in tags %}
