@@ -1,6 +1,4 @@
-from django.conf import settings
-from django.shortcuts import HttpResponse
-from django.shortcuts import redirect,render
+from django.shortcuts import redirect
 
 
 
@@ -32,7 +30,7 @@ class MaintenanceModeMiddleware:
  
 
             if path == "/":
-                return redirect('kayiplarview_tr')
+                return redirect('ihbarview_tr')
 
 
 
