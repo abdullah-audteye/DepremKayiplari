@@ -3,6 +3,32 @@ var center = [38.286, 35.681];
 
 // Create the map
 var map = L.map('map').setView(center, 9);
+var mcg = L.markerClusterGroup({
+    chunkedLoading: true,
+    //singleMarkerMode: true,
+    spiderfyOnMaxZoom: false,
+});
+var LeafIcon = L.Icon.extend({
+    options: {
+        iconSize: [24, 24],
+        shadowSize: [50, 64],
+        iconAnchor: [11, 94],
+        shadowAnchor: [4, 62],
+        popupAnchor: [0, -86],
+    },
+});
+var greenIcon = new LeafIcon({iconUrl: "https://www.google.com/intl/en_us/mapfiles/ms/micons/green-dot.png",});
+var redIcon = new LeafIcon({iconUrl: "https://www.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png",});
+var yellowIcon = new LeafIcon({iconUrl: "https://www.google.com/intl/en_us/mapfiles/ms/micons/yellow-dot.png",});
+var blueIcon = new LeafIcon({iconUrl: "https://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png",});
+
+var selectedArray = [1, 2, 3, 4];
+let values = {
+    1: {status: "At Hospital", icon: greenIcon, color: "green"},
+    2: {status: "Missing", icon: redIcon, color: "red"},
+    3: {status: "Found", icon: yellowIcon, color: "yellow"},
+    4: {status: "In Need of Help", icon: blueIcon, color: "blue"}
+}
 
 // Set up the OSM layer
 L.tileLayer(
@@ -41,74 +67,58 @@ var drawPluginOptions = {
 };
 
 ////////////////////////////////////////////////////////////////////////
+addLayer();
 
-var mcg = L.markerClusterGroup({
-    chunkedLoading: true,
-    //singleMarkerMode: true,
-    spiderfyOnMaxZoom: false,
-});
-var LeafIcon = L.Icon.extend({
-    options: {
-        iconSize: [24, 24],
-        shadowSize: [50, 64],
-        iconAnchor: [11, 94],
-        shadowAnchor: [4, 62],
-        popupAnchor: [0, -86],
-    },
-});
-var greenIcon = new LeafIcon({
-    iconUrl:
-        "https://mt.googleapis.com/vt/icon/name=icons/onion/123-red-dot.png",
-});
-var redIcon = new LeafIcon({
-    iconUrl:
-        "https://mt.googleapis.com/vt/icon/name=icons/onion/123-red-dot.png",
-});var yellowIcon = new LeafIcon({
-    iconUrl:
-        "https://mt.googleapis.com/vt/icon/name=icons/onion/123-red-dot.png",
-});var blueIcon = new LeafIcon({
-    iconUrl:
-        "https://mt.googleapis.com/vt/icon/name=icons/onion/123-red-dot.png",
-});
+function addLayer() {
+    mcg.clearLayers();
+    fetch("api/kayiplar")
+        .then((response) => response.json())
+        .then((points) =>
+            points.map((i) => {
+                if (i.kayip_user.length < 0)
+                    return;
+                var title = i.kayip_user[0]?.kayip_first_name + "-" + i.kayip_user[0]?.kayip_last_name + "-";
+                var marker = L.marker(new L.LatLng(i.kayip_user[0]?.cordinate_x, i.kayip_user[0]?.cordinate_y), {
+                    icon: values[i.kayip_user[0]?.kayip_status].icon,
+                    title: title,
+                });
+                marker.bindPopup(
+                    '<div class="row"><div class="col-12"><h3>Kayıp Bilgileri</h3></div><div class="col-12"><h5>isim:' +
+                    " " +
+                    i.kayip_user[0].kayip_first_name +
+                    " " +
+                    i.kayip_user[0].kayip_last_name +
+                    '</h5></div><div class="col-12"><h5>Adres:' +
+                    " " +
+                    i.kayip_user[0].address +
+                    '</h5></div><div class="col-12"><h5>Detay:' +
+                    " " +
+                    i.kayip_user[0].detail +
+                    '</h5></div><div style="border-top:1px solid gray;padding-top:5px;" class="col-12"><h4>İhbar Eden Bilgisi</h4>' +
+                    '</div>' +
+                    '<div class="col-12"><h6>isim:' +
+                    " " +
+                    i.ihbar_user.ihbar_first_name +
+                    " " +
+                    i.ihbar_user.ihbar_last_name +
+                    '</h6></div>' + '<div class="col-12"><h6>Durum:' +
+                    " " +
+                    values[i.kayip_user[0].kayip_status].status +
+                    '</h6></div>' +
+                    '<div class="col-12"><h6>Telefon:' +
+                    " " +
+                    i.ihbar_user.phonenumber +
+                    "</h6></div></div>",
+                    {
+                        maxWidth: 560,
+                    }
+                );
+                if (selectedArray.includes(i.kayip_user[0].kayip_status))
+                    mcg.addLayer(marker);
+            })
+        );
+}
 
-fetch("api/kayiplar")
-    .then((response) => response.json())
-    .then((points) =>
-        points.map((i) => {
-            console.log(i,"i");
-            var title = i.kayip_user[0].kayip_first_name + "-" + i.kayip_user[0].kayip_last_name + "-";
-            var marker = L.marker(new L.LatLng(i.kayip_user[0].cordinate_x, i.kayip_user[0].cordinate_y), {
-                icon: greenIcon,
-                title: title,
-            });
-            marker.bindPopup(
-                '<div class="row"><div class="col-12"><h3>Kayıp Bilgileri</h3></div><div class="col-12"><h5>isim:' +
-                " " +
-                i.kayip_user[0].kayip_first_name +
-                " " +
-                i.kayip_user[0].kayip_last_name +
-                '</h5></div><div class="col-12"><h5>Adres:' +
-                " " +
-                i.kayip_user[0].address +
-                '</h5></div><div class="col-12"><h5>Detay:' +
-                " " +
-                i.kayip_user[0].detail +
-                '</h5></div><div style="border-top:1px solid gray;padding-top:5px;" class="col-12"><h4>İhbar Eden Bilgisi</h4></div><div class="col-12"><h6>isim:' +
-                " " +
-                i.ihbar_user.ihbar_first_name +
-                " " +
-                i.ihbar_user.ihbar_last_name +
-                '</h6></div><div class="col-12"><h6>Telefon:' +
-                " " +
-                i.ihbar_user.phonenumber +
-                "</h6></div></div>",
-                {
-                    maxWidth: 560,
-                }
-            );
-            mcg.addLayer(marker);
-        })
-    );
 map.addLayer(mcg);
 
 ////////////////////////////////////////////////////////////////////////
@@ -192,6 +202,34 @@ newDiv.style.backgroundColor = "rosybrown";
 // add the text node to the newly created div
 newDiv.appendChild(newContentss);
 button.appendChild(newDiv);
+
+function setSelected(id) {
+    if (selectedArray.includes(id)) {
+        const index = selectedArray.indexOf(id);
+        if (index > -1) selectedArray.splice(index, 1);
+    } else {
+        selectedArray.push(id);
+    }
+    addLayer()
+    console.log(selectedArray, "selectedArray");
+}
+
+generateLegend()
+
+function generateLegend() {
+
+    fetch("api/kayipstatus")
+        .then((response) => response.json())
+        .then((status) => {
+            status.map((i) => {
+                var txt1 = '<input onclick="setSelected(' + i.id + ')" type="checkbox" id="' + i.id + '" checked\n' +
+                    '               style="accent-color: ' + values[i.id].color + ';" value="K">\n' +
+                    '        <label for="' + i.id + '">' + i.name + '</label><br>';        // Create text with HTML
+
+                $("#legendbar").append(txt1);   // Append new elements
+            })
+        });
+}
 
 map.on('draw:created', function (e) {
     var type = e.layerType,
