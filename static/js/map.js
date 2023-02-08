@@ -121,7 +121,6 @@ function addLayer() {
 
 map.addLayer(mcg);
 
-
 ////////////////////////////////////////////////////////////////////////
 
 // Initialise the draw control and pass it the FeatureGroup of editable layers
