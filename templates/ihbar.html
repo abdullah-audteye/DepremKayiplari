@@ -1,482 +1,535 @@
 {% load static %}
 <html lang="tr">
-<head>
-    <meta charset="UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FindmeHelpMe</title>
     <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-            crossorigin="anonymous"
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
     />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+      }
 
-        html {
-            height: 100%;
-        }
+      html {
+        height: 100%;
+      }
 
-        #msform {
-            text-align: center;
-            position: relative;
-            margin-top: 20px;
-        }
+      #msform {
+        text-align: center;
+        position: relative;
+        margin-top: 20px;
+      }
 
-        #msform fieldset .form-card {
-            padding: 40px 40px 30px 50px;
-        }
+      #msform fieldset .form-card {
+        padding: 40px 40px 30px 50px;
+      }
 
-        #msform fieldset {
-            background: white;
-            border: 0 none;
-            border-radius: 0.5rem;
-            box-sizing: border-box;
-            width: 100%;
-            margin: 0;
-            padding-bottom: 20px;
-            position: relative;
-        }
+      #msform fieldset {
+        background: white;
+        border: 0 none;
+        border-radius: 0.5rem;
+        box-sizing: border-box;
+        width: 100%;
+        margin: 0;
+        padding-bottom: 20px;
+        position: relative;
+      }
 
-        #msform fieldset:not(:first-of-type) {
-            display: none;
-        }
+      #msform fieldset:not(:first-of-type) {
+        display: none;
+      }
 
-        #msform fieldset .form-card {
-            text-align: left;
-            color: #9e9e9e;
-        }
+      #msform fieldset .form-card {
+        text-align: left;
+        color: #9e9e9e;
+      }
 
-        #msform input.field,
-        #msform textarea.field {
-            width: 100% !important;
-            padding-left: 20px;
-            font-size: 16px;
-            height: 48px;
-            line-height: 48px;
-            background-color: rgb(234, 236, 238);
-            border-radius: 25px;
-            border: none;
-            margin-bottom: 2px;
-        }
+      #msform input.field,
+      #msform textarea.field {
+        width: 100% !important;
+        padding-left: 20px;
+        font-size: 16px;
+        height: 48px;
+        line-height: 48px;
+        background-color: rgb(234, 236, 238);
+        border-radius: 25px;
+        border: none;
+        margin-bottom: 2px;
+      }
 
-        #msform input.field:focus,
-        #msform textarea.field:focus {
-            -moz-box-shadow: none !important;
-            -webkit-box-shadow: none !important;
-            box-shadow: none !important;
-            border: none;
-            font-weight: bold;
-            border: 1px solid #a7c957;
-            outline-width: 0;
-        }
+      #msform input.field:focus,
+      #msform textarea.field:focus {
+        -moz-box-shadow: none !important;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+        border: none;
+        font-weight: bold;
+        border: 1px solid #a7c957;
+        outline-width: 0;
+      }
 
-        #msform select.field {
-            width: 100% !important;
-            /* height: 47px; */
-            padding-left: 20px;
-            font-size: 16px;
-            height: 48px;
-            line-height: 48px;
-            background-color: rgb(234, 236, 238);
-            border-radius: 25px;
-            border: none;
-            background-image: url(data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3…c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E);
-            background-repeat: no-repeat, repeat;
-            background-position: right 0.7em top 50%, 0 0;
-            background-size: 0.65em auto, 100%;
-            margin-bottom: 20px;
-        }
+      #msform select.field {
+        width: 100% !important;
+        /* height: 47px; */
+        padding-left: 20px;
+        font-size: 16px;
+        height: 48px;
+        line-height: 48px;
+        background-color: rgb(234, 236, 238);
+        border-radius: 25px;
+        border: none;
+        background-image: url(data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3…c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E);
+        background-repeat: no-repeat, repeat;
+        background-position: right 0.7em top 50%, 0 0;
+        background-size: 0.65em auto, 100%;
+        margin-bottom: 20px;
+      }
 
-        #msform textarea.field {
-            height: 100px;
-        }
+      #msform textarea.field {
+        height: 100px;
+      }
 
-        #msform .action-button {
-            color: #fff;
-            border: none;
-            padding: 0 35px;
-            font-size: 18px;
-            height: 48px;
-            line-height: 48px;
-            background-color: #a7c957;
-            background-image: none;
-            border-radius: 24px;
-            width: auto;
-        }
+      #msform .action-button {
+        color: #fff;
+        border: none;
+        padding: 0 35px;
+        font-size: 18px;
+        height: 48px;
+        line-height: 48px;
+        background-color: #a7c957;
+        background-image: none;
+        border-radius: 24px;
+        width: auto;
+      }
 
-        #msform .action-button:hover,
-        #msform .action-button:focus {
-            box-shadow: 0 0 0 2px white, 0 0 0 3px #a7c957;
-            cursor: pointer;
-        }
+      #msform .action-button:hover,
+      #msform .action-button:focus {
+        box-shadow: 0 0 0 2px white, 0 0 0 3px #a7c957;
+        cursor: pointer;
+      }
 
-        #msform .action-button.previous {
-            background: #999;
-        }
+      #msform .action-button.previous {
+        background: #999;
+      }
 
-        #msform .action-button.next {
-            background: #616161;
-        }
+      #msform .action-button.next {
+        background: #616161;
+      }
 
-        select.list-dt {
-            border: none;
-            outline: 0;
-            border-bottom: 1px solid #ccc;
-            padding: 2px 5px 3px 5px;
-            margin: 2px;
-        }
+      select.list-dt {
+        border: none;
+        outline: 0;
+        border-bottom: 1px solid #ccc;
+        padding: 2px 5px 3px 5px;
+        margin: 2px;
+      }
 
-        select.list-dt:focus {
-            border-bottom: 2px solid #a7c957;
-        }
+      select.list-dt:focus {
+        border-bottom: 2px solid #a7c957;
+      }
 
+      .card {
+        z-index: 0;
+        border: none;
+        border-radius: 0.5rem;
+        position: relative;
+        background: white;
+        border: 0 none;
+        border-radius: 0px;
+        box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.3);
+        box-sizing: border-box;
+        width: 100%;
+        margin: 0 3% 20px 3%;
+        position: relative;
+      }
+
+      #card-close-btn {
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        margin: 5px 5px 0 0;
+        border: 2px solid lightgray;
+      }
+
+      .card .subcard {
+        padding: 30px;
+      }
+
+      .fs-title {
+        font-size: 25px;
+        color: #2c3e50;
+        margin-bottom: 10px;
+        font-weight: bold;
+        text-align: left;
+      }
+
+      #progressbar {
+        margin-bottom: 30px;
+        overflow: hidden;
+        color: lightgrey;
+        width: 100%;
+      }
+
+      #progressbar .active {
+        color: #000000;
+      }
+
+      #progressbar li {
+        list-style-type: none;
+        font-size: 12px;
+        width: 20%;
+        float: left;
+        position: relative;
+      }
+
+      #progressbar #company:before {
+        font-family: FontAwesome;
+        content: "\f044";
+      }
+
+      #progressbar #contact:before {
+        font-family: FontAwesome;
+        content: "\3f";
+      }
+
+      #progressbar #require:before {
+        font-family: FontAwesome;
+        content: "\f0ca";
+      }
+
+      #progressbar #require-2:before {
+        font-family: FontAwesome;
+        content: "\f0ad";
+      }
+
+      #progressbar #confirm:before {
+        font-family: FontAwesome;
+        content: "\f00c";
+      }
+
+      #progressbar li:before {
+        width: 50px;
+        height: 50px;
+        line-height: 45px;
+        display: block;
+        font-size: 18px;
+        color: #ffffff;
+        background: lightgray;
+        border-radius: 50%;
+        margin: 0 auto 10px auto;
+        padding: 2px;
+      }
+
+      #progressbar li:after {
+        content: "";
+        width: 100%;
+        height: 2px;
+        background: lightgray;
+        position: absolute;
+        left: 0;
+        top: 25px;
+        z-index: -1;
+      }
+
+      #progressbar li.active:before,
+      #progressbar li.active:after {
+        background: #a7c957;
+      }
+
+      .radio-group {
+        position: relative;
+        margin-bottom: 25px;
+      }
+
+      .radio {
+        display: inline-block;
+        width: 204;
+        height: 104;
+        border-radius: 0;
+        background: lightblue;
+        box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.2);
+        box-sizing: border-box;
+        cursor: pointer;
+        margin: 8px 2px;
+      }
+
+      .radio:hover {
+        box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3);
+      }
+
+      .radio.selected {
+        box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.1);
+      }
+
+      .fit-image {
+        width: 100%;
+        object-fit: cover;
+      }
+
+      /* #google_translate_element {
+        margin-left: auto;
+      } */
+
+      .navbar-logo {
+        font-size: 26px;
+        color: #a7c957;
+        padding: 20px 5px;
+        margin-right: 25px;
+      }
+
+      .navbar-info:hover {
+        cursor: pointer;
+      }
+
+      .nav-text {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-left: 15px;
+      }
+
+      @media (min-width: 570px) {
         .card {
-            z-index: 0;
-            border: none;
-            border-radius: 0.5rem;
-            position: relative;
-            background: white;
-            border: 0 none;
-            border-radius: 0px;
-            box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.3);
-            box-sizing: border-box;
-            width: 100%;
-            margin: 0 3% 20px 3%;
-            position: relative;
+          max-width: 100%;
+          margin: 0 auto;
         }
 
-        #card-close-btn {
-            cursor: pointer;
-            width: 40px;
-            height: 40px;
-            margin: 5px 5px 0 0;
-            border: 2px solid lightgray;
+        .subcard h2 {
+          font-size: 28px;
         }
 
-
-        .card .subcard {
-            padding: 30px;
-        }
-
-        .fs-title {
-            font-size: 25px;
-            color: #2c3e50;
-            margin-bottom: 10px;
-            font-weight: bold;
-            text-align: left;
+        .subcard p {
+          font-size: 16px;
         }
 
         #progressbar {
-            margin-bottom: 30px;
-            overflow: hidden;
-            color: lightgrey;
-            width: 100%;
+          max-width: 100%;
         }
 
-        #progressbar .active {
-            color: #000000;
+        #modal-btn {
+          margin-bottom: 15px;
         }
 
-        #progressbar li {
-            list-style-type: none;
-            font-size: 12px;
-            width: 20%;
-            float: left;
-            position: relative;
+        .form-card {
+          max-width: 450px;
+          padding: 0;
+          margin: 0;
         }
 
-        #progressbar #company:before {
-            font-family: FontAwesome;
-            content: "\f044";
+        .nav-text {
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          gap: 15px;
         }
 
-        #progressbar #contact:before {
-            font-family: FontAwesome;
-            content: "\3f";
+        @media (max-width: 375px) {
+          .card {
+            max-width: 100%;
+            margin: 0 auto;
+          }
+
+          .subcard h2 {
+            font-size: 20px;
+          }
+
+          #progressbar {
+            max-width: 100%;
+          }
+
+          #modal-btn {
+            margin-bottom: 15px;
+          }
+
+          .form-card {
+            max-width: 350px;
+            padding: 0;
+            margin: 0;
+          }
+
+          .form-card-text {
+            margin-top: 0;
+            margin-bottom: 5px;
+            font-size: 16px;
+          }
+
+          #msform fieldset .form-card {
+            padding: 5px 5px 5px 5px;
+            text-align: center;
+            margin-bottom: 5px;
+          }
+
+          #modal-btn {
+            width: 100px;
+          }
+
+          .nav-text {
+            flex-direction: row;
+          }
         }
-
-        #progressbar #require:before {
-            font-family: FontAwesome;
-            content: "\f0ca";
-        }
-
-        #progressbar #require-2:before {
-            font-family: FontAwesome;
-            content: "\f0ad";
-        }
-
-        #progressbar #confirm:before {
-            font-family: FontAwesome;
-            content: "\f00c";
-        }
-
-        #progressbar li:before {
-            width: 50px;
-            height: 50px;
-            line-height: 45px;
-            display: block;
-            font-size: 18px;
-            color: #ffffff;
-            background: lightgray;
-            border-radius: 50%;
-            margin: 0 auto 10px auto;
-            padding: 2px;
-        }
-
-        #progressbar li:after {
-            content: "";
-            width: 100%;
-            height: 2px;
-            background: lightgray;
-            position: absolute;
-            left: 0;
-            top: 25px;
-            z-index: -1;
-        }
-
-        #progressbar li.active:before,
-        #progressbar li.active:after {
-            background: #a7c957;
-        }
-
-        .radio-group {
-            position: relative;
-            margin-bottom: 25px;
-        }
-
-        .radio {
-            display: inline-block;
-            width: 204;
-            height: 104;
-            border-radius: 0;
-            background: lightblue;
-            box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.2);
-            box-sizing: border-box;
-            cursor: pointer;
-            margin: 8px 2px;
-        }
-
-        .radio:hover {
-            box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3);
-        }
-
-        .radio.selected {
-            box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.1);
-        }
-
-        .fit-image {
-            width: 100%;
-            object-fit: cover;
-        }
-
-        /* #google_translate_element {
-          margin-left: auto;
-        } */
-
-        @media (max-width: 570px) {
-            .card {
-                max-width: 100%;
-                margin: 0 auto;
-            }
-
-            .subcard h2 {
-                font-size: 28px;
-            }
-
-            .subcard p {
-                font-size: 16px;
-
-            }
-
-            #progressbar {
-                max-width: 100%;
-            }
-
-            #modal-btn {
-                margin-bottom: 15px;
-
-            }
-
-            .form-card {
-                max-width: 450px;
-                padding: 0;
-                margin: 0;
-            }
-
-            @media (max-width: 340px) {
-                .card {
-                    max-width: 100%;
-                    margin: 0 auto;
-
-                }
-
-                .subcard h2 {
-                    font-size: 20px;
-                }
-
-                #progressbar {
-                    max-width: 100%;
-                }
-
-                #modal-btn {
-                    margin-bottom: 15px;
-
-                }
-
-                .form-card {
-                    max-width: 350px;
-                    padding: 0;
-                    margin: 0;
-                }
-
-                .form-card-text {
-                    margin-top: 0;
-                    margin-bottom: 5px;
-                    font-size: 16px;
-                }
-
-                #msform fieldset .form-card {
-                    padding: 5px 5px 5px 5px;
-                    text-align: center;
-                    margin-bottom: 5px;
-                }
-
-                #modal-btn {
-                    width: 100px;
-                }
-
-            }
+      }
     </style>
-</head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
         <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <button style="font-size:16px" onclick="$('#myMultiModal').modal('show');">Bilgi Al <i
-                    class="fa fa-info-circle"></i></button>
-            <a class="nav-item nav-link" href="#">
-                <div id="google_translate_element"></div>
+          <h1 class="navbar-logo">FindMeHelpMe</h1>
+          <div class="nav-text">
+            <button
+              class="navbar-info"
+              style="
+                font-size: 18px;
+                border: none;
+                background: #f8f9fa;
+                font-weight: 500;
+                color: #495057;
+              "
+            >
+              Bilgi Al
+            </button>
+            <a
+              class="nav-item nav-link"
+              href="#"
+              style="margin-top: 20px; margin-left: 0px"
+            >
+              <div id="google_translate_element"></div>
             </a>
+          </div>
         </div>
-    </div>
-</nav>
-<!-- Modal -->
-<div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
+      </div>
+    </nav>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
         <form id="ihbarform" method="post" action="{% url 'ihbarview_tr' %}">
-            <input type="hidden" name="section" value=""/>
-            {% csrf_token %}
-            <!-- Modal content-->
-            <div id="google_translate_element"></div>
-            <div class="modal-content px-5 pt-4">
-                <div
-                        style="
+          <input type="hidden" name="section" value="" />
+          {% csrf_token %}
+          <!-- Modal content-->
+          <div id="google_translate_element"></div>
+          <div class="modal-content px-5 pt-4">
+            <div
+              style="
                 position: absolute;
                 right: 30px;
                 font-size: larger;
                 color: red;
                 cursor: pointer;
               "
-                        data-dismiss="modal"
-                >
-                    X
-                </div>
-                <h1>İhbar Yapan Kişi</h1>
-                <hr/>
-                <div class="form-group">
-                    <label for="example1">İsim:</label>
-                    <input
-                            required
-                            name="ihbar_first_name"
-                            type="text"
-                            class="form-control"
-                            placeholder="İsim:"
-                    />
-                </div>
-                <div class="form-group">
-                    <label for="example2">Soyisim:</label>
-                    <input
-                            required
-                            name="ihbar_last_name"
-                            type="text"
-                            class="form-control"
-                            placeholder="Soyisim:"
-                    />
-                </div>
-                <div class="form-group">
-                    <label for="example2">Telefon Numarası:</label>
-                    <input
-                            required
-                            name="phonenumber"
-                            type="tel"
-                            class="form-control"
-                            placeholder="555-432-11-00"
-                    />
-                </div>
-                <div class="form-group">
-                    <label for="example3">E-posta:</label>
-                    <input
-                            name="eposta"
-                            type="email"
-                            class="form-control"
-                            placeholder="E-posta:"
-                    />
-                </div>
-                <select name="country" class="form-group">
-                    {% for country in countries %}
-
-                        <option value="{{ country.id }}">
-                            <label class="form-check-label" for="defaultCheck1">
-                                {{ country.name }}
-                            </label>
-                        </option>
-
-                    {% endfor %}
-                </select>
-
-                <h1>KAYIP OLAN KİŞİLER</h1>
-                <hr/>
-
-                <button type="button" id="yenikayipadd">
-                    Yeni Kayıp Kişi Ekle
-                </button>
-
-                <input type="hidden" name="cordinate_x" id="cordinate_x"/>
-                <input type="hidden" name="cordinate_y" id="cordinate_y"/>
-                <ul class="nav nav-tabs" id="myTab" role="tablist"></ul>
-                <div class="tab-content" id="myTabContent"></div>
-
-                <button
-                        id="sendButtonForForm"
-                        type="submit"
-                        class="btn btn-primary mb-3"
-                >
-                    Gönder
-                </button>
-            </div>
-        </form>
-    </div>
-</div>
-<div class="modal fade" id="myMultiModal" role="dialog">
-    <!-- MultiStep Form -->
-    <div class="container-fluid" id="grad1">
-        <div class="row justify-content-center mt-0">
-            <div
-                    class="col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0 mt-3 mb-2"
+              data-dismiss="modal"
             >
-                <div class="card">
-                    <button
-                            id="modal-close-button"
-                            style="
+              X
+            </div>
+            <h1>İhbar Yapan Kişi</h1>
+            <hr />
+            <div class="form-group">
+              <label for="example1">İsim:</label>
+              <input
+                required
+                name="ihbar_first_name"
+                type="text"
+                class="form-control"
+                placeholder="İsim:"
+              />
+            </div>
+            <div class="form-group">
+              <label for="example2">Soyisim:</label>
+              <input
+                required
+                name="ihbar_last_name"
+                type="text"
+                class="form-control"
+                placeholder="Soyisim:"
+              />
+            </div>
+            <div class="form-group">
+              <label for="example2">Telefon Numarası:</label>
+              <input
+                required
+                name="phonenumber"
+                type="tel"
+                class="form-control"
+                placeholder="555-432-11-00"
+              />
+            </div>
+            <div class="form-group">
+              <label for="example3">E-posta:</label>
+              <input
+                name="eposta"
+                type="email"
+                class="form-control"
+                placeholder="E-posta:"
+              />
+            </div>
+            <select name="country" class="form-group">
+              {% for country in countries %}
+
+              <option value="{{ country.id }}">
+                <label class="form-check-label" for="defaultCheck1">
+                  {{ country.name }}
+                </label>
+              </option>
+
+              {% endfor %}
+            </select>
+
+            <h1>KAYIP OLAN KİŞİLER</h1>
+            <hr />
+
+            <button type="button" id="yenikayipadd">
+              Yeni Kayıp Kişi Ekle
+            </button>
+
+            <input type="hidden" name="cordinate_x" id="cordinate_x" />
+            <input type="hidden" name="cordinate_y" id="cordinate_y" />
+            <ul class="nav nav-tabs" id="myTab" role="tablist"></ul>
+            <div class="tab-content" id="myTabContent"></div>
+
+            <button
+              id="sendButtonForForm"
+              type="submit"
+              class="btn btn-primary mb-3"
+            >
+              Gönder
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="modal fade" id="myMultiModal" role="dialog">
+      <!-- MultiStep Form -->
+      <div class="container-fluid" style="padding-left: initial" id="grad1">
+        <div
+          style="margin-left: initial; margin-right: initial"
+          class="row justify-content-center mt-0"
+        >
+          <div
+            class="col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0 mt-3 mb-2"
+          >
+            <div class="card">
+              <button
+                class="mdl-cls-button"
+                id="modal-close-button"
+                style="
                   width: 45px;
                   height: 50px;
                   background: white;
@@ -485,143 +538,143 @@
                   margin-right: 10px;
                   color: red;
                 "
-                    >
-                        <strong>X</strong>
-                    </button>
-                    <div class="subcard">
-                        <h2><strong>Find Me Help Me</strong></h2>
-                        <p>Deprem Kayıp Takip Uygulaması</p>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 mx-0">
-                            <form id="msform">
-                                <!-- progressbar -->
-                                <ul id="progressbar">
-                                    <li id="company" class="active">
-                                        <strong>Hakkında</strong>
-                                    </li>
-                                    <li id="contact"><strong>Özellikler</strong></li>
-                                    <li id="require"><strong>Kullanım</strong></li>
-                                    <li id="require-2"><strong>Bize Ulaşın</strong></li>
-                                    <li id="confirm"><strong></strong></li>
-                                </ul>
-                                <!-- fieldsets -->
-                                <fieldset>
-                                    <div class="form-card">
-                                        <div class="form-card-text">
-                                            Uygulama, 6 Şubat 2023 tarihinde Türkiye ve Suriye'de
-                                            gerçekleşen depremde kayıp kişilerin yerlerini
-                                            belirleyebilmek ve kişilere ulaşmak amacıyla
-                                            oluşturulmuştur.
-                                        </div>
-                                    </div>
-                                    <a
-                                            type="button"
-                                            name="next"
-                                            class="next action-button"
-                                            value="Sonraki Adım"
-                                    >Sonraki Adım</a
-                                    >
-                                </fieldset>
-                                <fieldset>
-                                    <div class="form-card">
-                                        <div class="form-card-text">
-                                            <strong>● İhbar Et: </strong> Bu bölüm aracılığıyla
-                                            kayıp hakkında bilgiler girilerek kayıp kişi yerinin
-                                            belirlenmesi amaçlanmıştır.
-                                            <br/>
-                                            <strong>● Dil Değiştirme: </strong> Uygulama'da Arapça
-                                            dil seçeneği mevcuttur.
-                                        </div>
-                                    </div>
-
-                                    <a
-                                            type="button"
-                                            name="next"
-                                            class="next action-button"
-                                            value="Sonraki Adım"
-                                    >Sonraki Adım</a
-                                    >
-                                </fieldset>
-                                <fieldset>
-                                    <div class="form-card">
-                                        <div class="form-card-text">
-                                            <strong>● İhbar Et: </strong>Kayıp kişilerin
-                                            bilgilerine sahip kişiler ekranın sağ üst köşesinde
-                                            yer alan <strong>İhbar et</strong> bölümüne
-                                            tıklayarak, sahip olduğu bilgiler aracılığıyla kayıp
-                                            kişi hakkında ihbar'da bulunabilir.
-                                            <br/>
-                                            <br/>
-                                            <strong>● Dil Değiştirme: </strong>İhbar et bölümünün
-                                            altında yer alan dil değiştirme bölümüne tıklandığı
-                                            zaman dil değişimi sağlanmaktadır.
-                                        </div>
-                                    </div>
-
-                                    <a
-                                            type="button"
-                                            name="next"
-                                            class="next action-button"
-                                            value="Sonraki Adım"
-                                    >Sonraki Adım</a
-                                    >
-                                </fieldset>
-                                <fieldset>
-                                    <div class="form-card">
-                                        <div class="form-card-text">
-                                            Uygulama hakkında soru ve görüşlerinizi bizimle
-                                            paylaşabilirsiniz.
-                                            <br/>
-                                            <strong>Email Adresimiz: </strong
-                                            >ndmehelpme.com@gmail.com
-                                        </div>
-                                    </div>
-
-                                    <a
-                                            type="button"
-                                            name="next"
-                                            class="next action-button"
-                                            value="Sonraki Adım"
-                                    >Sonraki Adım</a
-                                    >
-                                </fieldset>
-                                <fieldset>
-                                    <a
-                                            type="button"
-                                            id="modal-submit"
-                                            name="next"
-                                            class="next action-button"
-                                            placeholder="Kapat"
-                                    >Kapat
-                                    </a>
-                                </fieldset>
-                            </form>
+              >
+                <strong>X</strong>
+              </button>
+              <div class="subcard">
+                <h2><strong>Find Me Help Me</strong></h2>
+                <p>Deprem Kayıp Takip Uygulaması</p>
+              </div>
+              <div class="row">
+                <div class="col-md-12 mx-0">
+                  <form id="msform">
+                    <!-- progressbar -->
+                    <ul id="progressbar">
+                      <li id="company" class="active">
+                        <strong>Hakkında</strong>
+                      </li>
+                      <li id="contact"><strong>Özellikler</strong></li>
+                      <li id="require"><strong>Kullanım</strong></li>
+                      <li id="require-2"><strong>Bize Ulaşın</strong></li>
+                      <li id="confirm"><strong></strong></li>
+                    </ul>
+                    <!-- fieldsets -->
+                    <fieldset>
+                      <div class="form-card">
+                        <div class="form-card-text">
+                          Uygulama, 6 Şubat 2023 tarihinde Türkiye ve Suriye'de
+                          gerçekleşen depremde kayıp kişilerin yerlerini
+                          belirleyebilmek ve kişilere ulaşmak amacıyla
+                          oluşturulmuştur.
                         </div>
-                    </div>
+                      </div>
+                      <a
+                        type="button"
+                        name="next"
+                        class="next action-button"
+                        value="Sonraki Adım"
+                        >Sonraki Adım</a
+                      >
+                    </fieldset>
+                    <fieldset>
+                      <div class="form-card">
+                        <div class="form-card-text">
+                          <strong>● İhbar Et: </strong> Bu bölüm aracılığıyla
+                          kayıp hakkında bilgiler girilerek kayıp kişi yerinin
+                          belirlenmesi amaçlanmıştır.
+                          <br />
+                          <strong>● Dil Değiştirme: </strong> Uygulama'da Arapça
+                          dil seçeneği mevcuttur.
+                        </div>
+                      </div>
+
+                      <a
+                        type="button"
+                        name="next"
+                        class="next action-button"
+                        value="Sonraki Adım"
+                        >Sonraki Adım</a
+                      >
+                    </fieldset>
+                    <fieldset>
+                      <div class="form-card">
+                        <div class="form-card-text">
+                          <strong>● İhbar Et: </strong>Kayıp kişilerin
+                          bilgilerine sahip kişiler ekranın sağ üst köşesinde
+                          yer alan <strong>İhbar et</strong> bölümüne
+                          tıklayarak, sahip olduğu bilgiler aracılığıyla kayıp
+                          kişi hakkında ihbar'da bulunabilir.
+                          <br />
+                          <br />
+                          <strong>● Dil Değiştirme: </strong>İhbar et bölümünün
+                          altında yer alan dil değiştirme bölümüne tıklandığı
+                          zaman dil değişimi sağlanmaktadır.
+                        </div>
+                      </div>
+
+                      <a
+                        type="button"
+                        name="next"
+                        class="next action-button"
+                        value="Sonraki Adım"
+                        >Sonraki Adım</a
+                      >
+                    </fieldset>
+                    <fieldset>
+                      <div class="form-card">
+                        <div class="form-card-text">
+                          Uygulama hakkında soru ve görüşlerinizi bizimle
+                          paylaşabilirsiniz.
+                          <br />
+                          <strong>Email Adresimiz: </strong
+                          >findmehelpme.com@gmail.com
+                        </div>
+                      </div>
+
+                      <a
+                        type="button"
+                        name="next"
+                        class="next action-button"
+                        value="Sonraki Adım"
+                        >Sonraki Adım</a
+                      >
+                    </fieldset>
+                    <fieldset>
+                      <a
+                        type="button"
+                        id="modal-submit"
+                        name="next"
+                        class="next action-button"
+                        placeholder="Kapat"
+                        >Kapat
+                      </a>
+                    </fieldset>
+                  </form>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-<fieldset
-        id="legendbar"
-        style="
+    <fieldset
+      id="legendbar"
+      style="
         position: absolute;
-        z-index: 99999999;
+        z-index: 999;
         background-color: white;
         bottom: 50px;
         left: 12px;
       "
->
-    <div>Görüntülemen İstediğinizi Seçeneği Seçiniz</div>
-</fieldset>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
+    >
+      <div>Görüntülemen İstediğinizi Seçeneği Seçiniz</div>
+    </fieldset>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
         let counter = 0;
 
         function newKayipForm(counter) {
-            return `<div class="form-group">
+          return `<div class="form-group">
                   <label for="example4">İsim:</label>
                   <input required name="kayip_first_name" type="text" class="form-control" placeholder="İsim:">
                 </div>
@@ -643,13 +696,13 @@
                       </select>
 
                   ${
-                counter == 1
-                    ? `<div class="form-group">
+                    counter == 1
+                      ? `<div class="form-group">
                           <label for="example7">Adres:</label>
                           <textarea required name="address" class="form-control" id="" cols="30" rows="5"></textarea>
                         </div>`
-                    : `<div></div>`
-            }
+                      : `<div></div>`
+                  }
                         <div><h3>Özellikler</h3></div>
                   {% for tag in tags %}
                          
@@ -663,216 +716,269 @@
                          {% endfor %}
                   </div>
                   ${
-                counter == 1 &&
-                `<div class="form-group">
+                    counter == 1 &&
+                    `<div class="form-group">
                           <label for="example8">Açıklama:</label>
                           <textarea  name="detail" class="form-control" id="" cols="30" rows="5"></textarea>
                         </div>`
-            }
+                  }
                   </div>
                   `;
         }
 
         const tabItemSingle = (counter) => {
-            return `
+          return `
   <form class="tab-pane fade" id="kayit${counter}" role="tabpanel" aria-labelledby="profile-tab">${newKayipForm(
-                counter
-            )}</form>`;
+            counter
+          )}</form>`;
         };
 
         const addliObject = (counter) => {
-            return `<li class="nav-item">
+          return `<li class="nav-item">
                     <a class="nav-link" id="record_tab${counter}" data-toggle="tab" href="#kayit${counter}" role="tab" aria-controls="profile"
                       aria-selected="false">Kayıt ${counter}</a>
                   </li>`;
         };
 
         document
-            .getElementById("yenikayipadd")
-            .addEventListener("click", () => {
-                counter++;
-                $("#myTab").append(addliObject(counter));
-                $("#myTabContent").append(tabItemSingle(counter));
-                $("#record_tab" + counter).click();
-            });
+          .getElementById("yenikayipadd")
+          .addEventListener("click", () => {
+            counter++;
+            $("#myTab").append(addliObject(counter));
+            $("#myTabContent").append(tabItemSingle(counter));
+            $("#record_tab" + counter).click();
+          });
 
         document.getElementById("ihbarform").addEventListener("submit", (e) => {
-            e.preventDefault();
-            let multiFormDataArray = {
-                data: [],
-                csrfmiddlewaretoken: "{{ csrf_token }}",
-            };
-            multiFormDataArray["ihbarci_data"] = $("#ihbarform").serialize();
+          e.preventDefault();
+          let multiFormDataArray = {
+            data: [],
+            csrfmiddlewaretoken: "{{ csrf_token }}",
+          };
+          multiFormDataArray["ihbarci_data"] = $("#ihbarform").serialize();
 
-            Array.from(
-                document.querySelector("#myTabContent").querySelectorAll("form")
-            ).forEach((frm) => {
-                console.log(frm);
-                let serialized_form = $("#" + frm.id).serialize();
-                multiFormDataArray.data.push(serialized_form);
-                console.log(serialized_form, "serializedform");
-            });
-            if (multiFormDataArray.data.length < 1) {
-                alert("Lütfen aşağıdaki bilgileri de doldurun!");
-                return;
+          Array.from(
+            document.querySelector("#myTabContent").querySelectorAll("form")
+          ).forEach((frm) => {
+            console.log(frm);
+            let serialized_form = $("#" + frm.id).serialize();
+            multiFormDataArray.data.push(serialized_form);
+            console.log(serialized_form, "serializedform");
+          });
+          if (multiFormDataArray.data.length < 1) {
+            alert("Lütfen aşağıdaki bilgileri de doldurun!");
+            return;
+          }
+
+          $.post("{% url 'ihbarview_tr' %}", multiFormDataArray, (result) => {
+            console.log(result);
+            if (result.status) {
+              window.location.reload();
             }
-
-            $.post("{% url 'ihbarview_tr' %}", multiFormDataArray, (result) => {
-                console.log(result);
-                if (result.status) {
-                    window.location.reload();
-                }
-            });
+          });
         });
-    });
-</script>
+      });
+    </script>
 
-<script type="text/javascript">
-    function googleTranslateElementInit() {
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
         new google.translate.TranslateElement(
-            {
-                pageLanguage: "tr",
-                includedLanguages: "ar,tr,en",
-            },
-            "google_translate_element"
+          {
+            pageLanguage: "tr",
+            includedLanguages: "ar,tr,en",
+          },
+          "google_translate_element"
         );
-    }
-</script>
+      }
+    </script>
 
-<script
-        type="text/javascript"
-        src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-></script>
+    <script
+      type="text/javascript"
+      src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+    ></script>
 
-<div id="map" style="width: 100%; height: 100%"></div>
-<button
-        type="button"
-        id="openModal"
-        class="btn btn-info btn-lg"
-        data-toggle="modal"
-        data-target="#myModal"
-        style="display: none"
->
-    Fill Form
-</button>
-</body>
-<link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
-<link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css"
-/>
-<link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css"
-/>
-<script src="https://leaflet.github.io/Leaflet.markercluster/dist/leaflet.markercluster.js"></script>
-<link
-        rel="stylesheet"
-        href="https://leaflet.github.io/Leaflet.markercluster/dist/MarkerCluster.css"
-/>
-<link
-        rel="stylesheet"
-        href="https://leaflet.github.io/Leaflet.markercluster/dist/MarkerCluster.Default.css"
-/>
-<script src="{% static 'js/map.js' %}"></script>
+    <div id="map" style="width: 100%; height: 92%"></div>
+    <button
+      type="button"
+      id="openModal"
+      class="btn btn-info btn-lg"
+      data-toggle="modal"
+      data-target="#myModal"
+      style="display: none"
+    >
+      Fill Form
+    </button>
+  </body>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+  />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css"
+  />
+  <script src="https://leaflet.github.io/Leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+  <link
+    rel="stylesheet"
+    href="https://leaflet.github.io/Leaflet.markercluster/dist/MarkerCluster.css"
+  />
+  <link
+    rel="stylesheet"
+    href="https://leaflet.github.io/Leaflet.markercluster/dist/MarkerCluster.Default.css"
+  />
+  <script src="{% static 'js/map.js' %}"></script>
 
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script
-        src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"
-></script>
-<script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"
-></script>
-{#MultiModal#}
-<script type="text/javascript">
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"
+  ></script>
+  {#MultiModal#}
+  <script type="text/javascript">
     $(document).ready(function () {
-        var current_fs, next_fs, previous_fs; //fieldsets
-        var opacity;
+      var current_fs, next_fs, previous_fs; //fieldsets
+      var opacity;
 
-        $(".next").click(function () {
-            current_fs = $(this).parent();
-            next_fs = $(this).parent().next();
+      $(".next").click(function () {
+        current_fs = $(this).parent();
+        next_fs = $(this).parent().next();
 
-            //Add Class Active
-            $("#progressbar li")
-                .eq($("fieldset").index(next_fs))
-                .addClass("active");
+        //Add Class Active
+        $("#progressbar li")
+          .eq($("fieldset").index(next_fs))
+          .addClass("active");
 
-            //show the next fieldset
-            next_fs.show();
-            //hide the current fieldset with style
-            current_fs.animate(
-                {opacity: 0},
-                {
-                    step: function (now) {
-                        // for making fielset appear animation
-                        opacity = 1 - now;
+        //show the next fieldset
+        next_fs.show();
+        //hide the current fieldset with style
+        current_fs.animate(
+          { opacity: 0 },
+          {
+            step: function (now) {
+              // for making fielset appear animation
+              opacity = 1 - now;
 
-                        current_fs.css({
-                            display: "none",
-                            position: "relative",
-                        });
-                        next_fs.css({opacity: opacity});
-                    },
-                    duration: 600,
-                }
-            );
-        });
+              current_fs.css({
+                display: "none",
+                position: "relative",
+              });
+              next_fs.css({ opacity: opacity });
+            },
+            duration: 600,
+          }
+        );
+      });
 
-        $(".previous").click(function () {
-            current_fs = $(this).parent();
-            previous_fs = $(this).parent().prev();
+      $(".previous").click(function () {
+        current_fs = $(this).parent();
+        previous_fs = $(this).parent().prev();
 
-            //Remove class active
-            $("#progressbar li")
-                .eq($("fieldset").index(current_fs))
-                .removeClass("active");
+        //Remove class active
+        $("#progressbar li")
+          .eq($("fieldset").index(current_fs))
+          .removeClass("active");
 
-            //show the previous fieldset
-            previous_fs.show();
+        //show the previous fieldset
+        previous_fs.show();
 
-            //hide the current fieldset with style
-            current_fs.animate(
-                {opacity: 0},
-                {
-                    step: function (now) {
-                        // for making fielset appear animation
-                        opacity = 1 - now;
+        //hide the current fieldset with style
+        current_fs.animate(
+          { opacity: 0 },
+          {
+            step: function (now) {
+              // for making fielset appear animation
+              opacity = 1 - now;
 
-                        current_fs.css({
-                            display: "none",
-                            position: "relative",
-                        });
-                        previous_fs.css({opacity: opacity});
-                    },
-                    duration: 600,
-                }
-            );
-        });
+              current_fs.css({
+                display: "none",
+                position: "relative",
+              });
+              previous_fs.css({ opacity: opacity });
+            },
+            duration: 600,
+          }
+        );
+      });
 
-        $(".radio-group .radio").click(function () {
-            $(this).parent().find(".radio").removeClass("selected");
-            $(this).addClass("selected");
-        });
+      $(".radio-group .radio").click(function () {
+        $(this).parent().find(".radio").removeClass("selected");
+        $(this).addClass("selected");
+      });
 
-        $("#modal-submit").click(function () {
-            $(".modal").hide();
-            document.getElementsByClassName("modal-backdrop")[0]?.remove();
-        });
+      // $("#modal-submit").click(function () {
+      //   $(".modal").hide();
+      //   document.getElementsByClassName("modal-backdrop")[0]?.remove();
+      // });
 
-        $("#modal-close-button").click(function () {
-            $(".modal").hide();
-            document.getElementsByClassName("modal-backdrop")[0]?.remove();
-        });
+      // $("#modal-close-button").click(function () {
+      //   $(".modal").hide();
+      //   document.getElementsByClassName("modal-backdrop")[0]?.remove();
+      // });
     });
-</script>
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.querySelector(".navbar-info").addEventListener("click", () => {
+        console.log(
+          document.getElementById("myMultiModal").style.display == ""
+        );
+        if (
+          document.getElementById("myMultiModal").style.display == "" ||
+          document.getElementById("myMultiModal").style.display == "none"
+        ) {
+          document.getElementById("myMultiModal").style.display = "block";
+          document.getElementById("myMultiModal").style.opacity = 1;
+        }
+      });
+
+      const removepreviousstep = () => {
+        Array.from(
+          document.querySelector("#progressbar").querySelectorAll("li")
+        ).forEach((item, index) => {
+          if (index != 0) {
+            item.removeAttribute("class");
+          }
+        });
+      };
+
+      const removepreviousstepfields = () => {
+        Array.from(
+          document.querySelector("#msform").querySelectorAll("fieldset")
+        ).forEach((item, index) => {
+          if (index != 0) {
+            item.style.display = "none";
+          } else {
+            item.style.display = "block";
+            item.style.opacity = 1;
+          }
+        });
+      };
+
+      const closeModal = () => {
+        document.getElementById("myMultiModal").style.display = "none";
+        document.getElementById("myMultiModal").style.opacity = 0;
+        removepreviousstep();
+        removepreviousstepfields();
+      };
+      document
+        .querySelector(".mdl-cls-button")
+        .addEventListener("click", () => closeModal());
+      document
+        .querySelector("#modal-submit")
+        .addEventListener("click", () => closeModal());
+    });
+  </script>
 </html>
