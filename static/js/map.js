@@ -60,11 +60,22 @@ var greenIcon = new LeafIcon({
     iconUrl:
         "https://mt.googleapis.com/vt/icon/name=icons/onion/123-red-dot.png",
 });
+var redIcon = new LeafIcon({
+    iconUrl:
+        "https://mt.googleapis.com/vt/icon/name=icons/onion/123-red-dot.png",
+});var yellowIcon = new LeafIcon({
+    iconUrl:
+        "https://mt.googleapis.com/vt/icon/name=icons/onion/123-red-dot.png",
+});var blueIcon = new LeafIcon({
+    iconUrl:
+        "https://mt.googleapis.com/vt/icon/name=icons/onion/123-red-dot.png",
+});
 
 fetch("api/kayiplar")
     .then((response) => response.json())
     .then((points) =>
         points.map((i) => {
+            console.log(i,"i");
             var title = i.kayip_user[0].kayip_first_name + "-" + i.kayip_user[0].kayip_last_name + "-";
             var marker = L.marker(new L.LatLng(i.kayip_user[0].cordinate_x, i.kayip_user[0].cordinate_y), {
                 icon: greenIcon,
@@ -102,7 +113,6 @@ map.addLayer(mcg);
 
 ////////////////////////////////////////////////////////////////////////
 
-
 // Initialise the draw control and pass it the FeatureGroup of editable layers
 var drawControl = new L.Control.Draw(drawPluginOptions);
 map.addControl(drawControl);
@@ -119,11 +129,13 @@ let lang = window.location.href.split("/")[window.location.href.split("/").lengt
 // and give it some content
 const newContent = document.createTextNode(lang === "ar" ? "حدد موقع المفقود" : "Konum Seç");
 newDiv.style.position = "absolute";
-newDiv.style.right = "31px";
+newDiv.style.right = "26px";
 newDiv.style.width = "90px";
 newDiv.style.height = "30px";
 newDiv.style.borderRadius = "6px";
+newDiv.style.fontWeight = "bold";
 newDiv.style.backgroundColor = "rosybrown";
+
 
 // add the text node to the newly created div
 newDiv.appendChild(newContent);
@@ -133,34 +145,31 @@ const currentDiv = document.getElementsByClassName('leaflet-draw-draw-marker')[0
 currentDiv.appendChild(newDiv);
 
 
-var button = document.createElement("Button");
-button.innerHTML = '<i class="fa fa-language" style="font-size:24px"></i>';
-button.style = "top:56px;right:5px;position:absolute;z-index: 400"
-button.onclick = function () {
-console.log("dil değiştirme");
-};
-document.body.appendChild(button); 
+// var button = document.createElement("Button");
+// button.innerHTML = '<i class="fa fa-language" style="font-size:24px"></i>';
+// button.style = "top:63px;right:5px;position:absolute;z-index: 400"
+// button.onclick = function () {
+//     console.log("dil değiştirme");
+// };
+// document.body.appendChild(button);
 
-newDiv = document.createElement("div");
+// newDiv = document.createElement("div");
 
-// and give it some content
-const newContents = document.createTextNode(lang === "ar" ? "Türkçe" : "عربي");
-newDiv.style.position = "absolute";
-newDiv.style.right = "40px";
-newDiv.style.top = "0px";
-newDiv.style.width = "127px";
-newDiv.style.height = "35px";
-newDiv.style.borderRadius = "6px";
-
-newDiv.style.backgroundColor = "rosybrown";
-
-// add the text node to the newly created div
-newDiv.appendChild(newContents);
-button.appendChild(newDiv);
+// // and give it some content
+// const newContents = document.createTextNode(lang === "ar" ? "Türkçe" : "عربي");
+// newDiv.style.position = "absolute";
+// newDiv.style.right = "36px";
+// newDiv.style.top = "0px";
+// newDiv.style.width = "100px";
+// newDiv.style.backgroundColor = "rosybrown";
+//
+// // add the text node to the newly created div
+// newDiv.appendChild(newContents);
+// button.appendChild(newDiv);
 
 button = document.createElement("Button");
-button.innerHTML = '<i class="fa fa-info" style="font-size:24px"></i>';
-button.style = "top:100px;right:5px;position:absolute;z-index: 400;"
+button.innerHTML = '<i class="fa fa-info" style="font-size:24px;width:38px;height:38px;padding:8px"></i>';
+button.style = "top:100px;right:5px;position:absolute;z-index: 400;border:none;background:white;box-shadow: 0px 0.8px 1px -1px rgba(0,0,0,5);"
 button.onclick = function () {
     $('#myMultiModal').modal('show');
 };
@@ -171,12 +180,13 @@ newDiv = document.createElement("div");
 // and give it some content
 const newContentss = document.createTextNode(lang === "ar" ? "Bilgi Al" : "Bilgi Al");
 newDiv.style.position = "absolute";
-newDiv.style.right = "40px";
+newDiv.style.right = "36px";
 newDiv.style.top = "0px";
 newDiv.style.width = "127px";
-newDiv.style.height = "35px";
-newDiv.style.padding = "3px";
+newDiv.style.height = "39px";
+newDiv.style.padding = "7px";
 newDiv.style.borderRadius = "6px";
+newDiv.style.fontWeight = "bold";
 newDiv.style.backgroundColor = "rosybrown";
 
 // add the text node to the newly created div
