@@ -24,10 +24,10 @@ var blueIcon = new LeafIcon({iconUrl: "https://www.google.com/intl/en_us/mapfile
 
 var selectedArray = [1, 2, 3, 4];
 let values = {
-    1: {status: "Hastahanede", icon: greenIcon, color: "green"},
-    2: {status: "Kayıp", icon: redIcon, color: "red"},
-    3: {status: "Bulundu", icon: yellowIcon, color: "yellow"},
-    4: {status: "İhtiyaç Sahibi", icon: blueIcon, color: "blue"}
+    1: {status: "At Hospital", icon: greenIcon, color: "green"},
+    2: {status: "Missing", icon: redIcon, color: "red"},
+    3: {status: "Found", icon: yellowIcon, color: "yellow"},
+    4: {status: "In Need of Help", icon: blueIcon, color: "blue"}
 }
 
 // Set up the OSM layer
