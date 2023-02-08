@@ -18,19 +18,19 @@ class MaintenanceModeMiddleware:
     def __call__(self, request):
         try:
             path = request.META.get('PATH_INFO', "")
-            print(path,'pathhh')
-            lang_check = (request.path.split('/')[1])
+            # print(path,'pathhh')
+            # lang_check = (request.path.split('/')[1])
+
+            # print(lang_check,'langcheckk')
 
 
-
-
-            if len(lang_check) == 0:
-                lang_check = "tr"
+            # if len(lang_check) == 0:
+            #     lang_check = "tr"
 
  
 
-            if path == "/":
-                return redirect('ihbarview_tr')
+            # if lang_check == "tr" or lang_check == "en":
+            #     return redirect('ihbarview_tr')
 
 
 
