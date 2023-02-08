@@ -1,17 +1,11 @@
 from django.shortcuts import render, redirect
 from .forms import KayipUserForm,IhbarUserForm
 from .models import Ihbar,KayipUser,Tag,TagArabic
-from django.db import IntegrityError, transaction
-from django.core.serializers import json
+from django.db import  transaction
 from django.http import JsonResponse
-
-from django.core.serializers import serialize
 from django.http import QueryDict
 from .serializers import KayipUserSerializer
 from rest_framework.generics import ListAPIView
-
-import json
-import itertools
 
 
 
