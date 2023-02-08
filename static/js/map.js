@@ -96,7 +96,10 @@ function addLayer() {
                     i.kayip_user[0].kayip_last_name +
                     '</h5></div><div class="col-12"><h5>Adres:' +
                     " " +
-                    i.kayip_user[0].address +
+                    i.kayip_user[0].address + '</h5></div>' + '<div class="col-12"><h5>Durum:' +
+                    " " +
+                    values[i.kayip_user[0].kayip_status].status +
+
                     '</h5></div><div class="col-12"><h5>Detay:' +
                     " " +
                     i.kayip_user[0].detail +
@@ -107,9 +110,6 @@ function addLayer() {
                     i.ihbar_user.ihbar_first_name +
                     " " +
                     i.ihbar_user.ihbar_last_name +
-                    '</h6></div>' + '<div class="col-12"><h6>Durum:' +
-                    " " +
-                    values[i.kayip_user[0].kayip_status].status +
                     '</h6></div>' +
                     '<div class="col-12"><h6>Telefon:' +
                     " " +
@@ -195,7 +195,6 @@ function setSelectedCountry(id) {
 generateLegend()
 
 function generateLegend() {
-
 
 
     fetch("api/kayipstatus")
