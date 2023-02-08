@@ -14,6 +14,8 @@ class Tag(models.Model):
         return self.tag
 
 
+
+
 class KayipStatus(models.Model):
     name = models.CharField(max_length=50)
 
