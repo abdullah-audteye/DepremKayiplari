@@ -40,6 +40,69 @@ var drawPluginOptions = {
     edit: false
 };
 
+////////////////////////////////////////////////////////////////////////
+
+var mcg = L.markerClusterGroup({
+    chunkedLoading: true,
+    //singleMarkerMode: true,
+    spiderfyOnMaxZoom: false,
+});
+var LeafIcon = L.Icon.extend({
+    options: {
+        iconSize: [24, 24],
+        shadowSize: [50, 64],
+        iconAnchor: [11, 94],
+        shadowAnchor: [4, 62],
+        popupAnchor: [0, -86],
+    },
+});
+var greenIcon = new LeafIcon({
+    iconUrl:
+        "https://mt.googleapis.com/vt/icon/name=icons/onion/123-red-dot.png",
+});
+
+fetch("api/kayiplar")
+    .then((response) => response.json())
+    .then((points) =>
+        points.map((i) => {
+            var title = i.kayip_user[0].kayip_first_name + "-" + i.kayip_user[0].kayip_last_name + "-";
+            var marker = L.marker(new L.LatLng(i.kayip_user[0].cordinate_x, i.kayip_user[0].cordinate_y), {
+                icon: greenIcon,
+                title: title,
+            });
+            marker.bindPopup(
+                '<div class="row"><div class="col-12"><h3>Kayıp Bilgileri</h3></div><div class="col-12"><h5>isim:' +
+                " " +
+                i.kayip_user[0].kayip_first_name +
+                " " +
+                i.kayip_user[0].kayip_last_name +
+                '</h5></div><div class="col-12"><h5>Adres:' +
+                " " +
+                i.kayip_user[0].address +
+                '</h5></div><div class="col-12"><h5>Detay:' +
+                " " +
+                i.kayip_user[0].detail +
+                '</h5></div><div style="border-top:1px solid gray;padding-top:5px;" class="col-12"><h4>İhbar Eden Bilgisi</h4></div><div class="col-12"><h6>isim:' +
+                " " +
+                i.ihbar_user.ihbar_first_name +
+                " " +
+                i.ihbar_user.ihbar_last_name +
+                '</h6></div><div class="col-12"><h6>Telefon:' +
+                " " +
+                i.ihbar_user.phonenumber +
+                "</h6></div></div>",
+                {
+                    maxWidth: 560,
+                }
+            );
+            mcg.addLayer(marker);
+        })
+    );
+map.addLayer(mcg);
+
+////////////////////////////////////////////////////////////////////////
+
+
 // Initialise the draw control and pass it the FeatureGroup of editable layers
 var drawControl = new L.Control.Draw(drawPluginOptions);
 map.addControl(drawControl);
@@ -51,7 +114,7 @@ document.getElementsByClassName('leaflet-draw-draw-marker')[0].style.scale = '1.
 
 // create a new div element
 let newDiv = document.createElement("div");
-let lang = window.location.href.split("/")[window.location.href.split("/").length - 2];
+let lang = window.location.href.split("/")[window.location.href.split("/").length - 1].slice(0, 2);
 
 // and give it some content
 const newContent = document.createTextNode(lang === "ar" ? "حدد موقع المفقود" : "Konum Seç");
@@ -73,9 +136,9 @@ button.innerHTML = '<i class="fa fa-language" style="font-size:24px"></i>';
 button.style = "top:63px;right:5px;position:absolute;z-index: 400"
 button.onclick = function () {
     if (lang == "ar")
-        window.location.href = "/tr/ihbar"
+        window.location.href = "/tr"
     else
-        window.location.href = "/ar/ihbar"
+        window.location.href = "/ar"
 };
 document.body.appendChild(button);
 
@@ -94,21 +157,17 @@ newDiv.appendChild(newContents);
 button.appendChild(newDiv);
 
 button = document.createElement("Button");
-button.innerHTML = '<i class="fa fa-backward" style="font-size:24px"></i>';
+button.innerHTML = '<i class="fa fa-info" style="font-size:24px"></i>';
 button.style = "top:100px;right:5px;position:absolute;z-index: 400"
 button.onclick = function () {
-    let lang = window.location.href.split("/")[window.location.href.split("/").length - 2];
-    if (lang == "ar")
-        window.location.href = "/ar"
-    else
-        window.location.href = "/tr"
+    $('#myMultiModal').modal('show');
 };
 document.body.appendChild(button);
 
 newDiv = document.createElement("div");
 
 // and give it some content
-const newContentss = document.createTextNode(lang === "ar" ? "ابحث عن مفقودين" : "Kayıtlara Git");
+const newContentss = document.createTextNode(lang === "ar" ? "Bilgi Al" : "Bilgi Al");
 newDiv.style.position = "absolute";
 newDiv.style.right = "36px";
 newDiv.style.top = "0px";

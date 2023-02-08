@@ -112,7 +112,6 @@ def KayipUserListAR(request):
     return render(request,'user_list_ar.html',{"users":str(users.values())})
 
 
-
 class KayipUserListView(ListAPIView):
     queryset = Ihbar.objects.order_by('-id')
     serializer_class = IhbarSerializer
