@@ -353,7 +353,6 @@
           <!-- Modal content-->
           <div id="google_translate_element"></div>
           <div class="modal-content px-5 pt-4">
-           
             <div
               style="
                 position: absolute;
@@ -449,12 +448,24 @@
           <div
             class="col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0 mt-3 mb-2"
           >
-            <div class="card"><button id="modal-close-button" style="width:45px;height:50px;background:white;border:none;margin-left:auto;margin-right: 10px;color:red"><strong>X</strong></button>
+            <div class="card">
+              <button
+                id="modal-close-button"
+                style="
+                  width: 45px;
+                  height: 50px;
+                  background: white;
+                  border: none;
+                  margin-left: auto;
+                  margin-right: 10px;
+                  color: red;
+                "
+              >
+                <strong>X</strong>
+              </button>
               <div class="subcard">
-                
                 <h2><strong>Find Me Help Me</strong></h2>
                 <p>Deprem Kayıp Takip Uygulaması</p>
-                
               </div>
               <div class="row">
                 <div class="col-md-12 mx-0">
@@ -537,7 +548,8 @@
                           Uygulama hakkında soru ve görüşlerinizi bizimle
                           paylaşabilirsiniz.
                           <br />
-                          <strong>Email Adresimiz: </strong>ndmehelpme.com@gmail.com
+                          <strong>Email Adresimiz: </strong
+                          >ndmehelpme.com@gmail.com
                         </div>
                       </div>
 
@@ -567,6 +579,18 @@
         </div>
       </div>
     </div>
+    <fieldset
+      id="legendbar"
+      style="
+        position: absolute;
+        z-index: 99999999;
+        background-color: white;
+        bottom: 50px;
+        left: 12px;
+      "
+    >
+      <div>Görüntülemen İstediğinizi Seçeneği Seçiniz</div>
+    </fieldset>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         let counter = 0;
@@ -689,7 +713,6 @@
         );
       }
     </script>
-    
 
     <script
       type="text/javascript"
@@ -820,16 +843,11 @@
         $(".modal").hide();
         document.getElementsByClassName("modal-backdrop")[0]?.remove();
       });
-      
 
-      $("#modal-close-button").click( function () {
+      $("#modal-close-button").click(function () {
         $(".modal").hide();
         document.getElementsByClassName("modal-backdrop")[0]?.remove();
       });
-
-      
-      
-
     });
   </script>
 </html>
