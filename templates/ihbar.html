@@ -15,6 +15,7 @@
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
         <form id="ihbarform" method="post" action="{% url 'ihbarview_tr' %}">
+          <input type="hidden" name="section" value=""/>
             {% csrf_token %}
             <!-- Modal content-->
             <div class="modal-content px-5 pt-4">
@@ -48,55 +49,8 @@
 
                 <input type="hidden" name="cordinate_x" id="cordinate_x"/>
                 <input type="hidden" name="cordinate_y" id="cordinate_y"/>
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                  <li class="nav-item">
-                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#kayit1" role="tab" aria-controls="home"
-                      aria-selected="true">Kayıt 1</a>
-                  </li>
-                
-             
-                </ul>
-                <div class="tab-content" id="myTabContent">
-                  <div class="tab-pane fade show active" id="kayit1" role="tabpanel" aria-labelledby="home-tab">
-                    <div style="border-bottom: 3px solid red;">
-                      <div class="form-group">
-                        <label for="example4">İsim:</label>
-                        <input required name="kayip_first_name" type="text" class="form-control" placeholder="İsim:">
-                      </div>
-                      <div class="form-group">
-                          <label for="example5">Soyisim:</label>
-                          <input required name="kayip_last_name" type="text" class="form-control" placeholder="Soyisim:">
-                        </div>
-                        
-                        <div class="form-group">
-                          <label for="example6">Telefon Numarası:</label>
-                          <input  name="kayip_phone_number" type="tel" class="form-control" placeholder="555-432-11-00">
-                        </div>
-                        <div class="form-group">
-                          <label for="example7">Adres:</label>
-                          <textarea required name="address" class="form-control" id="" cols="30" rows="5"></textarea>
-                        </div>
-                        <div><h3>Özellikler</h3></div>
-                        <div class="form-check">
-<!-- 
-                          {% for tag in tags %}
-                         
-                          <div>
-                            <input  class="form-check-input tags-class" type="checkbox"  value="{{tag.id}}">
-                            <label class="form-check-label" for="defaultCheck1">
-                              {{tag.tag}}
-                            </label>
-                          </div>
-                  
-                          {% endfor %} -->
-                        </div>
-                        <div class="form-group">
-                          <label for="example8">Açıklama:</label>
-                          <textarea  name="detail" class="form-control" id="" cols="30" rows="5"></textarea>
-                        </div>
-                      </div>
-                  </div>
-                </div>
+                <ul class="nav nav-tabs" id="myTab" role="tablist"></ul>
+                <div class="tab-content" id="myTabContent"></div>
 
                
                 <button id="sendButtonForForm" type="submit" class="btn btn-primary mb-3">Gönder</button>
@@ -110,12 +64,15 @@
 
   
   document.addEventListener("DOMContentLoaded", function(){
+
+
+
   
 
 
-let counter = 1
+let counter = 0
 
-function newKayipForm(){
+function newKayipForm(counter){
     return(
       `<div class="form-group">
                   <label for="example4">İsim:</label>
@@ -130,7 +87,33 @@ function newKayipForm(){
                     <input  name="kayip_phone_number" type="tel" class="form-control" placeholder="555-432-11-00">
                   </div>
 
-                  </div>`
+                  ${counter == 1 ?
+                  `<div class="form-group">
+                          <label for="example7">Adres:</label>
+                          <textarea required name="address" class="form-control" id="" cols="30" rows="5"></textarea>
+                        </div>`
+                        :`</span>`
+                    }
+                        <div><h3>Özellikler</h3></div>
+                  {% for tag in tags %}
+                         
+                         <div>
+                           <input name="tags" class="form-check-input tags-class" type="checkbox"  value="{{tag.id}}">
+                           <label class="form-check-label" for="defaultCheck1">
+                             {{tag.tag}}
+                           </label>
+                         </div>
+                 
+                         {% endfor %}
+                  </div>
+                  ${counter == 1 && 
+                    `<div class="form-group">
+                          <label for="example8">Açıklama:</label>
+                          <textarea  name="detail" class="form-control" id="" cols="30" rows="5"></textarea>
+                        </div>`
+                      }
+                  </div>
+                  `
     )
   }
 
@@ -138,7 +121,7 @@ function newKayipForm(){
 const tabItemSingle = (counter)=>{
   return(
     `
-  <div class="tab-pane fade" id="kayit${counter}" role="tabpanel" aria-labelledby="profile-tab">${newKayipForm()}</div>`
+  <form class="tab-pane fade" id="kayit${counter}" role="tabpanel" aria-labelledby="profile-tab">${newKayipForm(counter)}</form>`
   )
 }
 
@@ -164,6 +147,32 @@ const tabItemSingle = (counter)=>{
   })
 
 
+  document.getElementById('ihbarform').addEventListener('submit',(e)=>{
+    e.preventDefault()
+    let multiFormDataArray = {"data":[],csrfmiddlewaretoken: '{{ csrf_token }}'}
+    multiFormDataArray['ihbarci_data']=$("#ihbarform").serialize()
+
+    Array.from(document.querySelector('#myTabContent').querySelectorAll('form')).forEach((frm)=>{
+      console.log(frm)
+      let serialized_form = $("#"+frm.id).serialize()
+      multiFormDataArray.data.push(serialized_form)
+      console.log(serialized_form,'serializedform')
+    })
+    if(multiFormDataArray.data.length <1){
+      alert('Lütfen aşağıdaki bilgileri de doldurun!')
+      return
+    }
+
+    $.post("{% url 'ihbarview_tr' %}",multiFormDataArray,(result)=>{
+      console.log(result)
+      if(result.status){
+        window.location.reload()
+      }
+    });
+
+  })
+
+
 });
 </script>
 
@@ -180,9 +189,7 @@ const tabItemSingle = (counter)=>{
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css"/>
 <script src="{% static 'js/map.js' %}"></script>
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
