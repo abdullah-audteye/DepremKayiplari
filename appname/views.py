@@ -4,7 +4,7 @@ from .models import Ihbar,KayipUser,Tag,TagArabic
 from django.db import  transaction
 from django.http import JsonResponse
 from django.http import QueryDict
-from .serializers import KayipUserSerializer
+from .serializers import KayipUserSerializer,IhbarSerializer
 from rest_framework.generics import ListAPIView
 
 
@@ -112,7 +112,6 @@ def KayipUserListAR(request):
     return render(request,'user_list_ar.html',{"users":str(users.values())})
 
 
-
 class KayipUserListView(ListAPIView):
-    queryset = KayipUser.objects.order_by('-id')
-    serializer_class = KayipUserSerializer
+    queryset = Ihbar.objects.order_by('-id')
+    serializer_class = IhbarSerializer

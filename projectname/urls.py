@@ -11,7 +11,6 @@ urlpatterns = [
     path('tr/kayiplar',KayipUserList,name="kayiplarview_tr"),
     path('ar/kayiplar',KayipUserListAR,name="kayiplarview_ar"),
 
-
     path('api/kayiplar',KayipUserListView.as_view(),name="kayiplarview_api")
 
 ]
