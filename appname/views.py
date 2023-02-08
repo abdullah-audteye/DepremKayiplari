@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import KayipUserForm,IhbarUserForm
-from .models import Ihbar,KayipUser,Tag,TagArabic,Countries,KayipStatus
+from .models import Ihbar,KayipUser,Tag,TagArabic
 from django.db import  transaction
 from django.http import JsonResponse
 from django.http import QueryDict
@@ -12,8 +12,8 @@ from rest_framework.generics import ListAPIView
 
 def IhbarView(request):
     tags = Tag.objects.all()
-    countries = Countries.objects.all()
-    kayipstatus = KayipStatus.objects.all()
+    # countries = Countries.objects.all()
+    # kayipstatus = KayipStatus.objects.all()
 
     kayipuserform = KayipUserForm()
     ihbaruserform = IhbarUserForm()
@@ -56,7 +56,7 @@ def IhbarView(request):
             
 
 
-    return render(request,"ihbar.html",{"kayipuserform":kayipuserform,"ihbaruserform":ihbaruserform,"tags":tags,"countries":countries,"kayip_status":kayipstatus})
+    return render(request,"ihbar.html",{"kayipuserform":kayipuserform,"ihbaruserform":ihbaruserform,"tags":tags,"countries":[],"kayip_status":[]})
 
 
 class KayipUserListView(ListAPIView):

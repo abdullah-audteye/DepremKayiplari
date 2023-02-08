@@ -16,19 +16,19 @@ class Tag(models.Model):
 
 
 
-class KayipStatus(models.Model):
-    name = models.CharField(max_length=50)
+# class KayipStatus(models.Model):
+#     name = models.CharField(max_length=50)
 
-    def __str__(self):
-        return self.name
+#     def __str__(self):
+#         return self.name
 
 
-class Countries(models.Model):
-    name = models.CharField(max_length=100)
+# class Countries(models.Model):
+#     name = models.CharField(max_length=100)
     
 
-    def __str__(self):
-        return self.name
+#     def __str__(self):
+#         return self.name
 
 
 class IhbarUser(models.Model):
@@ -36,7 +36,7 @@ class IhbarUser(models.Model):
     ihbar_last_name = models.CharField(max_length=100)
     phonenumber = models.CharField(max_length=100)
     eposta = models.EmailField(max_length=100,null=True,blank=True)
-    country = models.ForeignKey(Countries,null=True,blank=True,on_delete=models.CASCADE)
+    # country = models.ForeignKey(Countries,null=True,blank=True,on_delete=models.CASCADE)
 
 
     def __str__(self):
@@ -52,7 +52,7 @@ class KayipUser(models.Model):
     tags = models.ManyToManyField(Tag,blank=True)
     detail = models.TextField(null=True,blank=True)
     status = models.CharField(blank=True,null=True,max_length=255)
-    kayip_status = models.ForeignKey(KayipStatus,on_delete=models.CASCADE,null=True,blank=True,related_name="kayiplar")
+    # kayip_status = models.ForeignKey(KayipStatus,on_delete=models.CASCADE,null=True,blank=True,related_name="kayiplar")
 
     def __str__(self):
         return self.kayip_first_name + " - "+self.kayip_last_name
