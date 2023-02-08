@@ -60,11 +60,22 @@ var greenIcon = new LeafIcon({
     iconUrl:
         "https://mt.googleapis.com/vt/icon/name=icons/onion/123-red-dot.png",
 });
+var redIcon = new LeafIcon({
+    iconUrl:
+        "https://mt.googleapis.com/vt/icon/name=icons/onion/123-red-dot.png",
+});var yellowIcon = new LeafIcon({
+    iconUrl:
+        "https://mt.googleapis.com/vt/icon/name=icons/onion/123-red-dot.png",
+});var blueIcon = new LeafIcon({
+    iconUrl:
+        "https://mt.googleapis.com/vt/icon/name=icons/onion/123-red-dot.png",
+});
 
 fetch("api/kayiplar")
     .then((response) => response.json())
     .then((points) =>
         points.map((i) => {
+            console.log(i,"i");
             var title = i.kayip_user[0].kayip_first_name + "-" + i.kayip_user[0].kayip_last_name + "-";
             var marker = L.marker(new L.LatLng(i.kayip_user[0].cordinate_x, i.kayip_user[0].cordinate_y), {
                 icon: greenIcon,
@@ -102,7 +113,6 @@ map.addLayer(mcg);
 
 ////////////////////////////////////////////////////////////////////////
 
-
 // Initialise the draw control and pass it the FeatureGroup of editable layers
 var drawControl = new L.Control.Draw(drawPluginOptions);
 map.addControl(drawControl);
@@ -130,31 +140,27 @@ newDiv.appendChild(newContent);
 const currentDiv = document.getElementsByClassName('leaflet-draw-draw-marker')[0];
 currentDiv.appendChild(newDiv);
 
+// var button = document.createElement("Button");
+// button.innerHTML = '<i class="fa fa-language" style="font-size:24px"></i>';
+// button.style = "top:63px;right:5px;position:absolute;z-index: 400"
+// button.onclick = function () {
+//     console.log("dil değiştirme");
+// };
+// document.body.appendChild(button);
 
-var button = document.createElement("Button");
-button.innerHTML = '<i class="fa fa-language" style="font-size:24px"></i>';
-button.style = "top:63px;right:5px;position:absolute;z-index: 400"
-button.onclick = function () {
-    if (lang == "ar")
-        window.location.href = "/tr"
-    else
-        window.location.href = "/ar"
-};
-document.body.appendChild(button);
+// newDiv = document.createElement("div");
 
-newDiv = document.createElement("div");
-
-// and give it some content
-const newContents = document.createTextNode(lang === "ar" ? "Türkçe" : "عربي");
-newDiv.style.position = "absolute";
-newDiv.style.right = "36px";
-newDiv.style.top = "0px";
-newDiv.style.width = "100px";
-newDiv.style.backgroundColor = "rosybrown";
-
-// add the text node to the newly created div
-newDiv.appendChild(newContents);
-button.appendChild(newDiv);
+// // and give it some content
+// const newContents = document.createTextNode(lang === "ar" ? "Türkçe" : "عربي");
+// newDiv.style.position = "absolute";
+// newDiv.style.right = "36px";
+// newDiv.style.top = "0px";
+// newDiv.style.width = "100px";
+// newDiv.style.backgroundColor = "rosybrown";
+//
+// // add the text node to the newly created div
+// newDiv.appendChild(newContents);
+// button.appendChild(newDiv);
 
 button = document.createElement("Button");
 button.innerHTML = '<i class="fa fa-info" style="font-size:24px"></i>';

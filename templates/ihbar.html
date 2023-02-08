@@ -1,5 +1,5 @@
 {% load static %}
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -272,6 +272,7 @@
     </style>
 </head>
 <body>
+<div id="google_translate_element"></div>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" role="dialog">
@@ -302,6 +303,18 @@
                     <label for="example3">E-posta:</label>
                     <input name="eposta" type="email" class="form-control" placeholder="E-posta:">
                 </div>
+                <select name="country" class="form-group">
+                  {% for country in countries %}
+
+                       <option value="{{country.id}}">
+                         <label class="form-check-label" for="defaultCheck1">
+                           {{country.name}}
+                         </label>
+                        </option>
+
+                       {% endfor %}
+
+                      </select>
 
 
                 <h1>KAYIP OLAN KİŞİLER</h1>
@@ -357,12 +370,12 @@
                                             oluşturulmuştur.
                                         </div>
                                     </div>
-                                    <input
+                                    <a
                                             type="button"
                                             name="next"
                                             class="next action-button"
                                             value="Sonraki Adım"
-                                    />
+                                    >Sonraki Adım</a>
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-card">
@@ -374,18 +387,18 @@
                                             mevcuttur.
                                         </div>
                                     </div>
-                                    <input
+                                    <a
                                             type="button"
                                             name="previous"
                                             class="previous action-button"
                                             value="Önceki Adım"
-                                    />
-                                    <input
+                                    >Önceki Adım</a>
+                                    <a
                                             type="button"
                                             name="next"
                                             class="next action-button"
                                             value="Sonraki Adım"
-                                    />
+                                    >Sonraki Adım</a>
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-card">
@@ -402,18 +415,18 @@
                                             değişimi sağlanmaktadır.
                                         </div>
                                     </div>
-                                    <input
+                                    <a
                                             type="button"
                                             name="previous"
                                             class="previous action-button"
                                             value="Önceki Adım"
-                                    />
-                                    <input
+                                    >Önceki Adım</a>
+                                    <a
                                             type="button"
                                             name="next"
                                             class="next action-button"
                                             value="Sonraki Adım"
-                                    />
+                                    >Sonraki Adım</a>
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-card">
@@ -423,34 +436,34 @@
                                             <strong>Email Adresimiz: </strong>info@audteye.com
                                         </div>
                                     </div>
-                                    <input
+                                    <a
                                             type="button"
                                             name="previous"
                                             class="previous action-button"
                                             value="Önceki Adım"
-                                    />
-                                    <input
+                                    >Önceki Adım</a>
+                                    <a
                                             type="button"
                                             name="next"
                                             class="next action-button"
                                             value="Sonraki Adım"
-                                    />
+                                    >Sonraki Adım</a>
                                 </fieldset>
                                 <fieldset>
-                                    <input
+                                    <a
                                             type="button"
                                             name="previous"
                                             class="previous action-button"
                                             value="Önceki Adım"
-                                    />
-                                    <button
+                                    >Önceki Adım</a>
+                                    <a
+                                            type="button"
                                             id="submit"
                                             name="next"
                                             class="next action-button"
                                             placeholder="Kapat"
-                                    >
-                                        Kapat
-                                    </button>
+                                    >Kapat
+                                        ></a>
                                 </fieldset>
                             </form>
                         </div>
@@ -476,13 +489,25 @@
                     <label for="example5">Soyisim:</label>
                     <input required name="kayip_last_name" type="text" class="form-control" placeholder="Soyisim:">
                   </div>
+                  <select name="kayip_status" class="form-group" style="width:100%">
+                  {% for status in kayip_status %}
+
+                       <option value="{{status.id}}">
+                         <label class="form-check-label" for="defaultCheck1">
+                           {{status.name}}
+                         </label>
+                        </option>
+
+                       {% endfor %}
+
+                      </select>
 
                   ${counter == 1 ?
                     `<div class="form-group">
                           <label for="example7">Adres:</label>
                           <textarea required name="address" class="form-control" id="" cols="30" rows="5"></textarea>
                         </div>`
-                    : `</span>`
+                    : `<div></div>`
                 }
                         <div><h3>Özellikler</h3></div>
                   {% for tag in tags %}
@@ -556,12 +581,21 @@
                     window.location.reload()
                 }
             });
-
         })
-
-
     });
 </script>
+
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'tr',
+            includedLanguages: 'ar,tr,en'
+        }, 'google_translate_element');
+    }
+</script>
+
+<script type="text/javascript"
+        src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 
 <div id="map" style="width: 100%; height: 100%"></div>
@@ -664,10 +698,9 @@
             $(this).addClass("selected");
         });
 
-        $("#submit").onclick = function () {
+        $("#submit").on('click', function () {
             $('#myMultiModal').modal('hide');
-        };
-
+        });
 
     });
 </script>
