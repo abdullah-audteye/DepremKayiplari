@@ -70,7 +70,7 @@ currentDiv.appendChild(newDiv);
 
 var button = document.createElement("Button");
 button.innerHTML = '<i class="fa fa-language" style="font-size:24px"></i>';
-button.style = "top:63px;right:5px;position:absolute;z-index: 9999"
+button.style = "top:63px;right:5px;position:absolute;z-index: 400"
 button.onclick = function () {
     if (lang == "ar")
         window.location.href = "/tr/ihbar"
@@ -95,7 +95,7 @@ button.appendChild(newDiv);
 
 button = document.createElement("Button");
 button.innerHTML = '<i class="fa fa-backward" style="font-size:24px"></i>';
-button.style = "top:100px;right:5px;position:absolute;z-index: 9999"
+button.style = "top:100px;right:5px;position:absolute;z-index: 400"
 button.onclick = function () {
     let lang = window.location.href.split("/")[window.location.href.split("/").length - 2];
     if (lang == "ar")

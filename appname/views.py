@@ -3,11 +3,15 @@ from .forms import KayipUserForm,IhbarUserForm
 from .models import Ihbar,KayipUser,Tag,TagArabic
 from django.db import IntegrityError, transaction
 from django.core.serializers import json
+from django.http import JsonResponse
+
 from django.core.serializers import serialize
+from django.http import QueryDict
 from .serializers import KayipUserSerializer
 from rest_framework.generics import ListAPIView
 
 import json
+import itertools
 
 
 
@@ -16,27 +20,42 @@ def IhbarView(request):
     kayipuserform = KayipUserForm()
     ihbaruserform = IhbarUserForm()
     if request.method == "POST":
-        kayipuserform = KayipUserForm(request.POST)
-        ihbaruserform = IhbarUserForm(request.POST)
-        print(request.POST,'requestpossst')
-        if(ihbaruserform.is_valid() and kayipuserform.is_valid()):
+        kayip_user_data = (request.POST.getlist('data[]'))
+        ihbarci_data = QueryDict(request.POST.get('ihbarci_data'))
+        ihbaruserform=IhbarUserForm(ihbarci_data)
+
+        if ihbaruserform.is_valid():
+            cordinate_x = ihbarci_data.get('cordinate_x')
+            cordinate_y = ihbarci_data.get('cordinate_y')
 
             try:
                 with transaction.atomic():
-                    ihbarform_instance=ihbaruserform.save()
-                    kayip_form_instance=kayipuserform.save()
-                    ihbar_instance = Ihbar.objects.create()
-                    ihbar_instance.ihbar_user = ihbarform_instance
-                    ihbar_instance.kayip_user.add(kayip_form_instance)
-                    ihbar_instance.save()
-                    return redirect('ihbarview_tr')
-            
+                    ihbaruserform_instance=ihbaruserform.save()
+                    
+                    saved_records = []
+                    for kayip_user in kayip_user_data:
+                        kayip_user = QueryDict(kayip_user).copy()
+                        kayip_user['cordinate_x']=cordinate_x
+                        kayip_user['cordinate_y']=cordinate_y
 
-            except IntegrityError:
-                raise IntegrityError('Check the values that you sent !')
-        else:
-            print(ihbaruserform.errors,'ihbarformerros')
-            print(kayipuserform.errors,'kayipuserform')
+                        kayip_user_check = KayipUserForm(kayip_user)
+                        if(kayip_user_check.is_valid()):
+                            kayip_user_instance = kayip_user_check.save()
+                                
+                            saved_records.append(kayip_user_instance.id)
+
+
+                    ihbar_instance = Ihbar.objects.create()
+                    ihbar_instance.ihbar_user = ihbaruserform_instance
+                    ihbar_instance.kayip_user.add(*saved_records)
+
+                    ihbar_instance.save()
+                    return JsonResponse({'status':True,'message':"success"}, status=200)
+                
+
+            except Exception as err:
+                print(err,'errrr')
+            
 
 
     return render(request,"ihbar.html",{"kayipuserform":kayipuserform,"ihbaruserform":ihbaruserform,"tags":tags})
@@ -47,27 +66,42 @@ def IhbarViewAR(request):
     kayipuserform = KayipUserForm()
     ihbaruserform = IhbarUserForm()
     if request.method == "POST":
-        kayipuserform = KayipUserForm(request.POST)
-        ihbaruserform = IhbarUserForm(request.POST)
-        print(request.POST,'requestpossst')
-        if(ihbaruserform.is_valid() and kayipuserform.is_valid()):
+        kayip_user_data = (request.POST.getlist('data[]'))
+        ihbarci_data = QueryDict(request.POST.get('ihbarci_data'))
+        ihbaruserform=IhbarUserForm(ihbarci_data)
+
+        if ihbaruserform.is_valid():
+            cordinate_x = ihbarci_data.get('cordinate_x')
+            cordinate_y = ihbarci_data.get('cordinate_y')
 
             try:
                 with transaction.atomic():
-                    ihbarform_instance=ihbaruserform.save()
-                    kayip_form_instance=kayipuserform.save()
+                    ihbaruserform_instance=ihbaruserform.save()
+                    
+                    saved_records = []
+                    for kayip_user in kayip_user_data:
+                        kayip_user = QueryDict(kayip_user).copy()
+                        kayip_user['cordinate_x']=cordinate_x
+                        kayip_user['cordinate_y']=cordinate_y
+
+                        kayip_user_check = KayipUserForm(kayip_user)
+                        if(kayip_user_check.is_valid()):
+                            kayip_user_instance = kayip_user_check.save()
+                                
+                            saved_records.append(kayip_user_instance.id)
+
+
                     ihbar_instance = Ihbar.objects.create()
-                    ihbar_instance.ihbar_user = ihbarform_instance
-                    ihbar_instance.kayip_user.add(kayip_form_instance)
+                    ihbar_instance.ihbar_user = ihbaruserform_instance
+                    ihbar_instance.kayip_user.add(*saved_records)
+
                     ihbar_instance.save()
                     return redirect('ihbarview_ar')
-            
+                
 
-            except IntegrityError:
-                raise IntegrityError('Check the values that you sent !')
-        else:
-            print(ihbaruserform.errors,'ihbarformerros')
-            print(kayipuserform.errors,'kayipuserform')
+            except Exception as err:
+                print(err,'errrr')
+            
 
 
     return render(request,"ihbar_arabic.html",{"kayipuserform":kayipuserform,"ihbaruserform":ihbaruserform,"tags":tags})
