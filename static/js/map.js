@@ -135,10 +135,7 @@ var button = document.createElement("Button");
 button.innerHTML = '<i class="fa fa-language" style="font-size:24px"></i>';
 button.style = "top:63px;right:5px;position:absolute;z-index: 400"
 button.onclick = function () {
-    if (lang == "ar")
-        window.location.href = "/tr"
-    else
-        window.location.href = "/ar"
+    console.log("dil değiştirme");
 };
 document.body.appendChild(button);
 
