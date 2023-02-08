@@ -5,7 +5,7 @@ from appname.views import IhbarView,KayipUserListView
 
 urlpatterns = [
     path("admin", admin.site.urls, name="admin_page"),
-    path('tr',IhbarView,name="ihbarview_tr"),
+    path('',IhbarView,name="ihbarview_tr"),
     path('api/kayiplar',KayipUserListView.as_view(),name="kayiplarview_api")
 
 ]
