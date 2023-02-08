@@ -269,6 +269,69 @@
             width: 100%;
             object-fit: cover;
         }
+
+        @media (max-width:570px) {
+            .card{
+                max-width: 100%;
+                margin:0 auto;
+            }
+            .subcard h2{
+                font-size: 28px;
+            }
+            .subcard p{
+                font-size: 16px;
+              
+            }
+            #progressbar {
+               max-width: 100%; 
+            }
+
+            #modal-btn{ 
+                margin-bottom: 15px;
+
+            }
+            .form-card {
+                max-width: 450px;
+                padding:0;
+                margin: 0;
+            }
+
+            @media (max-width:340px) {
+            .card{
+                max-width: 100%;
+                margin:0 auto;
+              
+            }
+            .subcard h2{
+                font-size: 20px;
+            }
+            #progressbar {
+               max-width: 100%; 
+            }
+            #modal-btn{ 
+                margin-bottom: 15px;
+
+            }
+            .form-card {
+                max-width: 300px;
+                padding:0;
+                margin: 0;
+            }
+            .form-card-text {
+                margin-top: 0;
+                margin-bottom: 5px;
+                font-size: 16px;
+            }
+            #msform fieldset .form-card {
+                padding: 5px 5px 5px 5px;
+                text-align: center;
+                margin-bottom: 5px;
+            }
+            #modal-btn {
+                width: 100px;
+            }
+                                         
+        }
     </style>
 </head>
 <body>
@@ -351,13 +414,14 @@
                                 <!-- fieldsets -->
                                 <fieldset>
                                     <div class="form-card">
-                                        <div>
+                                        <div class="form-card-text">
                                             Uygulama, 6 Şubat 2023 tarihinde Türkiye ve Suriye'de gerçekleşen depremde
                                             kayıp kişilerin yerlerini belirleyebilmek ve kişilere ulaşmak amacıyla
                                             oluşturulmuştur.
                                         </div>
                                     </div>
                                     <input
+                                            id="modal-btn"
                                             type="button"
                                             name="next"
                                             class="next action-button"
@@ -366,7 +430,7 @@
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-card">
-                                        <div>
+                                        <div class="form-card-text">
                                             <strong>● İhbar Et: </strong> Bu bölüm aracılığıyla kayıp hakkında bilgiler
                                             girilerek kayıp kişi yerinin belirlenmesi amaçlanmıştır.
                                             <br>
@@ -375,12 +439,14 @@
                                         </div>
                                     </div>
                                     <input
+                                            id="modal-btn"
                                             type="button"
                                             name="previous"
                                             class="previous action-button"
                                             value="Önceki Adım"
                                     />
                                     <input
+                                            id="modal-btn"
                                             type="button"
                                             name="next"
                                             class="next action-button"
@@ -389,7 +455,7 @@
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-card">
-                                        <div>
+                                        <div class="form-card-text">
                                             <strong>● İhbar Et: </strong>Kayıp kişilerin bilgilerine sahip kişiler
                                             ekranın sağ üst köşesinde yer alan
                                             <strong>İhbar et</strong> bölümüne tıklayarak, sahip olduğu bilgiler
@@ -403,12 +469,14 @@
                                         </div>
                                     </div>
                                     <input
+                                    id="modal-btn"
                                             type="button"
                                             name="previous"
                                             class="previous action-button"
                                             value="Önceki Adım"
                                     />
                                     <input
+                                    id="modal-btn"
                                             type="button"
                                             name="next"
                                             class="next action-button"
@@ -417,19 +485,21 @@
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-card">
-                                        <div>
+                                        <div class="form-card-text">
                                             Uygulama hakkında soru ve görüşlerinizi bizimle paylaşabilirsiniz.
                                             <br>
                                             <strong>Email Adresimiz: </strong>info@audteye.com
                                         </div>
                                     </div>
                                     <input
+                                    id="modal-btn"
                                             type="button"
                                             name="previous"
                                             class="previous action-button"
                                             value="Önceki Adım"
                                     />
                                     <input
+                                    id="modal-btn"
                                             type="button"
                                             name="next"
                                             class="next action-button"
@@ -438,6 +508,7 @@
                                 </fieldset>
                                 <fieldset>
                                     <input
+                                    id="modal-btn"
                                             type="button"
                                             name="previous"
                                             class="previous action-button"

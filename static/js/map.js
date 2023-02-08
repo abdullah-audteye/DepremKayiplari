@@ -120,7 +120,9 @@ let lang = window.location.href.split("/")[window.location.href.split("/").lengt
 const newContent = document.createTextNode(lang === "ar" ? "حدد موقع المفقود" : "Konum Seç");
 newDiv.style.position = "absolute";
 newDiv.style.right = "31px";
-newDiv.style.width = "100px";
+newDiv.style.width = "90px";
+newDiv.style.height = "30px";
+newDiv.style.borderRadius = "6px";
 newDiv.style.backgroundColor = "rosybrown";
 
 // add the text node to the newly created div
@@ -133,23 +135,23 @@ currentDiv.appendChild(newDiv);
 
 var button = document.createElement("Button");
 button.innerHTML = '<i class="fa fa-language" style="font-size:24px"></i>';
-button.style = "top:63px;right:5px;position:absolute;z-index: 400"
+button.style = "top:56px;right:5px;position:absolute;z-index: 400"
 button.onclick = function () {
-    if (lang == "ar")
-        window.location.href = "/tr"
-    else
-        window.location.href = "/ar"
+console.log("dil değiştirme");
 };
-document.body.appendChild(button);
+document.body.appendChild(button); 
 
 newDiv = document.createElement("div");
 
 // and give it some content
 const newContents = document.createTextNode(lang === "ar" ? "Türkçe" : "عربي");
 newDiv.style.position = "absolute";
-newDiv.style.right = "36px";
+newDiv.style.right = "40px";
 newDiv.style.top = "0px";
-newDiv.style.width = "100px";
+newDiv.style.width = "127px";
+newDiv.style.height = "35px";
+newDiv.style.borderRadius = "6px";
+
 newDiv.style.backgroundColor = "rosybrown";
 
 // add the text node to the newly created div
@@ -158,7 +160,7 @@ button.appendChild(newDiv);
 
 button = document.createElement("Button");
 button.innerHTML = '<i class="fa fa-info" style="font-size:24px"></i>';
-button.style = "top:100px;right:5px;position:absolute;z-index: 400"
+button.style = "top:100px;right:5px;position:absolute;z-index: 400;"
 button.onclick = function () {
     $('#myMultiModal').modal('show');
 };
@@ -169,9 +171,12 @@ newDiv = document.createElement("div");
 // and give it some content
 const newContentss = document.createTextNode(lang === "ar" ? "Bilgi Al" : "Bilgi Al");
 newDiv.style.position = "absolute";
-newDiv.style.right = "36px";
+newDiv.style.right = "40px";
 newDiv.style.top = "0px";
-newDiv.style.width = "122px";
+newDiv.style.width = "127px";
+newDiv.style.height = "35px";
+newDiv.style.padding = "3px";
+newDiv.style.borderRadius = "6px";
 newDiv.style.backgroundColor = "rosybrown";
 
 // add the text node to the newly created div
