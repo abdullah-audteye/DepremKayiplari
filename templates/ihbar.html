@@ -371,11 +371,7 @@
             width: 100px;
           }
 
-          .nav-text {
-            flex-direction: row;
-          }
-        }
-      }
+            }}
     </style>
   </head>
   <body>
@@ -416,11 +412,10 @@
             </a>
           </div>
         </div>
-      </div>
-    </nav>
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" role="dialog">
-      <div class="modal-dialog">
+    </div>
+</nav>
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
         <form id="ihbarform" method="post" action="{% url 'ihbarview_tr' %}">
           <input type="hidden" name="section" value="" />
           {% csrf_token %}
@@ -513,23 +508,17 @@
             </button>
           </div>
         </form>
-      </div>
     </div>
-    <div class="modal fade" id="myMultiModal" role="dialog">
-      <!-- MultiStep Form -->
-      <div class="container-fluid" style="padding-left: initial" id="grad1">
-        <div
-          style="margin-left: initial; margin-right: initial"
-          class="row justify-content-center mt-0"
-        >
-          <div
-            class="col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0 mt-3 mb-2"
-          >
-            <div class="card">
-              <button
-                class="mdl-cls-button"
-                id="modal-close-button"
-                style="
+</div>
+<div class="modal fade" id="myMultiModal" role="dialog">
+    <div class="container-fluid" id="grad1">
+        <div class="row justify-content-center mt-0">
+            <div
+                    class="col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0 mt-3 mb-2">
+                <div class="card">
+                    <button
+                            id="modal-close-button"
+                            style="
                   width: 45px;
                   height: 50px;
                   background: white;
@@ -612,24 +601,23 @@
                         </div>
                       </div>
 
-                      <a
-                        type="button"
-                        name="next"
-                        class="next action-button"
-                        value="Sonraki Adım"
-                        >Sonraki Adım</a
-                      >
-                    </fieldset>
-                    <fieldset>
-                      <div class="form-card">
-                        <div class="form-card-text">
-                          Uygulama hakkında soru ve görüşlerinizi bizimle
-                          paylaşabilirsiniz.
-                          <br />
-                          <strong>Email Adresimiz: </strong
-                          >findmehelpme.com@gmail.com
-                        </div>
-                      </div>
+                                    <a
+                                            type="button"
+                                            name="next"
+                                            class="next action-button"
+                                            value="Sonraki Adım"
+                                    >Sonraki Adım</a
+                                    >
+                                </fieldset>
+                                <fieldset>
+                                    <div class="form-card">
+                                        <div class="form-card-text">
+                                            Uygulama hakkında soru ve görüşlerinizi bizimle
+                                            paylaşabilirsiniz.
+                                            <br/>
+                                            <strong>Email Adresimiz: </strong>ndmehelpme.com@gmail.com
+                                        </div>
+                                    </div>
 
                       <a
                         type="button"

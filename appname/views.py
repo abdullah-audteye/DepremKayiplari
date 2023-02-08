@@ -1,11 +1,19 @@
 from django.shortcuts import render, redirect
 from .forms import KayipUserForm, IhbarUserForm
-from .models import Ihbar, KayipUser, Tag, TagArabic, Countries, KayipStatus
+from .models import Ihbar, KayipUser, Tag, Countries, KayipStatus
 from django.db import transaction
 from django.http import JsonResponse
 from django.http import QueryDict
 from .serializers import KayipUserSerializer, IhbarSerializer, KayipStatusSerializer
 from rest_framework.generics import ListAPIView
+from django.shortcuts import get_object_or_404
+import random
+
+def ChangeKayipStatus(request,pk):
+    ihbar = get_object_or_404(Ihbar,pk=pk)
+    kayip_status = KayipStatus.objects.all()
+    return render(request,'change_status.html',{"ihbar":ihbar,'kayip_status':kayip_status})
+
 
 
 def IhbarView(request):
@@ -41,7 +49,10 @@ def IhbarView(request):
                             saved_records.append(kayip_user_instance.id)
 
                     ihbar_instance = Ihbar.objects.create()
+                    access_number = random.randint(000000,999999)
+
                     ihbar_instance.ihbar_user = ihbaruserform_instance
+                    ihbar_instance.access_code = access_number
                     ihbar_instance.kayip_user.add(*saved_records)
 
                     ihbar_instance.save()

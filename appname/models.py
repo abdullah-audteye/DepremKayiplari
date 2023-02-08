@@ -1,17 +1,16 @@
 from django.db import models
 
 
-class TagArabic(models.Model):
-    tag = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.tag
 
 class Tag(models.Model):
     tag = models.CharField(max_length=100)
 
     def __str__(self):
         return self.tag
+
+    class Meta:
+        verbose_name = 'Tagler'
+        verbose_name_plural = 'Tagler'
 
 
 
@@ -22,13 +21,20 @@ class KayipStatus(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = 'Kayıp Durumları'
+        verbose_name_plural = 'Kayıp Durumları'
+
 
 class Countries(models.Model):
     name = models.CharField(max_length=100)
     
-
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = 'Ülkeler'
+        verbose_name_plural = 'Ülkeler'
 
 
 class IhbarUser(models.Model):
@@ -41,6 +47,11 @@ class IhbarUser(models.Model):
 
     def __str__(self):
         return self.ihbar_first_name + " - "+self.ihbar_last_name
+
+    class Meta:
+        verbose_name = 'Ihbar Eden Kişiler'
+        verbose_name_plural = 'Ihbar Eden Kişiler'
+
 
 class KayipUser(models.Model):
     kayip_first_name = models.CharField(max_length=100)
@@ -57,10 +68,19 @@ class KayipUser(models.Model):
     def __str__(self):
         return self.kayip_first_name + " - "+self.kayip_last_name
 
+    class Meta:
+        verbose_name = 'Kaybolan Kişiler'
+        verbose_name_plural = 'Kaybolan Kişiler'
+
 
 class Ihbar(models.Model):
     ihbar_user = models.ForeignKey(IhbarUser, on_delete=models.CASCADE,null=True,blank=True)
     kayip_user = models.ManyToManyField(KayipUser)
+    access_code = models.IntegerField(null=True,blank=True,db_index=True)
+
+    class Meta:
+        verbose_name = 'Ihbar'
+        verbose_name_plural = 'Ihbarlar'
 
 
 
