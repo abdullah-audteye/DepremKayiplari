@@ -9,6 +9,7 @@ from rest_framework.generics import ListAPIView
 
 
 
+
 def IhbarView(request):
     tags = Tag.objects.all()
     kayipuserform = KayipUserForm()
@@ -116,3 +117,4 @@ def KayipUserListAR(request):
 class KayipUserListView(ListAPIView):
     queryset = Ihbar.objects.order_by('-id')
     serializer_class = IhbarSerializer
+
