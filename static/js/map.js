@@ -23,6 +23,8 @@ var yellowIcon = new LeafIcon({iconUrl: "https://www.google.com/intl/en_us/mapfi
 var blueIcon = new LeafIcon({iconUrl: "https://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png",});
 
 var selectedArray = [1, 2, 3, 4];
+var selectedCountry = -1;
+
 let values = {
     1: {status: "At Hospital", icon: greenIcon, color: "green"},
     2: {status: "Missing", icon: redIcon, color: "red"},
@@ -77,6 +79,10 @@ function addLayer() {
             points.map((i) => {
                 if (i.kayip_user.length < 0)
                     return;
+
+                //illere göre filtrelemek için kontrol
+                // let check = selectedCountry == -1 ? true : (i.ihbar_user.country == selectedCountry);
+
                 var title = i.kayip_user[0]?.kayip_first_name + "-" + i.kayip_user[0]?.kayip_last_name + "-";
                 var marker = L.marker(new L.LatLng(i.kayip_user[0]?.cordinate_x, i.kayip_user[0]?.cordinate_y), {
                     icon: values[i.kayip_user[0]?.kayip_status].icon,
@@ -113,6 +119,7 @@ function addLayer() {
                         maxWidth: 560,
                     }
                 );
+
                 if (selectedArray.includes(i.kayip_user[0].kayip_status))
                     mcg.addLayer(marker);
             })
@@ -145,14 +152,12 @@ newDiv.style.borderRadius = "6px";
 newDiv.style.fontWeight = "bold";
 newDiv.style.backgroundColor = "rosybrown";
 
-
 // add the text node to the newly created div
 newDiv.appendChild(newContent);
 
 // add the newly created element and its content into the DOM
 const currentDiv = document.getElementsByClassName('leaflet-draw-draw-marker')[0];
 currentDiv.appendChild(newDiv);
-
 
 function setSelected(id) {
     if (selectedArray.includes(id)) {
@@ -161,13 +166,37 @@ function setSelected(id) {
     } else {
         selectedArray.push(id);
     }
-    addLayer()
-    console.log(selectedArray, "selectedArray");
+    addLayer();
+}
+
+function setSelectedCountry(id) {
+    console.log(id, "id");
+
+    var bounds = L.latLngBounds() // Instantiate LatLngBounds object
+//35.529991,36.697083,36.719072,40.561523
+    var polygonPoints = {
+        2: [
+            [36.07538422941732, 37.994225034592425],
+            [36.18091040353196, 39.72534001336037],
+            [34.540172959444554, 39.96051035009866],
+            [34.93205872605833, 37.98116001588474]],
+        1: [[38.21680877405232, 34.71204528737725],
+            [38.09154169736558, 38.6341641679324],
+            [36.50984563750561, 38.4583829295882],
+            [36.558397114119714, 35.55249933321049]]
+    };
+    map.fitBounds(polygonPoints[id]);
+
+    // var selectBox = document.getElementById("filterCountrySelect");
+    // var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+    // selectedCountry = selectedValue;
 }
 
 generateLegend()
 
 function generateLegend() {
+
+
 
     fetch("api/kayipstatus")
         .then((response) => response.json())
