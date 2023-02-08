@@ -134,10 +134,9 @@ document.getElementsByClassName('leaflet-draw-draw-marker')[0].style.scale = '1.
 
 // create a new div element
 let newDiv = document.createElement("div");
-let lang = window.location.href.split("/")[window.location.href.split("/").length - 1].slice(0, 2);
 
 // and give it some content
-const newContent = document.createTextNode(lang === "ar" ? "حدد موقع المفقود" : "Konum Seç");
+const newContent = document.createTextNode("Konum Seç");
 newDiv.style.position = "absolute";
 newDiv.style.right = "26px";
 newDiv.style.width = "90px";
@@ -154,54 +153,6 @@ newDiv.appendChild(newContent);
 const currentDiv = document.getElementsByClassName('leaflet-draw-draw-marker')[0];
 currentDiv.appendChild(newDiv);
 
-
-// var button = document.createElement("Button");
-// button.innerHTML = '<i class="fa fa-language" style="font-size:24px"></i>';
-// button.style = "top:63px;right:5px;position:absolute;z-index: 400"
-// button.onclick = function () {
-//     console.log("dil değiştirme");
-// };
-// document.body.appendChild(button);
-
-// newDiv = document.createElement("div");
-
-// // and give it some content
-// const newContents = document.createTextNode(lang === "ar" ? "Türkçe" : "عربي");
-// newDiv.style.position = "absolute";
-// newDiv.style.right = "36px";
-// newDiv.style.top = "0px";
-// newDiv.style.width = "100px";
-// newDiv.style.backgroundColor = "rosybrown";
-//
-// // add the text node to the newly created div
-// newDiv.appendChild(newContents);
-// button.appendChild(newDiv);
-
-button = document.createElement("Button");
-button.innerHTML = '<i class="fa fa-info" style="font-size:24px;width:38px;height:38px;padding:8px"></i>';
-button.style = "top:100px;right:5px;position:absolute;z-index: 400;border:none;background:white;box-shadow: 0px 0.8px 1px -1px rgba(0,0,0,5);"
-button.onclick = function () {
-    $('#myMultiModal').modal('show');
-};
-document.body.appendChild(button);
-
-newDiv = document.createElement("div");
-
-// and give it some content
-const newContentss = document.createTextNode(lang === "ar" ? "Bilgi Al" : "Bilgi Al");
-newDiv.style.position = "absolute";
-newDiv.style.right = "36px";
-newDiv.style.top = "0px";
-newDiv.style.width = "127px";
-newDiv.style.height = "39px";
-newDiv.style.padding = "7px";
-newDiv.style.borderRadius = "6px";
-newDiv.style.fontWeight = "bold";
-newDiv.style.backgroundColor = "rosybrown";
-
-// add the text node to the newly created div
-newDiv.appendChild(newContentss);
-button.appendChild(newDiv);
 
 function setSelected(id) {
     if (selectedArray.includes(id)) {
