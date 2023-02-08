@@ -1,18 +1,3 @@
-"""projectname URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/3.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.urls import include, path
 from django.contrib import admin
 from appname.views import IhbarView,KayipUserList,KayipUserListAR,KayipUserListView,IhbarViewAR
@@ -20,11 +5,11 @@ from appname.views import IhbarView,KayipUserList,KayipUserListAR,KayipUserListV
 
 urlpatterns = [
     path("admin", admin.site.urls, name="admin_page"),
-    path('tr/ihbar',IhbarView,name="ihbarview_tr"),
-    path('ar/ihbar',IhbarViewAR,name="ihbarview_ar"),
+    path('tr',IhbarView,name="ihbarview_tr"),
+    path('ar',IhbarViewAR,name="ihbarview_ar"),
 
-    path('tr',KayipUserList,name="kayiplarview_tr"),
-    path('ar',KayipUserListAR,name="kayiplarview_ar"),
+    path('tr/kayiplar',KayipUserList,name="kayiplarview_tr"),
+    path('ar/kayiplar',KayipUserListAR,name="kayiplarview_ar"),
 
 
     path('api/kayiplar',KayipUserListView.as_view(),name="kayiplarview_api")
