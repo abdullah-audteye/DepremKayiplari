@@ -24,7 +24,7 @@ import os
 SECRET_KEY = 'kulbjd^u!dq0pshi3p2zg(t6mn_s%5hgzx)43sy5x-8wtth($y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -101,6 +101,7 @@ DATABASES = {
         "USER": os.environ.get("POSTGRES_USER"),
         "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
         "HOST": "db",
+        # "PORT": "5454"
     }
 }
 
