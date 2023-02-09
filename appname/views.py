@@ -11,6 +11,8 @@ from .helper import CleanBadRecords,FixNonHavingDates,SendAccessCode
 from datetime import datetime
 import random
 from django.views.decorators.csrf import csrf_exempt
+from django.urls import reverse
+
 
 
 
@@ -40,6 +42,7 @@ def ChangeKayipStatus(request,pk):
 
 @csrf_exempt
 def IhbarView(request):
+    print(request.get_host(),'gethossst')
     tags = Tag.objects.all()
     countries = Countries.objects.all()
     kayipstatus = KayipStatus.objects.all()
@@ -89,11 +92,14 @@ def IhbarView(request):
                         FixNonHavingDates()
 
                         if(ihbaruserform_instance.eposta):
+                            
                             toemail =ihbaruserform_instance.eposta
                             dynamic_template_data = {
                             "subject":"Your access code to change missing people's status",
                             "name":ihbar_instance.access_code,
+                            "url":request.build_absolute_uri("/kayiplar/durum/"+str(ihbar_instance.access_code))
                             }
+                            print(request.build_absolute_uri("/kayiplar/durum/"+str(ihbar_instance.access_code)))
 
                             SendAccessCode(toemail,dynamic_template_data)
                         return JsonResponse({'status': True, 'message': "success"}, status=200)
