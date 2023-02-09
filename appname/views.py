@@ -11,10 +11,27 @@ from .helper import CleanBadRecords,FixNonHavingDates
 from datetime import datetime
 import random
 
+
 def ChangeKayipStatus(request,pk):
-    ihbar = get_object_or_404(Ihbar,pk=pk)
+    ihbar = get_object_or_404(Ihbar,access_code=pk)
     kayip_status = KayipStatus.objects.all()
-    return render(request,'change_status.html',{"ihbar":ihbar,'kayip_status':kayip_status})
+
+    if request.method == "POST":
+        kayip_user_update = (request.POST.getlist('data[]'))
+        try:
+            for updated in kayip_user_update:
+                kayipuserobj = (QueryDict(updated))
+                if(kayipuserobj.get("status") == None) or kayipuserobj.get("user_id") == None :
+                    continue
+                kayip_user_instance = KayipUser.objects.get(id=kayipuserobj['user_id'])
+                kayip_user_instance.kayip_status_id = kayipuserobj['status']
+                kayip_user_instance.save()
+            return JsonResponse({'status': True, 'message': "success"}, status=200)
+        except Exception as err:
+            print(err,'errr')
+            return JsonResponse({'status': False, 'message': "Failed"}, status=200)
+
+    return render(request,'change_status.html',{"ihbar":ihbar,'kayip_status':kayip_status,"access_code":pk})
 
 
 
@@ -53,8 +70,6 @@ def IhbarView(request):
                         else:
                             record_status = False
                             IhbarUser.objects.get(id=ihbaruserform_instance.id).delete()
-
-
 
 
                     if record_status:

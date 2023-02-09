@@ -5,32 +5,93 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+
 </head>
+<style>
+    .list-group {
+        max-height: 300px;
+        max-width: 500px;
+        margin-bottom: 10px;
+        overflow: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .panel {
+        margin: auto;
+        max-width: 500px;
+        transform: translate(0, 20%);
+    }
+
+    .selectcolumn {
+        display: flex;
+        align-items: end;
+        justify-content: space-evenly;
+    }
+
+    strong {
+        padding-left: 30px;
+    }
+</style>
 
 <body>
-    {% for user in ihbar.kayip_user.all %}
+    <div class="panel panel-primary" id="result_panel">
+        <div class="panel-heading">
+            <h3 class="panel-title">ihbar edilen kişiler</h3>
+        </div>
+        <div class="panel-body">
+            <ul class="list-group">
+                {% for kayip in ihbar.kayip_user.all %}
 
-            <div>
-                <form style="display: flex;">
-                <div>{{user.kayip_first_name}} - {{user.kayip_last_name}}</div>
-                <select>
+                <form id="form{{forloop.counter}}" action="" style="display: flex; flex-wrap: wrap;">
+                    <li style="width: 70%;" class="list-group-item text-danger">{{kayip.kayip_first_name}}
+                        {{kayip.kayip_last_name}}</li>
+                        <input name="user_id" type="hidden" value="{{kayip.id}}" />
+                    <select  style="width: 30%;" name="status" >
+                        <option value="{{kayip.kayip_status.id}}" selected disabled hidden>{{kayip.kayip_status.name}}</option>
 
-                {% for status in kayip_status %}
-
-                <option>{{status.name}}</option>
-
+                        {% for status in kayip_status %}
+                        
+                        <option  value="{{status.id}}">{{status.name}}</option>
+                        {% endfor %}
+                    </select>
+                </form>
                 {% endfor %}
-            </select>
-        </form>
+            </ul>{% if status == kayip.kayip_status %} {% else %}{% endif %}
+        </div>
+        <div class="panel-body selectcolumn">
+            <button id="savebutton" class="btn btn-primary">Kaydet</button>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script>
+        document.getElementById('savebutton').addEventListener('click', () => {
+            let multiFormDataArray = {
+                data: [],
+                csrfmiddlewaretoken: "{{ csrf_token }}",
+            };
+            Array.from(
+                document.querySelector(".list-group").querySelectorAll("form")
+            ).forEach((frm) => {
+                console.log(frm);
+                let serialized_form = $("#" + frm.id).serialize();
+                multiFormDataArray.data.push(serialized_form);
+                
+            });
 
-        <button>Send</button>
+            $.post("{% url 'kayiplar_durum_detail' access_code %}", multiFormDataArray, (result) => {
+                if (result.status) {
+                    window.location.reload();
+                }
+                else{
+                    alert("Check the fields !");
 
-            </div>
+                }
+ 
+            });
 
-    {% endfor %}
-
-
-
+        })
+    </script>
 
 </body>
 

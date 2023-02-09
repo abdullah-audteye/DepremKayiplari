@@ -73,11 +73,12 @@ addLayer();
 
 function addLayer() {
     mcg.clearLayers();
+    map.removeLayer(mcg);
     fetch("api/kayiplar")
         .then((response) => response.json())
         .then((points) =>
             points.map((i) => {
-                if (i.kayip_user.length < 0)
+                if (i.kayip_user.length < 1)
                     return;
 
                 //illere göre filtrelemek için kontrol
@@ -85,7 +86,7 @@ function addLayer() {
 
                 var title = i.kayip_user[0]?.kayip_first_name + "-" + i.kayip_user[0]?.kayip_last_name + "-";
                 var marker = L.marker(new L.LatLng(i.kayip_user[0]?.cordinate_x, i.kayip_user[0]?.cordinate_y), {
-                    icon: values[i.kayip_user[0]?.kayip_status].icon,
+                    icon: values[i.kayip_user[0]?.kayip_status]?.icon,
                     title: title,
                 });
                 marker.bindPopup(
@@ -96,20 +97,21 @@ function addLayer() {
                     i.kayip_user[0].kayip_last_name +
                     '</h5></div><div class="col-12"><h5>Adres:' +
                     " " +
-                    i.kayip_user[0].address +
+                    i.kayip_user[0].address + '</h5></div>' + '<div class="col-12"><h5>Durum:' +
+                    " " +
+                    values[i.kayip_user[0].kayip_status].status +
                     '</h5></div><div class="col-12"><h5>Detay:' +
                     " " +
                     i.kayip_user[0].detail +
-                    '</h5></div><div style="border-top:1px solid gray;padding-top:5px;" class="col-12"><h4>İhbar Eden Bilgisi</h4>' +
+                    '</h5></div><button class="col-11 btn btn-success" style="margin-left: 10px; margin-bottom: 5px"' +
+                    ' onclick="window.open(\'http://www.google.com/maps/place/' + i.kayip_user[0]?.cordinate_x + ',' + i.kayip_user[0]?.cordinate_y + '\' ,\'_blank\');">Konuma Git' +
+                    '</button><div style="border-top:1px solid gray;padding-top:5px;" class="col-12"><h4>İhbar Eden Bilgisi</h4>' +
                     '</div>' +
                     '<div class="col-12"><h6>isim:' +
                     " " +
                     i.ihbar_user.ihbar_first_name +
                     " " +
                     i.ihbar_user.ihbar_last_name +
-                    '</h6></div>' + '<div class="col-12"><h6>Durum:' +
-                    " " +
-                    values[i.kayip_user[0].kayip_status].status +
                     '</h6></div>' +
                     '<div class="col-12"><h6>Telefon:' +
                     " " +
@@ -118,15 +120,17 @@ function addLayer() {
                     {
                         maxWidth: 560,
                     }
-                );
+                )
+                ;
 
                 if (selectedArray.includes(i.kayip_user[0].kayip_status))
                     mcg.addLayer(marker);
             })
         );
+
+    map.addLayer(mcg);
 }
 
-map.addLayer(mcg);
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -186,18 +190,11 @@ function setSelectedCountry(id) {
             [36.558397114119714, 35.55249933321049]]
     };
     map.fitBounds(polygonPoints[id]);
-
-    // var selectBox = document.getElementById("filterCountrySelect");
-    // var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-    // selectedCountry = selectedValue;
 }
 
 generateLegend()
 
 function generateLegend() {
-
-
-
     fetch("api/kayipstatus")
         .then((response) => response.json())
         .then((status) => {
@@ -219,10 +216,6 @@ map.on('draw:created', function (e) {
         document.getElementById("cordinate_x").value = e.layer._latlng.lat;
         document.getElementById("cordinate_y").value = e.layer._latlng.lng;
         document.getElementById("openModal").click();
-        // let lat = (e.layer._latlng.lat);
-        // let lng = (e.layer._latlng.lng);
-        // let str = '<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Fill Form</button>'
-        // layer.bindPopup(str);
     }
 
     editableLayers.addLayer(layer);

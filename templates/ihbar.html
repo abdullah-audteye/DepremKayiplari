@@ -12,6 +12,15 @@
             crossorigin="anonymous"
     />
     <style>
+
+        body > .skiptranslate > iframe {
+            display: none;
+        }
+
+        body {
+            top: 0 !important;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -393,14 +402,8 @@
             <h1 class="navbar-logo">FindMeHelpMe</h1>
             <div class="nav-text">
                 <button
-                        class="navbar-info"
-                        style="
-                font-size: 18px;
-                border: none;
-                background: #f8f9fa;
-                font-weight: 500;
-                color: #495057;
-              "
+                        class="navbar-info btn btn-success"
+
                 >
                     Bilgi Al
                 </button>
@@ -522,7 +525,11 @@
     </div>
 </div>
 <div class="modal fade" id="myMultiModal" role="dialog">
-    <div class="container-fluid" id="grad1">
+    <div class="container-fluid" id="grad1" style="
+    position: absolute;
+    top: 15%;
+    right: 11px;
+">
         <div class="row justify-content-center mt-0">
             <div
                     class="col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0 mt-3 mb-2">
@@ -793,7 +800,7 @@
         new google.translate.TranslateElement(
             {
                 pageLanguage: "tr",
-                includedLanguages: "ar,tr,en",
+                includedLanguages: "ar,tr,en", layout: google.translate.TranslateElement.InlineLayout.SIMPLE
             },
             "google_translate_element"
         );
