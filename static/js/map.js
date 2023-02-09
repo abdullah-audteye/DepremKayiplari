@@ -132,14 +132,6 @@ function addLayer() {
     map.addLayer(mcg);
 }
 
-<<<<<<< HEAD
-
-
-http://www.google.com/maps/place/49.46800006494457,17.11514008755796
-    map.addLayer(mcg);
-=======
->>>>>>> 179d90f2068936cb63c50a55438df2e38f85c666
-
 ////////////////////////////////////////////////////////////////////////
 
 // Initialise the draw control and pass it the FeatureGroup of editable layers
@@ -235,4 +227,3 @@ map.on('draw:created', function (e) {
 
     editableLayers.addLayer(layer);
 });
-
