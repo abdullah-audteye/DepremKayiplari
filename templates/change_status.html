@@ -6,32 +6,121 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<style>
+    .list-group{
+    max-height: 300px;
+    max-width: 500px;
+    margin-bottom: 10px;
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
+}
+.panel{
+    margin: auto;
+    max-width: 500px;
+    transform: translate(0 , 20%);
+}
+.selectcolumn{
+    display: flex;
+    align-items: end;
+    justify-content:space-evenly;
+}
+strong{
+    padding-left: 30px;
+}
+</style>
 
 <body>
-    {% for user in ihbar.kayip_user.all %}
-
-            <div>
-                <form style="display: flex;">
-                <div>{{user.kayip_first_name}} - {{user.kayip_last_name}}</div>
-                <select>
-
-                {% for status in kayip_status %}
-
-                <option>{{status.name}}</option>
-
-                {% endfor %}
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <div class="panel panel-primary" id="result_panel">
+    <div class="panel-heading"><h3 class="panel-title">ihbar edilen kişiler</h3>
+    </div>
+    <div class="panel-body">
+        <ul style="display: flex; flex-wrap: wrap;" class="list-group">
+            <li style="width: 70%;" class="list-group-item text-danger">examplename examplemidlename examplesurname</li>
+            <select style="width: 30%;" name="" id="">
+                <option value="1">In Need Of Help</option>
+                <option value="2">Found</option>
+                <option value="3">Missing</option>
+                <option value="4">At Hospital</option>
             </select>
-        </form>
-
-        <button>Send</button>
-
-            </div>
-
-    {% endfor %}
-
-
-
-
+            <li style="width: 70%;" class="list-group-item text-danger">Ali dağlı</li>
+            <select style="width: 30%;" name="" id="">
+                <option value="1">In Need Of Help</option>
+                <option value="2">Found</option>
+                <option value="3">Missing</option>
+                <option value="4">At Hospital</option>
+            </select>
+            <li style="width: 70%;" class="list-group-item text-danger">Ali dağlı</li>
+            <select style="width: 30%;" name="" id="">
+                <option value="1">In Need Of Help</option>
+                <option value="2">Found</option>
+                <option value="3">Missing</option>
+                <option value="4">At Hospital</option>
+            </select>
+            <li style="width: 70%;" class="list-group-item text-danger">Ali dağlı</li>
+            <select style="width: 30%;" name="" id="">
+                <option value="1">In Need Of Help</option>
+                <option value="2">Found</option>
+                <option value="3">Missing</option>
+                <option value="4">At Hospital</option>
+            </select>
+            <li style="width: 70%;" class="list-group-item text-danger">Ali dağlı</li>
+            <select style="width: 30%;" name="" id="">
+                <option value="1">In Need Of Help</option>
+                <option value="2">Found</option>
+                <option value="3">Missing</option>
+                <option value="4">At Hospital</option>
+            </select>
+            <li style="width: 70%;" class="list-group-item text-danger">Ali dağlı</li>
+            <select style="width: 30%;" name="" id="">
+                <option value="1">In Need Of Help</option>
+                <option value="2">Found</option>
+                <option value="3">Missing</option>
+                <option value="4">At Hospital</option>
+            </select>
+            <li style="width: 70%;" class="list-group-item text-danger">Ali dağlı</li>
+            <select style="width: 30%;" name="" id="">
+                <option value="1">In Need Of Help</option>
+                <option value="2">Found</option>
+                <option value="3">Missing</option>
+                <option value="4">At Hospital</option>
+            </select>
+            <li style="width: 70%;" class="list-group-item text-danger">Ali dağlı</li>
+            <select style="width: 30%;" name="" id="">
+                <option value="1">In Need Of Help</option>
+                <option value="2">Found</option>
+                <option value="3">Missing</option>
+                <option value="4">At Hospital</option>
+            </select>
+            <li style="width: 70%;" class="list-group-item text-danger">Ali dağlı</li>
+            <select style="width: 30%;" name="" id="">
+                <option value="1">In Need Of Help</option>
+                <option value="2">Found</option>
+                <option value="3">Missing</option>
+                <option value="4">At Hospital</option>
+            </select>
+            <li style="width: 70%;" class="list-group-item text-danger">Ali dağlı</li>
+            <select style="width: 30%;" name="" id="">
+                <option value="1">In Need Of Help</option>
+                <option value="2">Found</option>
+                <option value="3">Missing</option>
+                <option value="4">At Hospital</option>
+            </select>
+            <li style="width: 70%;" class="list-group-item text-danger">Ali dağlı</li>
+            <select style="width: 30%;" name="" id="">
+                <option value="1">In Need Of Help</option>
+                <option value="2">Found</option>
+                <option value="3">Missing</option>
+                <option value="4">At Hospital</option>
+            </select>
+        
+    
+        </ul>
+    </div>
+    <div class="panel-body selectcolumn">
+        <button class="btn btn-primary">Kaydet</button>
+    </div>
+</div>
 </body>
 
 </html>

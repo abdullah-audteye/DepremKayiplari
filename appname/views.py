@@ -10,7 +10,7 @@ from django.shortcuts import get_object_or_404
 import random
 
 def ChangeKayipStatus(request,pk):
-    ihbar = get_object_or_404(Ihbar,pk=pk)
+    ihbar = get_object_or_404(Ihbar,access_code=pk)
     kayip_status = KayipStatus.objects.all()
     return render(request,'change_status.html',{"ihbar":ihbar,'kayip_status':kayip_status})
 
