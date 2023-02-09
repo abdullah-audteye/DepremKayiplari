@@ -7,11 +7,15 @@ from django.http import QueryDict
 from .serializers import KayipUserSerializer, IhbarSerializer, KayipStatusSerializer
 from rest_framework.generics import ListAPIView
 from django.shortcuts import get_object_or_404
-from .helper import CleanBadRecords,FixNonHavingDates
+from .helper import CleanBadRecords,FixNonHavingDates,SendAccessCode
 from datetime import datetime
 import random
+from django.views.decorators.csrf import csrf_exempt
 
 
+
+
+@csrf_exempt
 def ChangeKayipStatus(request,pk):
     ihbar = get_object_or_404(Ihbar,access_code=pk)
     kayip_status = KayipStatus.objects.all()
@@ -34,7 +38,7 @@ def ChangeKayipStatus(request,pk):
     return render(request,'change_status.html',{"ihbar":ihbar,'kayip_status':kayip_status,"access_code":pk})
 
 
-
+@csrf_exempt
 def IhbarView(request):
     tags = Tag.objects.all()
     countries = Countries.objects.all()
@@ -83,6 +87,15 @@ def IhbarView(request):
                         ihbar_instance.save()
                         CleanBadRecords()
                         FixNonHavingDates()
+
+                        if(ihbaruserform_instance.eposta):
+                            toemail =ihbaruserform_instance.eposta
+                            dynamic_template_data = {
+                            "subject":"Your access code to change missing people's status",
+                            "name":ihbar_instance.access_code,
+                            }
+
+                            SendAccessCode(toemail,dynamic_template_data)
                         return JsonResponse({'status': True, 'message': "success"}, status=200)
 
                     else:
