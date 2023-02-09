@@ -306,271 +306,272 @@
             margin-left: 15px;
         }
 
-      .leaflet-popup {
-        width: 30vw;
-      }
-
-      .leaflet-popup .col-12 {
-        text-align: center;
-      }
-
-      @media (min-width: 570px) {
-        .card {
-          max-width: 100%;
-          margin: 0 auto;
-        }
-
-        .subcard h2 {
-          font-size: 28px;
-        }
-
-        .subcard p {
-          font-size: 16px;
-        }
-
-        #progressbar {
-          max-width: 100%;
-        }
-
-        #modal-btn {
-          margin-bottom: 15px;
-        }
-
-        .form-card {
-          max-width: 450px;
-          padding: 0;
-          margin: 0;
-        }
-
-        .nav-text {
-          flex-direction: row;
-          justify-content: space-between;
-          align-items: center;
-          gap: 15px;
-        }
-
-        @media(max-width: 380px) {
-          .card {
-            max-width: 10px;
-            margin: 0 auto;
-            background: red;
-          }
-
-          .subcard h2 {
-            font-size: 20px;
-          }
-
-          #progressbar {
-            max-width: 100%;
-          }
-
-          #modal-btn {
-            margin-bottom: 15px;
-          }
-
-          .form-card {
-            max-width: 350px;
-            padding: 0;
-            margin: 0;
-          }
-
-          .form-card-text {
-            margin-top: 0;
-            margin-bottom: 5px;
-            font-size: 16px;
-          }
-
-          #msform fieldset .form-card {
-            padding: 5px 5px 5px 5px;
-            text-align: center;
-            margin-bottom: 5px;
-          }
-
-          #modal-btn {
-            width: 100px;
-          }
-        }
-      }
-      @media only screen and (max-width: 600px) {
         .leaflet-popup {
-            width: 80vw;
-            height: 50vw;
-          }
+            width: 30vw;
+        }
 
-          .leaflet-popup .col-12 {
+        .leaflet-popup .col-12 {
             text-align: center;
-          }
+        }
+
+        @media (min-width: 570px) {
+            .card {
+                max-width: 100%;
+                margin: 0 auto;
+            }
+
+            .subcard h2 {
+                font-size: 28px;
+            }
+
+            .subcard p {
+                font-size: 16px;
+            }
+
+            #progressbar {
+                max-width: 100%;
+            }
+
+            #modal-btn {
+                margin-bottom: 15px;
+            }
+
+            .form-card {
+                max-width: 450px;
+                padding: 0;
+                margin: 0;
+            }
+
+            .nav-text {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                gap: 15px;
+            }
+
+            @media (max-width: 380px) {
+                .card {
+                    max-width: 10px;
+                    margin: 0 auto;
+                    background: red;
+                }
+
+                .subcard h2 {
+                    font-size: 20px;
+                }
+
+                #progressbar {
+                    max-width: 100%;
+                }
+
+                #modal-btn {
+                    margin-bottom: 15px;
+                }
+
+                .form-card {
+                    max-width: 350px;
+                    padding: 0;
+                    margin: 0;
+                }
+
+                .form-card-text {
+                    margin-top: 0;
+                    margin-bottom: 5px;
+                    font-size: 16px;
+                }
+
+                #msform fieldset .form-card {
+                    padding: 5px 5px 5px 5px;
+                    text-align: center;
+                    margin-bottom: 5px;
+                }
+
+                #modal-btn {
+                    width: 100px;
+                }
+            }
+        }
+
+        @media only screen and (max-width: 600px) {
+            .leaflet-popup {
+                width: 80vw;
+                height: 50vw;
+            }
+
+            .leaflet-popup .col-12 {
+                text-align: center;
+            }
 
 
-}
+        }
 
-#legend_btn:hover{
-  cursor: pointer;
-}
+        #legend_btn:hover {
+            cursor: pointer;
+        }
 
-.leaflet-popup h5{
-  word-break: break-word;
-}
+        .leaflet-popup h5 {
+            word-break: break-word;
+        }
     </style>
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+    >
         <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <h1 class="navbar-logo">FindMeHelpMe</h1>
-          <div class="nav-text">
-            <button class="navbar-info btn btn-success" style="background: #da1e37;border:none;">Bilgi Al</button>
-            <a
-              class="nav-item nav-link"
-              href="#"
-              style="margin-top: 20px; margin-left: 0px"
-            >
-              <div id="google_translate_element"></div>
-            </a>
-          </div>
+            <h1 class="navbar-logo">FindMeHelpMe</h1>
+            <div class="nav-text">
+                <button class="navbar-info btn btn-success" style="background: #da1e37;border:none;">Bilgi Al</button>
+                <a
+                        class="nav-item nav-link"
+                        href="#"
+                        style="margin-top: 20px; margin-left: 0px"
+                >
+                    <div id="google_translate_element"></div>
+                </a>
+            </div>
         </div>
-      </div>
-      <a
-        class="nav-item nav-link"
-        href="#"
-        style="position: absolute; right: 50px; top: 3px"
-      >
+    </div>
+    <a
+            class="nav-item nav-link"
+            href="#"
+            style="position: absolute; right: 50px; top: 3px"
+    >
         {% for country in countries %}
-        <button
-          type="button"
-          class="btn btn-success"
-          id="{{ country.id }}"
-          name="country"
-          onclick="setSelectedCountry('{{ country.id }}')"
-          value="{{ country.name }}"
-        >
-          {{ country.name }}
-        </button>
+            <button
+                    type="button"
+                    class="btn btn-success"
+                    id="{{ country.id }}"
+                    name="country"
+                    onclick="setSelectedCountry('{{ country.id }}')"
+                    value="{{ country.name }}"
+            >
+                {{ country.name }}
+            </button>
         {% endfor %}
-      </a>
-    </nav>
-    <div class="modal fade" id="myModal" role="dialog">
-      <div class="modal-dialog">
+    </a>
+</nav>
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
         <form id="ihbarform" method="post" action="{% url 'ihbarview_tr' %}">
-          <input type="hidden" name="section" value="" />
-          {% csrf_token %}
-          <!-- Modal content-->
-          <div id="google_translate_element"></div>
-          <div class="modal-content px-5 pt-4">
-            <div
-              style="
+            <input type="hidden" name="section" value=""/>
+            {% csrf_token %}
+            <!-- Modal content-->
+            <div id="google_translate_element"></div>
+            <div class="modal-content px-5 pt-4">
+                <div
+                        style="
                 position: absolute;
                 right: 30px;
                 font-size: larger;
                 color: red;
                 cursor: pointer;
               "
-              data-dismiss="modal"
-            >
-              X
+                        data-dismiss="modal"
+                >
+                    X
+                </div>
+                <h1>İhbar Yapan Kişi</h1>
+                <hr/>
+                <div class="form-group">
+                    <label for="example1">İsim:</label>
+                    <input
+                            required
+                            name="ihbar_first_name"
+                            type="text"
+                            class="form-control"
+                            placeholder="İsim:"
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="example2">Soyisim:</label>
+                    <input
+                            required
+                            name="ihbar_last_name"
+                            type="text"
+                            class="form-control"
+                            placeholder="Soyisim:"
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="example2">Telefon Numarası:</label>
+                    <input
+                            required
+                            name="phonenumber"
+                            type="tel"
+                            class="form-control"
+                            placeholder="555-432-11-00"
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="example3">E-posta:</label>
+                    <input
+                            name="eposta"
+                            type="email"
+                            class="form-control"
+                            placeholder="E-posta:"
+                    />
+                </div>
+                <select name="country" class="form-group">
+                    {% for country in countries %}
+
+                        <option value="{{ country.id }}">
+                            <label class="form-check-label" for="defaultCheck1">
+                                {{ country.name }}
+                            </label>
+                        </option>
+
+                    {% endfor %}
+                </select>
+
+                <h1>KAYIP OLAN KİŞİLER</h1>
+                <hr/>
+
+                <button type="button" id="yenikayipadd">
+                    Yeni Kayıp Kişi Ekle
+                </button>
+
+                <input type="hidden" name="cordinate_x" id="cordinate_x"/>
+                <input type="hidden" name="cordinate_y" id="cordinate_y"/>
+                <ul class="nav nav-tabs" id="myTab" role="tablist"></ul>
+                <div class="tab-content" id="myTabContent"></div>
+
+                <button
+                        id="sendButtonForForm"
+                        type="submit"
+                        class="btn btn-primary mb-3"
+                >
+                    Gönder
+                </button>
             </div>
-            <h1>İhbar Yapan Kişi</h1>
-            <hr />
-            <div class="form-group">
-              <label for="example1">İsim:</label>
-              <input
-                required
-                name="ihbar_first_name"
-                type="text"
-                class="form-control"
-                placeholder="İsim:"
-              />
-            </div>
-            <div class="form-group">
-              <label for="example2">Soyisim:</label>
-              <input
-                required
-                name="ihbar_last_name"
-                type="text"
-                class="form-control"
-                placeholder="Soyisim:"
-              />
-            </div>
-            <div class="form-group">
-              <label for="example2">Telefon Numarası:</label>
-              <input
-                required
-                name="phonenumber"
-                type="tel"
-                class="form-control"
-                placeholder="555-432-11-00"
-              />
-            </div>
-            <div class="form-group">
-              <label for="example3">E-posta:</label>
-              <input
-                name="eposta"
-                type="email"
-                class="form-control"
-                placeholder="E-posta:"
-              />
-            </div>
-            <select name="country" class="form-group">
-              {% for country in countries %}
-
-              <option value="{{ country.id }}">
-                <label class="form-check-label" for="defaultCheck1">
-                  {{ country.name }}
-                </label>
-              </option>
-
-              {% endfor %}
-            </select>
-
-            <h1>KAYIP OLAN KİŞİLER</h1>
-            <hr />
-
-            <button type="button" id="yenikayipadd">
-              Yeni Kayıp Kişi Ekle
-            </button>
-
-            <input type="hidden" name="cordinate_x" id="cordinate_x" />
-            <input type="hidden" name="cordinate_y" id="cordinate_y" />
-            <ul class="nav nav-tabs" id="myTab" role="tablist"></ul>
-            <div class="tab-content" id="myTabContent"></div>
-
-            <button
-              id="sendButtonForForm"
-              type="submit"
-              class="btn btn-primary mb-3"
-            >
-              Gönder
-            </button>
-          </div>
         </form>
-      </div>
     </div>
-    <div class="modal fade" id="myMultiModal" role="dialog">
-      <div
-        class="container-fluid"
-        id="grad1"
-        style="position: absolute; top: 15%; right: 11px"
-      >
+</div>
+<div class="modal fade" id="myMultiModal" role="dialog">
+    <div
+            class="container-fluid"
+            id="grad1"
+            style="position: absolute; top: 15%; right: 11px"
+    >
         <div class="row justify-content-center mt-0">
-          <div
-            class="col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0 mt-3 mb-2"
-          >
-            <div class="card">
-              <button
-                class="mdl-cls-button"
-                id="modal-close-button"
-                style="
+            <div
+                    class="col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0 mt-3 mb-2"
+            >
+                <div class="card">
+                    <button
+                            class="mdl-cls-button"
+                            id="modal-close-button"
+                            style="
                   width: 45px;
                   height: 50px;
                   background: white;
@@ -579,128 +580,128 @@
                   margin-right: 10px;
                   color: red;
                 "
-              >
-                <strong>X</strong>
-              </button>
-              <div class="subcard">
-                <h2><strong>Find Me Help Me</strong></h2>
-                <p>Deprem Kayıp Takip Uygulaması</p>
-              </div>
-              <div class="row">
-                <div class="col-md-12 mx-0">
-                  <form id="msform">
-                    <!-- progressbar -->
-                    <ul id="progressbar">
-                      <li id="company" class="active">
-                        <strong>Hakkında</strong>
-                      </li>
-                      <li id="contact"><strong>Özellikler</strong></li>
-                      <li id="require"><strong>Kullanım</strong></li>
-                      <li id="require-2"><strong>Bize Ulaşın</strong></li>
-                      <li id="confirm"><strong></strong></li>
-                    </ul>
-                    <!-- fieldsets -->
-                    <fieldset>
-                      <div class="form-card">
-                        <div class="form-card-text">
-                          Uygulama, 6 Şubat 2023 tarihinde Türkiye ve Suriye'de
-                          gerçekleşen depremde kayıp kişilerin yerlerini
-                          belirleyebilmek ve kişilere ulaşmak amacıyla
-                          oluşturulmuştur.
-                        </div>
-                      </div>
-                      <a
-                        type="button"
-                        name="next"
-                        class="next action-button"
-                        value="Sonraki Adım"
-                        >Sonraki Adım</a
-                      >
-                    </fieldset>
-                    <fieldset>
-                      <div class="form-card">
-                        <div class="form-card-text">
-                          <strong>● İhbar Et: </strong> Bu bölüm aracılığıyla
-                          kayıp hakkında bilgiler girilerek kayıp kişi yerinin
-                          belirlenmesi amaçlanmıştır.
-                          <br />
-                          <strong>● Dil Değiştirme: </strong> Uygulama'da Arapça
-                          dil seçeneği mevcuttur.
-                        </div>
-                      </div>
+                    >
+                        <strong>X</strong>
+                    </button>
+                    <div class="subcard">
+                        <h2><strong>Find Me Help Me</strong></h2>
+                        <p>Deprem Kayıp Takip Uygulaması</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 mx-0">
+                            <form id="msform">
+                                <!-- progressbar -->
+                                <ul id="progressbar">
+                                    <li id="company" class="active">
+                                        <strong>Hakkında</strong>
+                                    </li>
+                                    <li id="contact"><strong>Özellikler</strong></li>
+                                    <li id="require"><strong>Kullanım</strong></li>
+                                    <li id="require-2"><strong>Bize Ulaşın</strong></li>
+                                    <li id="confirm"><strong></strong></li>
+                                </ul>
+                                <!-- fieldsets -->
+                                <fieldset>
+                                    <div class="form-card">
+                                        <div class="form-card-text">
+                                            Uygulama, 6 Şubat 2023 tarihinde Türkiye ve Suriye'de
+                                            gerçekleşen depremde kayıp kişilerin yerlerini
+                                            belirleyebilmek ve kişilere ulaşmak amacıyla
+                                            oluşturulmuştur.
+                                        </div>
+                                    </div>
+                                    <a
+                                            type="button"
+                                            name="next"
+                                            class="next action-button"
+                                            value="Sonraki Adım"
+                                    >Sonraki Adım</a
+                                    >
+                                </fieldset>
+                                <fieldset>
+                                    <div class="form-card">
+                                        <div class="form-card-text">
+                                            <strong>● İhbar Et: </strong> Bu bölüm aracılığıyla
+                                            kayıp hakkında bilgiler girilerek kayıp kişi yerinin
+                                            belirlenmesi amaçlanmıştır.
+                                            <br/>
+                                            <strong>● Dil Değiştirme: </strong> Uygulama'da Arapça
+                                            dil seçeneği mevcuttur.
+                                        </div>
+                                    </div>
 
-                      <a
-                        type="button"
-                        name="next"
-                        class="next action-button"
-                        value="Sonraki Adım"
-                        >Sonraki Adım</a
-                      >
-                    </fieldset>
-                    <fieldset>
-                      <div class="form-card">
-                        <div class="form-card-text">
-                          <strong>● İhbar Et: </strong>Kayıp kişilerin
-                          bilgilerine sahip kişiler ekranın sağ üst köşesinde
-                          yer alan <strong>İhbar et</strong> bölümüne
-                          tıklayarak, sahip olduğu bilgiler aracılığıyla kayıp
-                          kişi hakkında ihbar'da bulunabilir.
-                          <br />
-                          <br />
-                          <strong>● Dil Değiştirme: </strong>İhbar et bölümünün
-                          altında yer alan dil değiştirme bölümüne tıklandığı
-                          zaman dil değişimi sağlanmaktadır.
-                        </div>
-                      </div>
+                                    <a
+                                            type="button"
+                                            name="next"
+                                            class="next action-button"
+                                            value="Sonraki Adım"
+                                    >Sonraki Adım</a
+                                    >
+                                </fieldset>
+                                <fieldset>
+                                    <div class="form-card">
+                                        <div class="form-card-text">
+                                            <strong>● İhbar Et: </strong>Kayıp kişilerin
+                                            bilgilerine sahip kişiler ekranın sağ üst köşesinde
+                                            yer alan <strong>İhbar et</strong> bölümüne
+                                            tıklayarak, sahip olduğu bilgiler aracılığıyla kayıp
+                                            kişi hakkında ihbar'da bulunabilir.
+                                            <br/>
+                                            <br/>
+                                            <strong>● Dil Değiştirme: </strong>İhbar et bölümünün
+                                            altında yer alan dil değiştirme bölümüne tıklandığı
+                                            zaman dil değişimi sağlanmaktadır.
+                                        </div>
+                                    </div>
 
-                      <a
-                        type="button"
-                        name="next"
-                        class="next action-button"
-                        value="Sonraki Adım"
-                        >Sonraki Adım</a
-                      >
-                    </fieldset>
-                    <fieldset>
-                      <div class="form-card">
-                        <div class="form-card-text">
-                          Uygulama hakkında soru ve görüşlerinizi bizimle
-                          paylaşabilirsiniz.
-                          <br />
-                          <strong>Email Adresimiz: </strong
-                          >ndmehelpme.com@gmail.com
-                        </div>
-                      </div>
+                                    <a
+                                            type="button"
+                                            name="next"
+                                            class="next action-button"
+                                            value="Sonraki Adım"
+                                    >Sonraki Adım</a
+                                    >
+                                </fieldset>
+                                <fieldset>
+                                    <div class="form-card">
+                                        <div class="form-card-text">
+                                            Uygulama hakkında soru ve görüşlerinizi bizimle
+                                            paylaşabilirsiniz.
+                                            <br/>
+                                            <strong>Email Adresimiz: </strong
+                                            >ndmehelpme.com@gmail.com
+                                        </div>
+                                    </div>
 
-                      <a
-                        type="button"
-                        name="next"
-                        class="next action-button"
-                        value="Sonraki Adım"
-                        >Sonraki Adım</a
-                      >
-                    </fieldset>
-                    <fieldset>
-                      <a
-                        type="button"
-                        id="modal-submit"
-                        name="next"
-                        class="next action-button"
-                        placeholder="Kapat"
-                        >Kapat
-                      </a>
-                    </fieldset>
-                  </form>
+                                    <a
+                                            type="button"
+                                            name="next"
+                                            class="next action-button"
+                                            value="Sonraki Adım"
+                                    >Sonraki Adım</a
+                                    >
+                                </fieldset>
+                                <fieldset>
+                                    <a
+                                            type="button"
+                                            id="modal-submit"
+                                            name="next"
+                                            class="next action-button"
+                                            placeholder="Kapat"
+                                    >Kapat
+                                    </a>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-    <fieldset
-      id="legendbar"
-      style="
+</div>
+<fieldset
+        id="legendbar"
+        style="
         position: absolute;
         z-index: 999;
         background-color: white;
@@ -711,15 +712,15 @@
         border-radius: 6px;
         padding: 3px 7px;
       "
-    >
+>
     <div id="legendbar_content"></div>
-    </fieldset>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
+</fieldset>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
         let counter = 0;
 
         function newKayipForm(counter) {
-          return `<div class="form-group">
+            return `<div class="form-group">
                   <label for="example4">İsim:</label>
                   <input required name="kayip_first_name" type="text" class="form-control" placeholder="İsim:">
                 </div>
@@ -746,13 +747,13 @@
                       </select>
 
                   ${
-                    counter == 1
-                      ? `<div class="form-group">
+                counter == 1
+                    ? `<div class="form-group">
                           <label for="example7">Adres:</label>
                           <textarea required name="address" class="form-control" id="" cols="30" rows="5"></textarea>
                         </div>`
-                      : `<div></div>`
-                  }
+                    : `<div></div>`
+            }
                         <div><h3>Özellikler</h3></div>
                   {% for tag in tags %}
                          
@@ -766,38 +767,38 @@
                          {% endfor %}
                   </div>
                   ${
-                    counter == 1 &&
-                    `<div class="form-group">
+                counter == 1 &&
+                `<div class="form-group">
                           <label for="example8">Açıklama:</label>
                           <textarea  name="detail" class="form-control" id="" cols="30" rows="5"></textarea>
                         </div>`
-                  }
+            }
                   </div>
                   `;
         }
 
         const tabItemSingle = (counter) => {
-          return `
+            return `
   <form class="tab-pane fade" id="kayit${counter}" role="tabpanel" aria-labelledby="profile-tab">${newKayipForm(
-            counter
-          )}</form>`;
+                counter
+            )}</form>`;
         };
 
         const addliObject = (counter) => {
-          return `<li class="nav-item">
+            return `<li class="nav-item">
                     <a class="nav-link" id="record_tab${counter}" data-toggle="tab" href="#kayit${counter}" role="tab" aria-controls="profile"
                       aria-selected="false">Kayıt ${counter}</a>
                   </li>`;
         };
 
         document
-          .getElementById("yenikayipadd")
-          .addEventListener("click", () => {
-            counter++;
-            $("#myTab").append(addliObject(counter));
-            $("#myTabContent").append(tabItemSingle(counter));
-            $("#record_tab" + counter).click();
-          });
+            .getElementById("yenikayipadd")
+            .addEventListener("click", () => {
+                counter++;
+                $("#myTab").append(addliObject(counter));
+                $("#myTabContent").append(tabItemSingle(counter));
+                $("#record_tab" + counter).click();
+            });
 
         document.getElementById("ihbarform").addEventListener("submit", (e) => {
             e.preventDefault();
@@ -822,15 +823,14 @@
             $.post("{% url 'ihbarview_tr' %}", multiFormDataArray, (result) => {
                 if (result.status) {
                     window.location.reload();
-                }
-                else{
+                } else {
                     alert("Check the fields !");
 
                 }
             });
         });
-      });
-    </script>
+    });
+</script>
 
 <script type="text/javascript">
     function googleTranslateElementInit() {
@@ -841,225 +841,222 @@
             },
             "google_translate_element"
         );
-      }
-    </script>
+    }
+</script>
 
-    <script
-      type="text/javascript"
-      src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-    ></script>
+<script
+        type="text/javascript"
+        src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+></script>
 
-<div class="input-group col-md-4" style="
+<div class="input-group col-md-3" style="
     position: absolute;
     z-index: 500;
     left: 58px;
     margin-top: 15px;
 ">
-    <input class="form-control py-2 border-right-0 border" type="search" value="search" id="example-search-input">
-    <span class="input-group-append" style="background-color: lightblue;">
-        <button class="btn btn-outline-secondary border-left-0 border" type="button">
-            <i class="fa fa-search"></i>
+    <input class="form-control py-2 border-right-0 border" type="search" placeholder="Search" id="example-search-input">
+    <span class="input-group-append" style="background-color: rgb(218, 30, 55); ">
+        <button onclick="searchByName()" class="btn btn-outline-secondary border-left-0 border" type="button">
+            <i class="fa fa-search text-white"></i>
         </button>
     </span>
 </div>
-<div class="input-group col-md-4" style="
+<div class="input-group col-md-3" style="
     position: absolute;
     z-index: 500;
     left: 58px;
     margin-top: 54px;
 ">
     <div class="form-control py-2 border-right-0 border">
-        <ul>
-            <li style="list-style: none">Coffee</li>
-            <li style="list-style: none">Tea</li>
-            <li style="list-style: none">Milk</li>
+        <ul id="search_results">
+
         </ul>
     </div>
-
 </div>
 
-    <div id="map" style="width: 100%; height: 92%"></div>
-    <button
-      type="button"
-      id="openModal"
-      class="btn btn-info btn-lg"
-      data-toggle="modal"
-      data-target="#myModal"
-      style="display: none"
-    >
-      Fill Form
-    </button>
-  </body>
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-  />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css"
-  />
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css"
-  />
-  <script src="https://leaflet.github.io/Leaflet.markercluster/dist/leaflet.markercluster.js"></script>
-  <link
-    rel="stylesheet"
-    href="https://leaflet.github.io/Leaflet.markercluster/dist/MarkerCluster.css"
-  />
-  <link
-    rel="stylesheet"
-    href="https://leaflet.github.io/Leaflet.markercluster/dist/MarkerCluster.Default.css"
-  />
-  <script src="{% static 'js/map.js' %}"></script>
+<div id="map" style="width: 100%; height: 92%"></div>
+<button
+        type="button"
+        id="openModal"
+        class="btn btn-info btn-lg"
+        data-toggle="modal"
+        data-target="#myModal"
+        style="display: none"
+>
+    Fill Form
+</button>
+</body>
+<link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+<link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css"
+/>
+<link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css"
+/>
+<script src="https://leaflet.github.io/Leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+<link
+        rel="stylesheet"
+        href="https://leaflet.github.io/Leaflet.markercluster/dist/MarkerCluster.css"
+/>
+<link
+        rel="stylesheet"
+        href="https://leaflet.github.io/Leaflet.markercluster/dist/MarkerCluster.Default.css"
+/>
+<script src="{% static 'js/map.js' %}"></script>
 
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <script
-    src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"
-  ></script>
-  <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"
-  ></script>
-  {#MultiModal#}
-  <script type="text/javascript">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"
+></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"
+></script>
+{#MultiModal#}
+<script type="text/javascript">
     $(document).ready(function () {
-      var current_fs, next_fs, previous_fs; //fieldsets
-      var opacity;
+        var current_fs, next_fs, previous_fs; //fieldsets
+        var opacity;
 
-      $(".next").click(function () {
-        current_fs = $(this).parent();
-        next_fs = $(this).parent().next();
+        $(".next").click(function () {
+            current_fs = $(this).parent();
+            next_fs = $(this).parent().next();
 
-        //Add Class Active
-        $("#progressbar li")
-          .eq($("fieldset").index(next_fs))
-          .addClass("active");
+            //Add Class Active
+            $("#progressbar li")
+                .eq($("fieldset").index(next_fs))
+                .addClass("active");
 
-        //show the next fieldset
-        next_fs.show();
-        //hide the current fieldset with style
-        current_fs.animate(
-          { opacity: 0 },
-          {
-            step: function (now) {
-              // for making fielset appear animation
-              opacity = 1 - now;
+            //show the next fieldset
+            next_fs.show();
+            //hide the current fieldset with style
+            current_fs.animate(
+                {opacity: 0},
+                {
+                    step: function (now) {
+                        // for making fielset appear animation
+                        opacity = 1 - now;
 
-              current_fs.css({
-                display: "none",
-                position: "relative",
-              });
-              next_fs.css({ opacity: opacity });
-            },
-            duration: 600,
-          }
-        );
-      });
+                        current_fs.css({
+                            display: "none",
+                            position: "relative",
+                        });
+                        next_fs.css({opacity: opacity});
+                    },
+                    duration: 600,
+                }
+            );
+        });
 
-      $(".previous").click(function () {
-        current_fs = $(this).parent();
-        previous_fs = $(this).parent().prev();
+        $(".previous").click(function () {
+            current_fs = $(this).parent();
+            previous_fs = $(this).parent().prev();
 
-        //Remove class active
-        $("#progressbar li")
-          .eq($("fieldset").index(current_fs))
-          .removeClass("active");
+            //Remove class active
+            $("#progressbar li")
+                .eq($("fieldset").index(current_fs))
+                .removeClass("active");
 
-        //show the previous fieldset
-        previous_fs.show();
+            //show the previous fieldset
+            previous_fs.show();
 
-        //hide the current fieldset with style
-        current_fs.animate(
-          { opacity: 0 },
-          {
-            step: function (now) {
-              // for making fielset appear animation
-              opacity = 1 - now;
+            //hide the current fieldset with style
+            current_fs.animate(
+                {opacity: 0},
+                {
+                    step: function (now) {
+                        // for making fielset appear animation
+                        opacity = 1 - now;
 
-              current_fs.css({
-                display: "none",
-                position: "relative",
-              });
-              previous_fs.css({ opacity: opacity });
-            },
-            duration: 600,
-          }
-        );
-      });
+                        current_fs.css({
+                            display: "none",
+                            position: "relative",
+                        });
+                        previous_fs.css({opacity: opacity});
+                    },
+                    duration: 600,
+                }
+            );
+        });
 
-      $(".radio-group .radio").click(function () {
-        $(this).parent().find(".radio").removeClass("selected");
-        $(this).addClass("selected");
-      });
+        $(".radio-group .radio").click(function () {
+            $(this).parent().find(".radio").removeClass("selected");
+            $(this).addClass("selected");
+        });
 
-      // $("#modal-submit").click(function () {
-      //   $(".modal").hide();
-      //   document.getElementsByClassName("modal-backdrop")[0]?.remove();
-      // });
+        // $("#modal-submit").click(function () {
+        //   $(".modal").hide();
+        //   document.getElementsByClassName("modal-backdrop")[0]?.remove();
+        // });
 
-      // $("#modal-close-button").click(function () {
-      //   $(".modal").hide();
-      //   document.getElementsByClassName("modal-backdrop")[0]?.remove();
-      // });
+        // $("#modal-close-button").click(function () {
+        //   $(".modal").hide();
+        //   document.getElementsByClassName("modal-backdrop")[0]?.remove();
+        // });
     });
-  </script>
+</script>
 
-  <script>
+<script>
     document.addEventListener("DOMContentLoaded", function () {
-      document.querySelector(".navbar-info").addEventListener("click", () => {
-        console.log(
-          document.getElementById("myMultiModal").style.display == ""
-        );
-        if (
-          document.getElementById("myMultiModal").style.display == "" ||
-          document.getElementById("myMultiModal").style.display == "none"
-        ) {
-          document.getElementById("myMultiModal").style.display = "block";
-          document.getElementById("myMultiModal").style.opacity = 1;
-        }
-      });
-
-      const removepreviousstep = () => {
-        Array.from(
-          document.querySelector("#progressbar").querySelectorAll("li")
-        ).forEach((item, index) => {
-          if (index != 0) {
-            item.removeAttribute("class");
-          }
+        document.querySelector(".navbar-info").addEventListener("click", () => {
+            console.log(
+                document.getElementById("myMultiModal").style.display == ""
+            );
+            if (
+                document.getElementById("myMultiModal").style.display == "" ||
+                document.getElementById("myMultiModal").style.display == "none"
+            ) {
+                document.getElementById("myMultiModal").style.display = "block";
+                document.getElementById("myMultiModal").style.opacity = 1;
+            }
         });
-      };
 
-      const removepreviousstepfields = () => {
-        Array.from(
-          document.querySelector("#msform").querySelectorAll("fieldset")
-        ).forEach((item, index) => {
-          if (index != 0) {
-            item.style.display = "none";
-          } else {
-            item.style.display = "block";
-            item.style.opacity = 1;
-          }
-        });
-      };
+        const removepreviousstep = () => {
+            Array.from(
+                document.querySelector("#progressbar").querySelectorAll("li")
+            ).forEach((item, index) => {
+                if (index != 0) {
+                    item.removeAttribute("class");
+                }
+            });
+        };
 
-      const closeModal = () => {
-        document.getElementById("myMultiModal").style.display = "none";
-        document.getElementById("myMultiModal").style.opacity = 0;
-        removepreviousstep();
-        removepreviousstepfields();
-      };
-      document
-        .querySelector(".mdl-cls-button")
-        .addEventListener("click", () => closeModal());
-      document
-        .querySelector("#modal-submit")
-        .addEventListener("click", () => closeModal());
+        const removepreviousstepfields = () => {
+            Array.from(
+                document.querySelector("#msform").querySelectorAll("fieldset")
+            ).forEach((item, index) => {
+                if (index != 0) {
+                    item.style.display = "none";
+                } else {
+                    item.style.display = "block";
+                    item.style.opacity = 1;
+                }
+            });
+        };
+
+        const closeModal = () => {
+            document.getElementById("myMultiModal").style.display = "none";
+            document.getElementById("myMultiModal").style.opacity = 0;
+            removepreviousstep();
+            removepreviousstepfields();
+        };
+        document
+            .querySelector(".mdl-cls-button")
+            .addEventListener("click", () => closeModal());
+        document
+            .querySelector("#modal-submit")
+            .addEventListener("click", () => closeModal());
     });
-  </script>
+</script>
 </html>
