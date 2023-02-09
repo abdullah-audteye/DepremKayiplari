@@ -104,7 +104,7 @@ function addLayer() {
                     " " +
                     i.kayip_user[0].detail +
                     '</h5></div><button class="col-11 btn btn-success" style="margin-left: 10px; margin-bottom: 5px"' +
-                    ' onclick="location.href=\'http://www.google.com/maps/place/' + i.kayip_user[0]?.cordinate_x + ',' + i.kayip_user[0]?.cordinate_y + '\';">Konuma Git' +
+                    ' onclick="window.open(\'http://www.google.com/maps/place/' + i.kayip_user[0]?.cordinate_x + ',' + i.kayip_user[0]?.cordinate_y + '\' ,\'_blank\');">Konuma Git' +
                     '</button><div style="border-top:1px solid gray;padding-top:5px;" class="col-12"><h4>İhbar Eden Bilgisi</h4>' +
                     '</div>' +
                     '<div class="col-12"><h6>isim:' +
@@ -120,7 +120,8 @@ function addLayer() {
                     {
                         maxWidth: 560,
                     }
-                );
+                )
+                ;
 
                 if (selectedArray.includes(i.kayip_user[0].kayip_status))
                     mcg.addLayer(marker);
