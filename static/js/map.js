@@ -77,7 +77,7 @@ function addLayer() {
         .then((response) => response.json())
         .then((points) =>
             points.map((i) => {
-                if (i.kayip_user.length < 0)
+                if (i.kayip_user.length < 1)
                     return;
 
                 //illere göre filtrelemek için kontrol
