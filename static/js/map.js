@@ -1,7 +1,6 @@
 // center of the map
 var center = [38.286, 35.681];
 
-
 // Create the map
 var map = L.map('map').setView(center, 9);
 var mcg = L.markerClusterGroup({
