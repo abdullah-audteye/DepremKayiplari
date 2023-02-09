@@ -9,7 +9,7 @@ urlpatterns = [
     path('kayiplar/durum/<int:pk>',ChangeKayipStatus,name="kayiplar_durum_detail"),
 
     path('form',IframeForm,name="iframe_form"),
-    path('dashboard',IframeDashboard,name="iframe_dashboard"),
+    # path('dashboard',IframeDashboard,name="iframe_dashboard"),
 
     path('api/kayiplar',KayipUserListView.as_view(),name="kayiplarview_api"),
     path('api/kayipstatus',KayipStatusListView.as_view(),name="kayip_status_api")

@@ -21,9 +21,13 @@
     max-width: 500px;
     transform: translate(0 , 40%);
 }
+
+#successlabel{
+    display: none;
+}
 .selectcolumn{
     display: flex;
-    align-items: end;
+    align-items: center;
     justify-content:space-evenly;
 }
 strong{
@@ -56,7 +60,8 @@ strong{
                 {% endfor %}
             </ul>
         </div>
-        <div class="panel-body selectcolumn">
+        <div class="panel-body selectcolumn" style="flex-direction: column;">
+            <div id="successlabel" style="color: green;text-align: center;border:1px solid gray;padding:5;border-radius: 10px;margin: 5px;">Success</div>
             <button id="savebutton" class="btn btn-primary">Save</button>
         </div>
     </div>
@@ -78,7 +83,12 @@ strong{
 
             $.post("{% url 'kayiplar_durum_detail' access_code %}", multiFormDataArray, (result) => {
                 if (result.status) {
-                    window.location.reload();
+                    document.getElementById('successlabel').style.display="block"
+                    document.getElementById('savebutton').style.display="none"
+                    setTimeout(()=>{
+                        window.location.reload();
+
+                    },1500)
                 }
                 else{
                     alert("Check the fields !");
