@@ -18,6 +18,10 @@
             display: none;
         }
 
+        .leaflet-zoom-animated {
+            bottom: -120px !important;
+        }
+
         body {
             top: 0 !important;
         }
@@ -395,7 +399,7 @@
         @media only screen and (max-width: 600px) {
             .leaflet-popup {
                 width: 70vw !important;
-                height: 50vw;
+                height: 50vh;
             }
 
             .leaflet-popup .col-12 {
@@ -406,9 +410,9 @@
         }
 
         .leaflet-popup {
-                width: 20vw;
-                height: 50vw;
-            }
+            width: 20vw;
+            height: 50vh;
+        }
 
         #legend_btn:hover {
             cursor: pointer;
@@ -785,17 +789,7 @@
                         </div>`
                     : `<div></div>`
             }
-                        <div><h3>Özellikler</h3></div>
-                  {% for tag in tags %}
-                         
-                         <div>
-                           <input name="tags" class="form-check-input tags-class" type="checkbox"  value="{{tag.id}}">
-                           <label class="form-check-label" for="defaultCheck1">
-                             {{tag.tag}}
-                           </label>
-                         </div>
-                 
-                         {% endfor %}
+                       
                   </div>
                   ${
                 counter == 1 &&
@@ -880,7 +874,7 @@
         src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
 ></script>
 
-<div id="map" style="width: 100%; height: 92%"></div>
+<div id="map" style="width: 100%; height: 90%"></div>
 <button
         type="button"
         id="openModal"
