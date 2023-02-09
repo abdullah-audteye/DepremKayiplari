@@ -178,10 +178,6 @@ function setSelected(id) {
 }
 
 function setSelectedCountry(id) {
-    console.log(id, "id");
-
-    var bounds = L.latLngBounds() // Instantiate LatLngBounds object
-//35.529991,36.697083,36.719072,40.561523
     var polygonPoints = {
         2: [
             [36.07538422941732, 37.994225034592425],
@@ -202,6 +198,7 @@ function zoomToPoint(x, y) {
     let lat_lng = [x, y]
     bounds.extend(lat_lng)
     map.fitBounds(bounds)
+    $('#search_results').empty();
 
 }
 
@@ -210,6 +207,11 @@ generateLegend()
 function toggleLegend() {
     document.getElementById('legendbar_content').style.display =
         document.getElementById('legendbar_content').style.display == "none" ? "block" : "none";
+}
+
+function clearSearch() {
+    $('#search_results').empty();
+    $('#example-search-input').val('');
 }
 
 function searchByName() {
