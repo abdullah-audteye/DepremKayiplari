@@ -106,7 +106,7 @@ function addLayer() {
                         '</h5></div><div id="data-modal" class="col-12"><h5>Detay:' +
                         " " +
                         i.kayip_user[0].detail +
-                        '</h5></div><button class="col-11 btn btn-success" style="margin-left: 10px; margin-bottom: 5px"' +
+                        '</h5></div><button style="margin:3px auto; width:130px; height:40px; border-radius:6px; background:#28a745; border:none; color:white; padding:10px;font-size:16px; text-align:center;"' +
                         ' onclick="window.open(\'http://www.google.com/maps/place/' + i.kayip_user[0]?.cordinate_x + ',' + i.kayip_user[0]?.cordinate_y + '\' ,\'_blank\');">Konuma Git' +
                         '</button><div style="border-top:1px solid gray;padding-top:5px;" class="col-12"><h4>İhbar Eden Bilgisi</h4>' +
                         '</div>' +

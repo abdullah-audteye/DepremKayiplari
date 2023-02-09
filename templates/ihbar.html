@@ -26,10 +26,6 @@
             margin: 0;
             padding: 0;
         }
-<<<<<<< HEAD
->>>>>>> 681e138c78ea0a295d5f1342d678c5be373f65c4
-=======
->>>>>>> 681e138c78ea0a295d5f1342d678c5be373f65c4
 
         html {
             height: 100%;
@@ -398,7 +394,7 @@
 
         @media only screen and (max-width: 600px) {
             .leaflet-popup {
-                width: 80vw;
+                width: 70vw !important;
                 height: 50vw;
             }
 
@@ -408,6 +404,11 @@
 
 
         }
+
+        .leaflet-popup {
+                width: 20vw;
+                height: 50vw;
+            }
 
         #legend_btn:hover {
             cursor: pointer;
@@ -717,7 +718,7 @@
         padding: 3px 7px;
       "
 >
-    <div id="legendbar_content"></div>
+    <div id="legendbar_content" style="display:none"></div>
 </fieldset>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
