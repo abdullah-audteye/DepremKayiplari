@@ -1,6 +1,7 @@
 // center of the map
 var center = [38.286, 35.681];
 
+
 // Create the map
 var map = L.map('map').setView(center, 9);
 var mcg = L.markerClusterGroup({
@@ -89,24 +90,24 @@ function addLayer() {
                     title: title,
                 });
                 marker.bindPopup(
-                    '<div class="row"><div class="col-12"><h3>Kayıp Bilgileri</h3></div><div class="col-12"><h5>isim:' +
+                    '<div class="row"><div id="data-modal" class="col-12"><h3>Kayıp Bilgileri</h3></div><div class="col-12"><h5>isim:' +
                     " " +
                     i.kayip_user[0].kayip_first_name +
                     " " +
                     i.kayip_user[0].kayip_last_name +
-                    '</h5></div><div class="col-12"><h5>Adres:' +
+                    '</h5></div><div id="data-modal" class="col-12"><h5>Adres:' +
                     " " +
-                    i.kayip_user[0].address + '</h5></div>' + '<div class="col-12"><h5>Durum:' +
+                    i.kayip_user[0].address + '</h5></div>' + '<div id="data-modal" class="col-12"><h5>Durum:' +
                     " " +
-                    values[i.kayip_user[0].kayip_status].status +
-                    '</h5></div><div class="col-12"><h5>Detay:' +
+                    values[i.kayip_user[0].kayip_status]?.status +
+                    '</h5></div><div id="data-modal" class="col-12"><h5>Detay:' +
                     " " +
                     i.kayip_user[0].detail +
                     '</h5></div><button class="col-11 btn btn-success" style="margin-left: 10px; margin-bottom: 5px"' +
                     ' onclick="location.href=\'http://www.google.com/maps/place/' + i.kayip_user[0]?.cordinate_x + ',' + i.kayip_user[0]?.cordinate_y + '\';">Konuma Git' +
                     '</button><div style="border-top:1px solid gray;padding-top:5px;" class="col-12"><h4>İhbar Eden Bilgisi</h4>' +
                     '</div>' +
-                    '<div class="col-12"><h6>isim:' +
+                    '<div id="data-modal" class="col-12"><h6>isim:' +
                     " " +
                     i.ihbar_user.ihbar_first_name +
                     " " +
@@ -126,6 +127,8 @@ function addLayer() {
             })
         );
 }
+
+
 
 http://www.google.com/maps/place/49.46800006494457,17.11514008755796
     map.addLayer(mcg);
@@ -148,11 +151,12 @@ let newDiv = document.createElement("div");
 const newContent = document.createTextNode("Konum Seç");
 newDiv.style.position = "absolute";
 newDiv.style.right = "26px";
-newDiv.style.width = "90px";
+newDiv.style.width = "80px";
 newDiv.style.height = "30px";
 newDiv.style.borderRadius = "6px";
-newDiv.style.fontWeight = "bold";
-newDiv.style.backgroundColor = "rosybrown";
+newDiv.style.fontWeight = "400";
+newDiv.style.color = "white";
+newDiv.style.backgroundColor = "#da1e37";
 
 // add the text node to the newly created div
 newDiv.appendChild(newContent);
@@ -196,6 +200,11 @@ function setSelectedCountry(id) {
 
 generateLegend()
 
+function toggleLegend() {
+    document.getElementById('legendbar_content').style.display =
+     document.getElementById('legendbar_content').style.display == "none" ? "block" : "none";
+}
+
 function generateLegend() {
 
 
@@ -207,8 +216,9 @@ function generateLegend() {
                     '               style="accent-color: ' + values[i.id].color + ';" value="K">\n' +
                     '        <label for="' + i.id + '">' + i.name + '</label><br>';        // Create text with HTML
 
-                $("#legendbar").append(txt1);   // Append new elements
+                $("#legendbar_content").append(txt1);   // Append new elements
             })
+            $("#legendbar").append("<button id='legend_btn' style='position: absolute; width:50px; height:50px; margin-top:7px;background:#da1e37;border-radius:6px; border:none;box-shadow: 4px 4px 10px #adb5bd;' onclick='toggleLegend()'><i class='fa fa-filter'></i></button>");
         });
 }
 
@@ -228,3 +238,4 @@ map.on('draw:created', function (e) {
 
     editableLayers.addLayer(layer);
 });
+
