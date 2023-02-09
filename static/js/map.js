@@ -85,7 +85,7 @@ function addLayer() {
 
                 var title = i.kayip_user[0]?.kayip_first_name + "-" + i.kayip_user[0]?.kayip_last_name + "-";
                 var marker = L.marker(new L.LatLng(i.kayip_user[0]?.cordinate_x, i.kayip_user[0]?.cordinate_y), {
-                    icon: values[i.kayip_user[0]?.kayip_status].icon,
+                    icon: values[i.kayip_user[0]?.kayip_status]?.icon,
                     title: title,
                 });
                 marker.bindPopup(
