@@ -99,11 +99,12 @@ function addLayer() {
                     i.kayip_user[0].address + '</h5></div>' + '<div class="col-12"><h5>Durum:' +
                     " " +
                     values[i.kayip_user[0].kayip_status].status +
-
                     '</h5></div><div class="col-12"><h5>Detay:' +
                     " " +
                     i.kayip_user[0].detail +
-                    '</h5></div><div style="border-top:1px solid gray;padding-top:5px;" class="col-12"><h4>İhbar Eden Bilgisi</h4>' +
+                    '</h5></div><button class="col-11 btn btn-success" style="margin-left: 10px; margin-bottom: 5px"' +
+                    ' onclick="location.href=\'http://www.google.com/maps/place/' + i.kayip_user[0]?.cordinate_x + ',' + i.kayip_user[0]?.cordinate_y + '\';">Konuma Git' +
+                    '</button><div style="border-top:1px solid gray;padding-top:5px;" class="col-12"><h4>İhbar Eden Bilgisi</h4>' +
                     '</div>' +
                     '<div class="col-12"><h6>isim:' +
                     " " +
@@ -126,7 +127,8 @@ function addLayer() {
         );
 }
 
-map.addLayer(mcg);
+http://www.google.com/maps/place/49.46800006494457,17.11514008755796
+    map.addLayer(mcg);
 
 ////////////////////////////////////////////////////////////////////////
 
