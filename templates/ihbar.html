@@ -578,10 +578,10 @@
                             placeholder="E-posta:"
                     />
                 </div>
-                <select name="country" class="form-group">
+                <select class="form-control" name="country" class="form-group">
                     {% for country in countries %}
 
-                        <option value="{{ country.id }}">
+                        <option value="{{ country.id }}" class="form-control form-control-lg" >
                             <label class="form-check-label" for="defaultCheck1">
                                 {{ country.name }}
                             </label>
@@ -593,7 +593,7 @@
                 <h1>KAYIP OLAN KİŞİLER</h1>
                 <hr/>
 
-                <button type="button" id="yenikayipadd">
+                <button type="button" id="yenikayipadd" class="btn btn-primary mb-3">
                     Yeni Kayıp Kişi Ekle
                 </button>
 
@@ -784,15 +784,15 @@
                     <label for="example5">Soyisim:</label>
                     <input required name="kayip_last_name" type="text" class="form-control" placeholder="Soyisim:">
                   </div>
-                  <select style="width:100%;margin:5px auto" name="gender">
-                    <option value="M">Male</option>
-                    <option value="F">Female</option>
+                  <select class="form-control" style="width:100%;margin:5px auto" name="gender">
+                    <option value="M" class="form-control form-control-lg" >Male</option>
+                    <option value="F" class="form-control form-control-lg" >Female</option>
                     </select>
-                    <input style="width:100%;margin:5px 0" type="text" name="age" placeholder="Age"/>
+                    <input style="width:100%;margin:5px 0" type="text" class="form-control" name="age" placeholder="Age"/>
                     <br>
-                  <select name="kayip_status" class="form-group" style="width:100%">
+                  <select class="form-control" name="kayip_status" class="form-group" style="width:100%">
                   {% for status in kayip_status %}
-                       <option value="{{status.id}}">
+                       <option class="form-control form-control-lg"  value="{{status.id}}">
                          <label class="form-check-label" for="defaultCheck1">
                            {{status.name}}
                          </label>
