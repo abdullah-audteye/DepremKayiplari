@@ -73,6 +73,7 @@ addLayer();
 
 function addLayer() {
     mcg.clearLayers();
+    map.removeLayer(mcg);
     fetch("api/kayiplar")
         .then((response) => response.json())
         .then((points) =>
@@ -125,10 +126,10 @@ function addLayer() {
                     mcg.addLayer(marker);
             })
         );
+
+    map.addLayer(mcg);
 }
 
-http://www.google.com/maps/place/49.46800006494457,17.11514008755796
-    map.addLayer(mcg);
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -188,17 +189,11 @@ function setSelectedCountry(id) {
             [36.558397114119714, 35.55249933321049]]
     };
     map.fitBounds(polygonPoints[id]);
-
-    // var selectBox = document.getElementById("filterCountrySelect");
-    // var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-    // selectedCountry = selectedValue;
 }
 
 generateLegend()
 
 function generateLegend() {
-
-
     fetch("api/kayipstatus")
         .then((response) => response.json())
         .then((status) => {
@@ -220,10 +215,6 @@ map.on('draw:created', function (e) {
         document.getElementById("cordinate_x").value = e.layer._latlng.lat;
         document.getElementById("cordinate_y").value = e.layer._latlng.lng;
         document.getElementById("openModal").click();
-        // let lat = (e.layer._latlng.lat);
-        // let lng = (e.layer._latlng.lng);
-        // let str = '<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Fill Form</button>'
-        // layer.bindPopup(str);
     }
 
     editableLayers.addLayer(layer);
