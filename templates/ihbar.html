@@ -683,9 +683,14 @@
                     <label for="example5">Soyisim:</label>
                     <input required name="kayip_last_name" type="text" class="form-control" placeholder="Soyisim:">
                   </div>
+                  <select style="width:100%;margin:5px auto" name="gender">
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                    </select>
+                    <input style="width:100%;margin:5px 0" type="text" name="age" placeholder="Age"/>
+                    <br>
                   <select name="kayip_status" class="form-group" style="width:100%">
                   {% for status in kayip_status %}
-
                        <option value="{{status.id}}">
                          <label class="form-check-label" for="defaultCheck1">
                            {{status.name}}
@@ -764,7 +769,6 @@
                 console.log(frm);
                 let serialized_form = $("#" + frm.id).serialize();
                 multiFormDataArray.data.push(serialized_form);
-                console.log(serialized_form, "serializedform");
             });
             if (multiFormDataArray.data.length < 1) {
                 alert("Lütfen aşağıdaki bilgileri de doldurun!");
@@ -772,9 +776,12 @@
             }
 
             $.post("{% url 'ihbarview_tr' %}", multiFormDataArray, (result) => {
-                console.log(result);
                 if (result.status) {
                     window.location.reload();
+                }
+                else{
+                    alert("Check the fields !");
+
                 }
             });
         });
