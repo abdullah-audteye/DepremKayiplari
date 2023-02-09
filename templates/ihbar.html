@@ -18,6 +18,10 @@
             display: none;
         }
 
+        .leaflet-zoom-animated {
+            bottom: -120px !important;
+        }
+
         body {
             top: 0 !important;
         }
@@ -395,7 +399,7 @@
         @media only screen and (max-width: 600px) {
             .leaflet-popup {
                 width: 70vw !important;
-                height: 50vw;
+                height: 50vh;
             }
 
             .leaflet-popup .col-12 {
@@ -406,9 +410,9 @@
         }
 
         .leaflet-popup {
-                width: 20vw;
-                height: 50vw;
-            }
+            width: 20vw;
+            height: 50vh;
+        }
 
         #legend_btn:hover {
             cursor: pointer;
