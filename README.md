@@ -11,14 +11,22 @@ Where the relative of the missing person can put a pin on the map for the last p
  - Search on map 
 Volunteers can browse the map and search for the injured or missing in the area where they are located.
 
+ - Add a go-to location button, a link showing the location on google maps 
+ 
+ - Allow adding multiple people in one pin (like family or roommates)
+ 
+ - Automatically update an excel sheet on every new change in dB
+ 
+ - Add new pins type (missing, in hospital, need help, found), thess pins shows with 4 differnt collers on map
+ 
+ - Updating state is ready as backend through Gmail authentication, the person who made the report can update the status (only backend needs a frontend)
+ 
+ 
 ```
 Missing:
 ```
  - Enhance UI/UX
- - Allow adding multiple people in one pin (like family or roommates)
  - Add search-by-name bar
- - Update the status of the missing person 
- - Automatically update an excel sheet on every new change in dB
- - Add new pin show information about people who were rescued from the rubble and have no connection with their families
  - add image/s to missing pin
+ - frontend for the update status
  
