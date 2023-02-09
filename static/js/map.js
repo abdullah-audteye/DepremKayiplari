@@ -106,7 +106,7 @@ function addLayer() {
                         '</h5></div><div id="data-modal" class="col-12"><h5>Detay:' +
                         " " +
                         i.kayip_user[0].detail +
-                        '</h5></div><button class="col-11 btn btn-success" style="margin-left: 10px; margin-bottom: 5px"' +
+                        '</h5></div><button style="margin:3px auto; width:130px; height:40px; border-radius:6px; background:#28a745; border:none; color:white; padding:10px;font-size:16px; text-align:center;"' +
                         ' onclick="window.open(\'http://www.google.com/maps/place/' + i.kayip_user[0]?.cordinate_x + ',' + i.kayip_user[0]?.cordinate_y + '\' ,\'_blank\');">Konuma Git' +
                         '</button><div style="border-top:1px solid gray;padding-top:5px;" class="col-12"><h4>İhbar Eden Bilgisi</h4>' +
                         '</div>' +
@@ -178,10 +178,6 @@ function setSelected(id) {
 }
 
 function setSelectedCountry(id) {
-    console.log(id, "id");
-
-    var bounds = L.latLngBounds() // Instantiate LatLngBounds object
-//35.529991,36.697083,36.719072,40.561523
     var polygonPoints = {
         2: [
             [36.07538422941732, 37.994225034592425],
@@ -202,6 +198,7 @@ function zoomToPoint(x, y) {
     let lat_lng = [x, y]
     bounds.extend(lat_lng)
     map.fitBounds(bounds)
+    $('#search_results').empty();
 
 }
 
@@ -210,6 +207,11 @@ generateLegend()
 function toggleLegend() {
     document.getElementById('legendbar_content').style.display =
         document.getElementById('legendbar_content').style.display == "none" ? "block" : "none";
+}
+
+function clearSearch() {
+    $('#search_results').empty();
+    $('#example-search-input').val('');
 }
 
 function searchByName() {

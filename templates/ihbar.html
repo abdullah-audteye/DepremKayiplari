@@ -394,7 +394,7 @@
 
         @media only screen and (max-width: 600px) {
             .leaflet-popup {
-                width: 80vw;
+                width: 70vw !important;
                 height: 50vw;
             }
 
@@ -404,6 +404,11 @@
 
 
         }
+
+        .leaflet-popup {
+                width: 20vw;
+                height: 50vw;
+            }
 
         #legend_btn:hover {
             cursor: pointer;
@@ -416,6 +421,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
     <button
             class="navbar-toggler"
             type="button"
@@ -428,9 +434,33 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
+        <div class="navbar-nav" style="display: flex;align-items: center;">
             <h1 class="navbar-logo">FindMeHelpMe</h1>
-            <div class="nav-text">
+            {#Search#}
+            <div style="width:300px;height:100%;position: relative">
+                <div class="input-group " style="
+    z-index: 500;
+">
+                    <input class="form-control py-2 border-right-0 border" type="search" placeholder="Search"
+                           id="example-search-input">
+                    <span class="input-group-append" style="background-color: rgb(218, 30, 55); ">
+        <button onclick="clearSearch()" style="background-color: rebeccapurple"
+                class="btn btn-outline-secondary border-left-0 border" type="button">
+            <i class="fa fa-eraser text-white"></i>
+        </button>
+        <button onclick="searchByName()" class="btn btn-outline-secondary border-left-0 border" type="button">
+            <i class="fa fa-search text-white"></i>
+        </button>
+
+    </span>
+                </div>
+                <ul id="search_results"
+                    style="width: 100% ;position: absolute;z-index: 999999">
+                </ul>
+            </div>
+            <div class="nav-text" style="
+    margin-top: 11px;
+">
                 <button class="navbar-info btn btn-success" style="background: #da1e37;border:none;">Bilgi Al</button>
                 <a
                         class="nav-item nav-link"
@@ -460,6 +490,7 @@
             </button>
         {% endfor %}
     </a>
+
 </nav>
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
@@ -713,7 +744,7 @@
         padding: 3px 7px;
       "
 >
-    <div id="legendbar_content"></div>
+    <div id="legendbar_content" style="display:none"></div>
 </fieldset>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -848,32 +879,6 @@
         type="text/javascript"
         src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
 ></script>
-
-<div class="input-group col-md-3" style="
-    position: absolute;
-    z-index: 500;
-    left: 58px;
-    margin-top: 15px;
-">
-    <input class="form-control py-2 border-right-0 border" type="search" placeholder="Search" id="example-search-input">
-    <span class="input-group-append" style="background-color: rgb(218, 30, 55); ">
-        <button onclick="searchByName()" class="btn btn-outline-secondary border-left-0 border" type="button">
-            <i class="fa fa-search text-white"></i>
-        </button>
-    </span>
-</div>
-<div class="input-group col-md-3" style="
-    position: absolute;
-    z-index: 500;
-    left: 58px;
-    margin-top: 54px;
-">
-    <div class="form-control py-2 border-right-0 border">
-        <ul id="search_results">
-
-        </ul>
-    </div>
-</div>
 
 <div id="map" style="width: 100%; height: 92%"></div>
 <button
