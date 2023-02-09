@@ -26,7 +26,7 @@ def FixNonHavingDates():
 def SendAccessCode(to_email, dynamic_template_data):
     message = Mail(SENDGRID_FROM_EMAIL, to_email)
     message.dynamic_template_data = dynamic_template_data
-    message.template_id = "d-8ccad3a16c1b417a94d15a0432cddb02"
+    message.template_id = "d-1220bb5e2a3642a88c3380ac06bc7c52"
 
     
 
