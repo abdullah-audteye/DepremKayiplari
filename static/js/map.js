@@ -24,6 +24,7 @@ var blueIcon = new LeafIcon({iconUrl: "https://www.google.com/intl/en_us/mapfile
 
 var selectedArray = [1, 2, 3, 4];
 var selectedCountry = -1;
+var allData = [];
 
 let values = {
     1: {status: "At Hospital", icon: greenIcon, color: "green"},
@@ -73,60 +74,65 @@ addLayer();
 
 function addLayer() {
     mcg.clearLayers();
+    map.removeLayer(mcg);
     fetch("api/kayiplar")
         .then((response) => response.json())
-        .then((points) =>
-            points.map((i) => {
-                if (i.kayip_user.length < 0)
-                    return;
+        .then((points) => {
+                allData = points;
+                points.map((i) => {
+                    if (i.kayip_user.length < 1)
+                        return;
 
-                //illere göre filtrelemek için kontrol
-                // let check = selectedCountry == -1 ? true : (i.ihbar_user.country == selectedCountry);
+                    //illere göre filtrelemek için kontrol
+                    // let check = selectedCountry == -1 ? true : (i.ihbar_user.country == selectedCountry);
 
-                var title = i.kayip_user[0]?.kayip_first_name + "-" + i.kayip_user[0]?.kayip_last_name + "-";
-                var marker = L.marker(new L.LatLng(i.kayip_user[0]?.cordinate_x, i.kayip_user[0]?.cordinate_y), {
-                    icon: values[i.kayip_user[0]?.kayip_status].icon,
-                    title: title,
-                });
-                marker.bindPopup(
-                    '<div class="row"><div class="col-12"><h3>Kayıp Bilgileri</h3></div><div class="col-12"><h5>isim:' +
-                    " " +
-                    i.kayip_user[0].kayip_first_name +
-                    " " +
-                    i.kayip_user[0].kayip_last_name +
-                    '</h5></div><div class="col-12"><h5>Adres:' +
-                    " " +
-                    i.kayip_user[0].address + '</h5></div>' + '<div class="col-12"><h5>Durum:' +
-                    " " +
-                    values[i.kayip_user[0].kayip_status].status +
+                    var title = i.kayip_user[0]?.kayip_first_name + "-" + i.kayip_user[0]?.kayip_last_name + "-";
+                    var marker = L.marker(new L.LatLng(i.kayip_user[0]?.cordinate_x, i.kayip_user[0]?.cordinate_y), {
+                        icon: values[i.kayip_user[0]?.kayip_status]?.icon,
+                        title: title,
+                    });
+                    marker.bindPopup(
+                        '<div class="row"><div id="data-modal" class="col-12"><h3>Kayıp Bilgileri</h3></div><div class="col-12"><h5>isim:' +
+                        " " +
+                        i.kayip_user[0].kayip_first_name +
+                        " " +
+                        i.kayip_user[0].kayip_last_name +
+                        '</h5></div><div id="data-modal" class="col-12"><h5>Adres:' +
+                        " " +
+                        i.kayip_user[0].address + '</h5></div>' + '<div id="data-modal" class="col-12"><h5>Durum:' +
+                        " " +
+                        values[i.kayip_user[0].kayip_status]?.status +
+                        '</h5></div><div id="data-modal" class="col-12"><h5>Detay:' +
+                        " " +
+                        i.kayip_user[0].detail +
+                        '</h5></div><button style="margin:3px auto; width:130px; height:40px; border-radius:6px; background:#28a745; border:none; color:white; padding:10px;font-size:16px; text-align:center;"' +
+                        ' onclick="window.open(\'http://www.google.com/maps/place/' + i.kayip_user[0]?.cordinate_x + ',' + i.kayip_user[0]?.cordinate_y + '\' ,\'_blank\');">Konuma Git' +
+                        '</button><div style="border-top:1px solid gray;padding-top:5px;" class="col-12"><h4>İhbar Eden Bilgisi</h4>' +
+                        '</div>' +
+                        '<div id="data-modal" class="col-12"><h6>isim:' +
+                        " " +
+                        i.ihbar_user.ihbar_first_name +
+                        " " +
+                        i.ihbar_user.ihbar_last_name +
+                        '</h6></div>' +
+                        '<div class="col-12"><h6>Telefon:' +
+                        " " +
+                        i.ihbar_user.phonenumber +
+                        "</h6></div></div>",
+                        {
+                            maxWidth: 560,
+                        }
+                    )
+                    ;
 
-                    '</h5></div><div class="col-12"><h5>Detay:' +
-                    " " +
-                    i.kayip_user[0].detail +
-                    '</h5></div><div style="border-top:1px solid gray;padding-top:5px;" class="col-12"><h4>İhbar Eden Bilgisi</h4>' +
-                    '</div>' +
-                    '<div class="col-12"><h6>isim:' +
-                    " " +
-                    i.ihbar_user.ihbar_first_name +
-                    " " +
-                    i.ihbar_user.ihbar_last_name +
-                    '</h6></div>' +
-                    '<div class="col-12"><h6>Telefon:' +
-                    " " +
-                    i.ihbar_user.phonenumber +
-                    "</h6></div></div>",
-                    {
-                        maxWidth: 560,
-                    }
-                );
-
-                if (selectedArray.includes(i.kayip_user[0].kayip_status))
-                    mcg.addLayer(marker);
-            })
+                    if (selectedArray.includes(i.kayip_user[0].kayip_status))
+                        mcg.addLayer(marker);
+                })
+            }
         );
-}
 
-map.addLayer(mcg);
+    map.addLayer(mcg);
+}
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -146,11 +152,12 @@ let newDiv = document.createElement("div");
 const newContent = document.createTextNode("Konum Seç");
 newDiv.style.position = "absolute";
 newDiv.style.right = "26px";
-newDiv.style.width = "90px";
+newDiv.style.width = "80px";
 newDiv.style.height = "30px";
 newDiv.style.borderRadius = "6px";
-newDiv.style.fontWeight = "bold";
-newDiv.style.backgroundColor = "rosybrown";
+newDiv.style.fontWeight = "400";
+newDiv.style.color = "white";
+newDiv.style.backgroundColor = "#da1e37";
 
 // add the text node to the newly created div
 newDiv.appendChild(newContent);
@@ -170,10 +177,6 @@ function setSelected(id) {
 }
 
 function setSelectedCountry(id) {
-    console.log(id, "id");
-
-    var bounds = L.latLngBounds() // Instantiate LatLngBounds object
-//35.529991,36.697083,36.719072,40.561523
     var polygonPoints = {
         2: [
             [36.07538422941732, 37.994225034592425],
@@ -186,17 +189,55 @@ function setSelectedCountry(id) {
             [36.558397114119714, 35.55249933321049]]
     };
     map.fitBounds(polygonPoints[id]);
+}
 
-    // var selectBox = document.getElementById("filterCountrySelect");
-    // var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-    // selectedCountry = selectedValue;
+function zoomToPoint(x, y) {
+
+    var bounds = L.latLngBounds()
+    let lat_lng = [x, y]
+    bounds.extend(lat_lng)
+    map.fitBounds(bounds)
+    $('#search_results').empty();
+
 }
 
 generateLegend()
 
+function toggleLegend() {
+    document.getElementById('legendbar_content').style.display =
+        document.getElementById('legendbar_content').style.display == "none" ? "block" : "none";
+}
+
+function clearSearch() {
+    $('#search_results').empty();
+    $('#example-search-input').val('');
+}
+
+function searchByName() {
+    $('#search_results').empty();
+    let userInput = document.getElementById('example-search-input').value;
+    let resultArr = [];
+    let result = allData.map(x => {
+        return x.kayip_user.map((i) => {
+            console.log(i.kayip_first_name + ":" + i.kayip_first_name.includes(userInput))
+            i.kayip_first_name.includes(userInput) && resultArr.push({
+                name: i.kayip_first_name + " " + i.kayip_last_name,
+                coordinates: i.cordinate_x + "#" + i.cordinate_y
+            })
+        })
+    });
+
+    for (let i = 0; i < resultArr.length; i++) {
+        let resultListItem = i % 2 == 1 ? '<li style="list-style: none; border-bottom:1px solid black; cursor:pointer; padding: 4px; background-color: lightgray"' +
+            'onclick="zoomToPoint(' + resultArr[i].coordinates.split('#')[0] + ',' + resultArr[i].coordinates.split('#')[1] + ')">' + resultArr[i].name + '</li>'
+            : '<li style="list-style: none; border-bottom:1px solid black; cursor:pointer; padding: 4px; ; background-color: darkgray"' +
+            'onclick="zoomToPoint(' + resultArr[i].coordinates.split('#')[0] + ',' + resultArr[i].coordinates.split('#')[1] + ')">' + resultArr[i].name + '</li>';
+        $('#search_results').append(resultListItem);
+        console.log(resultArr, "result");
+    }
+}
+
 function generateLegend() {
-
-
     fetch("api/kayipstatus")
         .then((response) => response.json())
         .then((status) => {
@@ -205,8 +246,9 @@ function generateLegend() {
                     '               style="accent-color: ' + values[i.id].color + ';" value="K">\n' +
                     '        <label for="' + i.id + '">' + i.name + '</label><br>';        // Create text with HTML
 
-                $("#legendbar").append(txt1);   // Append new elements
+                $("#legendbar_content").append(txt1);   // Append new elements
             })
+            $("#legendbar").append("<button id='legend_btn' style='position: absolute; width:50px; height:50px; margin-top:7px;background:#da1e37;border-radius:6px; border:none;box-shadow: 4px 4px 10px #adb5bd;' onclick='toggleLegend()'><i class='fa fa-filter text-white'></i></button>");
         });
 }
 
@@ -218,10 +260,6 @@ map.on('draw:created', function (e) {
         document.getElementById("cordinate_x").value = e.layer._latlng.lat;
         document.getElementById("cordinate_y").value = e.layer._latlng.lng;
         document.getElementById("openModal").click();
-        // let lat = (e.layer._latlng.lat);
-        // let lng = (e.layer._latlng.lng);
-        // let str = '<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Fill Form</button>'
-        // layer.bindPopup(str);
     }
 
     editableLayers.addLayer(layer);

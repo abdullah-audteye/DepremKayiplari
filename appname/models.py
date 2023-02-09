@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 
 
@@ -54,6 +55,10 @@ class IhbarUser(models.Model):
 
 
 class KayipUser(models.Model):
+    GENDER_CHOICES = (
+        ('M', 'Male'),
+        ('F', 'Female'),
+    )
     kayip_first_name = models.CharField(max_length=100)
     kayip_last_name = models.CharField(max_length=100)
     # kayip_phone_number = models.CharField(max_length=100,null=True,blank=True)
@@ -64,6 +69,8 @@ class KayipUser(models.Model):
     detail = models.TextField(null=True,blank=True)
     status = models.CharField(blank=True,null=True,max_length=255)
     kayip_status = models.ForeignKey(KayipStatus,on_delete=models.CASCADE,null=True,blank=True,related_name="kayiplar")
+    gender = models.CharField(max_length=1,choices=GENDER_CHOICES,null=True,blank=True)
+    age = models.IntegerField(null=True,blank=True,default=0)
 
     def __str__(self):
         return self.kayip_first_name + " - "+self.kayip_last_name
@@ -77,6 +84,8 @@ class Ihbar(models.Model):
     ihbar_user = models.ForeignKey(IhbarUser, on_delete=models.CASCADE,null=True,blank=True)
     kayip_user = models.ManyToManyField(KayipUser)
     access_code = models.IntegerField(null=True,blank=True,db_index=True)
+    created_time = models.DateTimeField(auto_created=True,blank=True,null=True)
+
 
     class Meta:
         verbose_name = 'Ihbar'
