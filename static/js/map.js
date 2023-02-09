@@ -73,6 +73,7 @@ addLayer();
 
 function addLayer() {
     mcg.clearLayers();
+    map.removeLayer(mcg);
     fetch("api/kayiplar")
         .then((response) => response.json())
         .then((points) =>
@@ -103,7 +104,7 @@ function addLayer() {
                     " " +
                     i.kayip_user[0].detail +
                     '</h5></div><button class="col-11 btn btn-success" style="margin-left: 10px; margin-bottom: 5px"' +
-                    ' onclick="location.href=\'http://www.google.com/maps/place/' + i.kayip_user[0]?.cordinate_x + ',' + i.kayip_user[0]?.cordinate_y + '\';">Konuma Git' +
+                    ' onclick="window.open(\'http://www.google.com/maps/place/' + i.kayip_user[0]?.cordinate_x + ',' + i.kayip_user[0]?.cordinate_y + '\' ,\'_blank\');">Konuma Git' +
                     '</button><div style="border-top:1px solid gray;padding-top:5px;" class="col-12"><h4>İhbar Eden Bilgisi</h4>' +
                     '</div>' +
                     '<div class="col-12"><h6>isim:' +
@@ -119,16 +120,17 @@ function addLayer() {
                     {
                         maxWidth: 560,
                     }
-                );
+                )
+                ;
 
                 if (selectedArray.includes(i.kayip_user[0].kayip_status))
                     mcg.addLayer(marker);
             })
         );
+
+    map.addLayer(mcg);
 }
 
-http://www.google.com/maps/place/49.46800006494457,17.11514008755796
-    map.addLayer(mcg);
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -188,17 +190,11 @@ function setSelectedCountry(id) {
             [36.558397114119714, 35.55249933321049]]
     };
     map.fitBounds(polygonPoints[id]);
-
-    // var selectBox = document.getElementById("filterCountrySelect");
-    // var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-    // selectedCountry = selectedValue;
 }
 
 generateLegend()
 
 function generateLegend() {
-
-
     fetch("api/kayipstatus")
         .then((response) => response.json())
         .then((status) => {
@@ -220,10 +216,6 @@ map.on('draw:created', function (e) {
         document.getElementById("cordinate_x").value = e.layer._latlng.lat;
         document.getElementById("cordinate_y").value = e.layer._latlng.lng;
         document.getElementById("openModal").click();
-        // let lat = (e.layer._latlng.lat);
-        // let lng = (e.layer._latlng.lng);
-        // let str = '<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Fill Form</button>'
-        // layer.bindPopup(str);
     }
 
     editableLayers.addLayer(layer);
