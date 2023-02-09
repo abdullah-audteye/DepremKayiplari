@@ -1,6 +1,7 @@
 from rest_framework.serializers import ModelSerializer
 from .models import KayipUser,Ihbar,IhbarUser,KayipStatus
 class KayipUserSerializer(ModelSerializer):
+    
 
     # def to_representation(self, instance):
     #     data = super().to_representation(instance)
