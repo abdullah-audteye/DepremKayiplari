@@ -6,8 +6,10 @@ var map = L.map('map').setView(center, 9);
 var mcg = L.markerClusterGroup({
     chunkedLoading: true,
     //singleMarkerMode: true,
+    disableClusteringAtZoom: 18,
     spiderfyOnMaxZoom: false,
 });
+
 var LeafIcon = L.Icon.extend({
     options: {
         iconSize: [24, 24],
@@ -178,11 +180,15 @@ function setSelected(id) {
     } else {
         selectedArray.push(id);
     }
-    document.querySelector('#legendbar_content').querySelectorAll('input').forEach((btn)=>{btn.disabled=true})
+    document.querySelector('#legendbar_content').querySelectorAll('input').forEach((btn) => {
+        btn.disabled = true
+    })
     addLayer();
-    setTimeout(()=>{
-        document.querySelector('#legendbar_content').querySelectorAll('input').forEach((btn)=>{btn.disabled=false})
-    },1000)
+    setTimeout(() => {
+        document.querySelector('#legendbar_content').querySelectorAll('input').forEach((btn) => {
+            btn.disabled = false
+        })
+    }, 1000)
 }
 
 function setSelectedCountry(id) {
