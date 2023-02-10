@@ -2,18 +2,21 @@ from rest_framework.serializers import ModelSerializer,SerializerMethodField
 from .models import KayipUser,Ihbar,IhbarUser,KayipStatus
 
 def PutAsteriskSymbol(value,cut_value=2,phonenumber=False):
-    new_first_name = ""
-    splitted_names=[]
-    if phonenumber == False:
-        splitted_names = value.split(' ')
-    else:
-        splitted_names.append(value)
+    try:
+        new_first_name = ""
+        splitted_names=[]
+        if phonenumber == False and value:
+            splitted_names = value.split(' ')
+        else:
+            splitted_names.append(value)
 
-    
-    for i in splitted_names:
-        new_first_name+=(i[:cut_value]) + (cut_value) * "**" + " "
-    
-    return new_first_name
+        
+        for i in splitted_names:
+            new_first_name+=(i[:cut_value]) + (cut_value) * "**" + " "
+        
+        return new_first_name
+    except:
+        return value
 
 
 

@@ -241,8 +241,11 @@ function searchByName() {
     $('#search_results').empty();
     let userInput = document.getElementById('example-search-input').value;
 
-    if (userInput.length < 3)
-        alert("Must be at least 3 characters");
+    if (userInput.length < 3) {
+        let resultListItem = '<li style="list-style: none; color:white; border-bottom:1px solid black; cursor:pointer; padding: 4px; background-color: rgba(61,84,131,0.75)">' +
+            ' Must be At Least 3 Characters</li>';
+        $('#search_results').append(resultListItem);
+    }
 
     fetch("api/kayiplar/filter?first_name=" + userInput)
         .then((response) => response.json())
