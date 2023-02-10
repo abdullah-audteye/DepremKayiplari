@@ -250,14 +250,18 @@ function searchByName() {
     fetch("api/kayiplar/filter?first_name=" + userInput)
         .then((response) => response.json())
         .then((status) => {
-            for (let i = 0; i < status.length; i++) {
-                let resultListItem = i % 2 == 1 ? '<li style="list-style: none; color:white; border-bottom:1px solid black; cursor:pointer; padding: 4px; background-color: rgba(61,84,131,0.75)"' +
-                    'onclick="zoomToPoint(' + status[i].cordinate_x + ',' + status[i].cordinate_y + ')">' + status[i].kayip_first_name + ' ' + status[i].kayip_last_name + '</li>'
-                    :
-                    '<li style="list-style: none; color:white; border-bottom:1px solid black; cursor:pointer; padding: 4px; ; background-color: rgba(89,120,190,0.75)"' +
-                    'onclick="zoomToPoint(' + status[i].cordinate_x + ',' + status[i].cordinate_x + ')">' + status[i].kayip_first_name + ' ' + status[i].kayip_last_name + '</li>';
+            if (status.length == 0) {
+                let resultListItem = '<li style="list-style: none; color:white; border-bottom:1px solid black; cursor:pointer; padding: 4px; background-color: rgba(61,84,131,0.75)">' + ' No Result</li>';
                 $('#search_results').append(resultListItem);
-            }
+            } else
+                for (let i = 0; i < status.length; i++) {
+                    let resultListItem = i % 2 == 1 ? '<li style="list-style: none; color:white; border-bottom:1px solid black; cursor:pointer; padding: 4px; background-color: rgba(61,84,131,0.75)"' +
+                        'onclick="zoomToPoint(' + status[i].cordinate_x + ',' + status[i].cordinate_y + ')">' + status[i].kayip_first_name + ' ' + status[i].kayip_last_name + '</li>'
+                        :
+                        '<li style="list-style: none; color:white; border-bottom:1px solid black; cursor:pointer; padding: 4px; ; background-color: rgba(89,120,190,0.75)"' +
+                        'onclick="zoomToPoint(' + status[i].cordinate_x + ',' + status[i].cordinate_x + ')">' + status[i].kayip_first_name + ' ' + status[i].kayip_last_name + '</li>';
+                    $('#search_results').append(resultListItem);
+                }
         });
 }
 
