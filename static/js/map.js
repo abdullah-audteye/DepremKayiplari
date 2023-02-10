@@ -122,8 +122,7 @@ function addLayer() {
                         {
                             maxWidth: 560,
                         }
-                    )
-                    ;
+                    );
 
                     if (selectedArray.includes(i.kayip_user[0].kayip_status))
                         mcg.addLayer(marker);
@@ -173,7 +172,11 @@ function setSelected(id) {
     } else {
         selectedArray.push(id);
     }
+    document.querySelector('#legendbar_content').querySelectorAll('input').forEach((btn)=>{btn.disabled=true})
     addLayer();
+    setTimeout(()=>{
+        document.querySelector('#legendbar_content').querySelectorAll('input').forEach((btn)=>{btn.disabled=false})
+    },1000)
 }
 
 function setSelectedCountry(id) {

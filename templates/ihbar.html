@@ -479,7 +479,7 @@
     </span>
                 </div>
                 <ul id="search_results"
-                    style="width: 100% ;position: absolute;z-index: 999999">
+                    style="width: 100%;position: absolute;z-index: 999999;max-height: 200px;overflow-y: auto;">
                 </ul>
             </div>
             <div class="nav-text" style="margin-top: 11px;display: flex;align-items: center;">
@@ -581,7 +581,7 @@
                 <select class="form-control" name="country" class="form-group">
                     {% for country in countries %}
 
-                        <option value="{{ country.id }}" class="form-control form-control-lg" >
+                        <option value="{{ country.id }}" class="form-control form-control-lg">
                             <label class="form-check-label" for="defaultCheck1">
                                 {{ country.name }}
                             </label>
@@ -627,16 +627,13 @@
                     <button
                             class="mdl-cls-button"
                             id="modal-close-button"
-                            style="
-                  width: 45px;
-                  height: 50px;
-                  background: white;
-                  border: none;
-                  margin-left: auto;
-                  margin-right: 10px;
-                  color: red;
-                "
-                    >
+                            style="width: 45px;
+                            height: 50px;
+                            background: white;
+                            border: none;
+                            margin-left: auto;
+                            margin-right: 10px;
+                            color: red;">
                         <strong>X</strong>
                     </button>
                     <div class="subcard">
