@@ -31,73 +31,93 @@
         
       </div>
       <div class="form-main-content">
-        <form class="form" method="post" action="{% url 'ihbarview_tr' %}">
+        <form class="form" method="post" action="{% url 'genelform' %}">
+            {% csrf_token %}
+            <input type="hidden" id="coordinate_x" name="cordinate_x"/>
+            <input type="hidden" id="coordinate_y" name="cordinate_y"/>
+
             <label for="fname">Name</label><br>
-            <input type="text" id="" name=""><br>
+            <input required type="text" id="" name="kayip_first_name"><br>
             <label for="fname">Surname</label><br>
-            <input type="text" id="" name=""><br>
-            <label for="lname">Phone Number</label><br>
-            <input type="text" id="" name=""><br><br>
+            <input required type="text" id="" name="kayip_last_name"><br>
 
             <label for="fname">Country</label><br>
-            <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-              <option value="1" data-x="" data-y="">Option</option>
+            
+            <select name="country" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                {% for country in countries %}
+                <option value="{{country.id}}">{{country.name}}</option>
+                {% endfor %}
 
             </select><br>
             <label for="fname">City</label><br>
-            <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-              <option value="1">One</option>
+            <select required id="cityselect" name="city" class="form-select form-select-sm" aria-label=".form-select-sm example">
+              {% for city in cities %}
+                <option data-x="{{city.coordinate_x}}" data-y="{{city.coordinate_y}}">{{city.il_adi}}</option>
+                {% endfor %}
+
             </select><br>
 
             <label for="lname">Age</label><br>
-            <input type="text" id="" name=""><br><br>
+            <input required type="text"  name="age"><br><br>
             <p>Gender</p>
-            <div class="dropdown">
-              <button class="btn  dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                <button class="dropdown-item" type="button">Male</button>
-                <button class="dropdown-item" type="button">Female</button>
-              </div>
+            <div>
+              <select  name="gender"  aria-labelledby="dropdownMenu2">
+                <option value="M"  type="button">Male</option>
+                <option value="F"  type="button">Female</option>
+              </select>
             </div>
             <p>Condition</p>
-            <div class="dropdown">
-              <button class="btn  dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenu2">            
-                <button class="dropdown-item option1" type="button">Found</button>
-                <button class="dropdown-item option2" type="button">Lost</button>
-                <button class="dropdown-item option3" type="button">In Hospital</button>
-                <button class="dropdown-item option4" type="button">Needs Help</button>
-              </div>
+            <div >
+              <select  name="kayip_status"  aria-labelledby="dropdownMenu2">  
+                {% for status in kayipstatus %}
+                <option value="{{status.id}}" type="button">{{status}}</option>
+                {% endfor %}          
+              </select>
             </div>
     
 
             <label for="lname">Address</label><br>
-            <textarea style="resize:none; margin-bottom: 65px;" cols="66" rows="3"></textarea>
-           
-            <!-- <label for="lname">Photo</label><br>
-            <div class="file-input">
-              <input type="file" id="file" class="file">
-              <label class="btn btn-danger btn-sm w-25 py-2" for="file">Select file</label>
-            </div> -->
-            <label for="lname">Additional Notes</label><br>
-            <textarea style="resize:none; margin-bottom: 65px;" cols="66" rows="3"></textarea>
-            <label for="lname">Reporter Name</label><br>
-            <input type="text" id="" name=""><br><br>
-            <label for="lname">Reporter Phone</label><br>
-            <input type="text" id="" name=""><br><br>
-            <label for="lname">Reporter Email</label><br>
-            <input type="text" id="" name=""><br><br>
+            <textarea required name="address" style="resize:none; margin-bottom: 65px;" cols="66" rows="3"></textarea>
 
+            <label for="lname">Additional Notes</label><br>
+            <textarea name="detail" style="resize:none; margin-bottom: 65px;" cols="66" rows="3"></textarea>
+            <label for="lname">Reporter Name</label><br>
+            <input required  type="text"  name="ihbar_first_name"><br><br>
+            <label for="lname">Reporter Surname</label><br>
+            <input required  type="text"  name="ihbar_last_name"><br><br>
+            <label for="lname">Reporter Phone</label><br>
+            <input required type="text"  name="phonenumber"><br><br>
+            <label for="lname">Reporter Email</label><br>
+            <input required type="text" name="eposta"><br><br>
+
+            <div style="color:red">{{errors.errors}}</div>
 
 
 
 
             <input class="btn btn-danger btn-sm w-25 py-2 h-100" type="submit" value="Submit">
+
           </form> 
       </div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function(){
+            document.getElementById('cityselect').addEventListener('change',(event)=>{
+            // let result = document.getElementById('cityselect')
+            let e = document.getElementById("cityselect");
+            let value = e.options[e.selectedIndex].value;
+            let coordinate_x = e.options[e.selectedIndex].getAttribute('data-x');
+            let coordinate_y = e.options[e.selectedIndex].getAttribute('data-y');
+
+            
+            document.getElementById('coordinate_y').value = coordinate_y
+            document.getElementById('coordinate_x').value = coordinate_x
+
+
+        })
+});
+     
+    </script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
