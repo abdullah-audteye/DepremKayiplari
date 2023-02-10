@@ -59,7 +59,7 @@ class KayipUser(models.Model):
         ('M', 'Male'),
         ('F', 'Female'),
     )
-    kayip_first_name = models.CharField(max_length=100)
+    kayip_first_name = models.CharField(max_length=100,db_index=True)
     kayip_last_name = models.CharField(max_length=100)
     cordinate_x = models.FloatField(max_length=10,blank=True,null=True)
     cordinate_y = models.FloatField(max_length=10,blank=True,null=True)

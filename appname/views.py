@@ -4,12 +4,14 @@ from .models import Ihbar, KayipUser, Tag, Countries, KayipStatus,IhbarUser
 from django.db import transaction
 from django.http import JsonResponse
 from django.http import QueryDict
-from .serializers import  IhbarSerializer, KayipStatusSerializer
+from .serializers import  IhbarSerializer, KayipStatusSerializer,KayipUserSerializer
 from rest_framework.generics import ListAPIView
 from django.shortcuts import get_object_or_404
 from .helper import CleanBadRecords,FixNonHavingDates,SendAccessCode
 from datetime import datetime
 import random
+from rest_framework.response import Response
+from rest_framework import status
 from django.views.decorators.csrf import csrf_exempt
 import json
 
@@ -189,6 +191,25 @@ def IframeDashboard(request):
 class KayipUserListView(ListAPIView):
     queryset = Ihbar.objects.order_by('-id')
     serializer_class = IhbarSerializer
+
+
+class KayipUserFilterUser(ListAPIView):
+    serializer_class = KayipUserSerializer
+
+    def get_queryset(self,*args, **kwargs):
+        first_name_qs = (self.request.GET.get('first_name',None))
+        queryset = KayipUser.objects.filter(kayip_first_name__icontains=first_name_qs)
+        return queryset
+
+
+    def get(self, request, *args, **kwargs):
+        first_name_qs = (self.request.GET.get('first_name',None))
+        if (first_name_qs) !=None and len(first_name_qs)<3:
+            return Response({"error":"Must be at least 3 characters "},status=status.HTTP_400_BAD_REQUEST)
+        return self.list(request, *args, **kwargs)
+
+        
+
 
 
 class KayipStatusListView(ListAPIView):
