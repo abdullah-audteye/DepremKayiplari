@@ -19,9 +19,16 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>FindMeHelpMe | Form</title>
     <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    <style>
+
+        body > .skiptranslate > iframe {
+            display: none;
+        }
+    </style>
 </head>
 <body>
 <div class="main">
+    <div id="google_translate_element"></div>
     <div class="form-head ">
         <img src="{% static 'images/form-logo.png' %}" alt="form-logo" class="form-logo"/>
         <div>
@@ -127,6 +134,21 @@
             }
         });
 </script>
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+            {
+                pageLanguage: "tr",
+                includedLanguages: "ar,tr,en", layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            },
+            "google_translate_element"
+        );
+    }
+</script>
+<script
+        type="text/javascript"
+        src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
