@@ -135,3 +135,41 @@ textarea:hover{
     border: 1px solid lightgray;
     margin-bottom: 65px;
 }
+
+.gender, .condition {
+    width: 200px;
+    height: 35px;
+    border-radius: 3px;
+    border: 1px solid lightgray;
+    margin-bottom: 65px;
+}
+
+.gender:hover,
+.condition:hover {
+    cursor:pointer;
+}
+
+#country:hover,
+#cityselect:hover {
+    cursor:pointer;
+}
+
+#status1{
+    background-color: lightskyblue !important;
+    color:white;
+}
+
+#status2{
+    background-color: lightcoral !important;
+    color:white;
+}
+
+#status3{
+    background-color: lightgreen !important;
+    color:white;
+}
+
+#status4{
+    background-color:yellow !important;
+    color:white;
+}

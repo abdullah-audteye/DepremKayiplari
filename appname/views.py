@@ -19,6 +19,7 @@ import json
 def get_cities_from_file(path):
     try:
         with open(path, 'r') as f:
+            print(json.load(f),'fffff')
             cities = json.load(f)
         return cities
 
@@ -130,10 +131,11 @@ def IhbarView(request):
 
 
 def GeneralFormDataView(request):
-    p = ("static/data/sample.json")
+    p = ("http://127.0.0.1:8000/static/data/sample.json")
     countries = Countries.objects.all()
     kayipstatus = KayipStatus.objects.all()
     cities = get_cities_from_file(p) or []
+    print(cities,'citiress')
     errors = {}
 
     if request.method == "POST":
