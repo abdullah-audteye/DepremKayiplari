@@ -420,6 +420,18 @@
                 text-align: center;
             }
 
+            #zoom_buttons {
+                top: 3px;
+            }
+
+            #nav_btn_1 {
+                margin-top: 5px;
+            }
+
+            #nav_btn_2 {
+                margin-top: 5px;
+            }
+
 
         }
 
@@ -482,25 +494,27 @@
                     style="width: 100%;position: absolute;z-index: 999999;max-height: 200px;overflow-y: auto;">
                 </ul>
             </div>
-            <div class="nav-text" style="margin-top: 11px;display: flex;align-items: center;">
-                <button class="navbar-info btn btn-success" style="background: #da1e37;border:none;">Bilgi Al</button>
-                <button class="navbar-info btn btn-success" onclick="window.open('/form', '_blank')"
+            <div class="nav-text" style="display: flex;align-items: center;">
+                <button id="nav_btn_1" class="navbar-info btn btn-success" style="background: #da1e37;border:none;">
+                    Bilgi Al
+                </button>
+                <button id="nav_btn_2" class="navbar-info btn btn-success" onclick="window.open('/form', '_blank')"
                         style="background: #da1e37;border:none;">Kayıp Formu Doldur
                 </button>
                 <a
                         class="nav-item nav-link"
                         href="#"
-                        style="margin-top: 20px; margin-left: 0px"
+                        style="margin-left: 0px"
                 >
                     <div id="google_translate_element"></div>
                 </a>
             </div>
         </div>
     </div>
-    <a
-            class="nav-item nav-link"
-            href="#"
-            style="position: absolute; right: 50px; top: 3px"
+    <a id="zoom_buttons"
+       class="nav-item nav-link"
+       href="#"
+       style="position: absolute; right: 50px"
     >
         {% for country in countries %}
             <button
