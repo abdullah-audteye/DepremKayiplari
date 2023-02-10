@@ -1,0 +1,488 @@
+[
+    {
+        "il_adi": "ADANA",
+        "id": 1,
+        "coordinate_x": 35.33368253049477,
+        "coordinate_y": 36.98451447074858,
+        "il_plaka": 1
+    },{
+        "il_adi": "ADIYAMAN",
+        "id": 2,
+        "coordinate_x": 38.273491838384736,
+        "coordinate_y": 37.75545252011437,
+        "il_plaka": 2
+    },{
+        "il_adi": "AFYONKARAHİSAR",
+        "id": 3,
+        "coordinate_x": 30.53684764253041,
+        "coordinate_y": 38.75811821792405,
+        "il_plaka": 3
+    },{
+        "il_adi": "AĞRI",
+        "id": 4,
+        "coordinate_x": 43.040151203412364,
+        "coordinate_y": 39.71466562552961,
+        "il_plaka": 4
+    },{
+        "il_adi": "AMASYA",
+        "id": 5,
+        "coordinate_x": 35.82666494445541,
+        "coordinate_y": 40.65157436121925,
+        "il_plaka": 5
+    },{
+        "il_adi": "ANKARA",
+        "id": 6,
+        "coordinate_x": 32.8478469952843,
+        "coordinate_y": 39.93833654487968,
+        "il_plaka": 6
+    },{
+        "il_adi": "ANTALYA",
+        "id": 7,
+        "coordinate_x": 30.69624900369611,
+        "coordinate_y": 36.90710417500619,
+        "il_plaka": 7
+    },{
+        "il_adi": "ARTVİN",
+        "id": 8,
+        "coordinate_x": 41.84118064037099,
+        "coordinate_y": 41.178992983404974,
+        "il_plaka": 8
+    },{
+        "il_adi": "AYDIN",
+        "id": 9,
+        "coordinate_x": 27.837695319786853,
+        "coordinate_y": 37.84073647900402,
+        "il_plaka": 9
+    },{
+        "il_adi": "BİLECİK",
+        "id": 10,
+        "coordinate_x": 29.98238975484536,
+        "coordinate_y": 40.14665638269564,
+        "il_plaka": 11
+    },{
+        "il_adi": "BİNGÖL",
+        "id": 11,
+        "coordinate_x": 40.48721595973994,
+        "coordinate_y": 38.883751300110625,
+        "il_plaka": 12
+    },{
+        "il_adi": "BİTLİS",
+        "id": 12,
+        "coordinate_x": 42.11695603644375,
+        "coordinate_y": 38.39965822185264,
+        "il_plaka": 13
+    },{
+        "il_adi": "BOLU",
+        "id": 13,
+        "coordinate_x": 31.58541166876694,
+        "coordinate_y": 40.7411649370536,
+        "il_plaka": 14
+    },{
+        "il_adi": "BURDUR",
+        "id": 14,
+        "coordinate_x": 30.283236949431604,
+        "coordinate_y": 37.72041588516299,
+        "il_plaka": 15
+    },{
+        "il_adi": "BURSA",
+        "id": 15,
+        "coordinate_x": 29.05891578624687,
+        "coordinate_y": 40.19650079693208,
+        "il_plaka": 16
+    },{
+        "il_adi": "ÇANAKKALE",
+        "id": 16,
+        "coordinate_x": 26.419270009540604,
+        "coordinate_y": 40.12379882745052,
+        "il_plaka": 17
+    },{
+        "il_adi": "ÇANKIRI",
+        "id": 17,
+        "coordinate_x": 33.610191856732335,
+        "coordinate_y": 40.590989148150314,
+        "il_plaka": 18
+    },{
+        "il_adi": "ÇORUM",
+        "id": 18,
+        "coordinate_x": 34.94865039085127,
+        "coordinate_y": 40.552639599842394,
+        "il_plaka": 19
+    },{
+        "il_adi": "DİYARBAKIR",
+        "id": 19,
+        "coordinate_x": 40.21252243939897,
+        "coordinate_y": 37.92408134411169,
+        "il_plaka": 21
+    },{
+        "il_adi": "EDİRNE",
+        "id": 20,
+        "coordinate_x": 26.54348948163844,
+        "coordinate_y": 41.676127347733996,
+        "il_plaka": 22
+    },{
+        "il_adi": "ELAZIĞ",
+        "id": 21,
+        "coordinate_x": 39.20689844662564,
+        "coordinate_y": 38.66775391992166,
+        "il_plaka": 23
+    },{
+        "il_adi": "ERZİNCAN",
+        "id": 22,
+        "coordinate_x": 39.47915160853858,
+        "coordinate_y": 39.74846808760904,
+        "il_plaka": 24
+    },{
+        "il_adi": "ERZURUM",
+        "id": 23,
+        "coordinate_x": 41.26916029821153,
+        "coordinate_y": 39.89820981782537,
+        "il_plaka": 25
+    },{
+        "il_adi": "ESKİŞEHİR",
+        "id": 24,
+        "coordinate_x": 30.494442601558674,
+        "coordinate_y": 39.76853033759912,
+        "il_plaka": 26
+    },{
+        "il_adi": "GAZİANTEP",
+        "id": 25,
+        "coordinate_x": 37.36819101081245,
+        "coordinate_y": 37.06704881264984,
+        "il_plaka": 27
+    },{
+        "il_adi": "GİRESUN",
+        "id": 26,
+        "coordinate_x": 38.40735509555095,
+        "coordinate_y": 40.89198498676998,
+        "il_plaka": 28
+    },{
+        "il_adi": "GÜMÜŞHANE",
+        "id": 27,
+        "coordinate_x": 39.47826124110895,
+        "coordinate_y": 40.458427236943656,
+        "il_plaka": 29
+    },{
+        "il_adi": "HAKKARİ",
+        "id": 28,
+        "coordinate_x": 43.77776719392507,
+        "coordinate_y": 37.57467049079897,
+        "il_plaka": 30
+    },{
+        "il_adi": "HATAY",
+        "id": 29,
+        "coordinate_x": 36.15888928118221,
+        "coordinate_y": 36.19888195332412,
+        "il_plaka": 31
+    },{
+        "il_adi": "ISPARTA",
+        "id": 30,
+        "coordinate_x": 30.552727067162127,
+        "coordinate_y": 37.783097140514705,
+        "il_plaka": 32
+    },{
+        "il_adi": "MERSİN",
+        "id": 31,
+        "coordinate_x": 34.65441585557343,
+        "coordinate_y": 36.82175848090826
+    },{
+        "il_adi": "KARS",
+        "id": 32,
+        "coordinate_x": 43.115375203010956,
+        "coordinate_y": 40.61781665646768,
+        "il_plaka": 36
+    },{
+        "il_adi": "KASTAMONU",
+        "id": 33,
+        "coordinate_x": 33.74033490997691,
+        "coordinate_y": 41.37000536055641,
+        "il_plaka": 37
+    },{
+        "il_adi": "KAYSERİ",
+        "id": 34,
+        "coordinate_x": 35.4886344742697,
+        "coordinate_y": 38.72229228511466,
+        "il_plaka": 38
+    },{
+        "il_adi": "KIRKLARELİ",
+        "id": 35,
+        "coordinate_x": 27.218857390732282,
+        "coordinate_y": 41.735924123546056,
+        "il_plaka": 39
+    },{
+        "il_adi": "KIRŞEHİR",
+        "id": 36,
+        "coordinate_x": 34.15977289907039,
+        "coordinate_y": 39.14642721812131,
+        "il_plaka": 40
+    },{
+        "il_adi": "KOCAELİ",
+        "id": 37,
+        "coordinate_x": 29.938132037405754,
+        "coordinate_y": 40.78106038967142,
+        "il_plaka": 41
+    },{
+        "il_adi": "KONYA",
+        "id": 38,
+        "coordinate_x": 32.50442646624554,
+        "coordinate_y": 37.84396331857636,
+        "il_plaka": 42
+    },{
+        "il_adi": "KÜTAHYA",
+        "id": 39,
+        "coordinate_x": 29.99485849191207,
+        "coordinate_y": 39.43472201138168,
+        "il_plaka": 43
+    },{
+        "il_adi": "MALATYA",
+        "id": 40,
+        "coordinate_x": 38.32874065322334,
+        "coordinate_y": 38.34698524902435,
+        "il_plaka": 44
+    },{
+        "il_adi": "MANİSA",
+        "id": 41,
+        "coordinate_x": 27.433656563671565,
+        "coordinate_y": 38.62226990127776,
+        "il_plaka": 45
+    },{
+        "il_adi": "KAHRAMANMARAŞ",
+        "id": 42,
+        "coordinate_x": 36.92770392552041,
+        "coordinate_y": 37.57726007843597,
+        "il_plaka": 46
+    },{
+        "il_adi": "MARDİN",
+        "id": 43,
+        "coordinate_x": 40.737787098560425,
+        "coordinate_y": 37.31228804415863,
+        "il_plaka": 47
+    },{
+        "il_adi": "MUĞLA",
+        "id": 44,
+        "coordinate_x": 28.351618411947662,
+        "coordinate_y": 37.20345870685021,
+        "il_plaka": 48
+    },{
+        "il_adi": "MUŞ",
+        "id": 45,
+        "coordinate_x": 41.49744155381323,
+        "coordinate_y": 38.74197387873567,
+        "il_plaka": 49
+    },{
+        "il_adi": "NEVŞEHİR",
+        "id": 46,
+        "coordinate_x": 34.70957704532111,
+        "coordinate_y": 38.62039534456776,
+        "il_plaka": 50
+    },{
+        "il_adi": "NİĞDE",
+        "id": 47,
+        "coordinate_x": 34.67665249497116,
+        "coordinate_y": 37.97004238641621,
+        "il_plaka": 51
+    },{
+        "il_adi": "ORDU",
+        "id": 48,
+        "coordinate_x": 37.897507415677026,
+        "coordinate_y": 40.95363269176062,
+        "il_plaka": 52
+    },{
+        "il_adi": "RİZE",
+        "id": 49,
+        "coordinate_x": 40.4876877571152,
+        "coordinate_y": 41.009946171083925,
+        "il_plaka": 53
+    },{
+        "il_adi": "SAKARYA",
+        "id": 50,
+        "coordinate_x": 30.399985687608666,
+        "coordinate_y": 40.780557305546864,
+        "il_plaka": 54
+    },{
+        "il_adi": "SAMSUN",
+        "id": 51,
+        "coordinate_x": 36.293868904305874,
+        "coordinate_y": 41.288698902637016,
+        "il_plaka": 55
+    },{
+        "il_adi": "SİİRT",
+        "id": 52,
+        "coordinate_x": 41.9352843328916,
+        "coordinate_y": 37.928358028852124,
+        "il_plaka": 56
+    },{
+        "il_adi": "SİVAS",
+        "id": 53,
+        "coordinate_x": 37.01476580553384,
+        "coordinate_y": 39.7384686824449,
+        "il_plaka": 58
+    },{
+        "il_adi": "TEKİRDAĞ",
+        "id": 54,
+        "coordinate_x": 27.466824278397393,
+        "coordinate_y": 40.96786493080922,
+        "il_plaka": 59
+    },{
+        "il_adi": "TOKAT",
+        "id": 55,
+        "coordinate_x": 36.55247372599027,
+        "coordinate_y": 40.31414500580074,
+        "il_plaka": 60
+    },{
+        "il_adi": "TRABZON",
+        "id": 56,
+        "coordinate_x": 39.68653326406952,
+        "coordinate_y": 40.985540282160066,
+        "il_plaka": 61
+    },{
+        "il_adi": "TUNCELİ",
+        "id": 57,
+        "coordinate_x": 39.54351059304538,
+        "coordinate_y": 39.09921183817064,
+        "il_plaka": 62
+    },{
+        "il_adi": "ŞANLIURFA",
+        "id": 58,
+        "coordinate_x": 38.78603793420783,
+        "coordinate_y": 37.153594554700156,
+        "il_plaka": 63
+    },{
+        "il_adi": "UŞAK",
+        "id": 59,
+        "coordinate_x": 29.40225098959653,
+        "coordinate_y": 38.67029294569591,
+        "il_plaka": 64
+    },{
+        "il_adi": "VAN",
+        "id": 60,
+        "coordinate_x": 43.38323092214946,
+        "coordinate_y": 38.49456470017341,
+        "il_plaka": 65
+    },{
+        "il_adi": "YOZGAT",
+        "id": 61,
+        "coordinate_x": 34.78551912355669,
+        "coordinate_y": 39.81411322821165,
+        "il_plaka": 66
+    },{
+        "il_adi": "ZONGULDAK",
+        "id": 62,
+        "coordinate_x": 31.81232138961792,
+        "coordinate_y": 41.440750837929464,
+        "il_plaka": 67
+    },{
+        "il_adi": "AKSARAY",
+        "id": 63,
+        "coordinate_x": 34.014089905333364,
+        "coordinate_y": 38.37284793010855,
+        "il_plaka": 68
+    },{
+        "il_adi": "BAYBURT",
+        "id": 64,
+        "coordinate_x": 40.22288749078082,
+        "coordinate_y": 40.25631250523723,
+        "il_plaka": 69
+    },{
+        "il_adi": "KARAMAN",
+        "id": 65,
+        "coordinate_x": 33.21598509671663,
+        "coordinate_y": 37.1827502239999,
+        "il_plaka": 70
+    },{
+        "il_adi": "KIRIKKALE",
+        "id": 66,
+        "coordinate_x": 33.49582957241285,
+        "coordinate_y": 39.863533205524895,
+        "il_plaka": 71
+    },{
+        "il_adi": "BATMAN",
+        "id": 67,
+        "coordinate_x": 41.13062404717563,
+        "coordinate_y": 37.887863303704684,
+        "il_plaka": 72
+    },{
+        "il_adi": "ŞIRNAK",
+        "id": 68,
+        "coordinate_x": 42.45675607516544,
+        "coordinate_y": 37.522258494245484,
+        "il_plaka": 73
+    },{
+        "il_adi": "BARTIN",
+        "id": 69,
+        "coordinate_x": 32.32772809736587,
+        "coordinate_y": 41.630033429424905,
+        "il_plaka": 74
+    },{
+        "il_adi": "ARDAHAN",
+        "id": 70,
+        "coordinate_x": 42.70139050289631,
+        "coordinate_y": 41.11365645489928,
+        "il_plaka": 75
+    },{
+        "il_adi": "IĞDIR",
+        "id": 71,
+        "coordinate_x": 44.062264272069854,
+        "coordinate_y": 39.915871783243524,
+        "il_plaka": 76
+    },{
+        "il_adi": "YALOVA",
+        "id": 72,
+        "coordinate_x": 29.254930017822165,
+        "coordinate_y": 40.63699443903951,
+        "il_plaka": 77
+    },{
+        "il_adi": "KARABÜK",
+        "id": 73,
+        "coordinate_x": 32.606503441276104,
+        "coordinate_y": 41.189967972303144,
+        "il_plaka": 78
+    },{
+        "il_adi": "KİLİS",
+        "id": 74,
+        "coordinate_x": 37.1133347938649,
+        "coordinate_y": 36.71557646877302,
+        "il_plaka": 79
+    },{
+        "il_adi": "OSMANİYE",
+        "id": 75,
+        "coordinate_x": 36.26564309479089,
+        "coordinate_y": 37.05238087810887,
+        "il_plaka": 80
+    },{
+        "il_adi": "DÜZCE",
+        "id": 76,
+        "coordinate_x": 31.140105640588818,
+        "coordinate_y": 40.808050917342115,
+        "il_plaka": 81
+    },{
+        "il_adi": "SİNOP",
+        "id": 77,
+        "coordinate_x": 35.141038130018394,
+        "coordinate_y": 42.02459794382594,
+        "il_plaka": 57
+    },{
+        "il_adi": "BALIKESİR",
+        "id": 78,
+        "coordinate_x": 27.89536029391859,
+        "coordinate_y": 39.65053521581798,
+        "il_plaka": 10
+    },{
+        "il_adi": "DENİZLİ",
+        "id": 79,
+        "coordinate_x": 29.090748418582677,
+        "coordinate_y": 37.771532444038726,
+        "il_plaka": 20
+    },{
+        "il_adi": "İSTANBUL",
+        "id": 80,
+        "coordinate_x": 29.01078562835726,
+        "coordinate_y": 41.02196139578765,
+        "il_plaka": 34
+    },{
+        "il_adi": "İZMİR",
+        "id": 81,
+        "coordinate_x": 27.152964987815675,
+        "coordinate_y": 38.41025910403107,
+        "il_plaka": 35
+    }
+    ]

@@ -5,16 +5,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>FindmeHelpMe</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
     <link
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
             integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
             crossorigin="anonymous"
     />
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({
+            'gtm.start':
+                new Date().getTime(), event: 'gtm.js'
+        });
+        var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src =
+            'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-KT5NN9R');</script>
     <style>
 
         body > .skiptranslate > iframe {
             display: none;
+        }
+
+        .leaflet-zoom-animated {
+            bottom: -54px !important;
         }
 
         body {
@@ -259,8 +278,8 @@
 
         .radio {
             display: inline-block;
-            width: 204;
-            height: 104;
+            width: 204px;
+            height: 104px;
             border-radius: 0;
             background: lightblue;
             box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.2);
@@ -305,6 +324,14 @@
             margin-left: 15px;
         }
 
+        .leaflet-popup {
+            width: 30vw;
+        }
+
+        .leaflet-popup .col-12 {
+            text-align: center;
+        }
+
         @media (min-width: 570px) {
             .card {
                 max-width: 100%;
@@ -340,10 +367,11 @@
                 gap: 15px;
             }
 
-            @media (max-width: 375px) {
+            @media (max-width: 380px) {
                 .card {
-                    max-width: 100%;
+                    max-width: 10px;
                     margin: 0 auto;
+                    background: red;
                 }
 
                 .subcard h2 {
@@ -379,13 +407,57 @@
                 #modal-btn {
                     width: 100px;
                 }
-
             }
+        }
+
+        @media only screen and (max-width: 600px) {
+            .leaflet-popup {
+                width: 70vw !important;
+                height: 50vh;
+            }
+
+            .leaflet-popup .col-12 {
+                text-align: center;
+            }
+
+            #zoom_buttons {
+                top: 3px;
+            }
+
+            #nav_btn_1 {
+                margin-top: 3px;
+            }
+
+            #nav_btn_2 {
+                margin-top: 3px;
+            }
+
+
+        }
+
+        .leaflet-popup {
+            width: 20vw;
+            height: 50vh;
+        }
+
+        #legend_btn:hover {
+            cursor: pointer;
+        }
+
+        .leaflet-popup h5 {
+            word-break: break-word;
         }
     </style>
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KT5NN9R"
+            height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
     <button
             class="navbar-toggler"
             type="button"
@@ -398,35 +470,66 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
+        <div class="navbar-nav" style="display: flex;align-items: center;">
             <h1 class="navbar-logo">FindMeHelpMe</h1>
-            <div class="nav-text">
-                <button
-                        class="navbar-info btn btn-success"
+            {#Search#}
+            <div style="width:300px;height:100%;position: relative">
+                <div class="input-group " style="
+    z-index: 500;
+">
+                    <input class="form-control py-2 border-right-0 border" type="search" placeholder="Search"
+                           id="example-search-input">
+                    <span class="input-group-append" style="background-color: rgb(218, 30, 55); ">
+        <button onclick="clearSearch()" style="background-color: rebeccapurple"
+                class="btn btn-outline-secondary border-left-0 border" type="button">
+            <i class="fa fa-eraser text-white"></i>
+        </button>
+        <button onclick="searchByName()" class="btn btn-outline-secondary border-left-0 border" type="button">
+            <i class="fa fa-search text-white"></i>
+        </button>
 
-                >
+    </span>
+                </div>
+                <ul id="search_results"
+                    style="width: 100%;position: absolute;z-index: 999999;max-height: 200px;overflow-y: auto;">
+                </ul>
+            </div>
+            <div class="nav-text" style="display: flex;align-items: center;">
+                <button id="nav_btn_1" class="navbar-info btn btn-success" style="background: #da1e37;border:none;">
                     Bilgi Al
+                </button>
+                <button id="nav_btn_2" class="navbar-info btn btn-success" onclick="window.open('/genelform', '_blank')"
+                        style="background: #da1e37;border:none;">Kayıp Formu Doldur
                 </button>
                 <a
                         class="nav-item nav-link"
                         href="#"
-                        style="margin-top: 20px; margin-left: 0px"
+                        style="margin-left: 0px"
                 >
                     <div id="google_translate_element"></div>
                 </a>
             </div>
         </div>
     </div>
-    <a class="nav-item nav-link" href="#" style="position: absolute;right: 50px;    top: 3px;">
+    <a id="zoom_buttons"
+       class="nav-item nav-link"
+       href="#"
+       style="position: absolute; right: 50px"
+    >
         {% for country in countries %}
-            <button type="button" class="btn btn-success" id="{{ country.id }}" name="country"
+            <button
+                    type="button"
+                    class="btn btn-success"
+                    id="{{ country.id }}"
+                    name="country"
                     onclick="setSelectedCountry('{{ country.id }}')"
-                    value="{{ country.name }}">
-
+                    value="{{ country.name }}"
+            >
                 {{ country.name }}
             </button>
         {% endfor %}
     </a>
+
 </nav>
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
@@ -489,10 +592,10 @@
                             placeholder="E-posta:"
                     />
                 </div>
-                <select name="country" class="form-group">
+                <select class="form-control" name="country" class="form-group">
                     {% for country in countries %}
 
-                        <option value="{{ country.id }}">
+                        <option value="{{ country.id }}" class="form-control form-control-lg">
                             <label class="form-check-label" for="defaultCheck1">
                                 {{ country.name }}
                             </label>
@@ -504,7 +607,7 @@
                 <h1>KAYIP OLAN KİŞİLER</h1>
                 <hr/>
 
-                <button type="button" id="yenikayipadd">
+                <button type="button" id="yenikayipadd" class="btn btn-primary mb-3">
                     Yeni Kayıp Kişi Ekle
                 </button>
 
@@ -525,29 +628,26 @@
     </div>
 </div>
 <div class="modal fade" id="myMultiModal" role="dialog">
-    <div class="container-fluid" id="grad1" style="
-    position: absolute;
-    top: 15%;
-    right: 11px;
-">
+    <div
+            class="container-fluid"
+            id="grad1"
+            style="position: absolute; top: 15%; right: 11px"
+    >
         <div class="row justify-content-center mt-0">
             <div
-                    class="col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0 mt-3 mb-2">
+                    class="col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0 mt-3 mb-2"
+            >
                 <div class="card">
                     <button
                             class="mdl-cls-button"
-
                             id="modal-close-button"
-                            style="
-                  width: 45px;
-                  height: 50px;
-                  background: white;
-                  border: none;
-                  margin-left: auto;
-                  margin-right: 10px;
-                  color: red;
-                "
-                    >
+                            style="width: 45px;
+                            height: 50px;
+                            background: white;
+                            border: none;
+                            margin-left: auto;
+                            margin-right: 10px;
+                            color: red;">
                         <strong>X</strong>
                     </button>
                     <div class="subcard">
@@ -635,7 +735,8 @@
                                             Uygulama hakkında soru ve görüşlerinizi bizimle
                                             paylaşabilirsiniz.
                                             <br/>
-                                            <strong>Email Adresimiz: </strong>ndmehelpme.com@gmail.com
+                                            <strong>Email Adresimiz: </strong
+                                            >ndmehelpme.com@gmail.com
                                         </div>
                                     </div>
 
@@ -671,11 +772,15 @@
         position: absolute;
         z-index: 999;
         background-color: white;
-        bottom: 50px;
-        left: 12px;
+        bottom: 60px;
+        left: 10px;
+        display: block;
+        margin-bottom: 35px;
+        border-radius: 6px;
+        padding: 3px 7px;
       "
 >
-    <div>Görüntülemen İstediğinizi Seçeneği Seçiniz</div>
+    <div id="legendbar_content" style="display:none"></div>
 </fieldset>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -690,10 +795,15 @@
                     <label for="example5">Soyisim:</label>
                     <input required name="kayip_last_name" type="text" class="form-control" placeholder="Soyisim:">
                   </div>
-                  <select name="kayip_status" class="form-group" style="width:100%">
+                  <select class="form-control" style="width:100%;margin:5px auto" name="gender">
+                    <option value="M" class="form-control form-control-lg" >Male</option>
+                    <option value="F" class="form-control form-control-lg" >Female</option>
+                    </select>
+                    <input style="width:100%;margin:5px 0" type="text" class="form-control" name="age" placeholder="Age"/>
+                    <br>
+                  <select class="form-control" name="kayip_status" class="form-group" style="width:100%">
                   {% for status in kayip_status %}
-
-                       <option value="{{status.id}}">
+                       <option class="form-control form-control-lg"  value="{{status.id}}">
                          <label class="form-check-label" for="defaultCheck1">
                            {{status.name}}
                          </label>
@@ -711,17 +821,7 @@
                         </div>`
                     : `<div></div>`
             }
-                        <div><h3>Özellikler</h3></div>
-                  {% for tag in tags %}
-                         
-                         <div>
-                           <input name="tags" class="form-check-input tags-class" type="checkbox"  value="{{tag.id}}">
-                           <label class="form-check-label" for="defaultCheck1">
-                             {{tag.tag}}
-                           </label>
-                         </div>
-                 
-                         {% endfor %}
+                       
                   </div>
                   ${
                 counter == 1 &&
@@ -771,7 +871,6 @@
                 console.log(frm);
                 let serialized_form = $("#" + frm.id).serialize();
                 multiFormDataArray.data.push(serialized_form);
-                console.log(serialized_form, "serializedform");
             });
             if (multiFormDataArray.data.length < 1) {
                 alert("Lütfen aşağıdaki bilgileri de doldurun!");
@@ -779,9 +878,11 @@
             }
 
             $.post("{% url 'ihbarview_tr' %}", multiFormDataArray, (result) => {
-                console.log(result);
                 if (result.status) {
                     window.location.reload();
+                } else {
+                    alert("Check the fields !");
+
                 }
             });
         });
@@ -805,7 +906,7 @@
         src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
 ></script>
 
-<div id="map" style="width: 100%; height: 92%"></div>
+<div id="map" style="width: 100%; height: 90%"></div>
 <button
         type="button"
         id="openModal"

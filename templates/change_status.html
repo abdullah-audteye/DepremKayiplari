@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+
 </head>
 <style>
     .list-group{
@@ -17,11 +19,15 @@
 .panel{
     margin: auto;
     max-width: 500px;
-    transform: translate(0 , 20%);
+    transform: translate(0 , 40%);
+}
+
+#successlabel{
+    display: none;
 }
 .selectcolumn{
     display: flex;
-    align-items: end;
+    align-items: center;
     justify-content:space-evenly;
 }
 strong{
@@ -30,27 +36,71 @@ strong{
 </style>
 
 <body>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+
     <div class="panel panel-primary" id="result_panel">
-    <div class="panel-heading"><h3 class="panel-title">ihbar edilen kişiler</h3>
+        <div class="panel-heading">
+            <h3 class="panel-title">Missing People</h3>
+        </div>
+        <div class="panel-body">
+            <ul class="list-group">
+                {% for kayip in ihbar.kayip_user.all %}
+
+                <form id="form{{forloop.counter}}" action="" style="display: flex; flex-wrap: wrap;">
+                    <li style="width: 70%;" class="list-group-item text-danger">{{kayip.kayip_first_name}}
+                        {{kayip.kayip_last_name}}</li>
+                        <input name="user_id" type="hidden" value="{{kayip.id}}" />
+                    <select  style="width: 30%;" name="status" >
+                        <option value="{{kayip.kayip_status.id}}" selected disabled hidden>{{kayip.kayip_status.name}}</option>
+
+                        {% for status in kayip_status %}
+                        
+                        <option  value="{{status.id}}">{{status.name}}</option>
+                        {% endfor %}
+                    </select>
+                </form>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="panel-body selectcolumn" style="flex-direction: column;">
+            <div id="successlabel" style="color: green;text-align: center;border:1px solid gray;padding:5;border-radius: 10px;margin: 5px;">Success</div>
+            <button id="savebutton" class="btn btn-primary">Save</button>
+        </div>
     </div>
-    <div class="panel-body">
-        <ul  class="list-group">
-            <form action="" style="display: flex; flex-wrap: wrap;">
-            <li style="width: 70%;" class="list-group-item text-danger">name Surname</li>
-                <select style="width: 30%;" name="" id="">
-                    <option value="1">In Need Of Help</option>
-                    <option value="2">Found</option>
-                    <option value="3">Missing</option>
-                    <option value="4">At Hospital</option>
-                </select>
-            </form>
-        </ul>
-    </div>
-    <div class="panel-body selectcolumn">
-        <button class="btn btn-primary">Kaydet</button>
-    </div>
-</div>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script>
+        document.getElementById('savebutton').addEventListener('click', () => {
+            let multiFormDataArray = {
+                data: [],
+                csrfmiddlewaretoken: "{{ csrf_token }}",
+            };
+            Array.from(
+                document.querySelector(".list-group").querySelectorAll("form")
+            ).forEach((frm) => {
+                console.log(frm);
+                let serialized_form = $("#" + frm.id).serialize();
+                multiFormDataArray.data.push(serialized_form);
+                
+            });
+
+            $.post("{% url 'kayiplar_durum_detail' access_code %}", multiFormDataArray, (result) => {
+                if (result.status) {
+                    document.getElementById('successlabel').style.display="block"
+                    document.getElementById('savebutton').style.display="none"
+                    setTimeout(()=>{
+                        window.location.reload();
+
+                    },1500)
+                }
+                else{
+                    alert("Check the fields !");
+
+                }
+ 
+            });
+
+        })
+    </script>
+
 </body>
 
 </html>
