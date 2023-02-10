@@ -102,6 +102,12 @@ function addLayer() {
                         i.kayip_user[0].address + '</h5></div>' + '<div id="data-modal" class="col-12"><h5>Durum:' +
                         " " +
                         values[i.kayip_user[0].kayip_status]?.status +
+                        '</h5></div>' + '<div id="data-modal" class="col-12"><h5>Kişi Sayısı:' +
+                        " " +
+                        i.kayip_user.length +
+                        '</h5></div>' + '<div id="data-modal" class="col-12"><h5>Cinsiyet:' +
+                        " " +
+                        (i.kayip_user[0].gender == 'F' ? 'Kadın' : 'Erkek') +
                         '</h5></div><div id="data-modal" class="col-12"><h5>Detay:' +
                         " " +
                         i.kayip_user[0].detail +
