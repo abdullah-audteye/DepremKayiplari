@@ -54,7 +54,6 @@ def ChangeKayipStatus(request,pk):
 
 @csrf_exempt
 def IhbarView(request):
-    print(request.get_host(),'gethossst')
     tags = Tag.objects.all()
     countries = Countries.objects.all()
     kayipstatus = KayipStatus.objects.all()
@@ -132,7 +131,7 @@ def IhbarView(request):
 def GeneralFormDataView(request):
     p = ("static/data/sample.json")
     cities = get_cities_from_file(p) or []
-    
+
 
     return render(request,'generalformdata.html')
 
