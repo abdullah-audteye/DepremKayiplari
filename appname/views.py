@@ -210,3 +210,7 @@ class KayipStatusListView(ListAPIView):
     serializer_class = KayipStatusSerializer
 
 
+def item_list(request):
+    items = KayipUser.objects.all()
+    return render(request, 'item_list.html', {'items': items})
+

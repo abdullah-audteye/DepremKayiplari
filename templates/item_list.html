@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Table</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+</head>
+
+<body>
+  <div class="container-fluid">
+
+
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th>name</th>
+          <th>Address</th>
+          <th>map</th>
+          <th>Detail</th>
+          <th>Status</th>
+          <th>Gender</th>
+          <th>Age</th>
+          <!-- <th>Actions</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in items %}
+        <tr>
+          <td class="col-md-1">{{ item.kayip_first_name }} {{ item.kayip_last_name }}</td>
+          <td class="col-md-3">{{ item.address }}</td>
+          <td class="col-md-1"><a href="https://www.google.com/maps?q={{ item.cordinate_x }},{{ item.cordinate_y }} "> map </a> </td>
+          <td class="col-md-3">{{ item.detail }}</td>
+          <td class="col-md-2">{{ item.kayip_status }}</td>
+          <td class="col-md-1">{{ item.gender }}</td>
+          <td class="col-md-1">{{ item.age }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</body>
+
+
+</html>
