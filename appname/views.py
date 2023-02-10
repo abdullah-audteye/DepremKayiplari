@@ -54,7 +54,6 @@ def ChangeKayipStatus(request,pk):
 
 @csrf_exempt
 def IhbarView(request):
-    print(request.get_host(),'gethossst')
     tags = Tag.objects.all()
     countries = Countries.objects.all()
     kayipstatus = KayipStatus.objects.all()
@@ -62,6 +61,7 @@ def IhbarView(request):
     kayipuserform = KayipUserForm()
     ihbaruserform = IhbarUserForm()
     if request.method == "POST":
+        print(request.POST,'requestposst')
         kayip_user_data = (request.POST.getlist('data[]'))
         ihbarci_data = QueryDict(request.POST.get('ihbarci_data'))
         ihbaruserform = IhbarUserForm(ihbarci_data)
@@ -131,10 +131,48 @@ def IhbarView(request):
 
 def GeneralFormDataView(request):
     p = ("static/data/sample.json")
+    countries = Countries.objects.all()
+    kayipstatus = KayipStatus.objects.all()
     cities = get_cities_from_file(p) or []
-    
+    errors = {}
 
-    return render(request,'generalformdata.html')
+    if request.method == "POST":
+        ihbaruserform = IhbarUserForm(request.POST)
+        kayip_user_form = KayipUserForm(request.POST)
+
+        if(ihbaruserform.is_valid() and kayip_user_form.is_valid()):
+            ihbaruser = ihbaruserform.save()
+            kayip_user = kayip_user_form.save()
+
+
+            ihbar_instance = Ihbar.objects.create()
+            access_number = random.randint(000000,999999)
+
+            ihbar_instance.ihbar_user = ihbaruser
+            ihbar_instance.access_code = access_number
+            ihbar_instance.kayip_user.add(kayip_user.id)
+            ihbar_instance.created_time = datetime.now()
+            ihbar_instance.save()
+            if(ihbaruser.eposta):
+                            
+                toemail =ihbaruser.eposta
+                dynamic_template_data = {
+                "subject":"Your access code to change missing people's status",
+                "name":ihbar_instance.access_code,
+                "url":request.build_absolute_uri("/kayiplar/durum/"+str(ihbar_instance.access_code))
+                }
+
+                SendAccessCode(toemail,dynamic_template_data)
+
+
+        else:
+            errors["errors"] = str(ihbaruserform.errors) or str(kayip_user_form.errors)
+            
+
+
+
+    print(errors,'errors')
+    return render(request,'generalformdata.html',{"cities":cities,"countries":countries,"kayipstatus":kayipstatus,"errors":errors})
 
 
 def IframeForm(request):
