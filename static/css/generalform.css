@@ -1,0 +1,175 @@
+body {
+    margin:0;
+    padding:0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #FAFAFA !important;
+}
+
+.main {
+    max-width:450px;
+    margin:30px auto;
+    padding: 0 50px;
+}
+
+.form-head {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    max-width:100%;
+}
+
+.form-logo {
+    width:150px;
+    border-radius: 2px;
+}
+
+.form-title {
+    font-weight:400px;
+    font-size:27px;
+}
+
+.form-text {
+    font-weight:400px;
+    font-size:16px;
+}
+
+.form {
+    margin-top:35px;
+    font-family: 'Roboto', sans-serif;
+}
+.form >input {
+    margin-bottom:50px;
+    width:100%;
+    height:30px;
+    margin-top:15px;
+    border:1px solid #BFBFBF;
+    border-radius:3px;
+}
+.dropdown > button{
+    border:1px solid #BFBFBF;
+    height:30px;
+    width:200px;
+    background:white;
+    margin-bottom: 65px;
+}
+.dropdown > button:focus{
+    box-shadow:none;
+}
+
+.dropdown-toggle::after {
+    float:right;
+}
+textarea{
+    border: 1px solid #BFBFBF;
+    border-radius: 3px;
+    width: 100%;
+}
+input:focus{
+    outline: 2px solid red;
+    border: 0;
+    border-radius: 3px;
+}
+input:hover{
+    border: 1px solid gray;
+}
+textarea:focus {
+    outline: 2px solid red;
+    border: 0;
+    border-radius: 3px;
+}
+textarea:hover{
+    border: 1px solid gray;
+}
+.option1:hover{
+    background-color: lightgreen !important;
+    transition: 0.8s linear;
+}
+.option2:hover{
+    background-color: lightcoral !important;
+    transition: 0.8s linear;
+}
+.option3:hover{
+    background-color: lightskyblue !important;
+    transition: 0.8s linear;
+}
+.option4:hover{
+    background-color:yellow !important;
+    transition: 0.8s linear;
+}
+.file {
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  position: absolute;
+}
+.file-input label {
+  display: block;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  cursor: pointer;
+  transition: transform .2s ease-out;
+  margin-bottom: 65px;
+}
+
+@media only screen and (max-width: 450px){
+    .form-head {
+        gap: 15px;
+        max-width:100%;
+        flex-direction: column;
+}
+    .form-title , .form-text{
+        text-align: center;
+    }
+}
+.dropdown-menu{
+    width: 200px;
+}
+.form-select{
+    width: 100%;
+    height: 35px;
+    border-radius: 3px;
+    border: 1px solid lightgray;
+    margin-bottom: 65px;
+}
+
+.gender, .condition {
+    width: 200px;
+    height: 35px;
+    border-radius: 3px;
+    border: 1px solid lightgray;
+    margin-bottom: 65px;
+}
+
+.gender:hover,
+.condition:hover {
+    cursor:pointer;
+}
+
+#country:hover,
+#cityselect:hover {
+    cursor:pointer;
+}
+
+#status1{
+    background-color: lightskyblue !important;
+    color:white;
+}
+
+#status2{
+    background-color: lightcoral !important;
+    color:white;
+}
+
+#status3{
+    background-color: lightgreen !important;
+    color:white;
+}
+
+#status4{
+    background-color:yellow !important;
+    color:white;
+}

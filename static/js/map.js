@@ -6,8 +6,10 @@ var map = L.map('map').setView(center, 9);
 var mcg = L.markerClusterGroup({
     chunkedLoading: true,
     //singleMarkerMode: true,
+    disableClusteringAtZoom: 18,
     spiderfyOnMaxZoom: false,
 });
+
 var LeafIcon = L.Icon.extend({
     options: {
         iconSize: [24, 24],
@@ -94,14 +96,20 @@ function addLayer() {
                     marker.bindPopup(
                         '<div class="row"><div id="data-modal" class="col-12"><h3>Kayıp Bilgileri</h3></div><div class="col-12"><h5>isim:' +
                         " " +
-                        i.kayip_user[0].kayip_first_name +
+                        (i.kayip_user[0].kayip_first_name) +
                         " " +
-                        i.kayip_user[0].kayip_last_name +
+                        (i.kayip_user[0].kayip_last_name) +
                         '</h5></div><div id="data-modal" class="col-12"><h5>Adres:' +
                         " " +
                         i.kayip_user[0].address + '</h5></div>' + '<div id="data-modal" class="col-12"><h5>Durum:' +
                         " " +
                         values[i.kayip_user[0].kayip_status]?.status +
+                        '</h5></div>' + '<div id="data-modal" class="col-12"><h5>Kişi Sayısı:' +
+                        " " +
+                        i.kayip_user.length +
+                        '</h5></div>' + '<div id="data-modal" class="col-12"><h5>Cinsiyet:' +
+                        " " +
+                        (i.kayip_user[0].gender == 'F' ? 'Kadın' : 'Erkek') +
                         '</h5></div><div id="data-modal" class="col-12"><h5>Detay:' +
                         " " +
                         i.kayip_user[0].detail +
@@ -111,13 +119,13 @@ function addLayer() {
                         '</div>' +
                         '<div id="data-modal" class="col-12"><h6>isim:' +
                         " " +
-                        i.ihbar_user.ihbar_first_name +
+                        (i.ihbar_user.ihbar_first_name) +
                         " " +
-                        i.ihbar_user.ihbar_last_name +
+                        (i.ihbar_user.ihbar_last_name) +
                         '</h6></div>' +
                         '<div class="col-12"><h6>Telefon:' +
                         " " +
-                        i.ihbar_user.phonenumber +
+                        (i.ihbar_user.phonenumber) +
                         "</h6></div></div>",
                         {
                             maxWidth: 560,
@@ -131,6 +139,15 @@ function addLayer() {
         );
 
     map.addLayer(mcg);
+}
+
+function addAsterixToString(value) {
+    var result = value.split(" ", 2);
+    return result.map((i) => {
+        return i.split("").map((x, index) => {
+            return index == 0 ? (x) : "*"
+        }).join("")
+    }).join(" ");
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -172,11 +189,15 @@ function setSelected(id) {
     } else {
         selectedArray.push(id);
     }
-    document.querySelector('#legendbar_content').querySelectorAll('input').forEach((btn)=>{btn.disabled=true})
+    document.querySelector('#legendbar_content').querySelectorAll('input').forEach((btn) => {
+        btn.disabled = true
+    })
     addLayer();
-    setTimeout(()=>{
-        document.querySelector('#legendbar_content').querySelectorAll('input').forEach((btn)=>{btn.disabled=false})
-    },1000)
+    setTimeout(() => {
+        document.querySelector('#legendbar_content').querySelectorAll('input').forEach((btn) => {
+            btn.disabled = false
+        })
+    }, 1000)
 }
 
 function setSelectedCountry(id) {
@@ -219,25 +240,20 @@ function clearSearch() {
 function searchByName() {
     $('#search_results').empty();
     let userInput = document.getElementById('example-search-input').value;
-    let resultArr = [];
-    let result = allData.map(x => {
-        return x.kayip_user.map((i) => {
-            console.log(i.kayip_first_name + ":" + i.kayip_first_name.includes(userInput))
-            i.kayip_first_name.includes(userInput) && resultArr.push({
-                name: i.kayip_first_name + " " + i.kayip_last_name,
-                coordinates: i.cordinate_x + "#" + i.cordinate_y
-            })
-        })
-    });
 
-    for (let i = 0; i < resultArr.length; i++) {
-        let resultListItem = i % 2 == 1 ? '<li style="list-style: none; border-bottom:1px solid black; cursor:pointer; padding: 4px; background-color: lightgray"' +
-            'onclick="zoomToPoint(' + resultArr[i].coordinates.split('#')[0] + ',' + resultArr[i].coordinates.split('#')[1] + ')">' + resultArr[i].name + '</li>'
-            : '<li style="list-style: none; border-bottom:1px solid black; cursor:pointer; padding: 4px; ; background-color: darkgray"' +
-            'onclick="zoomToPoint(' + resultArr[i].coordinates.split('#')[0] + ',' + resultArr[i].coordinates.split('#')[1] + ')">' + resultArr[i].name + '</li>';
-        $('#search_results').append(resultListItem);
-        console.log(resultArr, "result");
-    }
+
+    fetch("api/kayiplar/filter?first_name=" + userInput)
+        .then((response) => response.json())
+        .then((status) => {
+            for (let i = 0; i < status.length; i++) {
+                let resultListItem = i % 2 == 1 ? '<li style="list-style: none; color:white; border-bottom:1px solid black; cursor:pointer; padding: 4px; background-color: rgba(61,84,131,0.75)"' +
+                    'onclick="zoomToPoint(' + status[i].cordinate_x + ',' + status[i].cordinate_y + ')">' + status[i].kayip_first_name + ' ' + status[i].kayip_last_name + '</li>'
+                    :
+                    '<li style="list-style: none; color:white; border-bottom:1px solid black; cursor:pointer; padding: 4px; ; background-color: rgba(89,120,190,0.75)"' +
+                    'onclick="zoomToPoint(' + status[i].cordinate_x + ',' + status[i].cordinate_x + ')">' + status[i].kayip_first_name + ' ' + status[i].kayip_last_name + '</li>';
+                $('#search_results').append(resultListItem);
+            }
+        });
 }
 
 function generateLegend() {
