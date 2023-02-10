@@ -53,7 +53,7 @@
             <label for="fname">City</label><br>
             <select required id="cityselect" name="city" class="form-select form-select-sm" aria-label=".form-select-sm example">
               {% for city in cities %}
-                <option data-x="{{city.coordinate_x}}" data-y="{{city.coordinate_y}}">{{city.il_adi}}</option>
+                <option data-x="{{city.coordinate_y}}" data-y="{{city.coordinate_x}}">{{city.il_adi}}</option>
                 {% endfor %}
 
             </select><br>
