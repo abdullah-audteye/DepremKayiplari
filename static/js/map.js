@@ -96,9 +96,9 @@ function addLayer() {
                     marker.bindPopup(
                         '<div class="row"><div id="data-modal" class="col-12"><h3>Kayıp Bilgileri</h3></div><div class="col-12"><h5>isim:' +
                         " " +
-                        addAsterixToString(i.kayip_user[0].kayip_first_name) +
+                        (i.kayip_user[0].kayip_first_name) +
                         " " +
-                        addAsterixToString(i.kayip_user[0].kayip_last_name) +
+                        (i.kayip_user[0].kayip_last_name) +
                         '</h5></div><div id="data-modal" class="col-12"><h5>Adres:' +
                         " " +
                         i.kayip_user[0].address + '</h5></div>' + '<div id="data-modal" class="col-12"><h5>Durum:' +
@@ -119,13 +119,13 @@ function addLayer() {
                         '</div>' +
                         '<div id="data-modal" class="col-12"><h6>isim:' +
                         " " +
-                        addAsterixToString(i.ihbar_user.ihbar_first_name)  +
+                        (i.ihbar_user.ihbar_first_name)  +
                         " " +
-                        addAsterixToString(i.ihbar_user.ihbar_last_name) +
+                        (i.ihbar_user.ihbar_last_name) +
                         '</h6></div>' +
                         '<div class="col-12"><h6>Telefon:' +
                         " " +
-                        addAsterixToString(i.ihbar_user.phonenumber) +
+                        (i.ihbar_user.phonenumber) +
                         "</h6></div></div>",
                         {
                             maxWidth: 560,

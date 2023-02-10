@@ -61,7 +61,6 @@ class KayipUser(models.Model):
     )
     kayip_first_name = models.CharField(max_length=100)
     kayip_last_name = models.CharField(max_length=100)
-    # kayip_phone_number = models.CharField(max_length=100,null=True,blank=True)
     cordinate_x = models.FloatField(max_length=10,blank=True,null=True)
     cordinate_y = models.FloatField(max_length=10,blank=True,null=True)
     address = models.TextField(null=True,blank=True)
