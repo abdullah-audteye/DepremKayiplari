@@ -29,9 +29,7 @@ def get_cities_from_file(path):
 
 @csrf_exempt
 def ChangeKayipStatus(request,pk):
-    p = ("static/data/sample.json")
 
-    cities = get_cities_from_file(p) or []
 
     ihbar = get_object_or_404(Ihbar,access_code=pk)
     kayip_status = KayipStatus.objects.all()
@@ -51,7 +49,7 @@ def ChangeKayipStatus(request,pk):
             print(err,'errr')
             return JsonResponse({'status': False, 'message': "Failed"}, status=200)
 
-    return render(request,'change_status.html',{"ihbar":ihbar,'kayip_status':kayip_status,"access_code":pk,"cities":cities})
+    return render(request,'change_status.html',{"ihbar":ihbar,'kayip_status':kayip_status,"access_code":pk})
 
 
 @csrf_exempt
@@ -129,6 +127,14 @@ def IhbarView(request):
                   {"kayipuserform": kayipuserform, "ihbaruserform": ihbaruserform, "tags": tags, "countries": countries,
                    "kayip_status": kayipstatus})
 
+
+
+def GeneralFormDataView(request):
+    p = ("static/data/sample.json")
+    cities = get_cities_from_file(p) or []
+    
+
+    return render(request,'generalformdata.html')
 
 
 def IframeForm(request):
