@@ -4,21 +4,35 @@ from .models import Ihbar, KayipUser, Tag, Countries, KayipStatus,IhbarUser
 from django.db import transaction
 from django.http import JsonResponse
 from django.http import QueryDict
-from .serializers import KayipUserSerializer, IhbarSerializer, KayipStatusSerializer
+from .serializers import  IhbarSerializer, KayipStatusSerializer
 from rest_framework.generics import ListAPIView
 from django.shortcuts import get_object_or_404
 from .helper import CleanBadRecords,FixNonHavingDates,SendAccessCode
 from datetime import datetime
 import random
 from django.views.decorators.csrf import csrf_exempt
-from django.urls import reverse
+import json
 
 
+
+
+def get_cities_from_file(path):
+    try:
+        with open(path, 'r') as f:
+            cities = json.load(f)
+        return cities
+
+    except:
+        return []
 
 
 
 @csrf_exempt
 def ChangeKayipStatus(request,pk):
+    p = ("static/data/sample.json")
+
+    cities = get_cities_from_file(p) or []
+
     ihbar = get_object_or_404(Ihbar,access_code=pk)
     kayip_status = KayipStatus.objects.all()
 
@@ -37,7 +51,7 @@ def ChangeKayipStatus(request,pk):
             print(err,'errr')
             return JsonResponse({'status': False, 'message': "Failed"}, status=200)
 
-    return render(request,'change_status.html',{"ihbar":ihbar,'kayip_status':kayip_status,"access_code":pk})
+    return render(request,'change_status.html',{"ihbar":ihbar,'kayip_status':kayip_status,"access_code":pk,"cities":cities})
 
 
 @csrf_exempt

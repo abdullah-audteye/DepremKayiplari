@@ -4,3 +4,4 @@ sqlparse==0.4.3
 djangorestframework==3.14.0
 psycopg2-binary==2.9.5
 sendgrid==6.9.7
+bs4
