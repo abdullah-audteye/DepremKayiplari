@@ -1,6 +1,6 @@
 from django.urls import include, path
 from django.contrib import admin
-from appname.views import IhbarView,KayipUserListView,KayipUserFilterUser,KayipStatusListView,ChangeKayipStatus,IframeForm,GeneralFormDataView,IframeDashboard
+from appname.views import IhbarView,KayipUserListView,KayipUserFilterUser,KayipStatusListView,ChangeKayipStatus,GeneralFormDataView
 
 
 urlpatterns = [
@@ -10,12 +10,8 @@ urlpatterns = [
     path('genelform',GeneralFormDataView,name="genelform"),
 
 
-    path('form',IframeForm,name="iframe_form"),
-    # path('dashboard',IframeDashboard,name="iframe_dashboard"),
-
     path('api/kayiplar',KayipUserListView.as_view(),name="kayiplarview_api"),
     path('api/kayiplar/filter',KayipUserFilterUser.as_view(),name="kayiplarview_api_filter"),
-
     path('api/kayipstatus',KayipStatusListView.as_view(),name="kayip_status_api")
 
 ]
