@@ -179,13 +179,6 @@ def GeneralFormDataView(request):
     return render(request,'generalformdata.html',{"cities":cities,"countries":countries,"kayipstatus":kayipstatus,"errors":errors})
 
 
-def IframeForm(request):
-    return render(request,'iframeform.html')
-
-
-def IframeDashboard(request):
-    return render(request,'iframeform.html')
-
 
 
 class KayipUserListView(ListAPIView):

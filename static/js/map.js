@@ -241,6 +241,8 @@ function searchByName() {
     $('#search_results').empty();
     let userInput = document.getElementById('example-search-input').value;
 
+    if (userInput.length < 3)
+        alert("Must be at least 3 characters");
 
     fetch("api/kayiplar/filter?first_name=" + userInput)
         .then((response) => response.json())
