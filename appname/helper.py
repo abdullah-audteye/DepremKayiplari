@@ -8,10 +8,6 @@ SENDGRID_FROM_EMAIL = os.environ.get('MAIL_SENDGRID_FROM_EMAIL')
 SENDGRID_API_KEY = os.environ.get('MAIL_SENDGRID_API_KEY')
 
 
-print(SENDGRID_FROM_EMAIL,'sendgrid')
-print(SENDGRID_API_KEY,'sendgrid')
-
-
 def CleanBadRecords():
     ihbarlar = Ihbar.objects.filter(kayip_user__isnull=True).delete()
 

@@ -99,7 +99,6 @@ def IhbarView(request):
                             "name":ihbar_instance.access_code,
                             "url":request.build_absolute_uri("/kayiplar/durum/"+str(ihbar_instance.access_code))
                             }
-                            print(request.build_absolute_uri("/kayiplar/durum/"+str(ihbar_instance.access_code)))
 
                             SendAccessCode(toemail,dynamic_template_data)
                         return JsonResponse({'status': True, 'message': "success"}, status=200)
