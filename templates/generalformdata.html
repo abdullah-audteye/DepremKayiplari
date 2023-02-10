@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="{% static 'css/generalform.css' %}" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>FindMeHelpMe | Form</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
   </head>
   <body>
     <div class="main">
@@ -43,7 +44,7 @@
 
             <label for="fname">Country</label><br>
             
-            <select name="country" class="form-select form-select-sm" aria-label=".form-select-sm example">
+            <select id="country" name="country" class="form-select form-select-sm" aria-label=".form-select-sm example">
                 {% for country in countries %}
                 <option value="{{country.id}}">{{country.name}}</option>
                 {% endfor %}
@@ -61,16 +62,16 @@
             <input required type="text"  name="age"><br><br>
             <p>Gender</p>
             <div>
-              <select  name="gender"  aria-labelledby="dropdownMenu2">
+              <select  class="gender" name="gender"  aria-labelledby="dropdownMenu2">
                 <option value="M"  type="button">Male</option>
                 <option value="F"  type="button">Female</option>
               </select>
             </div>
             <p>Condition</p>
             <div >
-              <select  name="kayip_status"  aria-labelledby="dropdownMenu2">  
+              <select   class="condition" name="kayip_status"  aria-labelledby="dropdownMenu2">  
                 {% for status in kayipstatus %}
-                <option value="{{status.id}}" type="button">{{status}}</option>
+                <option id="status{{status.id}}" value="{{status.id}}" type="button">{{status}}</option>
                 {% endfor %}          
               </select>
             </div>
