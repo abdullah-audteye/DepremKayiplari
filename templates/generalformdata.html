@@ -1,163 +1,170 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8"/>
-    <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-    <link
-            href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
-            rel="stylesheet"
-    />
-    <link rel="stylesheet" href="{% static 'css/generalform.css' %}"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/generalform.css' %}" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>FindMeHelpMe | Form</title>
     <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
     <style>
-
-        body > .skiptranslate > iframe {
+        body>.skiptranslate>iframe {
             display: none;
         }
     </style>
 </head>
+
 <body>
-<div class="main">
-    <div id="google_translate_element"></div>
-    <div class="form-head ">
-        <img src="{% static 'images/form-logo.png' %}" alt="form-logo" class="form-logo"/>
-        <div>
-            <h1 class="form-title">FindMeHelpMe Form</h1>
-            <p class="form-text">
-                Form to report missing people in the earthquake
-            </p>
+    <div class="main">
+        <div id="google_translate_element"></div>
+        <div class="form-head ">
+            <img src="{% static 'images/form-logo.png' %}" alt="form-logo" class="form-logo" />
+            <div>
+                <h1 class="form-title">FindMeHelpMe Form</h1>
+                <p class="form-text">
+                    Form to report missing people in the earthquake
+                </p>
+            </div>
+
         </div>
 
-    </div>
-    <div class="form-main-content">
-        <form class="form" method="post" action="{% url 'genelform' %}">
-            {% csrf_token %}
-            <input type="hidden" id="coordinate_x" name="cordinate_x"/>
-            <input type="hidden" id="coordinate_y" name="cordinate_y"/>
+        <div class="form-main-content">
+            <form class="form" id="myForm" method="post" action="{% url 'genelform' %}">
+                {% csrf_token %}
+                <input type="hidden" id="coordinate_x" name="cordinate_x" />
+                <input type="hidden" id="coordinate_y" name="cordinate_y" />
 
-            <label for="fname">Name</label><br>
-            <input required type="text" id="" name="kayip_first_name"><br>
-            <label for="fname">Surname</label><br>
-            <input required type="text" id="" name="kayip_last_name"><br>
+                <label for="fname">Name</label><br>
+                <input required type="text" id="" name="kayip_first_name"><br>
+                <label for="fname">Surname</label><br>
+                <input required type="text" id="" name="kayip_last_name"><br>
 
-            <label for="fname">Country</label><br>
+                <label for="fname">Country</label><br>
 
-            <select id="country" name="country" class="form-select form-select-sm" aria-label=".form-select-sm example">
-                {% for country in countries %}
+                <select id="country" name="country" class="form-select form-select-sm"
+                    aria-label=".form-select-sm example">
+                    {% for country in countries %}
                     <option value="{{ country.id }}">{{ country.name }}</option>
-                {% endfor %}
+                    {% endfor %}
 
-            </select><br>
-            <label for="fname">City</label><br>
-            <select required id="cityselect" name="city" class="form-select form-select-sm"
+                </select><br>
+                <label for="fname">City</label><br>
+                <select required id="cityselect" name="city" class="form-select form-select-sm"
                     aria-label=".form-select-sm example">
 
 
-            </select><br>
+                </select><br>
 
-            <label for="lname">Age</label><br>
-            <input required type="text" name="age"><br><br>
-            <p>Gender</p>
-            <div>
-                <select class="gender" name="gender" aria-labelledby="dropdownMenu2">
-                    <option value="M" type="button">Male</option>
-                    <option value="F" type="button">Female</option>
-                </select>
-            </div>
-            <p>Condition</p>
-            <div>
-                <select class="condition" name="kayip_status" aria-labelledby="dropdownMenu2">
-                    {% for status in kayipstatus %}
+                <label for="lname">Age</label><br>
+                <input required type="text" name="age"><br><br>
+                <p>Gender</p>
+                <div>
+                    <select class="gender" name="gender" aria-labelledby="dropdownMenu2">
+                        <option value="M" type="button">Male</option>
+                        <option value="F" type="button">Female</option>
+                    </select>
+                </div>
+                <p>Condition</p>
+                <div>
+                    <select class="condition" name="kayip_status" aria-labelledby="dropdownMenu2">
+                        {% for status in kayipstatus %}
                         <option id="status{{ status.id }}" value="{{ status.id }}" type="button">{{ status }}</option>
-                    {% endfor %}
-                </select>
-            </div>
+                        {% endfor %}
+                    </select>
+                </div>
 
 
-            <label for="lname">Address</label><br>
-            <textarea required name="address" style="resize:none; margin-bottom: 65px;" cols="66" rows="3"></textarea>
+                <label for="lname">Address</label><br>
+                <textarea required name="address" style="resize:none; margin-bottom: 65px;" cols="66"
+                    rows="3"></textarea>
 
-            <label for="lname">Additional Notes</label><br>
-            <textarea name="detail" style="resize:none; margin-bottom: 65px;" cols="66" rows="3"></textarea>
-            <label for="lname">Reporter Name</label><br>
-            <input required type="text" name="ihbar_first_name"><br><br>
-            <label for="lname">Reporter Surname</label><br>
-            <input required type="text" name="ihbar_last_name"><br><br>
-            <label for="lname">Reporter Phone</label><br>
-            <input required type="text" name="phonenumber"><br><br>
-            <label for="lname">Reporter Email</label><br>
-            <input required type="text" name="eposta"><br><br>
+                <label for="lname">Additional Notes</label><br>
+                <textarea name="detail" style="resize:none; margin-bottom: 65px;" cols="66" rows="3"></textarea>
+                <label for="lname">Reporter Name</label><br>
+                <input required type="text" name="ihbar_first_name"><br><br>
+                <label for="lname">Last Name</label><br>
+                <input required type="text" name="ihbar_last_name"><br><br>
+                <label for="lname">Phone</label><br>
+                <input required type="text" name="phonenumber"><br><br>
+                <label for="lname">Email</label><br>
+                <input required type="text" name="eposta"><br><br>
 
-            <div style="color:red">{{ errors.errors }}</div>
+                <div style="color:red">{{ errors.errors }}</div>
 
 
-            <input class="btn btn-danger btn-sm w-25 py-2 h-100" type="submit" value="Submit">
+                <input class="btn btn-danger btn-sm w-25 py-2 h-100" type="submit" value="Submit">
 
-        </form>
+            </form>
+        </div>
     </div>
-</div>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        document.getElementById('cityselect').addEventListener('change', (event) => {
-            // let result = document.getElementById('cityselect')
-            let e = document.getElementById("cityselect");
-            let value = e.options[e.selectedIndex].value;
-            let coordinate_x = e.options[e.selectedIndex].getAttribute('data-y');
-            let coordinate_y = e.options[e.selectedIndex].getAttribute('data-x');
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById('cityselect').addEventListener('change', (event) => {
+                // let result = document.getElementById('cityselect')
+                let e = document.getElementById("cityselect");
+                let value = e.options[e.selectedIndex].value;
+                let coordinate_x = e.options[e.selectedIndex].getAttribute('data-y');
+                let coordinate_y = e.options[e.selectedIndex].getAttribute('data-x');
 
 
-            document.getElementById('coordinate_y').value = coordinate_y
-            document.getElementById('coordinate_x').value = coordinate_x
+                document.getElementById('coordinate_y').value = coordinate_y
+                document.getElementById('coordinate_x').value = coordinate_x
 
 
-        })
-    });
-
-</script>
-<script>
-    fetch("/static/data/sample.json")
-        .then((response) => response.json())
-        .then((status) => {
-            for (let i = 0; i < status.length; i++) {
-                let resultListItem = '<option data-x="' + status[i].coordinate_x + '" data-y="' + status[i].coordinate_y + '" value="' + status[i].il_plaka + '">' + status[i].il_adi + '</option>'
-                $('#cityselect').append(resultListItem);
-            }
+            })
         });
-</script>
-<script type="text/javascript">
-    function googleTranslateElementInit() {
-        new google.translate.TranslateElement(
-            {
-                pageLanguage: "tr",
-                includedLanguages: "ar,tr,en", layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-            },
-            "google_translate_element"
-        );
-    }
-</script>
-<script
-        type="text/javascript"
-        src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+
+    </script>
+    <script>
+        fetch("/static/data/sample.json")
+            .then((response) => response.json())
+            .then((status) => {
+                for (let i = 0; i < status.length; i++) {
+                    let resultListItem = '<option data-x="' + status[i].coordinate_x + '" data-y="' + status[i].coordinate_y + '" value="' + status[i].il_plaka + '">' + status[i].il_adi + '</option>'
+                    $('#cityselect').append(resultListItem);
+                }
+            });
+    </script>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {
+                    pageLanguage: "tr",
+                    includedLanguages: "ar,tr,en", layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+                },
+                "google_translate_element"
+            );
+        }
+    </script>
+    <!-- <script>
+        document.getElementById("myForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+            // Perform form submission logic here
+            // Show Bootstrap alert
+            var alertDiv = document.createElement("div");
+            alertDiv.className = "alert alert-success";
+            alertDiv.innerHTML = "Form submitted successfully!";
+            document.body.appendChild(alertDiv);
+        });
+    </script> -->
+    <script type="text/javascript"
+        src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 </body>
-</html>
 
+</html>
