@@ -1,17 +1,22 @@
 from django.urls import include, path
 from django.contrib import admin
-from appname.views import IhbarView,KayipUserListView,KayipStatusListView,ChangeKayipStatus,IframeForm,IframeDashboard
+from appname.views import IhbarView,KayipUserListView,KayipUserFilterUser,KayipStatusListView,ChangeKayipStatus,GeneralFormDataView, item_list
 
 
 urlpatterns = [
     path("admin", admin.site.urls, name="admin_page"),
     path('',IhbarView,name="ihbarview_tr"),
     path('kayiplar/durum/<int:pk>',ChangeKayipStatus,name="kayiplar_durum_detail"),
+    path('genelform',GeneralFormDataView,name="genelform"),
 
-    path('form',IframeForm,name="iframe_form"),
-    # path('dashboard',IframeDashboard,name="iframe_dashboard"),
 
     path('api/kayiplar',KayipUserListView.as_view(),name="kayiplarview_api"),
-    path('api/kayipstatus',KayipStatusListView.as_view(),name="kayip_status_api")
+    path('api/kayiplar/filter',KayipUserFilterUser.as_view(),name="kayiplarview_api_filter"),
+    path('api/kayipstatus',KayipStatusListView.as_view(),name="kayip_status_api"),
+
+
+     path('table', item_list, name='item_list'),
 
 ]
+
+# urlpatterns = [    path('', item_list, name='item_list'),    path('edit/<int:pk>/', edit_item, name='edit_item'),]
