@@ -34,9 +34,8 @@
             </div>
 
         </div>
-
         <div class="form-main-content">
-            <form class="form" id="myForm" method="post" action="{% url 'genelform' %}">
+            <form class="form" method="post" action="{% url 'genelform' %}">
                 {% csrf_token %}
                 <input type="hidden" id="coordinate_x" name="cordinate_x" />
                 <input type="hidden" id="coordinate_y" name="cordinate_y" />
@@ -89,11 +88,11 @@
                 <textarea name="detail" style="resize:none; margin-bottom: 65px;" cols="66" rows="3"></textarea>
                 <label for="lname">Reporter Name</label><br>
                 <input required type="text" name="ihbar_first_name"><br><br>
-                <label for="lname">Last Name</label><br>
+                <label for="lname">Reporter Surname</label><br>
                 <input required type="text" name="ihbar_last_name"><br><br>
-                <label for="lname">Phone</label><br>
+                <label for="lname">Reporter Phone</label><br>
                 <input required type="text" name="phonenumber"><br><br>
-                <label for="lname">Email</label><br>
+                <label for="lname">Reporter Email</label><br>
                 <input required type="text" name="eposta"><br><br>
 
                 <div style="color:red">{{ errors.errors }}</div>
@@ -143,17 +142,6 @@
             );
         }
     </script>
-    <!-- <script>
-        document.getElementById("myForm").addEventListener("submit", function (event) {
-            event.preventDefault();
-            // Perform form submission logic here
-            // Show Bootstrap alert
-            var alertDiv = document.createElement("div");
-            alertDiv.className = "alert alert-success";
-            alertDiv.innerHTML = "Form submitted successfully!";
-            document.body.appendChild(alertDiv);
-        });
-    </script> -->
     <script type="text/javascript"
         src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

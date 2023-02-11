@@ -50,7 +50,7 @@ def ChangeKayipStatus(request,pk):
                 kayip_user_instance.save()
             return JsonResponse({'status': True, 'message': "success"}, status=200)
         except Exception as err:
-            print(err,'errr')
+            # print(err,'errr')
             return JsonResponse({'status': False, 'message': "Failed"}, status=200)
 
     return render(request,'change_status.html',{"ihbar":ihbar,'kayip_status':kayip_status,"access_code":pk})
@@ -65,7 +65,6 @@ def IhbarView(request):
     kayipuserform = KayipUserForm()
     ihbaruserform = IhbarUserForm()
     if request.method == "POST":
-        print(request.POST,'requestposst')
         kayip_user_data = (request.POST.getlist('data[]'))
         ihbarci_data = QueryDict(request.POST.get('ihbarci_data'))
         ihbaruserform = IhbarUserForm(ihbarci_data)
@@ -138,7 +137,6 @@ def GeneralFormDataView(request):
     countries = Countries.objects.all()
     kayipstatus = KayipStatus.objects.all()
     cities = get_cities_from_file(p) or []
-    print(cities,'citiress')
     errors = {}
 
     if request.method == "POST":
@@ -176,7 +174,6 @@ def GeneralFormDataView(request):
 
 
 
-    print(errors,'errors')
     return render(request,'generalformdata.html',{"cities":cities,"countries":countries,"kayipstatus":kayipstatus,"errors":errors})
 
 
