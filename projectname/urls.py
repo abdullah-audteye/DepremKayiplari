@@ -16,7 +16,6 @@ urlpatterns = [
 
 
      path('table', item_list, name='item_list'),
-
 ]
 
 # urlpatterns = [    path('', item_list, name='item_list'),    path('edit/<int:pk>/', edit_item, name='edit_item'),]

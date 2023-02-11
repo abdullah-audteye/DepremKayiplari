@@ -211,6 +211,8 @@ class KayipStatusListView(ListAPIView):
 
 
 def item_list(request):
-    items = KayipUser.objects.all()
-    return render(request, 'item_list.html', {'items': items})
-
+    if request.user.is_authenticated:
+        items = KayipUser.objects.all()
+        return render(request, 'item_list.html', {'items': items})
+    else:
+        return redirect('ihbarview_tr')
