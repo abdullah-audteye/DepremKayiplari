@@ -22,8 +22,8 @@ def PutAsteriskSymbol(value,cut_value=2,phonenumber=False):
 
 class KayipUserSerializer(ModelSerializer):
 
-    kayip_first_name = SerializerMethodField()
-    kayip_last_name = SerializerMethodField()
+    kayip_first_name = SerializerMethodField(read_only=True)
+    kayip_last_name = SerializerMethodField(read_only=True)
 
     def get_kayip_first_name(self,obj):
         return PutAsteriskSymbol(obj.kayip_first_name)
@@ -83,7 +83,7 @@ class ReportedUserSerializer(ModelSerializer):
         fields = "__all__"
 
 class ReportSerializer(ModelSerializer):
-    kayip_user = ReportedUserSerializer(many=True)
+    kayip_user = ReportedUserSerializer(many=True, read_only=True)
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
