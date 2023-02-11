@@ -4,14 +4,16 @@ from .models import Ihbar, KayipUser, Tag, Countries, KayipStatus,IhbarUser
 from django.db import transaction
 from django.http import JsonResponse
 from django.http import QueryDict
-from .serializers import  IhbarSerializer, KayipStatusSerializer,KayipUserSerializer
-from rest_framework.generics import ListAPIView
+from .serializers import  IhbarSerializer, KayipStatusSerializer,KayipUserSerializer, ReportSerializer
+from rest_framework.generics import ListAPIView, RetrieveUpdateDestroyAPIView
 from django.shortcuts import get_object_or_404
 from .helper import CleanBadRecords,FixNonHavingDates,SendAccessCode
 from datetime import datetime
 import random
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.views.decorators.csrf import csrf_exempt
 import json
 
@@ -208,6 +210,19 @@ class KayipUserFilterUser(ListAPIView):
 class KayipStatusListView(ListAPIView):
     queryset = KayipStatus.objects.all()
     serializer_class = KayipStatusSerializer
+
+
+class ReportListView(ListAPIView):
+    queryset = Ihbar.objects.all()
+    serializer_class = ReportSerializer
+    # permission_classes = [IsAuthenticated]
+
+
+class UpdateReportView(RetrieveUpdateDestroyAPIView):
+    queryset = Ihbar.objects.all()
+    serializer_class = ReportSerializer
+    permission_classes = [AllowAny]
+    authentication_classes = [TokenAuthentication]
 
 
 def item_list(request):
