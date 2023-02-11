@@ -16,7 +16,7 @@
   <script type="text/javascript" charset="utf8"
     src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.js"></script>
 </head>
-
+ 
 <!-- <td class="col-md-1">{{ item.kayip_first_name }} {{ item.kayip_last_name }}</td>
           <td class="col-md-3">{{ item.address }}</td>
           <td class="col-md-1"><a href="https://www.google.com/maps?q={{ item.cordinate_x }},{{ item.cordinate_y }} "> map </a> </td>
@@ -36,6 +36,7 @@
         <table id="reportList" class="display">
           <thead>
             <tr>
+              <th>Reported ID</th>
               <th>Name</th>
               <th>Address</th>
               <th>Map</th>
@@ -45,6 +46,7 @@
               <th>Age</th>
               <th>Reporter</th>
               <th>Reporter Number</th>
+              <th>Status Description</th>
             </tr>
           </thead>
         </table>
@@ -62,15 +64,17 @@
           dataItem.kayip_user.forEach(kayipUser => {
             let newRecord = {};
             newRecord.id = dataItem.id;
+            newRecord.reported_id = kayipUser.id;
             newRecord.name = kayipUser.kayip_first_name + " " + kayipUser.kayip_last_name;
             newRecord.map = `<a href="https://www.google.com/maps?q=${kayipUser.cordinate_x},${kayipUser.cordinate_y}"> map </a>`;
             newRecord.address = kayipUser.address;
             newRecord.detail = kayipUser.detail;
-            newRecord.status = kayipUser.kayip_status;
+            newRecord.kayip_status = kayipUser.kayip_status;
             newRecord.gender = kayipUser.gender === 'M' ? 'Male' : 'Female';
             newRecord.reporter = dataItem.ihbar_user_name;
             newRecord.reporter_number = dataItem.ihbar_user_phone_number;
             newRecord.age = kayipUser.age;
+            newRecord.status = kayipUser.status;
             reportList.push(newRecord);
           })
         });
@@ -79,17 +83,33 @@
         var dataTable = $('#reportList').DataTable({
 
           "data": reportList,
-  
+          
           "columns": [
+            { "data": "reported_id" },
             { "data": "name" },
             { "data": "address" },
             { "data": "map" },
             { "data": "detail" },
-            { "data": "status" },
+            { 
+              "data": "kayip_status",
+              "render": function (data, type, row) {
+                data = data.toString();
+                if (data === '1') {
+                  return 'At Hospital';
+                } else if (data === '2') {
+                  return 'Missing';
+                } else if (data === '3') {
+                  return 'Found';
+                } else {
+                  return 'In Need of Help';
+                }
+              } 
+            },
             { "data": "gender" },
             { "data": "age" },
             { "data": "reporter" },
-            { "data": "reporter_number" }
+            { "data": "reporter_number" },
+            { "data": "status" }
           ]
   
         });
@@ -107,23 +127,61 @@
         });
   
         $('#reportList').on('dblclick', 'tbody td', function () {
+          const ignoredCells = [0, 3, 8, 9, 6];
+          const statusCell = 5;
+          const statusDescriptionCell = 10;
+          if (ignoredCells.includes($(this)[0].cellIndex)) return;
+
+          if ($(this)[0].cellIndex == statusCell) {
+            var selectElement = document.createElement('select');
+            selectElement.className = "editable";
+            var optionElement0 = document.createElement('option');
+            optionElement0.value = 0;
+            optionElement0.text = "Select Status";
+            var optionElement1 = document.createElement('option');
+            optionElement1.value = 1;
+            optionElement1.text = "At Hospital";
+            var optionElement2 = document.createElement('option');
+            optionElement2.value = 2;
+            optionElement2.text = "Missing";
+            var optionElement3 = document.createElement('option');
+            optionElement3.value = 3;
+            optionElement3.text = "Found";
+            var optionElement4 = document.createElement('option');
+            optionElement4.value = 4;
+            optionElement4.text = "In Need of Help";
+            selectElement.appendChild(optionElement0);
+            selectElement.appendChild(optionElement1);
+            selectElement.appendChild(optionElement2);
+            selectElement.appendChild(optionElement3);
+            selectElement.appendChild(optionElement4);
+            this.innerHTML = '';
+            this.appendChild(selectElement);
+            $(selectElement).focus();
+          }
+          else if ($(this)[0].cellIndex == statusDescriptionCell) {
+            var textAreaElement = document.createElement('textarea');
+            textAreaElement.className = "editable";
+            this.innerHTML = '';
+            this.appendChild(textAreaElement);
+            $(textAreaElement).focus();
+          } 
+          else {
+            var text = dataTable.cell($(this)).data();
   
-          var text = dataTable.cell($(this)).data();
-  
-          var inputElement = document.createElement('input');
-  
-          inputElement.type = "text";
-  
-          inputElement.value = text;
-  
-          inputElement.className = "editable";
-  
-          this.innerHTML = '';
-  
-          this.appendChild(inputElement);
-  
-          $(inputElement).focus();
-  
+            var inputElement = document.createElement('input');
+    
+            inputElement.type = "text";
+    
+            inputElement.value = text;
+            inputElement.className = "editable";
+    
+            this.innerHTML = '';
+    
+            this.appendChild(inputElement);
+    
+            $(inputElement).focus();
+          }
         });
   
         $('#reportList').on('change', '.editable', function () {
@@ -137,16 +195,24 @@
           var oldData = cell.data();
   
           cell.data(inputVal);
-  
-          console.log(JSON.stringify(row.data()));
-  
-          // Make an ajax call to update table.
-  
-          // If the ajax call fails, put the old data back
-          // and show a warning.
-  
+          
+          let updatedData = row.data();
+          updatedData.gender = row.data().gender === 'Male' ? 'M' : 'F';
+
+          fetch(`/api/reports/${updatedData.id}`, {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedData)
+          })
+          .then(res => res.json())
+          .catch(err => {
+            console.log(err);
+            cell.data(oldData);
+          });
+
           dataTable.draw();
-  
         });
   
         $('#reportList').on('active', '.editable', function () {

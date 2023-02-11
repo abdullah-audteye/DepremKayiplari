@@ -16,7 +16,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.views.decorators.csrf import csrf_exempt
 import json
-
+import ipdb
 
 
 
@@ -224,6 +224,21 @@ class UpdateReportView(RetrieveUpdateDestroyAPIView):
     permission_classes = [AllowAny]
     authentication_classes = [TokenAuthentication]
 
+
+    def update(self, request, *args, **kwargs):
+        partial = kwargs.pop('partial', False)
+        instance = self.get_object()
+
+        kayip_user_id = request.data.get('reported_id')
+        kayip_user_instance = KayipUser.objects.get(id=kayip_user_id)
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+
+        serializer_kayip_user = KayipUserSerializer(kayip_user_instance, data=request.data, partial=partial)
+        serializer_kayip_user.is_valid(raise_exception=True)
+        serializer_kayip_user.save()
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+        return Response(serializer.data)
 
 def item_list(request):
     if request.user.is_authenticated:
