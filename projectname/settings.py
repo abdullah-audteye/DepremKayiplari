@@ -39,6 +39,9 @@ CORS_ALLOWED_ORIGINS = [
     "https://findmehelpme.com"
 ]
 
+X_FRAME_OPTIONS = 'ALLOW-FROM http://*.localhost/(.*)'
+
+
 # Application definition
 
 INSTALLED_APPS = [

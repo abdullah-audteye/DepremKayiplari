@@ -11,24 +11,20 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
     integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <!-- DataTable jQuery/JS -->
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.css">
   <script type="text/javascript" charset="utf8"
     src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.js"></script>
 </head>
- 
-<!-- <td class="col-md-1">{{ item.kayip_first_name }} {{ item.kayip_last_name }}</td>
-          <td class="col-md-3">{{ item.address }}</td>
-          <td class="col-md-1"><a href="https://www.google.com/maps?q={{ item.cordinate_x }},{{ item.cordinate_y }} "> map </a> </td>
-          <td class="col-md-3">{{ item.detail }}</td>
-          <td class="col-md-2">{{ item.kayip_status }}</td>
-          <td class="col-md-1">{{ item.gender }}</td>
-          <td class="col-md-1">{{ item.age }}</td> -->
           
 <body>
   <div class="container-fluid" style="padding: 40px; margin: 0px;">
     <div class="row" style="display: flex; justify-content: start;  margin-left: 0px; margin-bottom: 10px; gap: 5px;">
-      <button class="btn btn-sm btn-primary">New</button>
+      <button id="newRecordButton" class="btn btn-sm btn-primary">New</button>
       <button id="removeButton" class="btn btn-sm btn-danger">Delete</button>
     </div>
     <div class="row">
@@ -50,6 +46,15 @@
             </tr>
           </thead>
         </table>
+      </div>
+    </div>
+    <div id="newRecordModal" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <!-- <iframe src="/genelform" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe> -->
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -225,11 +230,31 @@
   
         $('#removeButton').on('click', function() {
             let selectedRow = dataTable.row('.selected').data();
-            // TODO: delete selected row, then refresh table
             fetch(`/api/reports/${selectedRow.id}`, {
               method: 'DELETE'
             });
             dataTable.row('.selected').remove().draw( false );
+        })
+
+        $('#newRecordButton').on('click', function() {
+          // Open a modal for new record
+          $('#newRecordModal').modal('show');
+          // Get the modal body
+          let modalBody = $('#newRecordModal').find('.modal-body');
+          // Calculate the iFrame and set the modal height size
+          let modalHeight = $(window).height() - 200;
+          modalBody.height(modalHeight);
+          // Append iframe to the modal body
+          let iframe = document.createElement('iframe');
+          iframe.src = '/genelform';
+          iframe.width = '100%';
+          iframe.height = '100%';
+          iframe.frameBorder = 0;
+          modalBody.append(iframe);
+          // When the modal is hidden, remove the iframe
+          $('#newRecordModal').on('hidden.bs.modal', function () {
+            modalBody.empty();
+          });
         })
       })
     });
