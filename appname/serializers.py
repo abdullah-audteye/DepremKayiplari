@@ -71,6 +71,31 @@ class IhbarSerializer(ModelSerializer):
         model = Ihbar
         exclude = ['access_code']
 
+
+class ReporterUserSerializer(ModelSerializer):
+    class Meta:
+        model = IhbarUser
+        fields = "__all__"
+
+class ReportedUserSerializer(ModelSerializer):
+    class Meta:
+        model = KayipUser
+        fields = "__all__"
+
+class ReportSerializer(ModelSerializer):
+    kayip_user = ReportedUserSerializer(many=True)
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['ihbar_user_name'] = instance.ihbar_user.ihbar_first_name + " " + instance.ihbar_user.ihbar_last_name
+        data['ihbar_user_phone_number'] = instance.ihbar_user.phonenumber
+        return data
+
+    class Meta:
+        model = Ihbar
+        exclude = ['access_code']
+
+
 class KayipStatusSerializer(ModelSerializer):
     class Meta:
         model = KayipStatus

@@ -8,42 +8,166 @@
   <title>Table</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
+    integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- DataTable jQuery/JS -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.css">
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.js"></script>
 </head>
 
-<body>
-  <div class="container-fluid">
-
-
-    <table class="table">
-      <thead class="thead-dark">
-        <tr>
-          <th>name</th>
-          <th>Address</th>
-          <th>map</th>
-          <th>Detail</th>
-          <th>Status</th>
-          <th>Gender</th>
-          <th>Age</th>
-          <!-- <th>Actions</th> -->
-        </tr>
-      </thead>
-      <tbody>
-        {% for item in items %}
-        <tr>
-          <td class="col-md-1">{{ item.kayip_first_name }} {{ item.kayip_last_name }}</td>
+<!-- <td class="col-md-1">{{ item.kayip_first_name }} {{ item.kayip_last_name }}</td>
           <td class="col-md-3">{{ item.address }}</td>
           <td class="col-md-1"><a href="https://www.google.com/maps?q={{ item.cordinate_x }},{{ item.cordinate_y }} "> map </a> </td>
           <td class="col-md-3">{{ item.detail }}</td>
           <td class="col-md-2">{{ item.kayip_status }}</td>
           <td class="col-md-1">{{ item.gender }}</td>
-          <td class="col-md-1">{{ item.age }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+          <td class="col-md-1">{{ item.age }}</td> -->
+          
+<body>
+  <div class="container-fluid" style="padding: 40px; margin: 0px;">
+    <div class="row" style="display: flex; justify-content: start;  margin-left: 0px; margin-bottom: 10px; gap: 5px;">
+      <button class="btn btn-sm btn-primary">New</button>
+      <button id="removeButton" class="btn btn-sm btn-danger">Delete</button>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <table id="reportList" class="display">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Address</th>
+              <th>Map</th>
+              <th>Detail</th>
+              <th>Status</th>
+              <th>Gender</th>
+              <th>Age</th>
+              <th>Reporter</th>
+              <th>Reporter Number</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
   </div>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      let reportList = [];
+
+      fetch('/api/reports')
+      .then(res => res.json())
+      .then(data => {
+        data.forEach(dataItem => {
+          dataItem.kayip_user.forEach(kayipUser => {
+            let newRecord = {};
+            newRecord.id = dataItem.id;
+            newRecord.name = kayipUser.kayip_first_name + " " + kayipUser.kayip_last_name;
+            newRecord.map = `<a href="https://www.google.com/maps?q=${kayipUser.cordinate_x},${kayipUser.cordinate_y}"> map </a>`;
+            newRecord.address = kayipUser.address;
+            newRecord.detail = kayipUser.detail;
+            newRecord.status = kayipUser.kayip_status;
+            newRecord.gender = kayipUser.gender === 'M' ? 'Male' : 'Female';
+            newRecord.reporter = dataItem.ihbar_user_name;
+            newRecord.reporter_number = dataItem.ihbar_user_phone_number;
+            newRecord.age = kayipUser.age;
+            reportList.push(newRecord);
+          })
+        });
+      })
+      .then(() => {
+        var dataTable = $('#reportList').DataTable({
+
+          "data": reportList,
+  
+          "columns": [
+            { "data": "name" },
+            { "data": "address" },
+            { "data": "map" },
+            { "data": "detail" },
+            { "data": "status" },
+            { "data": "gender" },
+            { "data": "age" },
+            { "data": "reporter" },
+            { "data": "reporter_number" }
+          ]
+  
+        });
+  
+        $('#reportList').on('click', 'tbody > tr', function () {
+  
+          if (!$(this).hasClass('selected')) {
+  
+            $('#reportList > tbody > tr.selected').removeClass('selected')
+  
+            $(this).addClass('selected');
+  
+          }
+  
+        });
+  
+        $('#reportList').on('dblclick', 'tbody td', function () {
+  
+          var text = dataTable.cell($(this)).data();
+  
+          var inputElement = document.createElement('input');
+  
+          inputElement.type = "text";
+  
+          inputElement.value = text;
+  
+          inputElement.className = "editable";
+  
+          this.innerHTML = '';
+  
+          this.appendChild(inputElement);
+  
+          $(inputElement).focus();
+  
+        });
+  
+        $('#reportList').on('change', '.editable', function () {
+  
+          var inputVal = this.value;
+  
+          var cell = dataTable.cell($(this).parent('td'));
+  
+          var row = dataTable.row($(this).parents('tr'));
+  
+          var oldData = cell.data();
+  
+          cell.data(inputVal);
+  
+          console.log(JSON.stringify(row.data()));
+  
+          // Make an ajax call to update table.
+  
+          // If the ajax call fails, put the old data back
+          // and show a warning.
+  
+          dataTable.draw();
+  
+        });
+  
+        $('#reportList').on('active', '.editable', function () {
+  
+          $(this).parent('td').html(this.value);
+  
+          dataTable.draw();
+  
+        });
+  
+        $('#removeButton').on('click', function() {
+            let selectedRow = dataTable.row('.selected').data();
+            // TODO: delete selected row, then refresh table
+            fetch(`/api/reports/${selectedRow.id}`, {
+              method: 'DELETE'
+            });
+            dataTable.row('.selected').remove().draw( false );
+        })
+      })
+    });
+  </script>
 </body>
-
-
 </html>
+
