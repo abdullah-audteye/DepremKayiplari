@@ -39,9 +39,8 @@
         </div>
 
     </div>
-
     <div class="form-main-content">
-        <form class="form"  id="myForm" method="post" action="{% url 'genelform' %}">
+        <form class="form" method="post" action="{% url 'genelform' %}">
             {% csrf_token %}
             <input type="hidden" id="coordinate_x" name="cordinate_x"/>
             <input type="hidden" id="coordinate_y" name="cordinate_y"/>
@@ -67,7 +66,7 @@
             </select><br>
 
             <label for="lname">Age</label><br>
-            <input required type="number" name="age"><br><br>
+            <input required type="text" name="age"><br><br>
             <p>Gender</p>
             <div>
                 <select class="gender" name="gender" aria-labelledby="dropdownMenu2">
@@ -92,7 +91,7 @@
             <textarea name="detail" style="resize:none; margin-bottom: 65px;" cols="66" rows="3"></textarea>
             <label for="lname">Reporter Name</label><br>
             <input required type="text" name="ihbar_first_name"><br><br>
-            <label for="lname">Reporter Last Name</label><br>
+            <label for="lname">Reporter Surname</label><br>
             <input required type="text" name="ihbar_last_name"><br><br>
             <label for="lname">Reporter Phone</label><br>
             <input required type="text" name="phonenumber"><br><br>
@@ -146,17 +145,6 @@
         );
     }
 </script>
-<script>
-    document.getElementById("myForm").addEventListener("submit", function(event) {
-        event.preventDefault();
-        // Perform form submission logic here
-        // Show Bootstrap alert
-        var alertDiv = document.createElement("div");
-        alertDiv.className = "alert alert-success";
-        alertDiv.innerHTML = "Form submitted successfully!";
-        document.body.appendChild(alertDiv);
-    });
-    </script>
 <script
         type="text/javascript"
         src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
@@ -172,4 +160,3 @@
         crossorigin="anonymous"></script>
 </body>
 </html>
-

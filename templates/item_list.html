@@ -43,6 +43,7 @@
               <th>Reporter</th>
               <th>Reporter Number</th>
               <th>Status Description</th>
+              <th>created_at</th>
             </tr>
           </thead>
         </table>
@@ -80,6 +81,7 @@
             newRecord.reporter_number = dataItem.ihbar_user_phone_number;
             newRecord.age = kayipUser.age;
             newRecord.status = kayipUser.status;
+            newRecord.created_at = kayipUser.created_at;
             reportList.push(newRecord);
           })
         });
@@ -114,7 +116,8 @@
             { "data": "age" },
             { "data": "reporter" },
             { "data": "reporter_number" },
-            { "data": "status" }
+            { "data": "status" },
+            { "data": "created_at" }
           ]
   
         });
