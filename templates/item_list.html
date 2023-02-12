@@ -50,7 +50,7 @@
               <th>Reporter</th>
               <th>Reporter Number</th>
               <th>Status Description</th>
-              <th>created_at</th>
+              <th>created_time</th>
             </tr>
           </thead>
         </table>
@@ -88,7 +88,7 @@
               newRecord.reporter_number = dataItem.ihbar_user_phone_number;
               newRecord.age = kayipUser.age;
               newRecord.status = kayipUser.status;
-              newRecord.created_at = kayipUser.created_at;
+              newRecord.created_time = dataItem.created_time;
               reportList.push(newRecord);
             })
           });
@@ -124,7 +124,7 @@
               { "data": "reporter" },
               { "data": "reporter_number" },
               { "data": "status" },
-              { "data": "created_at" }
+              { "data": "created_time" }
             ]
 
           });
