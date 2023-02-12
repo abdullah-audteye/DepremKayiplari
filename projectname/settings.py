@@ -21,10 +21,10 @@ import os
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'kulbjd^u!dq0pshi3p2zg(t6mn_s%5hgzx)43sy5x-8wtth($y'
-
+# SECRET_KEY = 'kulbjd^u!dq0pshi3p2zg(t6mn_s%5hgzx)43sy5x-8wtth($y'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.environ.get("DEBUG")
 
 ALLOWED_HOSTS = ["*"]
 
@@ -39,6 +39,9 @@ CORS_ALLOWED_ORIGINS = [
     "https://findmehelpme.com"
 ]
 
+X_FRAME_OPTIONS = 'ALLOW-FROM http://*.localhost/(.*)'
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -49,14 +52,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'appname',
-
+    'users'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -145,3 +148,5 @@ USE_TZ = True
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
+
+AUTH_USER_MODEL = 'users.User'

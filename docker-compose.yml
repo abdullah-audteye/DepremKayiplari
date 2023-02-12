@@ -27,16 +27,16 @@ services:
     ports:
       - "8080:8080"
 
-  nginx:
-    image: nginx
-    ports:
-      - "443:443"
-    volumes:
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - ./nginx/certs/8c0f14ed4a6c9fb9.crt:/etc/nginx/ssl/live/audteye.com/fullchain.pem
-      - ./nginx/certs/secret.key:/etc/nginx/ssl/live/audteye.com/privkey.pem
-      - ./staticfiles:/code/staticfiles
-      - ./media:/code/media
-      - ./templates:/code/templates
-    depends_on:
-      - web
+  # nginx:
+  #   image: nginx
+  #   ports:
+  #     - "443:443"
+  #   volumes:
+  #     - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+  #     - ./nginx/certs/8c0f14ed4a6c9fb9.crt:/etc/nginx/ssl/live/audteye.com/fullchain.pem
+  #     - ./nginx/certs/secret.key:/etc/nginx/ssl/live/audteye.com/privkey.pem
+  #     - ./staticfiles:/code/staticfiles
+  #     - ./media:/code/media
+  #     - ./templates:/code/templates
+  #   depends_on:
+  #     - web

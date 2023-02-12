@@ -4,17 +4,18 @@ from .models import Ihbar, KayipUser, Tag, Countries, KayipStatus,IhbarUser
 from django.db import transaction
 from django.http import JsonResponse
 from django.http import QueryDict
-from .serializers import  IhbarSerializer, KayipStatusSerializer,KayipUserSerializer
-from rest_framework.generics import ListAPIView
+from .serializers import  IhbarSerializer, KayipStatusSerializer,KayipUserSerializer, ReportSerializer
+from rest_framework.generics import ListAPIView, RetrieveUpdateDestroyAPIView
 from django.shortcuts import get_object_or_404
 from .helper import CleanBadRecords,FixNonHavingDates,SendAccessCode
 from datetime import datetime
 import random
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.views.decorators.csrf import csrf_exempt
 import json
-
 
 
 
@@ -49,7 +50,7 @@ def ChangeKayipStatus(request,pk):
                 kayip_user_instance.save()
             return JsonResponse({'status': True, 'message': "success"}, status=200)
         except Exception as err:
-            print(err,'errr')
+            # print(err,'errr')
             return JsonResponse({'status': False, 'message': "Failed"}, status=200)
 
     return render(request,'change_status.html',{"ihbar":ihbar,'kayip_status':kayip_status,"access_code":pk})
@@ -64,7 +65,6 @@ def IhbarView(request):
     kayipuserform = KayipUserForm()
     ihbaruserform = IhbarUserForm()
     if request.method == "POST":
-        print(request.POST,'requestposst')
         kayip_user_data = (request.POST.getlist('data[]'))
         ihbarci_data = QueryDict(request.POST.get('ihbarci_data'))
         ihbaruserform = IhbarUserForm(ihbarci_data)
@@ -137,7 +137,6 @@ def GeneralFormDataView(request):
     countries = Countries.objects.all()
     kayipstatus = KayipStatus.objects.all()
     cities = get_cities_from_file(p) or []
-    print(cities,'citiress')
     errors = {}
 
     if request.method == "POST":
@@ -175,7 +174,6 @@ def GeneralFormDataView(request):
 
 
 
-    print(errors,'errors')
     return render(request,'generalformdata.html',{"cities":cities,"countries":countries,"kayipstatus":kayipstatus,"errors":errors})
 
 
@@ -210,7 +208,37 @@ class KayipStatusListView(ListAPIView):
     serializer_class = KayipStatusSerializer
 
 
-def item_list(request):
-    items = KayipUser.objects.all()
-    return render(request, 'item_list.html', {'items': items})
+class ReportListView(ListAPIView):
+    queryset = Ihbar.objects.all()
+    serializer_class = ReportSerializer
+    # permission_classes = [IsAuthenticated]
 
+
+class UpdateReportView(RetrieveUpdateDestroyAPIView):
+    queryset = Ihbar.objects.all()
+    serializer_class = ReportSerializer
+    permission_classes = [AllowAny]
+    authentication_classes = [TokenAuthentication]
+
+
+    def update(self, request, *args, **kwargs):
+        partial = kwargs.pop('partial', False)
+        instance = self.get_object()
+
+        kayip_user_id = request.data.get('reported_id')
+        kayip_user_instance = KayipUser.objects.get(id=kayip_user_id)
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+
+        serializer_kayip_user = KayipUserSerializer(kayip_user_instance, data=request.data, partial=partial)
+        serializer_kayip_user.is_valid(raise_exception=True)
+        serializer_kayip_user.save()
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+        return Response(serializer.data)
+
+def item_list(request):
+    if request.user.is_authenticated:
+        items = KayipUser.objects.all()
+        return render(request, 'item_list.html', {'items': items})
+    else:
+        return redirect('ihbarview_tr')
