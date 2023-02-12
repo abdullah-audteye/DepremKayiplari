@@ -58,7 +58,6 @@ touch .env
 ```
 DEBUG=True
 SECRET_KEY=< Your SECRET_KEY>
-DJANGO_SETTINGS_MODULE=projectname.settings
 ```
 - **you can use sqlite for development pourpes**
  go to `appname/setting.py` Line 94 and comment out
