@@ -114,8 +114,10 @@
                     return 'Missing';
                   } else if (data === '3') {
                     return 'Found';
-                  } else {
+                  } else if (data === '4') {
                     return 'In Need of Help';
+                  } else {
+                    return 'Needs Refuge'
                   }
                 }
               },
@@ -127,14 +129,6 @@
               { "data": "created_time" }
             ]
 
-          });
-          $(document).ready(function () {
-            $('#reportList').DataTable({
-              dom: 'Bfrtip',
-              buttons: [
-                'copy', 'csv', 'excel'
-              ]
-            });
           });
 
           $('#reportList').on('click', 'tbody > tr', function () {
@@ -173,11 +167,15 @@
               var optionElement4 = document.createElement('option');
               optionElement4.value = 4;
               optionElement4.text = "In Need of Help";
+              var optionElement5 = document.createElement('option');
+              optionElement5.value = 5;
+              optionElement5.text = "Needs Refuge";
               selectElement.appendChild(optionElement0);
               selectElement.appendChild(optionElement1);
               selectElement.appendChild(optionElement2);
               selectElement.appendChild(optionElement3);
               selectElement.appendChild(optionElement4);
+              selectElement.appendChild(optionElement5);
               this.innerHTML = '';
               this.appendChild(selectElement);
               $(selectElement).focus();
