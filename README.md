@@ -36,6 +36,8 @@ Volunteers can browse the map and search for the injured or missing in the area 
  - Enhance UI/UX 
  - add image/s to missing pin (Need legal approval)
  
+ #NOTE : You can create pull request to ``new_development`` branch for development.
+ 
 ## HOW TO RUN THE PROJECT (without docker)
 1. clone the project
 ```
