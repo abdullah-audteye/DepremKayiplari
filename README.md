@@ -36,13 +36,18 @@ Volunteers can browse the map and search for the injured or missing in the area 
  - Enhance UI/UX 
  - add image/s to missing pin (Need legal approval)
  
- #NOTE : You can create pull request to ``new_development`` branch for development.
+### NOTE : You can create pull request to ``new_development`` branch for development.
  
 ## HOW TO RUN THE PROJECT (without docker)
 1. clone the project
 ```
 git clone https://github.com/abdullah-audteye/DepremKayiplari.git
 ```
+3. change the branch for ``new_development`` branch with this command :
+```
+git checkout new_development
+```
+
 2. create python virtual environment and activate it from terminal (ubuntu & mac) 
 ```
 cd DepremKayiplari
