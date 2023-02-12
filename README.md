@@ -1,9 +1,16 @@
 # FindmeHelpme
 
+Find me help me
+A voluntary initiative aimed at locating the missing after the earthquakes in Turkey and Syria 2023
+
+The initiative emerged after strong earthquakes struck several areas in Turkey and Syria, which doubled the threat to the lives of people trapped under the rubble. We launched a technology platform to coordinate rescue efforts.
+
 https://findmehelpme.com/
-```
-Project features
-```
+
+
+
+
+## Project features
 
  - Pin on the map to notice a missing person:
 Where the relative of the missing person can put a pin on the map for the last place before the earthquake with there with name, description, and phone number.
@@ -21,12 +28,64 @@ Volunteers can browse the map and search for the injured or missing in the area 
  
  - Updating state is ready as backend through Gmail authentication, the person who made the report can update the status (only backend needs a frontend)
  
- 
-```
-Missing:
-```
- - Enhance UI/UX
  - Add search-by-name bar
- - add image/s to missing pin
- - frontend for the update status
+ 
+ - frontend for the update status (table page needs to login)
+
+## Missing:
+ - Enhance UI/UX 
+ - add image/s to missing pin (Need legal approval)
+ 
+## HOW TO RUN THE PROJECT (without docker)
+1. clone the project
+```
+git clone https://github.com/abdullah-audteye/DepremKayiplari.git
+```
+2. create python virtual environment and activate it from terminal (ubuntu & mac) 
+```
+cd DepremKayiplari
+virtualenv env
+```
+then activate the env
+```
+source env/bin/activate
+```
+3. create .env file (ubuntu & mac) 
+```
+touch .env
+```
+4. fill the .env params
+```
+DEBUG=True
+SECRET_KEY=< Your SECRET_KEY>
+DJANGO_SETTINGS_MODULE=projectname.settings
+```
+- **you can use sqlite for development pourpes**
+ go to `appname/setting.py` Line 94 and comment out
+ ```
+  DATABASES = {
+     'default': {
+         'ENGINE': 'django.db.backends.sqlite3',
+         'NAME': BASE_DIR / 'db.sqlite3',
+     }
+ }
+```
+ and comment from line 101 to 110
+ 
+5. install dependecies 
+```
+pip3 install -r requirements.txt
+```
+6. migrate the DB
+```
+python manage.py makemigrations
+```
+```
+python manage.py migrate
+```
+7. run the app 
+```
+python manage.py runserver
+```
+
  
