@@ -34,7 +34,7 @@ let values = {
     2: { status: "Missing", icon: redIcon, color: "red" },
     3: { status: "Found", icon: yellowIcon, color: "yellow" },
     4: { status: "In Need of Help", icon: blueIcon, color: "blue" },
-    5: { status: "Needs Refuge", icon: purpleIcon, color: "purple" }
+    5: { status: "Needs a Shelter", icon: purpleIcon, color: "purple" }
 }
 
 // Set up the OSM layer
