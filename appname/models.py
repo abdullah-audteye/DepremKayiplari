@@ -70,7 +70,6 @@ class KayipUser(models.Model):
     kayip_status = models.ForeignKey(KayipStatus,on_delete=models.CASCADE,null=True,blank=True,related_name="kayiplar")
     gender = models.CharField(max_length=1,choices=GENDER_CHOICES,null=True,blank=True)
     age = models.IntegerField(null=True,blank=True,db_index=True)
-    # created_at = models.DateTimeField(blank=True,null=True,default=timezone.now)
 
 
     def __str__(self):
