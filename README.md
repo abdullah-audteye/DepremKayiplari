@@ -43,12 +43,12 @@ Volunteers can browse the map and search for the injured or missing in the area 
 ```
 git clone https://github.com/abdullah-audteye/DepremKayiplari.git
 ```
-3. change the branch for ``new_development`` branch with this command :
+2. change the branch for ``new_development`` branch with this command :
 ```
 git checkout new_development
 ```
 
-2. create python virtual environment and activate it from terminal (ubuntu & mac) 
+3. create python virtual environment and activate it from terminal (ubuntu & mac) 
 ```
 cd DepremKayiplari
 virtualenv env
@@ -57,11 +57,11 @@ then activate the env
 ```
 source env/bin/activate
 ```
-3. create .env file (ubuntu & mac) 
+4. create .env file (ubuntu & mac) 
 ```
 touch .env
 ```
-4. fill the .env params
+5. fill the .env params
 ```
 DEBUG=True
 SECRET_KEY=< Your SECRET_KEY>
@@ -78,18 +78,18 @@ SECRET_KEY=< Your SECRET_KEY>
 ```
  and comment from line 101 to 110
  
-5. install dependecies 
+6. install dependecies 
 ```
 pip3 install -r requirements.txt
 ```
-6. migrate the DB
+7. migrate the DB
 ```
 python manage.py makemigrations
 ```
 ```
 python manage.py migrate
 ```
-7. run the app 
+8. run the app 
 ```
 python manage.py runserver
 ```
