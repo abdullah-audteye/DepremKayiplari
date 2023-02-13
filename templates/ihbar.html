@@ -592,17 +592,18 @@
                             placeholder="E-posta:"
                     />
                 </div>
-                <select class="form-control" name="country" class="form-group">
-                    {% for country in countries %}
+                <div class="form-group">
+                    <label for="example3">Konum:</label>
+                    <select id="country" name="country" class="form-control form-control-lg"
+                    aria-label=".form-select-sm example"> </select><br>
 
-                        <option value="{{ country.id }}" class="form-control form-control-lg">
-                            <label class="form-check-label" for="defaultCheck1">
-                                {{ country.name }}
-                            </label>
-                        </option>
-
-                    {% endfor %}
-                </select>
+                    <select required id="cityselect" name="city"
+                    class="form-control form-control-lg" aria-label=".form-select-sm example">
+    
+    
+    
+                    </select><br>
+                </div>
 
                 <h1>KAYIP OLAN KİŞİLER</h1>
                 <hr/>
@@ -887,6 +888,47 @@
             });
         });
     });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        changeCities()
+
+        document.getElementById('country').addEventListener('click',()=>{
+            let e = document.getElementById("country");
+            let country_id = (e.options[e.selectedIndex].value)
+
+            changeCities(country_id)
+
+        })
+
+
+
+    function changeCities(country_id=1) {
+        $('#cityselect').empty();
+
+    fetch("api/cities?countryId="+country_id)
+        .then((response) => response.json())
+        .then((status) => {
+            console.log(status, 'cities')
+
+            for (let i = 0; i < status.length; i++) {
+                let resultListItem = `<option data-x="${status[i].coordinate_x}" data-y="${status[i].coordinate_y}" value="${status[i].id}">${status[i].name}</option>`
+                $('#cityselect').append(resultListItem);
+            } 
+        });
+
+    }
+
+        fetch("/api/countries")
+            .then((response) => response.json())
+            .then((status) => {
+                for (let i = 0; i < status.length; i++) {
+                    let resultListItem = `<option value="${status[i].id}">${status[i].name}</option>`
+                    $('#country').append(resultListItem);
+                }
+            });
+        })
 </script>
 
 <script type="text/javascript">

@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
 from .forms import KayipUserForm, IhbarUserForm
-from .models import Ihbar, KayipUser, Tag, Countries, KayipStatus,IhbarUser
-from django.db import transaction
+from .models import Ihbar, KayipUser, Tag, Countries, KayipStatus,IhbarUser,Cities
+from django.db import transaction,IntegrityError
 from django.http import JsonResponse
 from django.http import QueryDict
-from .serializers import  IhbarSerializer, KayipStatusSerializer,KayipUserSerializer, ReportSerializer
+from .serializers import  IhbarSerializer, KayipStatusSerializer,KayipUserSerializer, ReportSerializer,CitiesSerializer,KayipUserSerializerCertainParameters
 from rest_framework.generics import ListAPIView, RetrieveUpdateDestroyAPIView
 from django.shortcuts import get_object_or_404
 from .helper import CleanBadRecords,FixNonHavingDates,SendAccessCode
@@ -12,17 +12,18 @@ from datetime import datetime
 import random
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.authentication import TokenAuthentication
+from rest_framework.authentication import TokenAuthentication,SessionAuthentication
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.views.decorators.csrf import csrf_exempt
 import json
+from django.core.cache import cache
+
 
 
 
 def get_cities_from_file(path):
     try:
         with open(path, 'r') as f:
-            print(json.load(f),'fffff')
             cities = json.load(f)
         return cities
 
@@ -31,10 +32,23 @@ def get_cities_from_file(path):
 
 
 
+
+def CountriesAsJson(request):
+    cities = list(Countries.objects.all().values())
+    return JsonResponse(cities,safe=False)
+
+class CitiesWithFilter(ListAPIView):
+    serializer_class = CitiesSerializer
+
+    def get_queryset(self,*args, **kwargs):
+        country_id = (self.request.GET.get('countryId',None))
+        cities = (Cities.objects.filter(country_id=country_id))
+        return cities
+        
+
+
 @csrf_exempt
 def ChangeKayipStatus(request,pk):
-
-
     ihbar = get_object_or_404(Ihbar,access_code=pk)
     kayip_status = KayipStatus.objects.all()
 
@@ -72,6 +86,7 @@ def IhbarView(request):
         if ihbaruserform.is_valid():
             cordinate_x = ihbarci_data.get('cordinate_x')
             cordinate_y = ihbarci_data.get('cordinate_y')
+            city = ihbarci_data.get('city')
             record_status = True
 
             try:
@@ -83,6 +98,8 @@ def IhbarView(request):
                         kayip_user = QueryDict(kayip_user).copy()
                         kayip_user['cordinate_x'] = cordinate_x
                         kayip_user['cordinate_y'] = cordinate_y
+                        kayip_user['city'] = city
+
 
                         kayip_user_check = KayipUserForm(kayip_user)
                         if (kayip_user_check.is_valid()):
@@ -123,8 +140,8 @@ def IhbarView(request):
 
 
 
-            except Exception as err:
-                print(err, 'errrr')
+            except IntegrityError:
+                print("IntegrityError", 'errrr')
 
     return render(request, "ihbar.html",
                   {"kayipuserform": kayipuserform, "ihbaruserform": ihbaruserform, "tags": tags, "countries": countries,
@@ -133,10 +150,9 @@ def IhbarView(request):
 
 
 def GeneralFormDataView(request):
-    p = ("http://127.0.0.1:8000/static/data/sample.json")
     countries = Countries.objects.all()
+    cities = Cities.objects.all()
     kayipstatus = KayipStatus.objects.all()
-    cities = get_cities_from_file(p) or []
     errors = {}
 
     if request.method == "POST":
@@ -144,44 +160,76 @@ def GeneralFormDataView(request):
         kayip_user_form = KayipUserForm(request.POST)
 
         if(ihbaruserform.is_valid() and kayip_user_form.is_valid()):
-            ihbaruser = ihbaruserform.save()
-            kayip_user = kayip_user_form.save()
+            with transaction.atomic():
+                ihbaruser = ihbaruserform.save()
+                kayip_user = kayip_user_form.save()
 
 
-            ihbar_instance = Ihbar.objects.create()
-            access_number = random.randint(000000,999999)
+                ihbar_instance = Ihbar.objects.create()
+                access_number = random.randint(000000,999999)
 
-            ihbar_instance.ihbar_user = ihbaruser
-            ihbar_instance.access_code = access_number
-            ihbar_instance.kayip_user.add(kayip_user.id)
-            ihbar_instance.created_time = datetime.now()
-            ihbar_instance.save()
-            if(ihbaruser.eposta):
-                            
-                toemail =ihbaruser.eposta
-                dynamic_template_data = {
-                "subject":"Your access code to change missing people's status",
-                "name":ihbar_instance.access_code,
-                "url":request.build_absolute_uri("/kayiplar/durum/"+str(ihbar_instance.access_code))
-                }
+                ihbar_instance.ihbar_user = ihbaruser
+                ihbar_instance.access_code = access_number
+                ihbar_instance.kayip_user.add(kayip_user.id)
+                ihbar_instance.created_time = datetime.now()
+                ihbar_instance.save()
+                if(ihbaruser.eposta):
+                                
+                    toemail =ihbaruser.eposta
+                    dynamic_template_data = {
+                    "subject":"Your access code to change missing people's status",
+                    "name":ihbar_instance.access_code,
+                    "url":request.build_absolute_uri("/kayiplar/durum/"+str(ihbar_instance.access_code))
+                    }
 
-                SendAccessCode(toemail,dynamic_template_data)
+                    SendAccessCode(toemail,dynamic_template_data)
+                return redirect('ihbarview_tr')
 
 
         else:
             errors["errors"] = str(ihbaruserform.errors) or str(kayip_user_form.errors)
             
+    return render(request,'generalformdata.html',{"countries":countries,"kayipstatus":kayipstatus,"errors":errors,"cities":cities})
 
 
 
-    return render(request,'generalformdata.html',{"cities":cities,"countries":countries,"kayipstatus":kayipstatus,"errors":errors})
 
+class KayipUserWithCertainParametersListView(ListAPIView):
+    queryset = KayipUser.objects.all()
+    serializer_class = KayipUserSerializerCertainParameters
+
+    def list(self, request, *args, **kwargs):
+        if cache.get('kayip_user_with_params_qs') != None:
+            cached_queryset = cache.get('kayip_user_with_params_qs')
+            return Response(cached_queryset)
+
+        else:
+            queryset = self.filter_queryset(self.get_queryset())
+            page = self.paginate_queryset(queryset)
+            if page is not None:
+                serializer = self.get_serializer(page, many=True)
+                return self.get_paginated_response(serializer.data)
+            
+            serializer = self.get_serializer(queryset, many=True)
+
+            cached_queryset = cache.set('kayip_user_with_params_qs',serializer.data,60*3)
+            return Response(serializer.data)
+
+
+class IhbarDetailRetrieveView(RetrieveUpdateDestroyAPIView):
+    queryset = Ihbar.objects.all()
+    serializer_class = IhbarSerializer
+    lookup_url_kwarg = "kayip_user_id"
+    lookup_field = "kayip_user"
 
 
 
 class KayipUserListView(ListAPIView):
-    queryset = Ihbar.objects.order_by('-id')
+    queryset = Ihbar.objects.order_by('-id').prefetch_related('kayip_user').select_related('ihbar_user')
     serializer_class = IhbarSerializer
+
+
+
 
 
 class KayipUserFilterUser(ListAPIView):
@@ -211,14 +259,15 @@ class KayipStatusListView(ListAPIView):
 class ReportListView(ListAPIView):
     queryset = Ihbar.objects.all()
     serializer_class = ReportSerializer
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
+    authentication_classes = [TokenAuthentication,]
 
 
 class UpdateReportView(RetrieveUpdateDestroyAPIView):
     queryset = Ihbar.objects.all()
     serializer_class = ReportSerializer
     permission_classes = [AllowAny]
-    authentication_classes = [TokenAuthentication]
+    authentication_classes = [TokenAuthentication,]
 
 
     def update(self, request, *args, **kwargs):

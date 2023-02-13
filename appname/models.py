@@ -29,6 +29,7 @@ class KayipStatus(models.Model):
 
 class Countries(models.Model):
     name = models.CharField(max_length=100)
+    country_code = models.IntegerField(null=True,blank=True)
     
     def __str__(self):
         return self.name
@@ -38,12 +39,26 @@ class Countries(models.Model):
         verbose_name_plural = 'Ülkeler'
 
 
+class Cities(models.Model):
+    country = models.ForeignKey(Countries,on_delete=models.CASCADE)
+    name = models.CharField(max_length=50)
+    coordinate_x = models.FloatField(max_length=10,blank=True,null=True)
+    coordinate_y = models.FloatField(max_length=10,blank=True,null=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Şehirler'
+        verbose_name_plural = 'Şehirler'
+
+
 class IhbarUser(models.Model):
     ihbar_first_name = models.CharField(max_length=100)
     ihbar_last_name = models.CharField(max_length=100)
     phonenumber = models.CharField(max_length=100)
     eposta = models.EmailField(max_length=100,null=True,blank=True)
-    country = models.ForeignKey(Countries,null=True,blank=True,on_delete=models.CASCADE)
+    # country = models.ForeignKey(Countries,null=True,blank=True,on_delete=models.CASCADE)
 
 
     def __str__(self):
@@ -69,7 +84,8 @@ class KayipUser(models.Model):
     status = models.TextField(null=True,blank=True)
     kayip_status = models.ForeignKey(KayipStatus,on_delete=models.CASCADE,null=True,blank=True,related_name="kayiplar")
     gender = models.CharField(max_length=1,choices=GENDER_CHOICES,null=True,blank=True)
-    age = models.IntegerField(null=True,blank=True,db_index=True)
+    age = models.CharField(null=True,blank=True,max_length=5)
+    city = models.ForeignKey(Cities,on_delete=models.CASCADE,null=True,blank=True)
 
 
     def __str__(self):

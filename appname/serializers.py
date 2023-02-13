@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer,SerializerMethodField
-from .models import KayipUser,Ihbar,IhbarUser,KayipStatus
+from .models import KayipUser,Ihbar,Cities,IhbarUser,KayipStatus
 
 def PutAsteriskSymbol(value,cut_value=2,phonenumber=False):
     try:
@@ -18,7 +18,11 @@ def PutAsteriskSymbol(value,cut_value=2,phonenumber=False):
     except:
         return value
 
+class KayipUserSerializerCertainParameters(ModelSerializer):
 
+    class Meta:
+        model = KayipUser
+        fields = ("id","cordinate_x","cordinate_y","kayip_status")
 
 class KayipUserSerializer(ModelSerializer):
 
@@ -80,6 +84,11 @@ class ReporterUserSerializer(ModelSerializer):
 class ReportedUserSerializer(ModelSerializer):
     class Meta:
         model = KayipUser
+        fields = "__all__"
+
+class CitiesSerializer(ModelSerializer):
+    class Meta:
+        model = Cities
         fields = "__all__"
 
 class ReportSerializer(ModelSerializer):
