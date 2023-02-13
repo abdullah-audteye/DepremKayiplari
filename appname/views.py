@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import KayipUserForm, IhbarUserForm
-from .models import Ihbar, KayipUser, Tag, Countries, KayipStatus,IhbarUser
+from .models import Ihbar, KayipUser, Tag, Countries, KayipStatus,IhbarUser,Cities
 from django.db import transaction
 from django.http import JsonResponse
 from django.http import QueryDict
@@ -131,6 +131,7 @@ def IhbarView(request):
 
 def GeneralFormDataView(request):
     countries = Countries.objects.all()
+    cities = Cities.objects.all()
     kayipstatus = KayipStatus.objects.all()
     errors = {}
 
@@ -171,7 +172,7 @@ def GeneralFormDataView(request):
 
 
 
-    return render(request,'generalformdata.html',{"countries":countries,"kayipstatus":kayipstatus,"errors":errors})
+    return render(request,'generalformdata.html',{"countries":countries,"kayipstatus":kayipstatus,"errors":errors,"cities":cities})
 
 
 

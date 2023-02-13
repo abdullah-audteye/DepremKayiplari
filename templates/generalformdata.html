@@ -57,6 +57,9 @@
                 <label for="fname">City</label><br>
                 <select required id="cityselect" name="city" class="form-select form-select-sm"
                     aria-label=".form-select-sm example">
+                    {% for city in cities %}
+                    <option data-x="{{city.coordinate_x}}" data-y="{{city.coordinate_y}}" value="{{city.id}}">{{city.name}}</option>
+                    {% endfor %}
 
 
                 </select><br>
@@ -137,14 +140,14 @@
 
     </script>
     <script>
-        fetch("/static/data/sample.json")
-            .then((response) => response.json())
-            .then((status) => {
-                for (let i = 0; i < status.length; i++) {
-                    let resultListItem = '<option data-x="' + status[i].coordinate_x + '" data-y="' + status[i].coordinate_y + '" value="' + status[i].il_plaka + '">' + status[i].il_adi + '</option>'
-                    $('#cityselect').append(resultListItem);
-                }
-            });
+        // fetch("/static/data/sample.json")
+        //     .then((response) => response.json())
+        //     .then((status) => {
+        //         for (let i = 0; i < status.length; i++) {
+        //             let resultListItem = '<option data-x="' + status[i].coordinate_x + '" data-y="' + status[i].coordinate_y + '" value="' + status[i].il_plaka + '">' + status[i].il_adi + '</option>'
+        //             $('#cityselect').append(resultListItem);
+        //         }
+        //     });
     </script>
     <script type="text/javascript">
         function googleTranslateElementInit() {
