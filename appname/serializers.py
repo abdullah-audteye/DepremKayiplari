@@ -18,7 +18,11 @@ def PutAsteriskSymbol(value,cut_value=2,phonenumber=False):
     except:
         return value
 
+class KayipUserSerializerCertainParameters(ModelSerializer):
 
+    class Meta:
+        model = KayipUser
+        fields = ("id","cordinate_x","cordinate_y","kayip_status")
 
 class KayipUserSerializer(ModelSerializer):
 

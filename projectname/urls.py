@@ -1,6 +1,6 @@
 from django.urls import include, path
 from django.contrib import admin
-from appname.views import IhbarView, KayipUserListView,CountriesAsJson, CitiesWithFilter,KayipUserFilterUser, KayipStatusListView, ChangeKayipStatus, GeneralFormDataView, item_list, ReportListView, UpdateReportView
+from appname.views import IhbarView, KayipUserListView,CountriesAsJson,IhbarDetailRetrieveView,KayipUserWithCertainParametersListView, CitiesWithFilter,KayipUserFilterUser, KayipStatusListView, ChangeKayipStatus, GeneralFormDataView, item_list, ReportListView, UpdateReportView
 from users.views import login_view
 
 
@@ -11,6 +11,10 @@ urlpatterns = [
     path('genelform', GeneralFormDataView, name="genelform"),
 
     path('api/kayiplar', KayipUserListView.as_view(), name="kayiplarview_api"),
+    path('api/kayiplar/all', KayipUserWithCertainParametersListView.as_view(), name="kayiplarview_with_params_api"),
+    path('api/kayiplar/<int:kayip_user_id>', IhbarDetailRetrieveView.as_view(), name="ihbar_detail_retrieve"),
+
+
     path('api/kayiplar/filter', KayipUserFilterUser.as_view(),name="kayiplarview_api_filter"),
     path('api/kayipstatus', KayipStatusListView.as_view(), name="kayip_status_api"),
 
