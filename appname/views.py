@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import KayipUserForm, IhbarUserForm
-from .models import Ihbar, KayipUser, Tag, Countries, KayipStatus,IhbarUser
-from django.db import transaction
+from .models import Ihbar, KayipUser, Tag, Countries, KayipStatus,IhbarUser,Cities
+from django.db import transaction,IntegrityError
 from django.http import JsonResponse
 from django.http import QueryDict
 from .serializers import  IhbarSerializer, KayipStatusSerializer,KayipUserSerializer, ReportSerializer
@@ -120,8 +120,8 @@ def IhbarView(request):
 
 
 
-            except Exception as err:
-                print(err, 'errrr')
+            except IntegrityError:
+                print("IntegrityError", 'errrr')
 
     return render(request, "ihbar.html",
                   {"kayipuserform": kayipuserform, "ihbaruserform": ihbaruserform, "tags": tags, "countries": countries,
@@ -131,6 +131,7 @@ def IhbarView(request):
 
 def GeneralFormDataView(request):
     countries = Countries.objects.all()
+    cities = Cities.objects.all()
     kayipstatus = KayipStatus.objects.all()
     errors = {}
 
@@ -171,7 +172,7 @@ def GeneralFormDataView(request):
 
 
 
-    return render(request,'generalformdata.html',{"countries":countries,"kayipstatus":kayipstatus,"errors":errors})
+    return render(request,'generalformdata.html',{"countries":countries,"kayipstatus":kayipstatus,"errors":errors,"cities":cities})
 
 
 
