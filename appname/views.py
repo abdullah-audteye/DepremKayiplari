@@ -22,7 +22,6 @@ import json
 def get_cities_from_file(path):
     try:
         with open(path, 'r') as f:
-            print(json.load(f),'fffff')
             cities = json.load(f)
         return cities
 
@@ -33,8 +32,6 @@ def get_cities_from_file(path):
 
 @csrf_exempt
 def ChangeKayipStatus(request,pk):
-
-
     ihbar = get_object_or_404(Ihbar,access_code=pk)
     kayip_status = KayipStatus.objects.all()
 
@@ -133,10 +130,8 @@ def IhbarView(request):
 
 
 def GeneralFormDataView(request):
-    p = ("http://127.0.0.1:8000/static/data/sample.json")
     countries = Countries.objects.all()
     kayipstatus = KayipStatus.objects.all()
-    cities = get_cities_from_file(p) or []
     errors = {}
 
     if request.method == "POST":
@@ -144,28 +139,30 @@ def GeneralFormDataView(request):
         kayip_user_form = KayipUserForm(request.POST)
 
         if(ihbaruserform.is_valid() and kayip_user_form.is_valid()):
-            ihbaruser = ihbaruserform.save()
-            kayip_user = kayip_user_form.save()
+            with transaction.atomic():
+                ihbaruser = ihbaruserform.save()
+                kayip_user = kayip_user_form.save()
 
 
-            ihbar_instance = Ihbar.objects.create()
-            access_number = random.randint(000000,999999)
+                ihbar_instance = Ihbar.objects.create()
+                access_number = random.randint(000000,999999)
 
-            ihbar_instance.ihbar_user = ihbaruser
-            ihbar_instance.access_code = access_number
-            ihbar_instance.kayip_user.add(kayip_user.id)
-            ihbar_instance.created_time = datetime.now()
-            ihbar_instance.save()
-            if(ihbaruser.eposta):
-                            
-                toemail =ihbaruser.eposta
-                dynamic_template_data = {
-                "subject":"Your access code to change missing people's status",
-                "name":ihbar_instance.access_code,
-                "url":request.build_absolute_uri("/kayiplar/durum/"+str(ihbar_instance.access_code))
-                }
+                ihbar_instance.ihbar_user = ihbaruser
+                ihbar_instance.access_code = access_number
+                ihbar_instance.kayip_user.add(kayip_user.id)
+                ihbar_instance.created_time = datetime.now()
+                ihbar_instance.save()
+                if(ihbaruser.eposta):
+                                
+                    toemail =ihbaruser.eposta
+                    dynamic_template_data = {
+                    "subject":"Your access code to change missing people's status",
+                    "name":ihbar_instance.access_code,
+                    "url":request.build_absolute_uri("/kayiplar/durum/"+str(ihbar_instance.access_code))
+                    }
 
-                SendAccessCode(toemail,dynamic_template_data)
+                    SendAccessCode(toemail,dynamic_template_data)
+                return redirect('ihbarview_tr')
 
 
         else:
@@ -174,7 +171,7 @@ def GeneralFormDataView(request):
 
 
 
-    return render(request,'generalformdata.html',{"cities":cities,"countries":countries,"kayipstatus":kayipstatus,"errors":errors})
+    return render(request,'generalformdata.html',{"countries":countries,"kayipstatus":kayipstatus,"errors":errors})
 
 
 

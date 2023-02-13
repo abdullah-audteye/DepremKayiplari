@@ -98,13 +98,28 @@
                 <div style="color:red">{{ errors.errors }}</div>
 
 
-                <input class="btn btn-danger btn-sm w-25 py-2 h-100" type="submit" value="Submit">
+                <input id="submitbutton" class="btn btn-danger btn-sm w-25 py-2 h-100" type="submit" value="Submit">
 
             </form>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
+
+
+            document.getElementById('submitbutton').addEventListener('click',()=>{
+                document.getElementById('submitbutton').style.display="none"
+                setTimeout(()=>{
+                    document.getElementById('submitbutton').style.display="block"
+
+                },1000)
+            })
+
+
+
             document.getElementById('cityselect').addEventListener('change', (event) => {
                 // let result = document.getElementById('cityselect')
                 let e = document.getElementById("cityselect");
@@ -144,9 +159,7 @@
     </script>
     <script type="text/javascript"
         src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
