@@ -4,7 +4,7 @@ from .models import Ihbar, KayipUser, Tag, Countries, KayipStatus,IhbarUser,Citi
 from django.db import transaction,IntegrityError
 from django.http import JsonResponse
 from django.http import QueryDict
-from .serializers import  IhbarSerializer, KayipStatusSerializer,KayipUserSerializer, ReportSerializer
+from .serializers import  IhbarSerializer, KayipStatusSerializer,KayipUserSerializer, ReportSerializer,CitiesSerializer
 from rest_framework.generics import ListAPIView, RetrieveUpdateDestroyAPIView
 from django.shortcuts import get_object_or_404
 from .helper import CleanBadRecords,FixNonHavingDates,SendAccessCode
@@ -28,6 +28,21 @@ def get_cities_from_file(path):
     except:
         return []
 
+
+
+
+def CountriesAsJson(request):
+    cities = list(Countries.objects.all().values())
+    return JsonResponse(cities,safe=False)
+
+class CitiesWithFilter(ListAPIView):
+    serializer_class = CitiesSerializer
+
+    def get_queryset(self,*args, **kwargs):
+        country_id = (self.request.GET.get('countryId',None))
+        cities = (Cities.objects.filter(country_id=country_id))
+        return cities
+        
 
 
 @csrf_exempt
