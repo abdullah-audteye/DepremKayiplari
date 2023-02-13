@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import KayipUserForm, IhbarUserForm
 from .models import Ihbar, KayipUser, Tag, Countries, KayipStatus,IhbarUser,Cities
-from django.db import transaction
+from django.db import transaction,IntegrityError
 from django.http import JsonResponse
 from django.http import QueryDict
 from .serializers import  IhbarSerializer, KayipStatusSerializer,KayipUserSerializer, ReportSerializer
@@ -120,8 +120,8 @@ def IhbarView(request):
 
 
 
-            except Exception as err:
-                print(err, 'errrr')
+            except IntegrityError:
+                print("IntegrityError", 'errrr')
 
     return render(request, "ihbar.html",
                   {"kayipuserform": kayipuserform, "ihbaruserform": ihbaruserform, "tags": tags, "countries": countries,
