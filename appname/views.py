@@ -12,7 +12,7 @@ from datetime import datetime
 import random
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.authentication import TokenAuthentication
+from rest_framework.authentication import TokenAuthentication,SessionAuthentication
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.views.decorators.csrf import csrf_exempt
 import json
@@ -84,6 +84,7 @@ def IhbarView(request):
         if ihbaruserform.is_valid():
             cordinate_x = ihbarci_data.get('cordinate_x')
             cordinate_y = ihbarci_data.get('cordinate_y')
+            city = ihbarci_data.get('city')
             record_status = True
 
             try:
@@ -95,6 +96,8 @@ def IhbarView(request):
                         kayip_user = QueryDict(kayip_user).copy()
                         kayip_user['cordinate_x'] = cordinate_x
                         kayip_user['cordinate_y'] = cordinate_y
+                        kayip_user['city'] = city
+
 
                         kayip_user_check = KayipUserForm(kayip_user)
                         if (kayip_user_check.is_valid()):
@@ -193,7 +196,7 @@ def GeneralFormDataView(request):
 
 
 class KayipUserListView(ListAPIView):
-    queryset = Ihbar.objects.order_by('-id')
+    queryset = Ihbar.objects.order_by('-id').prefetch_related('kayip_user').select_related('ihbar_user')
     serializer_class = IhbarSerializer
 
 
@@ -224,14 +227,15 @@ class KayipStatusListView(ListAPIView):
 class ReportListView(ListAPIView):
     queryset = Ihbar.objects.all()
     serializer_class = ReportSerializer
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
+    authentication_classes = [TokenAuthentication,]
 
 
 class UpdateReportView(RetrieveUpdateDestroyAPIView):
     queryset = Ihbar.objects.all()
     serializer_class = ReportSerializer
     permission_classes = [AllowAny]
-    authentication_classes = [TokenAuthentication]
+    authentication_classes = [TokenAuthentication,]
 
 
     def update(self, request, *args, **kwargs):

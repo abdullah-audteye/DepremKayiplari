@@ -169,13 +169,19 @@ let newDiv = document.createElement("div");
 // and give it some content
 const newContent = document.createTextNode("Konum Seç");
 newDiv.style.position = "absolute";
-newDiv.style.right = "26px";
-newDiv.style.width = "80px";
-newDiv.style.height = "30px";
-newDiv.style.borderRadius = "6px";
+newDiv.style.right = "0px";
+newDiv.style.width = "113px";
+newDiv.style.height = "33px";
+newDiv.style.top = "1px";
+newDiv.style.borderRadius = "4px";
+newDiv.style.paddingLeft = "11px";
 newDiv.style.fontWeight = "400";
+newDiv.style.textAlign = "left";
 newDiv.style.color = "white";
-newDiv.style.backgroundColor = "#da1e37";
+newDiv.style.zIndex = "-1";
+newDiv.style.backgroundColor = "#da1e37"; 
+
+
 
 // add the text node to the newly created div
 newDiv.appendChild(newContent);
