@@ -47,19 +47,15 @@
 
                 <label for="fname">Country</label><br>
 
-                <select id="country" name="country" class="form-select form-select-sm"
+                <select id="country" name="country"  class="form-select form-select-sm"
                     aria-label=".form-select-sm example">
-                    {% for country in countries %}
-                    <option value="{{ country.id }}">{{ country.name }}</option>
-                    {% endfor %}
+
 
                 </select><br>
                 <label for="fname">City</label><br>
-                <select required id="cityselect" name="city" class="form-select form-select-sm"
-                    aria-label=".form-select-sm example">
-                    {% for city in cities %}
-                    <option data-x="{{city.coordinate_x}}" data-y="{{city.coordinate_y}}" value="{{city.id}}">{{city.name}}</option>
-                    {% endfor %}
+                <select required id="cityselect" name="city"
+                    class="form-select form-select-sm" aria-label=".form-select-sm example">
+
 
 
                 </select><br>
@@ -107,20 +103,19 @@
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
 
 
-            document.getElementById('submitbutton').addEventListener('click',()=>{
-                document.getElementById('submitbutton').style.display="none"
-                setTimeout(()=>{
-                    document.getElementById('submitbutton').style.display="block"
+            document.getElementById('submitbutton').addEventListener('click', () => {
+                document.getElementById('submitbutton').style.display = "none"
+                setTimeout(() => {
+                    document.getElementById('submitbutton').style.display = "block"
 
-                },1000)
+                }, 1000)
             })
-
 
 
             document.getElementById('cityselect').addEventListener('change', (event) => {
@@ -140,14 +135,44 @@
 
     </script>
     <script>
-        // fetch("/static/data/sample.json")
-        //     .then((response) => response.json())
-        //     .then((status) => {
-        //         for (let i = 0; i < status.length; i++) {
-        //             let resultListItem = '<option data-x="' + status[i].coordinate_x + '" data-y="' + status[i].coordinate_y + '" value="' + status[i].il_plaka + '">' + status[i].il_adi + '</option>'
-        //             $('#cityselect').append(resultListItem);
-        //         }
-        //     });
+        document.addEventListener("DOMContentLoaded", function () {
+            changeCities()
+
+            document.getElementById('country').addEventListener('click',()=>{
+                let e = document.getElementById("country");
+                let country_id = (e.options[e.selectedIndex].value)
+
+                changeCities(country_id)
+
+            })
+
+
+
+        function changeCities(country_id=1) {
+            $('#cityselect').empty();
+
+        fetch("api/cities?countryId="+country_id)
+            .then((response) => response.json())
+            .then((status) => {
+                console.log(status, 'cities')
+
+                for (let i = 0; i < status.length; i++) {
+                    let resultListItem = `<option data-x="${status[i].coordinate_x}" data-y="${status[i].coordinate_y}" value="${status[i].id}">${status[i].name}</option>`
+                    $('#cityselect').append(resultListItem);
+                } 
+            });
+
+        }
+
+            fetch("/api/countries")
+                .then((response) => response.json())
+                .then((status) => {
+                    for (let i = 0; i < status.length; i++) {
+                        let resultListItem = `<option value="${status[i].id}">${status[i].name}</option>`
+                        $('#country').append(resultListItem);
+                    }
+                });
+            })
     </script>
     <script type="text/javascript">
         function googleTranslateElementInit() {

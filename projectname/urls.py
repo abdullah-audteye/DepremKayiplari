@@ -1,6 +1,6 @@
 from django.urls import include, path
 from django.contrib import admin
-from appname.views import IhbarView, KayipUserListView, KayipUserFilterUser, KayipStatusListView, ChangeKayipStatus, GeneralFormDataView, item_list, ReportListView, UpdateReportView
+from appname.views import IhbarView, KayipUserListView,CountriesAsJson, CitiesWithFilter,KayipUserFilterUser, KayipStatusListView, ChangeKayipStatus, GeneralFormDataView, item_list, ReportListView, UpdateReportView
 from users.views import login_view
 
 
@@ -18,6 +18,10 @@ urlpatterns = [
 
     # Authentication paths
     path('login', login_view, name='login'),
+
+    path('api/cities',CitiesWithFilter.as_view(),name="cities_json"),
+    path('api/countries',CountriesAsJson,name="countries_json"),
+
 
     # Reports endpoints
     path('api/reports', ReportListView.as_view(), name="reportlist_api"),
