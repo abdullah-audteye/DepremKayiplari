@@ -4,7 +4,7 @@ from .models import Ihbar, KayipUser, Tag, Countries, KayipStatus,IhbarUser,Citi
 from django.db import transaction,IntegrityError
 from django.http import JsonResponse
 from django.http import QueryDict
-from .serializers import  IhbarSerializer, KayipStatusSerializer,KayipUserSerializer, ReportSerializer,CitiesSerializer
+from .serializers import  IhbarSerializer, KayipStatusSerializer,KayipUserSerializer, ReportSerializer,CitiesSerializer,KayipUserSerializerCertainParameters
 from rest_framework.generics import ListAPIView, RetrieveUpdateDestroyAPIView
 from django.shortcuts import get_object_or_404
 from .helper import CleanBadRecords,FixNonHavingDates,SendAccessCode
@@ -187,17 +187,30 @@ def GeneralFormDataView(request):
         else:
             errors["errors"] = str(ihbaruserform.errors) or str(kayip_user_form.errors)
             
-
-
-
     return render(request,'generalformdata.html',{"countries":countries,"kayipstatus":kayipstatus,"errors":errors,"cities":cities})
 
+
+
+
+class KayipUserWithCertainParametersListView(ListAPIView):
+    queryset = KayipUser.objects.all()
+    serializer_class = KayipUserSerializerCertainParameters
+
+
+class IhbarDetailRetrieveView(RetrieveUpdateDestroyAPIView):
+    queryset = Ihbar.objects.all()
+    serializer_class = IhbarSerializer
+    lookup_url_kwarg = "kayip_user_id"
+    lookup_field = "kayip_user"
 
 
 
 class KayipUserListView(ListAPIView):
     queryset = Ihbar.objects.order_by('-id').prefetch_related('kayip_user').select_related('ihbar_user')
     serializer_class = IhbarSerializer
+
+
+
 
 
 class KayipUserFilterUser(ListAPIView):
