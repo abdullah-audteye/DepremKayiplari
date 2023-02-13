@@ -19,29 +19,29 @@ var LeafIcon = L.Icon.extend({
         popupAnchor: [0, -86],
     },
 });
-var greenIcon = new LeafIcon({ iconUrl: "https://www.google.com/intl/en_us/mapfiles/ms/micons/green-dot.png", });
-var redIcon = new LeafIcon({ iconUrl: "https://www.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png", });
-var yellowIcon = new LeafIcon({ iconUrl: "https://www.google.com/intl/en_us/mapfiles/ms/micons/yellow-dot.png", });
-var blueIcon = new LeafIcon({ iconUrl: "https://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png", });
-var purpleIcon = new LeafIcon({ iconUrl: "https://www.google.com/intl/en_us/mapfiles/ms/micons/purple-dot.png", });
+var greenIcon = new LeafIcon({iconUrl: "https://www.google.com/intl/en_us/mapfiles/ms/micons/green-dot.png",});
+var redIcon = new LeafIcon({iconUrl: "https://www.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png",});
+var yellowIcon = new LeafIcon({iconUrl: "https://www.google.com/intl/en_us/mapfiles/ms/micons/yellow-dot.png",});
+var blueIcon = new LeafIcon({iconUrl: "https://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png",});
+var purpleIcon = new LeafIcon({iconUrl: "https://www.google.com/intl/en_us/mapfiles/ms/micons/purple-dot.png",});
 
 var selectedArray = [1, 2, 3, 4, 5];
 var selectedCountry = -1;
 var allData = [];
 
 let values = {
-    1: { status: "At Hospital", icon: greenIcon, color: "green" },
-    2: { status: "Missing", icon: redIcon, color: "red" },
-    3: { status: "Found", icon: yellowIcon, color: "yellow" },
-    4: { status: "In Need of Help", icon: blueIcon, color: "blue" },
-    5: { status: "Needs a Shelter", icon: purpleIcon, color: "purple" }
+    1: {status: "At Hospital", icon: greenIcon, color: "green"},
+    2: {status: "Missing", icon: redIcon, color: "red"},
+    3: {status: "Found", icon: yellowIcon, color: "yellow"},
+    4: {status: "In Need of Help", icon: blueIcon, color: "blue"},
+    5: {status: "Needs a Shelter", icon: purpleIcon, color: "purple"}
 }
 
 // Set up the OSM layer
 L.tileLayer(
     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 18
-}).addTo(map);
+        maxZoom: 18
+    }).addTo(map);
 
 // add a marker in the given location
 
@@ -79,68 +79,72 @@ addLayer();
 function addLayer() {
     mcg.clearLayers();
     map.removeLayer(mcg);
-    fetch("api/kayiplar")
+    fetch("api/kayiplar/all")
         .then((response) => response.json())
         .then((points) => {
-            allData = points;
-            points.map((i) => {
-                if (i.kayip_user.length < 1)
-                    return;
+                allData = points;
+                points.map((i) => {
+                    var marker = L.marker(new L.LatLng(i.cordinate_x, i.cordinate_y), {
+                        icon: values[i.kayip_status]?.icon,
+                    }).on('click', getMarkerData).addTo(map);
+                    marker.bindPopup(
+                        `<div id="popup_${i.id}"></div>`,
+                        {
+                            maxWidth: 560,
+                        }
+                    );
 
-                //illere göre filtrelemek için kontrol
-                // let check = selectedCountry == -1 ? true : (i.ihbar_user.country == selectedCountry);
-
-                var title = i.kayip_user[0]?.kayip_first_name + "-" + i.kayip_user[0]?.kayip_last_name + "-";
-                var marker = L.marker(new L.LatLng(i.kayip_user[0]?.cordinate_x, i.kayip_user[0]?.cordinate_y), {
-                    icon: values[i.kayip_user[0]?.kayip_status]?.icon,
-                    title: title,
-                });
-                marker.bindPopup(
-                    '<div class="row"><div id="data-modal" class="col-12"><h3>Kayıp Bilgileri</h3></div><div class="col-12"><h5>isim:' +
-                    " " +
-                    (i.kayip_user[0].kayip_first_name) +
-                    " " +
-                    (i.kayip_user[0].kayip_last_name) +
-                    '</h5></div><div id="data-modal" class="col-12"><h5>Adres:' +
-                    " " +
-                    i.kayip_user[0].address + '</h5></div>' + '<div id="data-modal" class="col-12"><h5>Durum:' +
-                    " " +
-                    values[i.kayip_user[0].kayip_status]?.status +
-                    '</h5></div>' + '<div id="data-modal" class="col-12"><h5>Kişi Sayısı:' +
-                    " " +
-                    i.kayip_user.length +
-                    '</h5></div>' + '<div id="data-modal" class="col-12"><h5>Cinsiyet:' +
-                    " " +
-                    (i.kayip_user[0].gender == 'F' ? 'Kadın' : 'Erkek') +
-                    '</h5></div><div id="data-modal" class="col-12"><h5>Detay:' +
-                    " " +
-                    i.kayip_user[0].detail +
-                    '</h5></div><button style="margin:3px auto; width:130px; height:40px; border-radius:6px; background:#28a745; border:none; color:white; padding:10px;font-size:16px; text-align:center;"' +
-                    ' onclick="window.open(\'http://www.google.com/maps/place/' + i.kayip_user[0]?.cordinate_x + ',' + i.kayip_user[0]?.cordinate_y + '\' ,\'_blank\');">Konuma Git' +
-                    '</button><div style="border-top:1px solid gray;padding-top:5px;" class="col-12"><h4>İhbar Eden Bilgisi</h4>' +
-                    '</div>' +
-                    '<div id="data-modal" class="col-12"><h6>isim:' +
-                    " " +
-                    (i.ihbar_user.ihbar_first_name) +
-                    " " +
-                    (i.ihbar_user.ihbar_last_name) +
-                    '</h6></div>' +
-                    '<div class="col-12"><h6>Telefon:' +
-                    " " +
-                    (i.ihbar_user.phonenumber) +
-                    "</h6></div></div>",
-                    {
-                        maxWidth: 560,
-                    }
-                );
-
-                if (selectedArray.includes(i.kayip_user[0].kayip_status))
-                    mcg.addLayer(marker);
-            })
-        }
+                    if (selectedArray.includes(i.kayip_status))
+                        mcg.addLayer(marker);
+                })
+            }
         );
 
     map.addLayer(mcg);
+}
+
+function getMarkerData(e) {
+    let id = $(e["target"]["_popup"]["_content"])[0].id.split('_')[1];
+    fetch("api/kayiplar/" + id)
+        .then((response) => response.json())
+        .then((i) => {
+            let val = '<div class="row"><div id="data-modal" class="col-12"><h3>Kayıp Bilgileri</h3></div><div class="col-12"><h5>isim:' +
+                " " +
+                (i.kayip_user[0].kayip_first_name) +
+                " " +
+                (i.kayip_user[0].kayip_last_name) +
+                '</h5></div><div id="data-modal" class="col-12"><h5>Adres:' +
+                " " +
+                i.kayip_user[0].address + '</h5></div>' + '<div id="data-modal" class="col-12"><h5>Durum:' +
+                " " +
+                values[i.kayip_user[0].kayip_status]?.status +
+                '</h5></div>' + '<div id="data-modal" class="col-12"><h5>Kişi Sayısı:' +
+                " " +
+                i.kayip_user.length +
+                '</h5></div>' + '<div id="data-modal" class="col-12"><h5>Cinsiyet:' +
+                " " +
+                (i.kayip_user[0].gender == 'F' ? 'Kadın' : 'Erkek') +
+                '</h5></div><div id="data-modal" class="col-12"><h5>Detay:' +
+                " " +
+                i.kayip_user[0].detail +
+                '</h5></div><button style="margin:3px auto; width:130px; height:40px; border-radius:6px; background:#28a745; border:none; color:white; padding:10px;font-size:16px; text-align:center;"' +
+                ' onclick="window.open(\'http://www.google.com/maps/place/' + i.kayip_user[0]?.cordinate_x + ',' + i.kayip_user[0]?.cordinate_y + '\' ,\'_blank\');">Konuma Git' +
+                '</button><div style="border-top:1px solid gray;padding-top:5px;" class="col-12"><h4>İhbar Eden Bilgisi</h4>' +
+                '</div>' +
+                '<div id="data-modal" class="col-12"><h6>isim:' +
+                " " +
+                (i.ihbar_user.ihbar_first_name) +
+                " " +
+                (i.ihbar_user.ihbar_last_name) +
+                '</h6></div>' +
+                '<div class="col-12"><h6>Telefon:' +
+                " " +
+                (i.ihbar_user.phonenumber) +
+                '</h6></div></div>';
+
+            $('#popup_' + id).append(val);
+        });
+
 }
 
 function addAsterixToString(value) {
@@ -179,8 +183,7 @@ newDiv.style.fontWeight = "400";
 newDiv.style.textAlign = "left";
 newDiv.style.color = "white";
 newDiv.style.zIndex = "-1";
-newDiv.style.backgroundColor = "#da1e37"; 
-
+newDiv.style.backgroundColor = "#da1e37";
 
 
 // add the text node to the newly created div
@@ -216,9 +219,9 @@ function setSelectedCountry(id) {
             [34.540172959444554, 39.96051035009866],
             [34.93205872605833, 37.98116001588474]],
         1: [[38.21680877405232, 34.71204528737725],
-        [38.09154169736558, 38.6341641679324],
-        [36.50984563750561, 38.4583829295882],
-        [36.558397114119714, 35.55249933321049]]
+            [38.09154169736558, 38.6341641679324],
+            [36.50984563750561, 38.4583829295882],
+            [36.558397114119714, 35.55249933321049]]
     };
     map.fitBounds(polygonPoints[id]);
 }
