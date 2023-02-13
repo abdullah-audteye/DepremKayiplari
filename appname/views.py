@@ -16,6 +16,8 @@ from rest_framework.authentication import TokenAuthentication,SessionAuthenticat
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.views.decorators.csrf import csrf_exempt
 import json
+from django.core.cache import cache
+
 
 
 
@@ -195,6 +197,23 @@ def GeneralFormDataView(request):
 class KayipUserWithCertainParametersListView(ListAPIView):
     queryset = KayipUser.objects.all()
     serializer_class = KayipUserSerializerCertainParameters
+
+    def list(self, request, *args, **kwargs):
+        if cache.get('kayip_user_with_params_qs') != None:
+            cached_queryset = cache.get('kayip_user_with_params_qs')
+            return Response(cached_queryset)
+
+        else:
+            queryset = self.filter_queryset(self.get_queryset())
+            page = self.paginate_queryset(queryset)
+            if page is not None:
+                serializer = self.get_serializer(page, many=True)
+                return self.get_paginated_response(serializer.data)
+            
+            serializer = self.get_serializer(queryset, many=True)
+
+            cached_queryset = cache.set('kayip_user_with_params_qs',serializer.data,60*3)
+            return Response(serializer.data)
 
 
 class IhbarDetailRetrieveView(RetrieveUpdateDestroyAPIView):
