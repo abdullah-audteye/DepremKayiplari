@@ -86,7 +86,7 @@ function addLayer() {
                 points.map((i) => {
                     var marker = L.marker(new L.LatLng(i.cordinate_x, i.cordinate_y), {
                         icon: values[i.kayip_status]?.icon,
-                    }).on('click', getMarkerData).addTo(map);
+                    }).on('click', getMarkerData);
                     marker.bindPopup(
                         `<div id="popup_${i.id}"></div>`,
                         {
