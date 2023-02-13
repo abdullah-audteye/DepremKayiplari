@@ -29,6 +29,7 @@ class KayipStatus(models.Model):
 
 class Countries(models.Model):
     name = models.CharField(max_length=100)
+    country_code = models.IntegerField(null=True,blank=True)
     
     def __str__(self):
         return self.name
@@ -36,6 +37,20 @@ class Countries(models.Model):
     class Meta:
         verbose_name = 'Ülkeler'
         verbose_name_plural = 'Ülkeler'
+
+
+class Cities(models.Model):
+    country = models.ForeignKey(Countries,on_delete=models.CASCADE)
+    name = models.CharField(max_length=50)
+    coordinate_x = models.FloatField(max_length=10,blank=True,null=True)
+    coordinate_y = models.FloatField(max_length=10,blank=True,null=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Şehirler'
+        verbose_name_plural = 'Şehirler'
 
 
 class IhbarUser(models.Model):
@@ -70,6 +85,7 @@ class KayipUser(models.Model):
     kayip_status = models.ForeignKey(KayipStatus,on_delete=models.CASCADE,null=True,blank=True,related_name="kayiplar")
     gender = models.CharField(max_length=1,choices=GENDER_CHOICES,null=True,blank=True)
     age = models.CharField(null=True,blank=True,max_length=5)
+    city = models.ForeignKey(Cities,on_delete=models.CASCADE,null=True,blank=True)
 
 
     def __str__(self):
