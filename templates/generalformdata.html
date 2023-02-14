@@ -35,7 +35,7 @@
 
         </div>
         <div class="form-main-content">
-            <form class="form" method="post" action="{% url 'genelform' %}">
+            <form id="generalform" class="form" method="post" action="{% url 'genelform' %}">
                 {% csrf_token %}
                 <input type="hidden" id="coordinate_x" name="cordinate_x" />
                 <input type="hidden" id="coordinate_y" name="cordinate_y" />
@@ -108,8 +108,24 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
 
+            $("#generalform").on('submit', function(e){
+
+                e.preventDefault();
+                let coordinatex_check = document.getElementById('coordinate_y').value 
+                let coordinatey_check  = document.getElementById('coordinate_x').value
+                if((coordinatex_check == undefined || coordinatex_check.length<1) || (coordinatey_check == undefined || coordinatey_check.length<1)){
+                    console.log('workeed')
+                    alert('Choose a city')
+                    return
+                    
+                }
+                document.getElementById('generalform').submit()
+
+
+                });
 
             document.getElementById('submitbutton').addEventListener('click', () => {
+
                 document.getElementById('submitbutton').style.display = "none"
                 setTimeout(() => {
                     document.getElementById('submitbutton').style.display = "block"
@@ -131,6 +147,11 @@
 
 
             })
+
+
+
+
+
         });
 
     </script>
@@ -150,14 +171,20 @@
 
         function changeCities(country_id=1) {
             $('#cityselect').empty();
+            let = resultListItem = ""
 
         fetch("api/cities?countryId="+country_id)
             .then((response) => response.json())
             .then((status) => {
-                console.log(status, 'cities')
 
+                console.log(status, 'cities')
+                let defaultoption   = `<option  selected disabled hidden >Please choose a city</option>`
+                $('#cityselect').append(defaultoption);
                 for (let i = 0; i < status.length; i++) {
-                    let resultListItem = `<option data-x="${status[i].coordinate_x}" data-y="${status[i].coordinate_y}" value="${status[i].id}">${status[i].name}</option>`
+                    
+
+                    resultListItem = `<option data-x="${status[i].coordinate_x}" data-y="${status[i].coordinate_y}" value="${status[i].id}">${status[i].name}</option>`
+
                     $('#cityselect').append(resultListItem);
                 } 
             });
