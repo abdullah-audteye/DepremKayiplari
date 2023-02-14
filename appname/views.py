@@ -195,7 +195,7 @@ def GeneralFormDataView(request):
 
 
 class KayipUserWithCertainParametersListView(ListAPIView):
-    queryset = KayipUser.objects.all()
+    queryset = KayipUser.objects.all().select_related()
     serializer_class = KayipUserSerializerCertainParameters
 
     def list(self, request, *args, **kwargs):
