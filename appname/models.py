@@ -29,7 +29,7 @@ class KayipStatus(models.Model):
 
 class Countries(models.Model):
     name = models.CharField(max_length=100)
-    country_code = models.IntegerField(null=True,blank=True)
+    country_code = models.CharField(null=True,blank=True,max_length=10)
     
     def __str__(self):
         return self.name
@@ -40,7 +40,7 @@ class Countries(models.Model):
 
 
 class Cities(models.Model):
-    country = models.ForeignKey(Countries,on_delete=models.CASCADE)
+    country = models.ForeignKey(Countries,on_delete=models.CASCADE,null=True,blank=True)
     name = models.CharField(max_length=50)
     coordinate_x = models.FloatField(max_length=10,blank=True,null=True)
     coordinate_y = models.FloatField(max_length=10,blank=True,null=True)
