@@ -1,6 +1,6 @@
 from django.urls import include, path
 from django.contrib import admin
-from appname.views import IhbarView, KayipUserListView,CountriesAsJson,IhbarDetailRetrieveView,KayipUserWithCertainParametersListView, CitiesWithFilter,KayipUserFilterUser, KayipStatusListView, ChangeKayipStatus, GeneralFormDataView, item_list, ReportListView, UpdateReportView
+from appname.views import IhbarView, KayipUserListView,CountriesAsJson,CreateIhbarciandKayip,IhbarDetailRetrieveView,KayipUserWithCertainParametersListView, CitiesWithFilter,KayipUserFilterUser, KayipStatusListView, ChangeKayipStatus, GeneralFormDataView, item_list, ReportListView, UpdateReportView
 from users.views import login_view
 
 
@@ -30,5 +30,7 @@ urlpatterns = [
     # Reports endpoints
     path('api/reports', ReportListView.as_view(), name="reportlist_api"),
     path('api/reports/<int:pk>', UpdateReportView.as_view(), name="reportlist_api_update"),
+
+    path('api/createrecord',CreateIhbarciandKayip.as_view(),name="create_record")
 ]
 
