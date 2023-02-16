@@ -229,16 +229,21 @@ function zoomToPoint(x, y, id) {
         fetch("api/kayiplar/" + id)
             .then((response) => response.json())
             .then((obj) => {
-                console.log(obj, "123");
-                let val = '<li style="list-style: none; color:white; text-align: center; border-bottom:1px solid black; cursor:pointer; padding: 4px; background-color: rgba(171,59,59,0.75)"' +
-                    '>  <b> ' + (obj.kayip_user[0].kayip_first_name) + ' ' + (obj.kayip_user[0].kayip_last_name) + '  </b></li>' +
-                    '<li style="list-style: none; color:white; border-bottom:1px solid black; cursor:pointer; padding: 4px; background-color: rgba(162,0,0,0.75)"' +
-                    '> <b> Adress : </b>' + (obj.kayip_user[0].address) + '</li>' + '<li style="list-style: none; color:white; border-bottom:1px solid black; cursor:pointer; padding: 4px; background-color: rgba(171,59,59,0.75)"' +
-                    '> <b> Durum : </b>  ' + (values[obj.kayip_user[0].kayip_status]).status + '</li>' + '<li style="list-style: none; color:white; border-bottom:1px solid black; cursor:pointer; padding: 4px; background-color: rgba(162,0,0,0.75)"' +
-                    '> <b> Cinsiyet : </b>  ' + (obj.kayip_user[0].gender == 'F' ? 'Kadın' : 'Erkek') + '</li>' + '<li style="list-style: none; color:white; border-bottom:1px solid black; cursor:pointer; padding: 4px; background-color: rgba(171,59,59,0.75)"' +
-                    '> <b> Detay : </b> ' + (obj.kayip_user[0].detail) + '</li>';
+                let vals = "";
+                Object.keys(obj.kayip_user[0]).map((i, index) => {
+
+                    if ((obj.kayip_user[0][i] == null || obj.kayip_user[0][i].length === 0))
+                        return;
+                    if (index == 1)
+                        vals = vals + '<li style="list-style: none; color:white; text-align: center; border-bottom:1px solid black; cursor:pointer; padding: 4px; background-color: rgba(171,59,59,0.75)"' +
+                            '>  <b> ' + (obj.kayip_user[0][i]) + ' ' + (obj.kayip_user[0][i]) + '  </b></li>'
+                    else if (index > 2)
+                        vals = vals + '<li style="list-style: none; color:white; border-bottom:1px solid black; cursor:pointer; padding: 4px; background-color: rgba(171,59,59,0.75)"' +
+                            '>  <b>' + i + ' : </b>' + (obj.kayip_user[0][i]) + '</li>'
+                })
+
                 $('#search_results').empty();
-                $('#search_results').append(val);
+                $('#search_results').append(vals);
                 return;
             });
     } else {
