@@ -144,7 +144,6 @@ function getMarkerData(e) {
 
             $('#popup_' + id).append(val);
         });
-
 }
 
 function addAsterixToString(value) {
@@ -184,7 +183,6 @@ newDiv.style.textAlign = "left";
 newDiv.style.color = "white";
 newDiv.style.zIndex = "-1";
 newDiv.style.backgroundColor = "#da1e37";
-
 
 // add the text node to the newly created div
 newDiv.appendChild(newContent);
@@ -226,14 +224,30 @@ function setSelectedCountry(id) {
     map.fitBounds(polygonPoints[id]);
 }
 
-function zoomToPoint(x, y) {
-
-    var bounds = L.latLngBounds()
-    let lat_lng = [x, y]
-    bounds.extend(lat_lng)
-    map.fitBounds(bounds)
-    $('#search_results').empty();
-
+function zoomToPoint(x, y, id) {
+    if (x == null || y == null) {
+        fetch("api/kayiplar/" + id)
+            .then((response) => response.json())
+            .then((obj) => {
+                console.log(obj, "123");
+                let val = '<li style="list-style: none; color:white; text-align: center; border-bottom:1px solid black; cursor:pointer; padding: 4px; background-color: rgba(171,59,59,0.75)"' +
+                    '>  <b> ' + (obj.kayip_user[0].kayip_first_name) + ' ' + (obj.kayip_user[0].kayip_last_name) + '  </b></li>' +
+                    '<li style="list-style: none; color:white; border-bottom:1px solid black; cursor:pointer; padding: 4px; background-color: rgba(162,0,0,0.75)"' +
+                    '> <b> Adress : </b>' + (obj.kayip_user[0].address) + '</li>' + '<li style="list-style: none; color:white; border-bottom:1px solid black; cursor:pointer; padding: 4px; background-color: rgba(171,59,59,0.75)"' +
+                    '> <b> Durum : </b>  ' + (values[obj.kayip_user[0].kayip_status]).status + '</li>' + '<li style="list-style: none; color:white; border-bottom:1px solid black; cursor:pointer; padding: 4px; background-color: rgba(162,0,0,0.75)"' +
+                    '> <b> Cinsiyet : </b>  ' + (obj.kayip_user[0].gender == 'F' ? 'Kadın' : 'Erkek') + '</li>' + '<li style="list-style: none; color:white; border-bottom:1px solid black; cursor:pointer; padding: 4px; background-color: rgba(171,59,59,0.75)"' +
+                    '> <b> Detay : </b> ' + (obj.kayip_user[0].detail) + '</li>';
+                $('#search_results').empty();
+                $('#search_results').append(val);
+                return;
+            });
+    } else {
+        var bounds = L.latLngBounds()
+        let lat_lng = [x, y]
+        bounds.extend(lat_lng)
+        map.fitBounds(bounds)
+        $('#search_results').empty();
+    }
 }
 
 generateLegend()
@@ -266,11 +280,12 @@ function searchByName() {
                 $('#search_results').append(resultListItem);
             } else
                 for (let i = 0; i < status.length; i++) {
+                    console.log((status[i]), "12");
                     let resultListItem = i % 2 == 1 ? '<li style="list-style: none; color:white; border-bottom:1px solid black; cursor:pointer; padding: 4px; background-color: rgba(61,84,131,0.75)"' +
-                        'onclick="zoomToPoint(' + status[i].cordinate_x + ',' + status[i].cordinate_y + ')">' + status[i].kayip_first_name + ' ' + status[i].kayip_last_name + '</li>'
+                        'onclick="zoomToPoint(' + status[i].cordinate_x + ',' + status[i].cordinate_y + ',' + status[i].id + ')">' + status[i].kayip_first_name + ' ' + status[i].kayip_last_name + '</li>'
                         :
                         '<li style="list-style: none; color:white; border-bottom:1px solid black; cursor:pointer; padding: 4px; ; background-color: rgba(89,120,190,0.75)"' +
-                        'onclick="zoomToPoint(' + status[i].cordinate_x + ',' + status[i].cordinate_x + ')">' + status[i].kayip_first_name + ' ' + status[i].kayip_last_name + '</li>';
+                        'onclick="zoomToPoint(' + status[i].cordinate_x + ',' + status[i].cordinate_x + ',' + status[i].id + ')">' + status[i].kayip_first_name + ' ' + status[i].kayip_last_name + '</li>';
                     $('#search_results').append(resultListItem);
                 }
         });
