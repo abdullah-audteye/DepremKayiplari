@@ -18,6 +18,8 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.views.decorators.csrf import csrf_exempt
 import json
 from django.core.cache import cache
+from django.db.models import Q
+
 
 
 
@@ -196,7 +198,7 @@ def GeneralFormDataView(request):
 
 
 class KayipUserWithCertainParametersListView(ListAPIView):
-    queryset = KayipUser.objects.all().select_related()
+    queryset = KayipUser.objects.all().select_related().exclude(Q(cordinate_x__isnull=True) | Q(cordinate_y__isnull=True))
     serializer_class = KayipUserSerializerCertainParameters
 
     def list(self, request, *args, **kwargs):
