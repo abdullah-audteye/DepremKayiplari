@@ -5,7 +5,8 @@ from django.db import transaction,IntegrityError
 from django.http import JsonResponse
 from django.http import QueryDict
 from .serializers import  IhbarSerializer, KayipStatusSerializer,KayipUserSerializer, ReportSerializer,CitiesSerializer,KayipUserSerializerCertainParameters
-from rest_framework.generics import ListAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import ListAPIView, RetrieveUpdateDestroyAPIView,GenericAPIView
+from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
 from .helper import CleanBadRecords,FixNonHavingDates,SendAccessCode
 from datetime import datetime
@@ -17,6 +18,8 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.views.decorators.csrf import csrf_exempt
 import json
 from django.core.cache import cache
+from django.db.models import Q
+
 
 
 
@@ -195,7 +198,7 @@ def GeneralFormDataView(request):
 
 
 class KayipUserWithCertainParametersListView(ListAPIView):
-    queryset = KayipUser.objects.all().select_related()
+    queryset = KayipUser.objects.all().select_related().exclude(Q(cordinate_x__isnull=True) | Q(cordinate_y__isnull=True))
     serializer_class = KayipUserSerializerCertainParameters
 
     def list(self, request, *args, **kwargs):
@@ -229,7 +232,48 @@ class KayipUserListView(ListAPIView):
     serializer_class = IhbarSerializer
 
 
+class CreateIhbarciandKayip(APIView):
+    def post(self, request, *args, **kwargs):
+        data = request.data
 
+        ihbar_user_obj = {
+            "ihbar_first_name":data.get('ihbar_first_name',"None"),
+            "ihbar_last_name":data.get('ihbar_last_name',"None"),
+            "phonenumber":data.get('phonenumber',"None"),
+            "eposta":data.get('phonenumber',"none@none.com")
+        }
+
+        kayip_user_obj = {
+            "kayip_first_name":data.get('kayip_first_name',"None"),
+            "kayip_last_name":data.get('kayip_last_name',"None"),
+            # "cordinate_x":data.get('cordinate_x',0),
+            # "cordinate_y":data.get('cordinate_y',0),
+            "address":data.get('address',None),
+            "detail":data.get('detail',None),
+            "status":data.get('status',None),
+            "kayip_status_id":data.get('kayip_status',None),
+            "gender":data.get('gender',"M"),
+        }
+
+        with transaction.atomic():
+
+            try:
+
+                ihbar_user_instance = IhbarUser.objects.create(**ihbar_user_obj)
+                kayip_user_instance = KayipUser.objects.create(**kayip_user_obj)
+                ihbar_instance = Ihbar.objects.create()
+                access_number = random.randint(000000,999999)
+
+                ihbar_instance.ihbar_user = ihbar_user_instance
+                ihbar_instance.access_code = access_number
+                ihbar_instance.kayip_user.add(kayip_user_instance.id)
+                ihbar_instance.created_time = datetime.now()
+                ihbar_instance.save()
+            except IntegrityError as err:
+                return Response(str(err),400)
+
+
+        return Response('Success')
 
 
 class KayipUserFilterUser(ListAPIView):

@@ -24,6 +24,7 @@ var redIcon = new LeafIcon({iconUrl: "https://www.google.com/intl/en_us/mapfiles
 var yellowIcon = new LeafIcon({iconUrl: "https://www.google.com/intl/en_us/mapfiles/ms/micons/yellow-dot.png",});
 var blueIcon = new LeafIcon({iconUrl: "https://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png",});
 var purpleIcon = new LeafIcon({iconUrl: "https://www.google.com/intl/en_us/mapfiles/ms/micons/purple-dot.png",});
+var orangeIcon = new LeafIcon({iconUrl: "https://www.google.com/intl/en_us/mapfiles/ms/micons/orange-dot.png",});
 
 var selectedArray = [1, 2, 3, 4, 5];
 var selectedCountry = -1;
@@ -34,7 +35,8 @@ let values = {
     2: {status: "Missing", icon: redIcon, color: "red"},
     3: {status: "Found", icon: yellowIcon, color: "yellow"},
     4: {status: "In Need of Help", icon: blueIcon, color: "blue"},
-    5: {status: "Needs a Shelter", icon: purpleIcon, color: "purple"}
+    5: {status: "Needs a Shelter", icon: purpleIcon, color: "purple"},
+    6: {status: "Unknown", icon: orangeIcon, color: "orange"}
 }
 
 // Set up the OSM layer
@@ -144,7 +146,6 @@ function getMarkerData(e) {
 
             $('#popup_' + id).append(val);
         });
-
 }
 
 function addAsterixToString(value) {
@@ -184,7 +185,6 @@ newDiv.style.textAlign = "left";
 newDiv.style.color = "white";
 newDiv.style.zIndex = "-1";
 newDiv.style.backgroundColor = "#da1e37";
-
 
 // add the text node to the newly created div
 newDiv.appendChild(newContent);
@@ -226,14 +226,35 @@ function setSelectedCountry(id) {
     map.fitBounds(polygonPoints[id]);
 }
 
-function zoomToPoint(x, y) {
+function zoomToPoint(x, y, id) {
+    if (x == null || y == null) {
+        fetch("api/kayiplar/" + id)
+            .then((response) => response.json())
+            .then((obj) => {
+                let vals = "";
+                Object.keys(obj.kayip_user[0]).map((i, index) => {
 
-    var bounds = L.latLngBounds()
-    let lat_lng = [x, y]
-    bounds.extend(lat_lng)
-    map.fitBounds(bounds)
-    $('#search_results').empty();
+                    if ((obj.kayip_user[0][i] == null || obj.kayip_user[0][i].length === 0))
+                        return;
+                    if (index == 1)
+                        vals = vals + '<li style="list-style: none; color:white; text-align: center; border-bottom:1px solid black; cursor:pointer; padding: 4px; background-color: rgba(171,59,59,0.75)"' +
+                            '>  <b> ' + (obj.kayip_user[0][i]) + ' ' + (obj.kayip_user[0][i]) + '  </b></li>'
+                    else if (index > 2)
+                        vals = vals + '<li style="list-style: none; color:white; border-bottom:1px solid black; cursor:pointer; padding: 4px; background-color: rgba(171,59,59,0.75)"' +
+                            '>  <b>' + i + ' : </b>' + (obj.kayip_user[0][i]) + '</li>'
+                })
 
+                $('#search_results').empty();
+                $('#search_results').append(vals);
+                return;
+            });
+    } else {
+        var bounds = L.latLngBounds()
+        let lat_lng = [x, y]
+        bounds.extend(lat_lng)
+        map.fitBounds(bounds)
+        $('#search_results').empty();
+    }
 }
 
 generateLegend()
@@ -266,11 +287,12 @@ function searchByName() {
                 $('#search_results').append(resultListItem);
             } else
                 for (let i = 0; i < status.length; i++) {
+                    console.log((status[i]), "12");
                     let resultListItem = i % 2 == 1 ? '<li style="list-style: none; color:white; border-bottom:1px solid black; cursor:pointer; padding: 4px; background-color: rgba(61,84,131,0.75)"' +
-                        'onclick="zoomToPoint(' + status[i].cordinate_x + ',' + status[i].cordinate_y + ')">' + status[i].kayip_first_name + ' ' + status[i].kayip_last_name + '</li>'
+                        'onclick="zoomToPoint(' + status[i].cordinate_x + ',' + status[i].cordinate_y + ',' + status[i].id + ')">' + status[i].kayip_first_name + ' ' + status[i].kayip_last_name + '</li>'
                         :
                         '<li style="list-style: none; color:white; border-bottom:1px solid black; cursor:pointer; padding: 4px; ; background-color: rgba(89,120,190,0.75)"' +
-                        'onclick="zoomToPoint(' + status[i].cordinate_x + ',' + status[i].cordinate_x + ')">' + status[i].kayip_first_name + ' ' + status[i].kayip_last_name + '</li>';
+                        'onclick="zoomToPoint(' + status[i].cordinate_x + ',' + status[i].cordinate_x + ',' + status[i].id + ')">' + status[i].kayip_first_name + ' ' + status[i].kayip_last_name + '</li>';
                     $('#search_results').append(resultListItem);
                 }
         });
@@ -282,7 +304,7 @@ function generateLegend() {
         .then((status) => {
             status.map((i) => {
                 var txt1 = '<input onclick="setSelected(' + i.id + ')" type="checkbox" id="' + i.id + '" checked\n' +
-                    '               style="accent-color: ' + values[i.id].color + ';" value="K">\n' +
+                    '               style="accent-color: ' + values[i.id]?.color + ';" value="K">\n' +
                     '        <label for="' + i.id + '">' + i.name + '</label><br>';        // Create text with HTML
 
                 $("#legendbar_content").append(txt1);   // Append new elements
