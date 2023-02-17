@@ -24,6 +24,7 @@ var redIcon = new LeafIcon({iconUrl: "https://www.google.com/intl/en_us/mapfiles
 var yellowIcon = new LeafIcon({iconUrl: "https://www.google.com/intl/en_us/mapfiles/ms/micons/yellow-dot.png",});
 var blueIcon = new LeafIcon({iconUrl: "https://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png",});
 var purpleIcon = new LeafIcon({iconUrl: "https://www.google.com/intl/en_us/mapfiles/ms/micons/purple-dot.png",});
+var orangeIcon = new LeafIcon({iconUrl: "https://www.google.com/intl/en_us/mapfiles/ms/micons/orange-dot.png",});
 
 var selectedArray = [1, 2, 3, 4, 5];
 var selectedCountry = -1;
@@ -34,7 +35,8 @@ let values = {
     2: {status: "Missing", icon: redIcon, color: "red"},
     3: {status: "Found", icon: yellowIcon, color: "yellow"},
     4: {status: "In Need of Help", icon: blueIcon, color: "blue"},
-    5: {status: "Needs a Shelter", icon: purpleIcon, color: "purple"}
+    5: {status: "Needs a Shelter", icon: purpleIcon, color: "purple"},
+    6: {status: "Unknown", icon: orangeIcon, color: "orange"}
 }
 
 // Set up the OSM layer
@@ -302,7 +304,7 @@ function generateLegend() {
         .then((status) => {
             status.map((i) => {
                 var txt1 = '<input onclick="setSelected(' + i.id + ')" type="checkbox" id="' + i.id + '" checked\n' +
-                    '               style="accent-color: ' + values[i.id].color + ';" value="K">\n' +
+                    '               style="accent-color: ' + values[i.id]?.color + ';" value="K">\n' +
                     '        <label for="' + i.id + '">' + i.name + '</label><br>';        // Create text with HTML
 
                 $("#legendbar_content").append(txt1);   // Append new elements
