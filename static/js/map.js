@@ -292,7 +292,7 @@ function searchByName() {
                         'onclick="zoomToPoint(' + status[i].cordinate_x + ',' + status[i].cordinate_y + ',' + status[i].id + ')">' + status[i].kayip_first_name + ' ' + status[i].kayip_last_name + '</li>'
                         :
                         '<li style="list-style: none; color:white; border-bottom:1px solid black; cursor:pointer; padding: 4px; ; background-color: rgba(89,120,190,0.75)"' +
-                        'onclick="zoomToPoint(' + status[i].cordinate_x + ',' + status[i].cordinate_x + ',' + status[i].id + ')">' + status[i].kayip_first_name + ' ' + status[i].kayip_last_name + '</li>';
+                        'onclick="zoomToPoint(' + status[i].cordinate_x + ',' + status[i].cordinate_y + ',' + status[i].id + ')">' + status[i].kayip_first_name + ' ' + status[i].kayip_last_name + '</li>';
                     $('#search_results').append(resultListItem);
                 }
         });
